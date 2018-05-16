@@ -7,16 +7,18 @@
             </keep-alive>
             <router-view v-if="!$route.meta.keepAlive"></router-view>
         </transition>
+        <sFooter></sFooter>
     </div>
 </template>
 
 
 <script>
-    import {sHeader} from './components'
+    import { sHeader, sFooter } from './components'
 
     export default {
         components: {
-            sHeader
+            sHeader,
+            sFooter
         }
     }
 </script>
