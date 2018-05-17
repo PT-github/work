@@ -1,6 +1,7 @@
 <template>
     <div class="s-slider">
-        <el-carousel ref="sliderComp" @change="slideChange" indicator-position="none" trigger="click"  height="296px" :autoplay="false" arrow="always">
+        <!--:autoplay="false"-->
+        <el-carousel ref="sliderComp" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
             <el-carousel-item v-for="item in 3" :key="item">
                 <img src="../../../assets/slider/slider.png" alt="滚图">
             </el-carousel-item>

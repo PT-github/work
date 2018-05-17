@@ -8,14 +8,19 @@
                 <sNews></sNews>
             </div>
         </div>
-        <div class="part2"></div>
+        <div class="part2 clearfix">
+            <div class="fl">课程管理</div>
+            <div class="fr">
+                <sRegist></sRegist>
+            </div>
+        </div>
         <div class="part3"></div>
         <div class="part4"></div>
         <div class="part5"></div>
     </div>
 </template>
 <script>
-    import { sSlider, sNews } from './components'
+    import { sSlider, sNews, sRegist } from './components'
     export default {
         name: 'home',
         data() {
@@ -25,7 +30,8 @@
         computed: {},
         components: {
             sSlider,
-            sNews
+            sNews,
+            sRegist
         }
     }
 </script>
@@ -33,6 +39,9 @@
     .home-container {
         width: 1000px;
         margin: 13px auto 26px;
+        .part2 {
+            margin-top: 20px;
+        }
         .part1 {
             .fl {
                 width: 710px;
