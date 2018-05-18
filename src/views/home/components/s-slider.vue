@@ -36,7 +36,7 @@
         }
     }
 </script>
-<style type="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
     .s-slider {
         position: relative;
         height: 315px;

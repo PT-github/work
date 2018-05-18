@@ -27,7 +27,7 @@
         name: 'sNews'
     }
 </script>
-<style type="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
     .s-news {
         border: 1px solid #cac9cb;
         width: 100%;

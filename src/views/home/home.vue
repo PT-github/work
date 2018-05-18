@@ -9,7 +9,9 @@
             </div>
         </div>
         <div class="part2 clearfix">
-            <div class="fl">课程管理</div>
+            <div class="fl">
+                <sLesson></sLesson>
+            </div>
             <div class="fr">
                 <sRegist></sRegist>
             </div>
@@ -20,7 +22,7 @@
     </div>
 </template>
 <script>
-    import { sSlider, sNews, sRegist } from './components'
+    import { sSlider, sNews, sRegist, sLesson } from './components'
     export default {
         name: 'home',
         data() {
@@ -31,7 +33,8 @@
         components: {
             sSlider,
             sNews,
-            sRegist
+            sRegist,
+            sLesson
         }
     }
 </script>

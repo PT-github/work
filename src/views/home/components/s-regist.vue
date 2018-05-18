@@ -17,7 +17,7 @@
     </div>
 </template>
 
-<style type="stylesheet/scss" lang="scss" scoped>
+<style res="stylesheet/scss" lang="scss" scoped>
     .s-regist {
         width: 278px;
         height: 300px;
@@ -46,6 +46,7 @@
             background-position: center center;
             background-image: url("../../../assets/regist/btn1.png");
             margin: 0 auto;
+            cursor: pointer;
             .p1 {
                 font-size: 16px;
                 color: #008dd6;
