@@ -16,7 +16,9 @@
                 <sRegist></sRegist>
             </div>
         </div>
-        <div class="part3"></div>
+        <div class="part3">
+            <sTeacher></sTeacher>
+        </div>
         <div class="part4"></div>
         <div class="part5">
             <sFriendShip></sFriendShip>
@@ -24,7 +26,7 @@
     </div>
 </template>
 <script>
-    import { sSlider, sNews, sRegist, sLesson, sFriendShip } from './components'
+    import { sSlider, sNews, sRegist, sLesson, sTeacher, sFriendShip } from './components'
     export default {
         name: 'home',
         data() {
@@ -37,7 +39,8 @@
             sNews,
             sRegist,
             sLesson,
-            sFriendShip
+            sFriendShip,
+            sTeacher
         }
     }
 </script>
