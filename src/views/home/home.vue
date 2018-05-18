@@ -18,11 +18,13 @@
         </div>
         <div class="part3"></div>
         <div class="part4"></div>
-        <div class="part5"></div>
+        <div class="part5">
+            <sFriendShip></sFriendShip>
+        </div>
     </div>
 </template>
 <script>
-    import { sSlider, sNews, sRegist, sLesson } from './components'
+    import { sSlider, sNews, sRegist, sLesson, sFriendShip } from './components'
     export default {
         name: 'home',
         data() {
@@ -34,7 +36,8 @@
             sSlider,
             sNews,
             sRegist,
-            sLesson
+            sLesson,
+            sFriendShip
         }
     }
 </script>
