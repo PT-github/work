@@ -409,8 +409,9 @@
                         }
                         span {
                             padding-top: 15px;
-                            padding-bottom: 11px;
+                            /*padding-bottom: 10px;*/
                             display: block;
+                            height: 40px;
                             border-bottom: 1px solid #666666;
                         }
                     }

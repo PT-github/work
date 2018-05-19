@@ -19,14 +19,16 @@
         <div class="part3">
             <sTeacher></sTeacher>
         </div>
-        <div class="part4"></div>
+        <div class="part4">
+            <sVideoAndEmployment></sVideoAndEmployment>
+        </div>
         <div class="part5">
             <sFriendShip></sFriendShip>
         </div>
     </div>
 </template>
 <script>
-    import { sSlider, sNews, sRegist, sLesson, sTeacher, sFriendShip } from './components'
+    import { sSlider, sNews, sRegist, sLesson, sTeacher, sVideoAndEmployment, sFriendShip } from './components'
     export default {
         name: 'home',
         data() {
@@ -40,6 +42,7 @@
             sRegist,
             sLesson,
             sFriendShip,
+            sVideoAndEmployment,
             sTeacher
         }
     }
