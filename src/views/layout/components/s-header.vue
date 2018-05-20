@@ -34,12 +34,13 @@
                     <li @click="go" path="home" class="home" :class="{ 'on': active === 'home'}">首页</li>
                     <li @click="go" path="news-center" class="" :class="{ 'on': active === 'news-center'}">新闻中心</li>
                     <li @click="go" path="education-training" class="" :class="{ 'on': active === 'education-training'}">教育培训</li>
-                    <li @click="go" path="certificate" class="" :class="{ 'on': active === 'certificate'}">证书查询</li>
-                    <li @click="go" path="shiftinfo" class="" :class="{ 'on': active === 'shiftinfo'}">开班信息</li>
-                    <li @click="go" path="video" class="" :class="{ 'on': active === 'video'}">视频教学</li>
                     <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">招聘求职</li>
-                    <li @click="go" path="teacher" class="" :class="{ 'on': active === 'teacher'}">优秀导师</li>
                     <li @click="go" path="about-us" class="" :class="{ 'on': active === 'about-us'}">关于我们</li>
+                    <!--证书查询 开班信息 视频教学 优秀导师-->
+                    <li @click="go" path="certificate" class="" :class="{ 'on': active === 'certificate'}">功能入口</li>
+                    <li @click="go" path="shiftinfo" class="" :class="{ 'on': active === 'shiftinfo'}">功能入口</li>
+                    <li @click="go" path="video" class="" :class="{ 'on': active === 'video'}">功能入口</li>
+                    <li @click="go" path="teacher" class="" :class="{ 'on': active === 'teacher'}">功能入口</li>
                 </ul>
             </div>
         </div>
