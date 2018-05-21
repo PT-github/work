@@ -2,26 +2,46 @@
     <div class="s-slider">
         <!--:autoplay="false"-->
         <el-carousel ref="sliderComp" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
-            <el-carousel-item v-for="item in 3" :key="item">
-                <img src="../../../assets/slider/slider.png" alt="滚图">
+            <el-carousel-item v-for="item in list" :key="item.id">
+                <img :src="item.imgUrl" :alt="item.name">
             </el-carousel-item>
         </el-carousel>
         <ul class="indicator-page">
-            <template v-for="item in 3">
-                <li @click="sliderTo(item - 1)" :class="{ 'active': (index + 1) === item }"></li>
+            <template v-for="(item, idx) in list">
+                <li @click="sliderTo(idx)" :class="{ 'active': index === idx }"></li>
             </template>
         </ul>
     </div>
 </template>
 <script>
+	import { queryPoster } from '@/api/service'
     export default {
         name: 'sSlider',
         data() {
             return {
-                index: 1
+            	list: [],
+                index: 0
             }
         },
+        mounted() {
+        	this.queryPoster()
+        },
         methods: {
+	        queryPoster() {
+		        const loading = this.$loading({
+			        lock: true,
+			        spinner: 'el-icon-loading',
+			        background: 'rgba(0, 0, 0, 0.4)',
+			        fullscreen: false,
+			        target: this.$el
+		        })
+                queryPoster().then((res) => {
+	                loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                	loading.close()
+                })
+            },
             slideChange(currentIdx) {
                 this.index = currentIdx
             },
@@ -45,10 +65,10 @@
             bottom: 0;
             left: 0;
             right: 0;
+            display: flex;
             li {
                 cursor: pointer;
-                float: left;
-                width: 232px;
+                flex: 1;
                 height: 10px;
                 background-color: #666666;
                 margin-left: 7px;
@@ -70,7 +90,8 @@
                         border-left-color: transparent;
                         position: absolute;
                         top: -10px;
-                        left: 111px;
+                        left: 50%;
+                        margin-left: -5px;
                     }
                 }
             }
