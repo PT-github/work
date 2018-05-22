@@ -31,7 +31,7 @@
 		        const loading = this.$loading({
 			        lock: true,
 			        spinner: 'el-icon-loading',
-			        background: 'rgba(0, 0, 0, 0.4)',
+			        background: 'rgba(0, 0, 0, 0.1)',
 			        fullscreen: false,
 			        target: this.$el
 		        })

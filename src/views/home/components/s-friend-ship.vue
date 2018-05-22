@@ -2,69 +2,62 @@
     <div class="s-friend-ship">
         <div class="title"></div>
         <div class="link-box clearfix">
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
-            </router-link>
-            <router-link tag='a' :to="'/'" class="fl">
-                <img src="../../../assets/links/logo_03.png" alt="logo">
+            <router-link v-for="item in list" tag='a' :to="'/'" class="fl">
+                <img :src="item.imgUrl" :alt="item.name">
             </router-link>
         </div>
     </div>
 </template>
 
+<script>
+    import { queryFriendShips } from '@/api/service'
+    export default {
+        name: 'sFriendShip',
+        mounted() {
+            this.getData()
+        },
+        data() {
+            return {
+                list: []
+            }
+        },
+        methods: {
+            getData() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.link-box')
+                })
+                queryFriendShips().then((res) => {
+                    loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            }
+        }
+    }
+</script>
 <style rel="stylesheet/scss" lang="scss" scoped>
     .s-friend-ship {
-        height: 170px;
         margin-top: 20px;
         position: relative;
         background-color: #FFF;
         .link-box {
             padding-top: 42px;
+            padding-bottom: 20px;
             padding-left:20px;
+            min-height: 142px;
             a {
-                /*margin-bottom: */
+                width: 120px;
+                height: 50px;
+                img {
+                    width: 120px;
+                    height: 50px;
+                    dispaly: block;
+                }
             }
         }
         .title {

@@ -4,281 +4,81 @@
             <div class="title">课程培训</div>
         </div>
         <div class="fr">
-            <div class="tabs">
+            <div class="tabs" v-if="list && list.length > 0">
                 <div class="tabs-nav flex">
-                    <div class="tabs-nav-span" :class="{ 'active': activeTab === '1' }" @click="exchangeTabs('1')">
-                        <span>健康管理师</span>
-                    </div>
-                    <div class="tabs-nav-span" :class="{ 'active': activeTab === '2' }" @click="exchangeTabs('2')">
-                        <span>心理咨询师</span>
-                    </div>
-                    <div class="tabs-nav-span" :class="{ 'active': activeTab === '3' }" @click="exchangeTabs('3')">
-                        <span>育婴师</span>
-                    </div>
-                    <div class="tabs-nav-span" :class="{ 'active': activeTab === '4' }" @click="exchangeTabs('4')">
-                        <span>催乳师</span>
-                    </div>
-                    <div class="tabs-nav-span" :class="{ 'active': activeTab === '5' }" @click="exchangeTabs('5')">
-                        <span>继续教育</span>
-                    </div>
+                    <template v-for="(item, index) in list">
+                        <div class="tabs-nav-span" :class="{ 'active': activeTab === index }" @click="exchangeTabs(index)">
+                            <span>{{ item.title }}</span>
+                        </div>
+                    </template>
                 </div>
                 <div class="tabs-content">
-                    <div class="tabs-content-01" :class="{ 'active': activeTab === '1' }">
-                        <div class="table">
-                            <div class="theader">
-                                <div class="tr">
-                                    <div class="th" style="width: 115px;">课程名称</div>
-                                    <div class="th flex-auto">开班时间</div>
-                                    <div class="th" style="width: 85px;">课时</div>
-                                    <div class="th" style="width: 80px;">培训费</div>
-                                    <div class="th" style="width: 115px;">考试及资料费</div>
-                                    <div class="th" style="width: 85px;">合计</div>
+                    <template v-for="(item, index) in list">
+                        <div class="tabs-content-01" :class="{ 'active': activeTab === index }">
+                            <div class="table">
+                                <div class="theader">
+                                    <div class="tr">
+                                        <div class="th" style="width: 115px;">课程名称</div>
+                                        <div class="th flex-auto">开班时间</div>
+                                        <div class="th" style="width: 85px;">课时</div>
+                                        <div class="th" style="width: 80px;">培训费</div>
+                                        <div class="th" style="width: 115px;">考试及资料费</div>
+                                        <div class="th" style="width: 85px;">合计</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tbody">
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级健康管理师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级健康管理师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级健康管理师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级健康管理师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
+                                <div class="tbody">
+                                    <template v-if="item.data && item.data.length > 0">
+                                        <template v-for="v in item.data">
+                                            <div class="tr">
+                                                <div class="td blue" style="width: 115px;">{{ v.name }}</div>
+                                                <div class="td flex-auto">{{ v.openDate }}</div>
+                                                <div class="td sky-blue" style="width: 85px;">{{v.classHour}}</div>
+                                                <div class="td" style="width: 80px;">{{v.tranningFee}}</div>
+                                                <div class="td" style="width: 115px;">{{v.examinationFee}}</div>
+                                                <div class="td orange" style="width: 85px;">{{v.totalFee}}</div>
+                                            </div>
+                                        </template>
+                                    </template>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tabs-content-02" :class="{ 'active': activeTab === '2' }">
-                        <div class="table">
-                            <div class="theader">
-                                <div class="tr">
-                                    <div class="th" style="width: 115px;">课程名称</div>
-                                    <div class="th flex-auto">开班时间</div>
-                                    <div class="th" style="width: 85px;">课时</div>
-                                    <div class="th" style="width: 80px;">培训费</div>
-                                    <div class="th" style="width: 115px;">考试及资料费</div>
-                                    <div class="th" style="width: 85px;">合计</div>
-                                </div>
-                            </div>
-                            <div class="tbody">
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级心理咨询师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级心理咨询师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级心理咨询师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级心理咨询师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tabs-content-03" :class="{ 'active': activeTab === '3' }">
-                        <div class="table">
-                            <div class="theader">
-                                <div class="tr">
-                                    <div class="th" style="width: 115px;">课程名称</div>
-                                    <div class="th flex-auto">开班时间</div>
-                                    <div class="th" style="width: 85px;">课时</div>
-                                    <div class="th" style="width: 80px;">培训费</div>
-                                    <div class="th" style="width: 115px;">考试及资料费</div>
-                                    <div class="th" style="width: 85px;">合计</div>
-                                </div>
-                            </div>
-                            <div class="tbody">
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级育婴师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级育婴师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级育婴师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级育婴师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tabs-content-04" :class="{ 'active': activeTab === '4' }">
-                        <div class="table">
-                            <div class="theader">
-                                <div class="tr">
-                                    <div class="th" style="width: 115px;">课程名称</div>
-                                    <div class="th flex-auto">开班时间</div>
-                                    <div class="th" style="width: 85px;">课时</div>
-                                    <div class="th" style="width: 80px;">培训费</div>
-                                    <div class="th" style="width: 115px;">考试及资料费</div>
-                                    <div class="th" style="width: 85px;">合计</div>
-                                </div>
-                            </div>
-                            <div class="tbody">
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级催乳师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级催乳师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级催乳师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级催乳师</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tabs-content-05" :class="{ 'active': activeTab === '5' }">
-                        <div class="table">
-                            <div class="theader">
-                                <div class="tr">
-                                    <div class="th" style="width: 115px;">课程名称</div>
-                                    <div class="th flex-auto">开班时间</div>
-                                    <div class="th" style="width: 85px;">课时</div>
-                                    <div class="th" style="width: 80px;">培训费</div>
-                                    <div class="th" style="width: 115px;">考试及资料费</div>
-                                    <div class="th" style="width: 85px;">合计</div>
-                                </div>
-                            </div>
-                            <div class="tbody">
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级继续教育</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级继续教育</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级继续教育</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td blue" style="width: 115px;">一级继续教育</div>
-                                    <div class="td flex-auto">03月10日-09月12日</div>
-                                    <div class="td sky-blue" style="width: 85px;">116课时</div>
-                                    <div class="td" style="width: 80px;">3000元</div>
-                                    <div class="td" style="width: 115px;">440元</div>
-                                    <div class="td orange" style="width: 85px;">3440元</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { queryLessons } from '@/api/service'
     export default {
         name: 'sLesson',
+        mounted() {
+            this.getLessons()
+        },
         data() {
             return {
-                activeTab: '1'
+                activeTab: 0,
+                list: []
             }
         },
         methods: {
             exchangeTabs(t) {
                 this.activeTab = t
+            },
+            getLessons() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el
+                })
+                queryLessons().then((res) => {
+                    loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                    loading.close()
+                })
             }
         }
     }

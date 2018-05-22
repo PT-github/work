@@ -2,29 +2,60 @@
     <div class="s-news">
         <div class="news-title">新闻中心</div>
         <div class="news-box">
-            <div class="news-box-top">
-                <div class="news-box-top-title">首届湖南“健康管理师之星”评选结果公示</div>
-                <div class="news-box-top-content clearfix">
-                    <div class="fl"><img src="../../../assets/news/pic.png" alt="新闻"></div>
-                    <div class="fr">
-                        <p>首届湖南“健康管理师之星通过宣传发动、提名推荐、网络投票、微信投票……</p>
+            <template v-if="list.length > 0">
+                <div class="news-box-top">
+                    <div class="news-box-top-title">{{ list[0].name }}</div>
+                    <div class="news-box-top-content clearfix">
+                        <div class="fl"><img :src="list[0].imgUrl" :alt="list[0].name"></div>
+                        <div class="fr">
+                            <p>
+                                <template v-if="list[0].desc && list[0].desc.length > 36">
+                                    {{ list[0].desc.substr(0, 34) + '......' }}
+                                </template>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <ul class="news-list">
-                <li>首届湖南“健康管理师之星”评选结果公示</li>
-                <li>首届湖南“健康管理师之星”评选结果公示</li>
-                <li>首届湖南“健康管理师之星”评选结果公示</li>
-                <li>首届湖南“健康管理师之星”评选结果公示</li>
-                <li>首届湖南“健康管理师之星”评选结果公示</li>
-                <li>首届湖南“健康管理师之星”评选结果公示</li>
-            </ul>
+                <ul class="news-list">
+                    <template v-for="(item, index) in list">
+                        <template v-if="index > 0">
+                            <li>{{ item.name }}</li>
+                        </template>
+                    </template>
+                </ul>
+            </template>
         </div>
     </div>
 </template>
 <script>
+    import { queryNews } from '@/api/service'
     export default {
-        name: 'sNews'
+        name: 'sNews',
+        mounted() {
+            this.getData()
+        },
+        data() {
+            return {
+                list: []
+            }
+        },
+        methods: {
+            getData() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el
+                })
+                queryNews().then((res) => {
+                    loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            }
+        }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -65,11 +96,17 @@
                         font-size: 12px;
                         color: #888888;
                         width: 145px;
-                        line-height: 18px;
                         height: 66px;
                         padding: 2px 0;
+                        line-height: 22px;
+                        overflow: hidden;
                         &:hover {
                             text-decoration: underline;
+                        }
+                        p {
+                            overflow: hidden;
+                            width: 100%;
+                            height: 100%;
                         }
                     }
                     .fl {

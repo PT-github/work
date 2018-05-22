@@ -12,34 +12,67 @@
                 </router-link>
             </div>
         </div>
-        <div class="slide-btn">
-            <div class="left" @click="go('pre')"></div>
-            <div class="right" @click="go('next')"></div>
-        </div>
-        <div class="s-teacher-content">
-            <el-carousel ref="teacherSlider" :interval="5000" class="s-teacher-slider" :autoplay="true" arrow="never" indicator-position="none" trigger="click" height="174px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <div class="teacher-l fl" v-for="v in 6">
-                        <div class="t-pic">
-                            <img src="../../../assets/teacher/teacher.png" alt="刘文峰">
+        <template v-if="list && list.length > 0">
+            <div class="slide-btn">
+                <div class="left" @click="go('pre')"></div>
+                <div class="right" @click="go('next')"></div>
+            </div>
+            <div class="s-teacher-content">
+                <el-carousel ref="teacherSlider" :interval="5000" class="s-teacher-slider" :autoplay="true" arrow="never" indicator-position="none" trigger="click" height="174px">
+                    <el-carousel-item v-for="(item, index) in list" :key="'carousel-' + index">
+                        <div class="teacher-l fl" v-for="v in item">
+                            <div class="t-pic">
+                                <img :src="v.imgUrl" :alt="v.name">
+                            </div>
+                            <div class="des">{{ v.category }}</div>
+                            <div class="name">{{ v.name }}</div>
                         </div>
-                        <div class="des">健康科学讲师</div>
-                        <div class="name">刘文峰</div>
-                    </div>
-                </el-carousel-item>
-            </el-carousel>
-        </div>
+                    </el-carousel-item>
+                </el-carousel>
+            </div>
+        </template>
     </div>
 </template>
 <script>
+    import { queryTeachers } from '@/api/service'
     export default {
         name: 'sTeacher',
+        mounted() {
+            this.getData()
+        },
         data() {
             return {
-
+                list: []
             }
         },
         methods: {
+            getData() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el
+                })
+                queryTeachers().then((res) => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        var tempArray = []
+                        for(let i = 0; i < res.list.length; i++) {
+                            tempArray.push(res.list[i])
+                            if ((i + 1) % 6 === 0 && i + 1 != res.list.length) {
+                                this.list.push(tempArray)
+                                tempArray = []
+                            }
+                            if (i + 1 === res.list.length) {
+                                this.list.push(tempArray)
+                            }
+                        }
+                    }
+                }).catch(() => {
+                    loading.close()
+                })
+            },
             go(p) {
                 if (p === 'pre') {
                     this.$refs['teacherSlider'].prev()
@@ -97,7 +130,7 @@
                 }
                 .des {
                     position: absolute;
-                    top: 128px;
+                    top: 130px;
                     height: 20px;
                     left: 0;
                     right: 0;
@@ -110,6 +143,9 @@
                 .t-pic {
                     width: 135px;
                     height: 150px;
+                    border-top-left-radius: 20px;
+                    border-top-right-radius: 20px;
+                    overflow: hidden;
                     img {
                         width: 100%;
                         height: 100%;

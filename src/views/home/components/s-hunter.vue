@@ -7,52 +7,12 @@
                 </router-link>
             </div>
             <ul class="company-box clearfix">
-                <li>
+                <li v-for="item in list">
                     <div class="company-content">
-                        <div class="hunt-for">健康管理师、育婴师...</div>
-                        <div class="company-name">湖南省健康管理公司</div>
-                        <div class="money">1.5-2.5万/月</div>
-                        <div class="area">上海</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="company-content">
-                        <div class="hunt-for">健康管理师、育婴师...</div>
-                        <div class="company-name">湖南省健康管理公司</div>
-                        <div class="money">1.5-2.5万/月</div>
-                        <div class="area">上海</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="company-content">
-                        <div class="hunt-for">健康管理师、育婴师...</div>
-                        <div class="company-name">湖南省健康管理公司</div>
-                        <div class="money">1.5-2.5万/月</div>
-                        <div class="area">上海</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="company-content">
-                        <div class="hunt-for">健康管理师、育婴师...</div>
-                        <div class="company-name">湖南省健康管理公司</div>
-                        <div class="money">1.5-2.5万/月</div>
-                        <div class="area">上海</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="company-content">
-                        <div class="hunt-for">健康管理师、育婴师...</div>
-                        <div class="company-name">湖南省健康管理公司</div>
-                        <div class="money">1.5-2.5万/月</div>
-                        <div class="area">上海</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="company-content">
-                        <div class="hunt-for">健康管理师、育婴师...</div>
-                        <div class="company-name">湖南省健康管理公司</div>
-                        <div class="money">1万/月</div>
-                        <div class="area">上海</div>
+                        <div class="hunt-for">{{ item.job }}</div>
+                        <div class="company-name">{{ item.name }}</div>
+                        <div class="money">{{ item.salary }}</div>
+                        <div class="area">{{ item.place }}</div>
                     </div>
                 </li>
             </ul>
@@ -65,31 +25,59 @@
                 </router-link>
             </div>
             <ul class="job-box">
-                <li>
-                    <router-link tag="a" :to="'/'">健康管理师XXXX</router-link>
-                </li>
-                <li>
-                    <router-link tag="a" :to="'/'">健康管理师XXXX</router-link>
-                </li>
-                <li>
-                    <router-link tag="a" :to="'/'">健康管理师XXXX</router-link>
-                </li>
-                <li>
-                    <router-link tag="a" :to="'/'">健康管理师XXXX</router-link>
-                </li>
-                <li>
-                    <router-link tag="a" :to="'/'">健康管理师XXXX</router-link>
-                </li>
-                <li>
-                    <router-link tag="a" :to="'/'">健康管理师XXXX</router-link>
+                <li v-for="item in jobs">
+                    <router-link tag="a" :to="'/'">{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>
     </div>
 </template>
 <script>
+    import { queryCompany, queryJobs } from '@/api/service'
     export default {
-        name: 'sHunter'
+        name: 'sHunter',
+        mounted() {
+            this.getData()
+            this.getJobs()
+        },
+        data() {
+            return {
+                list: [],
+                jobs: []
+            }
+        },
+        methods: {
+            getData() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.company-box')
+                })
+                queryCompany().then((res) => {
+                    loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getJobs() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.job-box')
+                })
+                queryJobs().then((res) => {
+                    loading.close()
+                    this.jobs = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            }
+        }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -114,7 +102,8 @@
                 }
             }
             .company-box {
-                margin-top: 20px;
+                padding-top: 20px;
+                height: 190px;
                 li {
                     float: left;
                     margin-left: 35px;
@@ -181,8 +170,6 @@
         > .fr {
             width: 250px;
             position: relative;
-            padding-top: 40px;
-            padding-bottom: 10px;
             box-shadow: 2px 0px 2px rgba(204, 204, 204, .5) inset;
             .title {
                 background-image: url(../../../assets/news/news-title.png);
@@ -203,6 +190,10 @@
                 }
             }
             .job-box {
+                padding-top: 40px;
+                padding-bottom: 10px;
+                height: 230px;
+                overflow: hidden;
                 li {
                     background-image: url("../../../assets/video/icon.png");
                     background-position: 20px center;

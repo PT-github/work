@@ -6,340 +6,83 @@
             </router-link>
         </div>
         <ul class="list">
-            <li class="list-li">
+            <li v-for="item in list" class="list-li">
                 <div class="search_job_list">
                     <div class="part01 clearfix">
                         <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
+                            <router-link tag="a" :to="'/'" class=" disc_per">{{item.name}}</router-link>
+                            <span class="disc_user_mes">{{item.sex}},{{item.age}}岁,</span>
                         </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
+                        <div class="disc_time fr">更新时间：{{item.updateTime}}</div>
                     </div>
                     <div class="company_det">
                         <span class="search_job_list_box_s">
                             意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
+                            <span class="com_search_job_em">{{item.itention}}</span>
                         </span>
                         <span class="search_job_list_box_line">|</span>
                         <span class="search_job_list_box_s">
                             薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
+                            <span class="com_search_job_em com_search_job_em_pay">{{item.salary}}</span>
                         </span>
                         <span class="search_job_list_box_line">|</span>
                         <span class="search_job_list_box_s">
                             经验：
-                            <span class="com_search_job_em">8年以上</span>
+                            <span class="com_search_job_em">{{item.experience}}</span>
                         </span>
                         <span class="search_job_list_box_line">|</span>
                         <span class="search_job_list_box_s">
                             学历：
-                            <span class="com_search_job_em">大专</span>
+                            <span class="com_search_job_em">{{item.education}}</span>
                         </span>
                     </div>
                 </div>
             </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-li">
-                <div class="search_job_list">
-                    <div class="part01 clearfix">
-                        <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">人才的名称</router-link>
-                            <span class="disc_user_mes">女,32岁,</span>
-                        </div>
-                        <div class="disc_time fr">更新时间：7小时前</div>
-                    </div>
-                    <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">健康咨询管理师</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">面议</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">8年以上</span>
-                        </span>
-                        <span class="search_job_list_box_line">|</span>
-                        <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">大专</span>
-                        </span>
-                    </div>
-                </div>
-            </li>
+
         </ul>
     </div>
 </template>
 <script>
+    import { queryTalents } from '@/api/service'
     export default {
-        name: 'sTalentList'
+        name: 'sTalentList',
+        mounted() {
+            this.getTalents()
+        },
+        data() {
+            return {
+                list: []
+            }
+        },
+        methods: {
+            getTalents() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.list')
+                })
+                queryTalents().then((res) => {
+                    loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            }
+        }
     }
 </script>
+
 <style rel="stylesheet/scss" lang="scss" scoped>
     .s-talent-list {
         width: 100%;
         border: 1px solid #cac9cb;
         margin-top: 20px;
         background-color: #FFF;
+        .list {
+            min-height: 58px;
+        }
         .list-li {
             &:last-child {
                 .search_job_list {
@@ -391,6 +134,13 @@
                 top: 10px;
                 right: 10px;
             }
+        }
+    }
+</style>
+<style rel="stylesheet/scss" lang="scss">
+    .list {
+        .el-loading-spinner {
+            margin-top: -9px;
         }
     }
 </style>
