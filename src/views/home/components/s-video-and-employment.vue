@@ -6,72 +6,26 @@
             </router-link>
         </div>
         <div class="video-box clearfix">
-            <div class="video-box-content fl">
-                <div class="video-show clearfix" @click="playShow">
+            <div class="video-box-content fl" v-for="item in list">
+                <div class="video-show clearfix" @click="playShow(item.videoUrl, item.videoPic)">
                     <div class="pic fl">
-                        <img src="../../../assets/video/pic.png" alt="健康管理师培训视频">
+                        <img :src="item.imgUrl" :alt="item.name">
                     </div>
-                    <div class="detail fl">健康管理师培训视频</div>
-                </div>
-            </div>
-            <div class="video-box-content fl">
-                <div class="video-show clearfix">
-                    <div class="pic fl">
-                        <img src="../../../assets/video/pic.png" alt="健康管理师培训视频">
-                    </div>
-                    <div class="detail fl">健康管理师培训视频</div>
-                </div>
-            </div>
-            <div class="video-box-content fl">
-                <div class="video-show clearfix">
-                    <div class="pic fl">
-                        <img src="../../../assets/video/pic.png" alt="健康管理师培训视频">
-                    </div>
-                    <div class="detail fl">健康管理师培训视频</div>
-                </div>
-            </div>
-            <div class="video-box-content fl">
-                <div class="video-show clearfix">
-                    <div class="pic fl">
-                        <img src="../../../assets/video/pic.png" alt="健康管理师培训视频">
-                    </div>
-                    <div class="detail fl">健康管理师培训视频</div>
+                    <div class="detail fl">{{ item.name }}</div>
                 </div>
             </div>
         </div>
         <ul class="ul clearfix">
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
-            <li>XXXX视频教程</li>
+            <li v-for="item in list2" @click="playShow(item.videoUrl, item.videoPic)">{{ item.name }}</li>
         </ul>
-        <!--<div class="fr">
-            <div class="title">招聘单位</div>
-            <ul>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-                <li><router-link tag="a" :to="'/'">叶义言儿童生长促进中心</router-link></li>
-            </ul>
-        </div>-->
         <el-dialog @close="close" :close-on-click-modal="false" :close-on-press-escape="false"
                    :visible.sync="dialogVisible" width="1000px">
-            <sVideoPlay ref="sVideoPlayDom"></sVideoPlay>
+            <sVideoPlay :videoUrl="videoUrl" :videoPic="videoPic" ref="sVideoPlayDom"></sVideoPlay>
         </el-dialog>
     </div>
 </template>
 <script>
+	import { queryVideos } from '@/api/service'
     import sVideoPlay from './s-video-play'
 
     export default {
@@ -79,12 +33,45 @@
         data() {
             return {
                 dialogVisible: false,
-                playFlag: false
+                playFlag: false,
+                list: [],
+                list2: [],
+	            videoUrl: '',
+                videoPic: ''
             }
         },
+	    mounted() {
+		    this.getVidews()
+	    },
         methods: {
-            playShow() {
+	        getVidews() {
+		        const loading = this.$loading({
+			        lock: true,
+			        spinner: 'el-icon-loading',
+			        background: 'rgba(0, 0, 0, 0.1)',
+			        fullscreen: false,
+			        target: this.$el
+		        })
+		        queryVideos().then((res) => {
+			        loading.close()
+			        for(let i = 0; i < res.list.length; i++) {
+			        	if (i <= 3) {
+			        		this.list.push(res.list[i])
+                        } else {
+					        this.list2.push(res.list[i])
+                        }
+                    }
+		        }).catch(() => {
+			        loading.close()
+		        })
+            },
+            playShow(url, pic) {
+	        	this.videoUrl = url
+                this.videoPic = pic
                 this.dialogVisible = true
+                this.$nextTick(() => {
+	                this.$refs['sVideoPlayDom'].play()
+                })
             },
             close() {
                 this.$refs['sVideoPlayDom'].pause()

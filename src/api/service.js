@@ -52,8 +52,16 @@ export function queryTalents() {
 
 // 首页友情链接列表
 export function queryFriendShips() {
-  return request({
-    url: '/queryFriendShips',
-    method: 'post'
-  })
+	return request({
+		url: '/queryFriendShips',
+		method: 'post'
+	})
+}
+
+// 首页视频列表
+export function queryVideos() {
+	return request({
+		url: '/queryVideos',
+		method: 'post'
+	})
 }

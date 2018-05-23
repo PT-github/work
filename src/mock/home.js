@@ -3,6 +3,25 @@ import { param2Obj } from '@/utils'
 
 export default {
     /**
+     * 视频列表
+     * @returns {*}
+     */
+    queryVideos: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|16": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["健康管理师培训视频","育婴师培训视频","催乳师培训视频"],
+                    "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
+	                "videoUrl": "http://www.w3school.com.cn/i/movie.ogg",
+	                "videoPic": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"
+                }
+            ]
+        })
+    },
+    /**
      * 友情链接列表
      * @returns {*}
      */

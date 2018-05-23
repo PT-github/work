@@ -23,6 +23,7 @@
 </template>
 <script>
     export default {
+    	props: ['videoUrl', 'videoPic'],
         data() {
             return {
                 playerOptions: {
@@ -34,9 +35,9 @@
                     playbackRates: [0.7, 1.0, 1.5, 2.0],
                     sources: [{
                         type: "video/mp4",
-                        src: require('../../../assets/mp4/oceans.mp4')
+                        src: this.videoUrl
                     }],
-                    poster: require('../../../assets/mp4/pic.png')
+                    poster: this.videoPic
                 }
             }
         },
@@ -49,6 +50,9 @@
             }
         },
         methods: {
+    		play() {
+			    this.$refs['videoPlayer'].play()
+            },
             pause() {
                 console.log(this.$refs['videoPlayer'])
             },
