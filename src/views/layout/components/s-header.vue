@@ -3,7 +3,7 @@
         <div class="s-header-container">
             <div class="part1 clearfix">
                 <div class="fl clearfix">
-                    <div class="fl logo"><img src="../../../assets/header/logo.png" alt="健康人才网"></div>
+                    <div class="fl logo"><img src="/static/imgs/logo.png" alt="健康人才网"></div>
                     <div class="fl bt">
                         <p class="title">湖南省健康服务业协会</p>
                         <p class="title-des">HUNAN HEALHT SERVICE INDUSTRY ASSOCLATION</p>
@@ -32,7 +32,7 @@
             <div class="part2">
                 <ul class="flex">
                     <li @click="go" path="home" class="home" :class="{ 'on': active === 'home'}">首页</li>
-                    <li @click="go" path="news-center" class="" :class="{ 'on': active === 'news-center'}">新闻中心</li>
+                    <li @click="go" path="news" class="" :class="{ 'on': active === 'news'}">新闻中心</li>
                     <li @click="go" path="education-training" class="" :class="{ 'on': active === 'education-training'}">教育培训</li>
                     <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">招聘求职</li>
                     <li @click="go" path="about-us" class="" :class="{ 'on': active === 'about-us'}">关于我们</li>
@@ -73,7 +73,7 @@
         .s-header-container {
             width: 1000px;
             height: 100%;
-            background-image: url("../../../assets/header/bg_02.png");
+            background-image: url("/static/imgs/bg_02.png");
             background-position: top center;
             margin: 0 auto;
             background-repeat: no-repeat;

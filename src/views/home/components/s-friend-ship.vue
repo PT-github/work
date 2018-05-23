@@ -2,7 +2,7 @@
     <div class="s-friend-ship">
         <div class="title"></div>
         <div class="link-box clearfix">
-            <router-link v-for="item in list" tag='a' :to="'/'" class="fl">
+            <router-link v-for="item in list" :key="item.id" tag='a' :to="'/'" class="fl">
                 <img :src="item.imgUrl" :alt="item.name">
             </router-link>
         </div>

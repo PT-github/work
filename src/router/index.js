@@ -20,8 +20,8 @@ export default new Router({
                     name: 'home',
                     meta: {title: '首页', keepAlive: true}
                 }, {
-                    path: 'news-center',
-                    component: _import('news/news-center'),
+                    path: 'news',
+                    component: _import('news/news-list'),
                     name: 'home',
                     meta: {title: '新闻中心', keepAlive: true}
                 }, {

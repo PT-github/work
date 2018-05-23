@@ -1,7 +1,7 @@
 <template>
     <div class="s-slider">
-        <!--:autoplay="false"-->
-        <el-carousel ref="sliderComp" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
+        <!---->
+        <el-carousel ref="sliderComp" :autoplay="false" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
             <el-carousel-item v-for="item in list" :key="item.id">
                 <img :src="item.imgUrl" :alt="item.name">
             </el-carousel-item>

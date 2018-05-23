@@ -10,12 +10,12 @@ export default {
         return Mock.mock({
             'success': true,
             "message": '成功',
-            "list|16": [
+            "list|15": [
                 {
                     "id|+1": 1,
                     "name|1": ["健康管理师培训视频","育婴师培训视频","催乳师培训视频"],
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
-	                "videoUrl": "http://www.w3school.com.cn/i/movie.ogg",
+	                "videoUrl|1": ["http://www.w3school.com.cn/i/movie.ogg", "http://vjs.zencdn.net/v/oceans.mp4"],
 	                "videoPic": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"
                 }
             ]
@@ -56,7 +56,7 @@ export default {
                     "salary|1": ["面议","1万/月","2万/月"],
                     "education|1": ["大专","本科","研究生","博士"],
                     "experience|1": ["8年以上","7年以上","6年以上","5年以上","4年以上","3年以上","2年以上"],
-                    "updataTime": ["7小时前","8小时前","9小时前","1天前","2天前","3天前","4天前"]
+                    "updateTime|1": ["7小时前","8小时前","9小时前","1天前","2天前","3天前","4天前"]
                 }
             ]
         })

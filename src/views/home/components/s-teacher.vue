@@ -2,7 +2,7 @@
     <div class="s-teacher">
         <div class="title">
             <div class="fl">
-                <span class="m fl"><img src="../../../assets/teacher/title.png" alt="优秀导师"></span>
+                <span class="m fl"><img src="/static/imgs/title-teacher.png" alt="优秀导师"></span>
                 <span class="s fl">/</span>
                 <span class="l fl">SHOW</span>
             </div>

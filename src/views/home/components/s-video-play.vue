@@ -26,9 +26,26 @@
     	props: ['videoUrl', 'videoPic'],
         data() {
             return {
-                playerOptions: {
+
+            }
+        },
+        watch: {
+            videoUrl: function(v) {
+                console.log(v, '---------------------------')
+            }
+        },
+        mounted() {
+            console.log('this is current player instance object', this.player)
+        },
+        computed: {
+            player() {
+                return this.$refs.videoPlayer.player
+            },
+            playerOptions() {
+                return {
                     // videojs options
                     muted: false,
+                    autoplay: true,
                     width: '960px',
                     height: '400px',
                     language: 'zh-CN',
@@ -41,20 +58,14 @@
                 }
             }
         },
-        mounted() {
-            console.log('this is current player instance object', this.player)
-        },
-        computed: {
-            player() {
-                return this.$refs.videoPlayer.player
-            }
-        },
         methods: {
     		play() {
-			    this.$refs['videoPlayer'].play()
+    		    console.log(this.$refs['videoPlayer'], '=================')
+			    // this.$refs['videoPlayer'].player.play()
             },
             pause() {
-                console.log(this.$refs['videoPlayer'])
+                // console.log(this.$refs['videoPlayer'])
+                this.$refs['videoPlayer'].player.pause()
             },
             onPlayerEnded() {
 

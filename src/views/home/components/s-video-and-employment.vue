@@ -162,7 +162,7 @@
         }
         .title {
             height: 40px;
-            background-image: url("../../../assets/video/title1.png");
+            background-image: url("/static/imgs/title-video.png");
             background-position: 17px 10px;
             background-repeat: no-repeat;
             position: relative;

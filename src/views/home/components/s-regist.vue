@@ -231,7 +231,7 @@
             margin: 1px 1px 0;
             border-bottom: 1px solid #d3d3d3;
             border-top: 1px solid #d3d3d3;
-            background-image: url("../../../assets/regist/tell.png");
+            background-image: url("/static/imgs/tell.png");
             background-repeat: no-repeat;
             background-position: 126px center;
             p {

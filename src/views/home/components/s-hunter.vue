@@ -90,7 +90,7 @@
             width: 748px;
             .title {
                 height: 40px;
-                background-image: url("../../../assets/hunter/title_03.png");
+                background-image: url("/static/imgs/title_hunter.png");
                 background-position: 17px 10px;
                 background-repeat: no-repeat;
                 box-shadow: 1px 1px 1px rgba(204, 204, 204, .5);
