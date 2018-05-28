@@ -22,8 +22,18 @@ export default new Router({
                 }, {
                     path: 'news',
                     component: _import('news/news-list'),
-                    name: 'home',
+                    name: 'newsList',
                     meta: {title: '新闻中心', keepAlive: true}
+                }, {
+                    path: 'news-detail',
+                    component: _import('news/news-detail'),
+                    name: 'newsDetail',
+                    meta: {title: '新闻详情', keepAlive: false}
+                }, {
+                    path: 'news-cate-list',
+                    component: _import('news/news-cate-list'),
+                    name: 'newsCateList',
+                    meta: {title: '新闻列表', keepAlive: false}
                 }, {
                     path: 'education-training',
                     component: _import('education/education-training'),

@@ -3,6 +3,143 @@ import { param2Obj } from '@/utils'
 
 export default {
     /**
+     * 分类新闻列表
+     * @returns {*}
+     */
+    queryNewsListByCategory: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|30": [
+                {
+                    "id|+1": 1,
+                    "title|1": ["新闻的标题","内容标题在哪里"],
+                    "category": "新闻的分类",
+                    "publishTime|1": ["2018-10-10 10:10:20","2015-09-09 09:09:09",],
+                    "publishMan|1": ["系统管理员","国家领导人"],
+                    "clickRate|1": ["100", "200"]
+                }
+            ]
+        })
+    },
+    /**
+     * 新闻详情列表
+     * @returns {*}
+     */
+    queryNewsDetail: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id|+1": 1,
+                "title|1": ["新闻的标题","内容标题在哪里"],
+                "content": "AAAAAAAAAAAAA<br/>BBBBBBBBBBBBBBB<br/>CCCCCCCCCC"
+            }
+        })
+    },
+    /**
+     * 培训滚图列表
+     * @returns {*}
+     */
+    queryLatestNews: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|4": [
+                {
+                    "id|+1": 1,
+                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"]
+                }
+            ]
+        })
+    },
+    /**
+     * 培训风采列表
+     * @returns {*}
+     */
+    queryTrainingAndDemeanor: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "total": 10,
+            "totalPage": 3,
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                }
+            ]
+        })
+    },
+    /**
+     * 政法政规列表
+     * @returns {*}
+     */
+    queryPoliticalAndRegulations: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "total": 10,
+            "totalPage": 2,
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                }
+            ]
+        })
+    },
+    /**
+     * 行业资讯列表
+     * @returns {*}
+     */
+    queryIndustryInfos: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "total": 10,
+            "totalPage": 5,
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                }
+            ]
+        })
+    },
+    /**
+     * 通知列表
+     * @returns {*}
+     */
+    queryNoticeList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                }
+            ]
+        })
+    },
+    /**
+     * 工作动态列表
+     * @returns {*}
+     */
+    queryWorkDynamics: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["工作动态工作动态工作动态工作动态工作动态工作动态","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                }
+            ]
+        })
+    },
+    /**
      * 视频列表
      * @returns {*}
      */

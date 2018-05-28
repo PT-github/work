@@ -2,29 +2,27 @@
     <div class="news-list">
         <div class="part01 clearfix">
             <div class="fl">
-                <div class="news-title">工作动态 <router-link tag="a" class="more" :to="'/'">更多>></router-link></div>
-                <ul class="news-l">
+                <div class="news-title">工作动态 <router-link tag="a" class="more" :to="{ path: '/news-cate-list', query: { category: 1, title: '工作动态' } }">更多>></router-link></div>
+                <ul class="news-l" id="workDynamics">
                     <template v-for="(item, index) in list">
-                        <template v-if="index > 0">
-                            <li>{{ item.name }}</li>
-                        </template>
+                        <li><router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }">{{ item.name }}</router-link></li>
                     </template>
                 </ul>
             </div>
-            <div class="fl no-border" style="width: 400px;">
+            <div class="fl no-border" style="width: 400px;" id="latestNews">
                 <el-carousel :autoplay="false" class="sliderBox" trigger="click" height="310px">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <img src="http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg" alt="">
+                    <el-carousel-item v-for="item in list6" :key="item.id">
+                        <router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }">
+                            <img :src="item.imgUrl" alt="">
+                        </router-link>
                     </el-carousel-item>
                 </el-carousel>
             </div>
             <div class="fl">
-                <div class="news-title">通知公告 <router-link tag="a" class="more" :to="'/'">更多>></router-link></div>
-                <ul class="news-l">
-                    <template v-for="(item, index) in list">
-                        <template v-if="index > 0">
-                            <li>{{ item.name }}</li>
-                        </template>
+                <div class="news-title">通知公告 <router-link tag="a" class="more" :to="{ path: '/news-cate-list', query: { category: 2, title: '通知公告' } }">更多>></router-link></div>
+                <ul class="news-l" id="noticeBox">
+                    <template v-for="(item, index) in list2">
+                        <li><router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }">{{ item.name }}</router-link></li>
                     </template>
                 </ul>
             </div>
@@ -32,91 +30,194 @@
         <div class="part02">
             <div class="fl">
                 <div class="title title_03">
-                    <router-link tag='a' :to="'/'" class="more">更多>></router-link>
+                    <router-link tag='a' :to="{ path: '/news-cate-list', query: { category: 3, title: '行业资讯' } }" class="more">更多>></router-link>
                 </div>
-                <ul class="list">
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
+                <ul class="list"  id="industryInfo">
+                    <li v-for="item in list3"><router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }"><span>{{ item.name }}</span></router-link></li>
                 </ul>
                 <div class="paging clearfix">
-                    <span class="next button fr"></span>
-                    <span class="page fr">1/3</span>
-                    <span class="prev button fr"></span>
+                    <span class="next button fr" @click="getIndustryInfos(pageNo3 + 1)"></span>
+                    <span class="page fr">{{pageNo3}}/{{totalPage3}}</span>
+                    <span class="prev button fr" @click="getIndustryInfos(pageNo3 - 1)"></span>
                 </div>
             </div>
             <div class="fl" style="width: 400px;">
-                <div class="title title_06">
-                    <router-link tag='a' :to="'/'" class="more">更多>></router-link>
+                <div class="title title_06" id="politicalAndRegulations">
+                    <router-link tag='a' :to="{ path: '/news-cate-list', query: { category: 4, title: '政策法规' } }" class="more">更多>></router-link>
                 </div>
                 <ul class="list">
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
+                    <li v-for="item in list4"><router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }"><span>{{ item.name }}</span></router-link></li>
                 </ul>
                 <div class="paging clearfix">
-                    <span class="next button fr"></span>
-                    <span class="page fr">1/3</span>
-                    <span class="prev button fr"></span>
+                    <span class="next button fr" @click="getPoliticalAndRegulations(pageNo4 + 1)"></span>
+                    <span class="page fr">{{pageNo4}}/{{totalPage4}}</span>
+                    <span class="prev button fr" @click="getPoliticalAndRegulations(pageNo4 - 1)"></span>
                 </div>
             </div>
             <div class="fl">
                 <div class="title title_08">
-                    <router-link tag='a' :to="'/'" class="more">更多>></router-link>
+                    <router-link tag='a' :to="{ path: '/news-cate-list', query: { category: 5, title: '培训风采' } }" class="more">更多>></router-link>
                 </div>
-                <ul class="list">
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
-                    <li><span>1111111111111111111111111</span></li>
+                <ul class="list" id="trainingAndDemeanor">
+                    <li v-for="item in list5"><router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }"><span>{{ item.name }}</span></router-link></li>
                 </ul>
                 <div class="paging clearfix">
-                    <span class="next button fr"></span>
-                    <span class="page fr">1/3</span>
-                    <span class="prev button fr"></span>
+                    <span class="next button fr" @click="getTrainingAndDemeanor(pageNo5 + 1)"></span>
+                    <span class="page fr">{{pageNo5}}/{{totalPage5}}</span>
+                    <span class="prev button fr" @click="getTrainingAndDemeanor(pageNo5 - 1)"></span>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { queryWorkDynamics, queryNoticeList, queryIndustryInfos, queryPoliticalAndRegulations, queryTrainingAndDemeanor, queryLatestNews } from '@/api/service'
     export default {
         name: 'newsList',
         data() {
             return {
-                list: [
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                    {name: '11111111111111111111111'},
-                ]
+                list: [],
+                list2: [],
+                list3: [],
+                pageNo3: 1,
+                pageSize3: 10,
+                totalPage3: 1,
+                list4: [],
+                pageNo4: 1,
+                pageSize4: 10,
+                totalPage4: 1,
+                list5: [],
+                pageNo5: 1,
+                pageSize5: 10,
+                totalPage5: 1,
+                list6: []
+            }
+        },
+        mounted() {
+            this.getWorkDynamics()
+            this.getNoticeList()
+            this.getIndustryInfos()
+            this.getPoliticalAndRegulations()
+            this.getTrainingAndDemeanor()
+            this.getLatestNews()
+        },
+        methods: {
+            getLatestNews() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('#latestNews')
+                })
+                queryLatestNews().then((res) => {
+                    loading.close()
+                    this.list6 = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getTrainingAndDemeanor(p) {
+                if (p === 0 || p > this.totalPage5) {
+                    return
+                } else if (!!p) {
+                    this.pageNo5 = p
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('#trainingAndDemeanor')
+                })
+                queryTrainingAndDemeanor({
+                    pageNo: this.pageNo5,
+                    pageSize: this.pageSize5
+                }).then((res) => {
+                    loading.close()
+                    this.list5 = res.list
+                    this.totalPage5 = res.totalPage ? res.totalPage : 1
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getPoliticalAndRegulations(p) {
+                if (p === 0 || p > this.totalPage4) {
+                    return
+                } else if (!!p) {
+                    this.pageNo4 = p
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('#politicalAndRegulations')
+                })
+                queryPoliticalAndRegulations({
+                    pageNo: this.pageNo4,
+                    pageSize: this.pageSize4
+                }).then((res) => {
+                    loading.close()
+                    this.list4 = res.list
+                    this.totalPage4 = res.totalPage ? res.totalPage : 1
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getIndustryInfos(p) {
+                if (p === 0 || p > this.totalPage3) {
+                    return
+                } else if (!!p) {
+                    this.pageNo3 = p
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('#industryInfo')
+                })
+                queryIndustryInfos({
+                    pageNo: this.pageNo3,
+                    pageSize: this.pageSize3
+                }).then((res) => {
+                    loading.close()
+                    this.totalPage3 = res.totalPage ? res.totalPage : 1
+                    this.list3 = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getWorkDynamics() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('#workDynamics')
+                })
+                queryWorkDynamics().then((res) => {
+                    loading.close()
+                    this.list = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getNoticeList() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('#noticeBox')
+                })
+                queryNoticeList().then((res) => {
+                    loading.close()
+                    this.list2 = res.list
+                }).catch(() => {
+                    loading.close()
+                })
             }
         }
     }
@@ -169,6 +270,9 @@
                     cursor: pointer;
                     padding: 10px 12px;
                     li {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                         span {
                             font-size: 13px;
                             color: #888888;
@@ -244,6 +348,9 @@
                         background-repeat: no-repeat;
                         background-position: left center;
                         padding-left: 12px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                     li:hover {
                         text-decoration: underline;

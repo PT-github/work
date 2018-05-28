@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+// =======================首页开始=========================
 // 首页左右滑动区域=>获取广告列表
 export function queryPoster() {
   return request({
@@ -65,3 +65,68 @@ export function queryVideos() {
 		method: 'post'
 	})
 }
+
+// =======================首页结束=========================
+
+
+// =======================新闻二级页面开始=========================
+// 工作动态列表
+export function queryWorkDynamics() {
+    return request({
+        url: '/queryWorkDynamics',
+        method: 'post'
+    })
+}
+// 通知列表
+export function queryNoticeList() {
+    return request({
+        url: '/queryNoticeList',
+        method: 'post'
+    })
+}
+// 行业资讯列表
+export function queryIndustryInfos() {
+    return request({
+        url: '/queryIndustryInfos',
+        method: 'post'
+    })
+}
+// 政法政规列表
+export function queryPoliticalAndRegulations() {
+    return request({
+        url: '/queryPoliticalAndRegulations',
+        method: 'post'
+    })
+}
+// 培训风采列表
+export function queryTrainingAndDemeanor(data) {
+    return request({
+        url: '/queryTrainingAndDemeanor',
+        method: 'post',
+        data: data
+    })
+}
+// 最新新闻-滚图列表
+export function queryLatestNews() {
+    return request({
+        url: '/queryLatestNews',
+        method: 'post'
+    })
+}
+// 新闻详情列表
+export function queryNewsDetail(params) {
+    return request({
+        url: '/queryNewsDetail',
+        method: 'post',
+        params: params
+    })
+}
+// 分类新闻列表
+export function queryNewsListByCategory(data) {
+    return request({
+        url: '/queryNewsListByCategory',
+        method: 'post',
+        data: data
+    })
+}
+// =======================新闻二级页面结束=========================
