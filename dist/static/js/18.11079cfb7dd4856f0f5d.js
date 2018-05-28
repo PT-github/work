@@ -1,0 +1,2 @@
+webpackJsonp([18],{"/+rM":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l={render:function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("教育培训")])},staticRenderFns:[]},r=n("VU/8")(null,l,!1,null,null,null);t.default=r.exports}});
+//# sourceMappingURL=18.11079cfb7dd4856f0f5d.js.map

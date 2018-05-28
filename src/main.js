@@ -10,7 +10,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './permission' // permission control
-process.env.NODE_ENV === 'development' && require('./mock') // simulation data
+// process.env.NODE_ENV === 'development' && require('./mock') // simulation data
+require('./mock')
 // import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/dist/css/swiper.min.css'
 import * as filters from './filters' // global filters

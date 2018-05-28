@@ -25,6 +25,11 @@
                 </div>
             </li>
         </ul>
+        <div class="pageBox">
+            <span class="cursor" @click="go(pageNo - 1)">上一页</span>
+            <span>{{pageNo}}</span>
+            <span class="cursor" @click="go(pageNo + 1)">下一页</span>
+        </div>
     </div>
 </template>
 <script>
@@ -38,12 +43,21 @@
                 list: [],
                 pageNo: 1,
                 pageSize: 30,
+                totalPage: 1
             }
         },
         mounted() {
             this.getNewsListByCategory()
         },
         methods: {
+            go(p) {
+                if (p === 0 || p > this.totalPage) {
+                    return;
+                } else {
+                    this.pageNo = p
+                    this.getNewsListByCategory()
+                }
+            },
             getNewsListByCategory() {
                 const loading = this.$loading({
                     lock: true,
@@ -52,18 +66,24 @@
                     fullscreen: false,
                     target: this.$el
                 })
+                var scrollTop = document.documentElement.scrollTop
                 queryNewsListByCategory({
                     category: this.category,
                     pageNo: this.pageNo,
                     pageSize: this.pageSize
                 }).then((res) => {
+                    console.log(document.documentElement.scrollTop)
                     loading.close()
-                    console.log(res)
-                    if (this.pageNo === 1) {
+                    this.totalPage = res.totalPage
+                    this.list = res.list
+                    /*if (this.pageNo === 1) {
                         this.list = res.list
                     } else {
-                        this.list.push(res.list)
-                    }
+                        this.list.push(...res.list)
+                    }*/
+                    this.$nextTick(() => {
+                        document.documentElement.scrollTop = 166
+                    })
                 }).catch(() => {
                     loading.close()
                 })
@@ -79,15 +99,27 @@
         background-color: #FFF;
         position: relative;
         min-height: 100px;
+        .pageBox {
+            height: 58px;
+            line-height: 58px;
+            text-align: center;
+            .cursor {
+                cursor: pointer;
+            }
+            span {
+                padding: 0 10px;
+                font-size: 13px;
+            }
+        }
         .list {
             min-height: 58px;
             padding-top: 30px;
             .list-li {
-                &:last-child {
+                /*&:last-child {
                     .search_job_list {
                         border-bottom: 0;
                     }
-                }
+                }*/
                 .search_job_list {
                     margin-left: 10px;
                     margin-right: 10px;

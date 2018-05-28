@@ -4,7 +4,7 @@
         <div class="news-box">
             <template v-if="list.length > 0">
                 <div class="news-box-top">
-                    <div class="news-box-top-title">{{ list[0].name }}</div>
+                    <div class="news-box-top-title"><router-link tag='a' :to="{ name: 'newsDetail', query: { id: list[0].id } }">{{ list[0].name }}</router-link></div>
                     <div class="news-box-top-content clearfix">
                         <div class="fl"><img :src="list[0].imgUrl" :alt="list[0].name"></div>
                         <div class="fr">
@@ -19,7 +19,7 @@
                 <ul class="news-list">
                     <template v-for="(item, index) in list">
                         <template v-if="index > 0">
-                            <li>{{ item.name }}</li>
+                            <li><router-link tag='a' :to="{ name: 'newsDetail', query: { id: item.id } }">{{ item.name }}</router-link></li>
                         </template>
                     </template>
                 </ul>

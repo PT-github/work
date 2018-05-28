@@ -10,6 +10,7 @@ export default {
         return Mock.mock({
             'success': true,
             "message": '成功',
+            "totalPage": 4,
             "list|30": [
                 {
                     "id|+1": 1,
