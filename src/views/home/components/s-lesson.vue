@@ -86,7 +86,8 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
     .s-lesson {
         width: 710px;
-        height: 300px;
+        min-height: 300px;
+        height: 100%;
         border: 1px solid #cac9cb;
         background-color: #FFF;
         .fr {

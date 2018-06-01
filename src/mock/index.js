@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import api from './home'
 Mock.setup({
-    timeout: '20'
+    timeout: '2000'
 })
 // 拦截首页接口请求
 Mock.mock(/\/queryPoster/, 'post', api.queryPoster)
