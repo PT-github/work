@@ -10,7 +10,13 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {  // 请求到 '/device' 下 的请求都会被代理到 target： http://debug.xxx.com 中
+      '/home/*': {
+        target: 'http://localhost:8090',
+        secure: false, // 接受 运行在 https 上的服务
+        changeOrigin: true
+      }
+      },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

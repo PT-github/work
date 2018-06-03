@@ -3,49 +3,49 @@ import request from '@/utils/request'
 // 首页左右滑动区域=>获取广告列表
 export function queryPoster() {
   return request({
-    url: '/queryPoster',
+    url: '/home/queryPoster',
     method: 'post'
   })
 }
 // 首页新闻列表
 export function queryNews() {
   return request({
-    url: '/queryNews',
+    url: '/home/queryNews',
     method: 'post'
   })
 }
 // 首页课程列表
 export function queryLessons() {
   return request({
-    url: '/queryLessons',
+    url: '/home/queryLessons',
     method: 'post'
   })
 }
 // 首页导师列表
 export function queryTeachers() {
   return request({
-    url: '/queryTeachers',
+    url: '/home/queryTeachers',
     method: 'post'
   })
 }
 // 首页热门招聘单位列表
 export function queryCompany() {
   return request({
-    url: '/queryCompany',
+    url: '/home/queryCompany',
     method: 'post'
   })
 }
 // 首页职位列表
 export function queryJobs() {
   return request({
-    url: '/queryJobs',
+    url: '/home/queryJobs',
     method: 'post'
   })
 }
 // 首页人才列表
 export function queryTalents() {
   return request({
-    url: '/queryTalents',
+    url: '/home/queryTalents',
     method: 'post'
   })
 }
@@ -53,7 +53,7 @@ export function queryTalents() {
 // 首页友情链接列表
 export function queryFriendShips() {
 	return request({
-		url: '/queryFriendShips',
+		url: '/home/queryFriendShips',
 		method: 'post'
 	})
 }
@@ -61,7 +61,7 @@ export function queryFriendShips() {
 // 首页视频列表
 export function queryVideos() {
 	return request({
-		url: '/queryVideos',
+		url: '/home/queryVideos',
 		method: 'post'
 	})
 }
@@ -73,35 +73,35 @@ export function queryVideos() {
 // 工作动态列表
 export function queryWorkDynamics() {
     return request({
-        url: '/queryWorkDynamics',
+        url: '/news/queryWorkDynamics',
         method: 'post'
     })
 }
 // 通知列表
 export function queryNoticeList() {
     return request({
-        url: '/queryNoticeList',
+        url: '/news/queryNoticeList',
         method: 'post'
     })
 }
 // 行业资讯列表
 export function queryIndustryInfos() {
     return request({
-        url: '/queryIndustryInfos',
+        url: '/news/queryIndustryInfos',
         method: 'post'
     })
 }
 // 政法政规列表
 export function queryPoliticalAndRegulations() {
     return request({
-        url: '/queryPoliticalAndRegulations',
+        url: '/news/queryPoliticalAndRegulations',
         method: 'post'
     })
 }
 // 培训风采列表
 export function queryTrainingAndDemeanor(data) {
     return request({
-        url: '/queryTrainingAndDemeanor',
+        url: '/news/queryTrainingAndDemeanor',
         method: 'post',
         data: data
     })
@@ -109,14 +109,14 @@ export function queryTrainingAndDemeanor(data) {
 // 最新新闻-滚图列表
 export function queryLatestNews() {
     return request({
-        url: '/queryLatestNews',
+        url: '/news/queryLatestNews',
         method: 'post'
     })
 }
 // 新闻详情列表
 export function queryNewsDetail(params) {
     return request({
-        url: '/queryNewsDetail',
+        url: '/news/queryNewsDetail',
         method: 'post',
         params: params
     })
@@ -124,7 +124,7 @@ export function queryNewsDetail(params) {
 // 分类新闻列表
 export function queryNewsListByCategory(data) {
     return request({
-        url: '/queryNewsListByCategory',
+        url: '/news/queryNewsListByCategory',
         method: 'post',
         data: data
     })

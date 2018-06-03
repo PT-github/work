@@ -3,7 +3,7 @@
         <!---->
         <el-carousel ref="sliderComp" :autoplay="false" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
             <el-carousel-item v-for="item in list" :key="item.id">
-                <img :src="item.imgUrl" :alt="item.name">
+                <img :src="item.imgurl" :alt="item.name">
             </el-carousel-item>
         </el-carousel>
         <ul class="indicator-page">
@@ -38,6 +38,7 @@
                 queryPoster().then((res) => {
 	                loading.close()
                     this.list = res.list
+                    console.log('====' + JSON.stringify(res));
                 }).catch(() => {
                 	loading.close()
                 })
