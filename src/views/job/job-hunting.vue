@@ -14,7 +14,7 @@
                     地点：
                 </div>
                 <div class="input-control">
-                    <span>北京</span>
+                    <span @click="dialogVisible = true">请选择</span>
                     <span>上海</span>
                     <span>长沙</span>
                     <span>广州</span>
@@ -224,13 +224,31 @@
                 </div>
             </div>
         </div>
+        <el-dialog class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false" :close-on-press-escape="false">
+            <div slot="title" class="areaTitle">选择地区 <span>（最多只能选择5项）</span></div>
+            <div class="selectedArea clearfix">
+                <div class="areaBtn">长沙<i></i></div>
+                <div class="areaBtn">上海<i></i></div>
+            </div>
+            <areaComp></areaComp>
+            <div slot="footer" class="dialog-footer">
+                <div class="button" @click="dialogVisible = false">确 定</div>
+                <div class="button cancel" @click="dialogVisible = false">取 消</div>
+            </div>
+        </el-dialog>
+
     </div>
 </template>
 <script>
+    import areaComp from './components/areaComp'
     export default {
         name: 'jobHunting',
+        components: {
+            areaComp
+        },
         data() {
             return {
+                dialogVisible: false,
                 showMore: false,
                 showMoreTitle: '展开更多选项▼',
             }
@@ -451,6 +469,72 @@
             }
             .no-bottom {
                 border-bottom: 0;
+            }
+        }
+    }
+</style>
+<style rel="stylesheet/scss" lang="scss">
+    .areaDialog {
+        .selectedArea {
+            padding: 15px 10px 5px;
+            background-color: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            .areaBtn {
+                position: relative;
+                float: left;
+                height: 26px;
+                line-height: 26px;
+                font-size: 12px;
+                color: #333;
+                white-space: nowrap;
+                margin: 0 8px 5px 0;
+                padding: 0 20px 0 6px;
+                background-color: #fff;
+                border: 1px solid #ff9f20;
+                cursor: pointer;
+                i {
+                    position: absolute;
+                    width: 20px;
+                    top: -1px;
+                    right: 0;
+                    height: 26px;
+                    background: url(../../assets/img/close2.png) center no-repeat;
+                }
+            }
+        }
+        .el-dialog__header {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .areaTitle {
+            font-weight: bold;
+            font-size: 18px;
+            span {
+                font-size: 12px;
+            }
+        }
+        .el-dialog__body {
+            padding: 0 0 10px 0;
+        }
+        .dialog-footer {
+            text-align: center;
+            .button {
+                display: inline-block;
+                height: 28px;
+                line-height: 27px;
+                font-size: 14px;
+                color: #fff;
+                text-align: center;
+                cursor: pointer;
+                margin: 0 10px;
+                padding: 0 30px;
+                background-color: #ff6000;
+                border: 1px solid #ff6000;
+                border-radius: 2px;
+            }
+            .cancel {
+                color: #999;
+                background-color: #fff;
+                border-color: #b0b0b0;
             }
         }
     }
