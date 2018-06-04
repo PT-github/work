@@ -141,6 +141,86 @@
                         <div class="td center" style="width: 150px;">50-10万/年</div>
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
                 </div>
             </div>
         </div>

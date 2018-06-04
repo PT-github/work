@@ -40,8 +40,8 @@
                     <li @click="go" path="home" class="home" :class="{ 'on': active === 'home'}">首页</li>
                     <li @click="go" path="news" class="" :class="{ 'on': active === 'news'}">新闻中心</li>
                     <li @click="go" path="education-training" class="" :class="{ 'on': active === 'education-training'}">教育培训</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">招揽人才</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting2'}">找工作</li>
+                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting2'}">招揽人才</li>
+                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">找工作</li>
                     <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting3'}">中高级人才</li>
                     <li @click="go" path="about-us" class="" :class="{ 'on': active === 'about-us'}">关于我们</li>
                 </ul>

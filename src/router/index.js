@@ -43,7 +43,7 @@ export default new Router({
                     path: 'job-hunting',
                     component: _import('job/job-hunting'),
                     name: 'home',
-                    meta: {title: '招聘求职', keepAlive: true}
+                    meta: {title: '找工作', keepAlive: true}
                 }, {
                     path: 'about-us',
                     component: _import('about/about-us'),
