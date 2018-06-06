@@ -11,9 +11,39 @@
                 </div>
                 <div class="fr">
                     <div class="fr-top clearfix">
-                        <router-link tag='a' :to="'/'" class="fl fr-top1 icon">会员中心</router-link>
-                        <router-link tag='a' :to="'/'" class="fl fr-top2 icon">个人会员</router-link>
-                        <router-link tag='a' :to="'/'" class="fl fr-top3 icon">企业会员</router-link>
+                        <span class="fr-top1">个人/企业注册</span>
+                        <span class="fr-top2" @click="showLoginDialog">登录</span>
+                        <span @click="openDialog">在线留言</span>
+                        <div class="loginBox" v-show="dialogVisible" id="LoginSeqBox">
+                            <transition>
+                                <div class="login-form" v-if="loginType === 1">
+                                    <div class="title">
+                                        账号登录
+                                        <span @click="exchangeLoginType(2)">扫码登录</span>
+                                    </div>
+                                    <div class="login-form_control">
+                                        <input type="text" placeholder="用户名">
+                                    </div>
+                                    <div class="login-form_control">
+                                        <input type="password" placeholder="密码">
+                                    </div>
+                                    <div class="login-form_control">
+                                        <span class="sel active">个人用户</span><span class="sel">企业用户</span>
+                                    </div>
+                                    <div class="login-form_control form_control-submit">
+                                        <div class="submit">登录</div>
+                                    </div>
+                                </div>
+                                <div class="login-ewm" v-else>
+                                    <div class="title">
+                                        扫码登录
+                                        <span @click="exchangeLoginType(1)">账号登录</span>
+                                    </div>
+                                    <div class="pic"><img src="/static/imgs/ewm.png" alt=""></div>
+                                    <div class="des">微信登录</div>
+                                </div>
+                            </transition>
+                        </div>
                     </div>
                     <div class="fr-search">
                         <div class="flex">
@@ -31,22 +61,37 @@
             </div>
             <div class="part2">
                 <ul class="flex">
-                    <!--<li @click="go" path="home" class="home" :class="{ 'on': active === 'home'}">首页</li>
-                    <li @click="go" path="news" class="" :class="{ 'on': active === 'news'}">新闻中心</li>
-                    <li @click="go" path="education-training" class="" :class="{ 'on': active === 'education-training'}">教育培训</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">招聘求职</li>
-                    <li @click="go" path="about-us" class="" :class="{ 'on': active === 'about-us'}">关于我们</li>-->
-
                     <li @click="go" path="home" class="home" :class="{ 'on': active === 'home'}">首页</li>
                     <li @click="go" path="news" class="" :class="{ 'on': active === 'news'}">新闻中心</li>
                     <li @click="go" path="education-training" class="" :class="{ 'on': active === 'education-training'}">教育培训</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting2'}">招揽人才</li>
+                    <li @click="go" path="personnel-list" class="" :class="{ 'on': active === 'personnel-list'}">招揽人才</li>
                     <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">找工作</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting3'}">中高级人才</li>
+                    <li @click="go" path="senior-personnel-list" class="" :class="{ 'on': active === 'senior-personnel-list'}">中高级人才</li>
                     <li @click="go" path="about-us" class="" :class="{ 'on': active === 'about-us'}">关于我们</li>
                 </ul>
             </div>
         </div>
+        <el-dialog :visible.sync="centerDialogVisible" width="430px" center :close-on-click-modal="false" :close-on-press-escape="false">
+            <span slot="title" class="leaveMsgTitle">在线留言</span>
+            <div class="leaveMsgContent">
+                <div class="form-control">
+                    <div class="label">主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</div>
+                    <div class="input-control"><input type="text"></div>
+                </div>
+                <div class="form-control">
+                    <div class="label">联系方式：</div>
+                    <div class="input-control"><input type="text"></div>
+                </div>
+                <div class="form-control form-control_textarea">
+                    <div class="label">留言内容：</div>
+                    <div class="input-control"><textarea></textarea></div>
+                </div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="centerDialogVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="centerDialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -54,14 +99,55 @@
         name: 'sHeader',
         data() {
             return {
-                active: 'home'
+                active: 'home',
+                centerDialogVisible: false,
+                dialogVisible: false,
+                loginType: 1
             }
         },
+        mounted() {
+            window.addEventListener('scroll',()=>{
+                this.dialogVisible = false
+            })
+            document.body.addEventListener('click', (e) => {
+                var target = e.target,loginSeqBox = document.getElementById('LoginSeqBox')
+                if (target.className.indexOf('fr-top2') !== -1 || loginSeqBox === target || this.isChildOf(target, loginSeqBox)) {
+                    return
+                } else {
+                    this.dialogVisible = false
+                }
+            })
+        },
         methods: {
+            isChildOf(child, parent) {
+                var parentNode;
+                if (child && parent) {
+                    parentNode = child.parentNode;
+                    while (parentNode) {
+                        if (parent === parentNode) {
+                            return true;
+                        }
+                        parentNode = parentNode.parentNode;
+                    }
+                }
+                return false;
+            },
             go(e) {
                 var path = e.target.getAttribute('path')
                 this.active = path
                 this.$router.push({ path: '/' + path })
+            },
+            showLoginDialog() {
+                this.dialogVisible = true
+            },
+            openDialog() {
+                this.centerDialogVisible = true
+            },
+            exchangeLoginType(v) {
+                this.loginType = v
+            },
+            leaveMsg() {
+
             }
         }
     }
@@ -73,6 +159,160 @@
         background-repeat: repeat-x;
         width: 100%;
         min-width: 1000px;
+        .loginBox {
+            position: absolute;
+            background-color: #FFF;
+            border-radius: 5px;
+            width: 180px;
+            top: 23px;
+            left: 40px;
+            z-index: 10000;
+            box-shadow: 1px 1px 1px 1px #ccc;
+            &:after {
+                content: '';
+                width: 10px;
+                height: 10px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: transparent transparent #e6e3e3 transparent;
+                position: absolute;
+                top: -10px;
+                left: 47px;
+            }
+            .login-ewm {
+                padding: 10px;
+                .des {
+                    font-size: 12px;
+                    text-align: center;
+                    height: 22px;
+                    line-height: 22px;
+                }
+                .pic {
+                    img {
+                        display: block;
+                        margin: 0 auto;
+                        width: 120px;
+                    }
+                }
+                .title {
+                    font-size: 14px;
+                    height: 35px;
+                    line-height: 35px;
+                    color: #333;
+                    position: relative;
+                    span {
+                        font-size: 12px;
+                        color: #999;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .login-form {
+                padding: 10px;
+                .form_control-submit {
+                    .submit {
+                        width: 100%;
+                        height: 25px;
+                        line-height: 25px;
+                        background-color: #bc1217;
+                        font-size: 12px;
+                        text-align: center;
+                        color: #FFF;
+                        cursor: pointer;
+                        border-radius: 5px;
+                    }
+                }
+                .login-form_control {
+                    display: flex;
+                    margin-bottom: 5px;
+                    span.sel {
+                        flex: 1;
+                        border: 1px solid #dedede;
+                        text-align: center;
+                        font-size: 12px;
+                        color: #666;
+                        height: 22px;
+                        line-height: 22px;
+                        cursor: pointer;
+                    }
+                    span.active {
+                        color: #FFF;
+                        background-color: #bc1217;
+                        border: none;
+                    }
+                    input {
+                        width: 100%;
+                        height: 25px;
+                        border: 1px solid #dedede;
+                        border-radius: 4px;
+                        padding: 0 3px;
+                        font-size: 12px;
+                        font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+                        color: #666;
+                    }
+                }
+                .title {
+                    font-size: 14px;
+                    height: 35px;
+                    line-height: 35px;
+                    color: #333;
+                    position: relative;
+                    span {
+                        font-size: 12px;
+                        color: #999;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .dialog-footer {
+            display: block;
+            margin: 0 auto;
+        }
+        .leaveMsgTitle {
+            color: #666;
+        }
+        .form-control {
+            display: flex;
+            width: 100%;
+            height: 35px;
+            margin-bottom: 10px;
+            .label {
+                width:70px;
+                height: 35px;
+                line-height: 35px;
+                text-align: right;
+                font-size: 12px;
+                padding-right: 5px;
+            }
+            .input-control {
+                flex: 1;
+                input {
+                    height: 35px;
+                    width: 100%;
+                    border: 1px solid #dedede;
+                    background:none;
+                    border-radius: 5px;
+                    outline: none;
+                    padding: 0 5px;
+                }
+                textarea {
+                    height: 60px;
+                    width: 100%;
+                    resize: none;
+                    border: 1px solid #dedede;
+                    border-radius: 5px;
+                    outline: none;
+                    padding: 0 5px;
+                }
+            }
+        }
         .s-header-container {
             width: 1000px;
             height: 100%;
@@ -174,16 +414,28 @@
                         width: 250px;
                         margin-top: 30px;
                         margin-bottom: 28px;
-                        > a {
-                            margin-right: 25px;
-                            height: 20px;
-                            line-height: 20px;
-                            width: 65px;
+                        position: relative;
+                        height: 20px;
+                        line-height: 20px;
+                        > span {
+                            position: absolute;
                             font-size: 12px;
-                            text-align: right;
                             color: #666666;
+                            top: 0;
+                            right: 5px;
+                            cursor: pointer;
+                            &:hover {
+                                color: #000;
+                                text-decoration: underline;
+                            }
                         }
-                        .icon {
+                        .fr-top1 {
+                            right: 60px;
+                        }
+                        .fr-top2 {
+                            right: 143px;
+                        }
+                        /*.icon {
                             background-repeat: no-repeat;
                             background-position: left center;
                         }
@@ -196,7 +448,7 @@
                         > .fr-top3 {
                             margin-right: 0;
                             background-image: url("../../../assets/header/bg_10.png");
-                        }
+                        }*/
                     }
                 }
             }
@@ -209,6 +461,5 @@
 </style>
 
 <style rel="stylesheet/scss" lang="scss">
-
 </style>
 

@@ -37,17 +37,27 @@ export default new Router({
                 }, {
                     path: 'education-training',
                     component: _import('education/education-training'),
-                    name: 'home',
+                    name: 'educationTraining',
                     meta: {title: '教育培训', keepAlive: true}
                 }, {
                     path: 'job-hunting',
                     component: _import('job/job-hunting'),
-                    name: 'home',
+                    name: 'jobHunting',
                     meta: {title: '找工作', keepAlive: true}
+                }, {
+                    path: 'personnel-list',
+                    component: _import('job/personnel-list'),
+                    name: 'personnelList',
+                    meta: {title: '招揽人才', keepAlive: true}
+                }, {
+                    path: 'senior-personnel-list',
+                    component: _import('job/personnel-list'),
+                    name: 'seniorPersonnelList',
+                    meta: {title: '中高级人才', keepAlive: true}
                 }, {
                     path: 'about-us',
                     component: _import('about/about-us'),
-                    name: 'home',
+                    name: 'aboutUs',
                     meta: {title: '关于我们', keepAlive: true}
                 }
             ]

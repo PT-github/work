@@ -102,7 +102,7 @@
                 </div>
                 <div class="tbody">
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -110,7 +110,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox checked"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -118,7 +118,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox checked"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -126,7 +126,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox checked"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -134,7 +134,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox checked"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -142,7 +142,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -150,7 +150,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -158,7 +158,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -166,7 +166,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -174,7 +174,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -182,7 +182,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -190,7 +190,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -198,7 +198,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -206,7 +206,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -214,7 +214,7 @@
                         <div class="td center" style="width: 110px;">06-04</div>
                     </div>
                     <div class="tr">
-                        <div class="td" style="width: 30px;"><span class="checkbox"></span></div>
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
                         <div class="td flex-auto">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
@@ -298,7 +298,7 @@
                                 width: 15px;
                                 height: 15px;
                                 margin-top: 12px;
-                                margin-left: 8px;
+                                margin-left: 15px;
                                 float: left;
                                 background-image: url(../../assets/img/check.png);
                                 background-position:left center;
