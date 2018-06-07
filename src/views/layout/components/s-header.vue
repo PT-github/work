@@ -11,9 +11,61 @@
                 </div>
                 <div class="fr">
                     <div class="fr-top clearfix">
-                        <span class="fr-top1">个人/企业注册</span>
-                        <span class="fr-top2" @click="showLoginDialog">登录</span>
+                        <template v-if="false">
+                            <span class="fr-top1" @click="showLoginDialog">登录</span>
+                            <span class="fr-top2" @click="registVisible = true">个人/企业注册</span>
+                        </template>
+                        <span class="fr-top3">
+                            企业用户-彭涛
+                            <ul class="userSelOptions">
+                                <li>基本信息</li>
+                                <li>我的招聘</li>
+                                <li>会员积分</li>
+                                <li>人才搜索</li>
+                                <li>职位申请记录</li>
+                                <li>我的面试申请</li>
+                                <li>我的人才库</li>
+                            </ul>
+                        </span>
+                        <span class="fr-top3" v-if="false">
+                            个人用户-彭涛
+                            <ul class="userSelOptions">
+                                <li>基本信息</li>
+                                <li>我的简历</li>
+                                <li>会员积分</li>
+                                <li>我的申请</li>
+                                <li>我的面试邀请</li>
+                                <li>我的订单</li>
+                                <li>高级人才申请</li>
+                            </ul>
+                        </span>
+                        <span class="fr-top4">站内信<i>2</i></span>
                         <span @click="openDialog">在线留言</span>
+                        <transition>
+                            <div class="registBox" v-show="registVisible" id="RegistSeqBox">
+                                <div class="login-form">
+                                    <div class="title">个人注册</div>
+                                    <div class="login-form_control">
+                                        <input type="text" placeholder="用户名">
+                                    </div>
+                                    <div class="login-form_control">
+                                        <input type="password" placeholder="密码">
+                                    </div>
+                                    <div class="login-form_control">
+                                        <input type="text" placeholder="联系电话">
+                                    </div>
+                                    <div class="login-form_control">
+                                        <input type="text" placeholder="邮箱">
+                                    </div>
+                                    <div class="login-form_control">
+                                        <span class="sel active">个人用户</span><span class="sel">企业用户</span>
+                                    </div>
+                                    <div class="login-form_control form_control-submit">
+                                        <div class="submit">注&nbsp;&nbsp;&nbsp;&nbsp;册</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </transition>
                         <div class="loginBox" v-show="dialogVisible" id="LoginSeqBox">
                             <transition>
                                 <div class="login-form" v-if="loginType === 1">
@@ -31,7 +83,7 @@
                                         <span class="sel active">个人用户</span><span class="sel">企业用户</span>
                                     </div>
                                     <div class="login-form_control form_control-submit">
-                                        <div class="submit">登录</div>
+                                        <div class="submit">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
                                     </div>
                                 </div>
                                 <div class="login-ewm" v-else>
@@ -102,19 +154,26 @@
                 active: 'home',
                 centerDialogVisible: false,
                 dialogVisible: false,
-                loginType: 1
+                loginType: 1,
+                registVisible: false
             }
         },
         mounted() {
             window.addEventListener('scroll',()=>{
                 this.dialogVisible = false
+                this.registVisible = false
             })
             document.body.addEventListener('click', (e) => {
-                var target = e.target,loginSeqBox = document.getElementById('LoginSeqBox')
-                if (target.className.indexOf('fr-top2') !== -1 || loginSeqBox === target || this.isChildOf(target, loginSeqBox)) {
+                var target = e.target,loginSeqBox = document.getElementById('LoginSeqBox'),registSeqBox = document.getElementById('RegistSeqBox')
+                if (target.className.indexOf('fr-top1') !== -1 || loginSeqBox === target || this.isChildOf(target, loginSeqBox)) {
+                    this.registVisible = false
+                    return
+                } else if(target.className.indexOf('fr-top2') !== -1 || registSeqBox === target || this.isChildOf(target, registSeqBox)){
+                    this.dialogVisible = false
                     return
                 } else {
                     this.dialogVisible = false
+                    this.registVisible = false
                 }
             })
         },
@@ -159,11 +218,11 @@
         background-repeat: repeat-x;
         width: 100%;
         min-width: 1000px;
-        .loginBox {
+        .loginBox, .registBox {
             position: absolute;
             background-color: #FFF;
             border-radius: 5px;
-            width: 180px;
+            width: 200px;
             top: 23px;
             left: 40px;
             z-index: 10000;
@@ -227,7 +286,7 @@
                 }
                 .login-form_control {
                     display: flex;
-                    margin-bottom: 5px;
+                    margin-bottom: 15px;
                     span.sel {
                         flex: 1;
                         border: 1px solid #dedede;
@@ -269,6 +328,13 @@
                         cursor: pointer;
                     }
                 }
+            }
+        }
+        .registBox {
+            left: 10px;
+            width: 230px;
+            &:after {
+                left: 140px;
             }
         }
         .dialog-footer {
@@ -430,10 +496,62 @@
                             }
                         }
                         .fr-top1 {
-                            right: 60px;
+                            right: 143px;
                         }
                         .fr-top2 {
-                            right: 143px;
+                            right: 60px;
+                        }
+                        .fr-top3 {
+                            right: 120px;
+                            .userSelOptions {
+                                display: none;
+                                position: absolute;
+                                background-color: #FFF;
+                                border-radius: 5px;
+                                width: 100px;
+                                top: 23px;
+                                left: 50%;
+                                margin-left: -50px;
+                                z-index: 10000;
+                                box-shadow: 1px 1px 2px 0px #ccc;
+                                border: 1px solid #d1d1d1;
+                                &:after {
+                                    content: '';
+                                    width: 10px;
+                                    height: 10px;
+                                    border-width: 5px;
+                                    border-style: solid;
+                                    border-color: transparent transparent #e6e3e3 transparent;
+                                    position: absolute;
+                                    top: -10px;
+                                    left: 45px;
+                                }
+                                li {
+                                    display: block;
+                                    padding: 0 9px;
+                                    line-height: 26px;
+                                    text-align: left;
+                                    font-size: 12px;
+                                    color: #333;
+                                }
+                            }
+                            &:hover{
+                                .userSelOptions {
+                                    display: block;
+                                }
+                            }
+                        }
+                        .fr-top4 {
+                            right: 60px;
+                            i {
+                                font-style: normal;
+                                font-size: 12px;
+                                background-color: red;
+                                padding: 0 2px;
+                                border-radius: 20px;
+                                color:#FFF;
+                                margin-left: 4px;
+                            }
                         }
                         /*.icon {
                             background-repeat: no-repeat;
