@@ -91,7 +91,7 @@
                         <div class="search_job_list">
                             <div class="part01 clearfix">
                                 <div class="search_user_list_neme fl">
-                                    <router-link tag="a" :to="'/'" class=" disc_per">张三</router-link>
+                                    <span class=" disc_per" @click="jobDetailDialogVisible = true">张三</span>
                                     <span class="disc_user_mes">男,28岁,</span>
                                 </div>
                                 <div class="disc_time fr">更新时间：3天前</div>
@@ -128,7 +128,7 @@
                         <div class="search_job_list">
                             <div class="part01 clearfix">
                                 <div class="search_user_list_neme fl">
-                                    <router-link tag="a" :to="'/'" class=" disc_per">张三</router-link>
+                                    <span class=" disc_per" @click="jobDetailDialogVisible = true">张三</span>
                                     <span class="disc_user_mes">男,28岁,</span>
                                 </div>
                                 <div class="disc_time fr">更新时间：3天前</div>
@@ -159,7 +159,8 @@
                 </li>
             </ul>
         </div>
-        <el-dialog class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false" :close-on-press-escape="false">
+        <el-dialog class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false"
+                   :close-on-press-escape="false">
             <div slot="title" class="areaTitle">选择地区 <span>（最多只能选择5项）</span></div>
             <div class="selectedArea clearfix">
                 <div class="areaBtn">长沙<i></i></div>
@@ -171,11 +172,199 @@
                 <div class="button cancel" @click="dialogVisible = false">取 消</div>
             </div>
         </el-dialog>
-
+        <el-dialog :top="'2vh'" :visible.sync="jobDetailDialogVisible" width="1000px" :close-on-click-modal="false"
+                   :close-on-press-escape="false">
+            <span slot="title">简历详情</span>
+            <div class="job-detail">
+                <div class="job-control">
+                    <div class="label">姓名：</div>
+                    <div class="value">张三</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">出生日期：</div>
+                    <div class="value">2008年9月</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">手机：</div>
+                    <div class="value">150XXXXXXXX</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">性别：</div>
+                    <div class="value">男</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">名族：</div>
+                    <div class="value">汉族</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">邮箱：</div>
+                    <div class="value">xxxxxxxxxxx@163.com</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">户籍：</div>
+                    <div class="value">湖南省长沙市</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">身高：</div>
+                    <div class="value">170</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">QQ：</div>
+                    <div class="value">347985953</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">体重：</div>
+                    <div class="value">50KG</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">政治面貌：</div>
+                    <div class="value">党员</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">学历：</div>
+                    <div class="value">本科</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">固话：</div>
+                    <div class="value">010-86102658</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">毕业时间：</div>
+                    <div class="value">2008年7月</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">毕业院校：</div>
+                    <div class="value">湖南文理学院</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">身份证：</div>
+                    <div class="value">430XXXXXXXXXXXXXX</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">专业：</div>
+                    <div class="value">电气自动化</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">现有职称：</div>
+                    <div class="value">高级软件开发工程师</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">第二专业：</div>
+                    <div class="value">育婴师</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">现居住地：</div>
+                    <div class="value">湖南省长沙市五一广场9栋1801室</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">求职意向：</div>
+                    <div class="value">育婴师</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">薪资类型：</div>
+                    <div class="value">按月</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">期望薪资：</div>
+                    <div class="value">1W/月</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">职位：</div>
+                    <div class="value">高级软件开发工程师</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">希望工作地区：</div>
+                    <div class="value">湖南长沙</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">到岗时间：</div>
+                    <div class="value">一个月后</div>
+                </div>
+                <div class="job-control job-control_auto">
+                    <div class="label">工作经验：</div>
+                    <div class="value">
+                        <div class="table">
+                            <div class="theader">
+                                <div class="tr">
+                                    <div class="th">入职时间</div>
+                                    <div class="th">离职时间</div>
+                                    <div class="th">公司</div>
+                                    <div class="th">职位</div>
+                                    <div class="th">工作描述</div>
+                                    <div class="th">离职原因</div>
+                                </div>
+                            </div>
+                            <div class="tbody">
+                                <div class="tr">
+                                    <div class="td">2018年1月</div>
+                                    <div class="td">2019年2月</div>
+                                    <div class="td">湖南XXX公司</div>
+                                    <div class="td">育婴师</div>
+                                    <div class="td">工作的一些描述</div>
+                                    <div class="td">个人原因</div>
+                                </div>
+                                <div class="tr">
+                                    <div class="td">2018年1月</div>
+                                    <div class="td">2019年2月</div>
+                                    <div class="td">湖南XXX公司</div>
+                                    <div class="td">育婴师</div>
+                                    <div class="td">工作的一些描述</div>
+                                    <div class="td">个人原因</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-control job-control_auto">
+                    <div class="label">教育/培训经历：</div>
+                    <div class="value">
+                        <div class="table">
+                            <div class="theader">
+                                <div class="tr">
+                                    <div class="th">入学时间</div>
+                                    <div class="th">毕业时间</div>
+                                    <div class="th">学校</div>
+                                    <div class="th">学历</div>
+                                    <div class="th">专业</div>
+                                    <div class="th">专业描述</div>
+                                </div>
+                            </div>
+                            <div class="tbody">
+                                <div class="tr">
+                                    <div class="td">2018年1月</div>
+                                    <div class="td">2019年2月</div>
+                                    <div class="td">湖南XXX学院</div>
+                                    <div class="td">本科</div>
+                                    <div class="td">电气自动化</div>
+                                    <div class="td">电子信息类学科</div>
+                                </div>
+                                <div class="tr">
+                                    <div class="td">2018年1月</div>
+                                    <div class="td">2019年2月</div>
+                                    <div class="td">湖南XXX学院</div>
+                                    <div class="td">本科</div>
+                                    <div class="td">电气自动化</div>
+                                    <div class="td">电子信息类学科</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-control job-control_auto">
+                    <div class="label">工作技能：</div>
+                    <div class="value">育婴师、健康管理师</div>
+                </div>
+                <div class="job-control job-control_auto">
+                    <div class="label">自我评价：</div>
+                    <div class="value">我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX。</div>
+                </div>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
     import areaComp from './components/areaComp'
+
     export default {
         name: 'jobHunting',
         components: {
@@ -186,6 +375,7 @@
                 dialogVisible: false,
                 showMore: false,
                 showMoreTitle: '展开更多选项▼',
+                jobDetailDialogVisible: false
             }
         },
         methods: {
@@ -204,6 +394,60 @@
     .job-hunting {
         width: 1000px;
         margin: 0 auto;
+        .job-detail {
+            display: flex;
+            flex-wrap: wrap;
+            .job-control {
+                width: 33.33%;
+                margin-bottom: 5px;
+                display: flex;
+                font-size: 12px;
+                .label {
+                    width: 100px;
+                    text-align: right;
+                    padding-right: 10px;
+                }
+                .value {
+                    flex: 1;
+                    line-height: 25px;
+                    .table {
+                        border: 1px solid #cac9cb;
+                        .tr {
+                            display: flex;
+                            .td, .th {
+                                flex: 1;
+                                font-size: 12px;
+                                border-right: 1px solid #cac9cb;
+                                border-bottom: 1px solid #cac9cb;
+                                &:last-child {
+                                    border-right: 0;
+                                }
+                            }
+                            .td {
+                                padding-left: 5px;
+                                padding-right: 5px;
+                            }
+                            .th {
+                                background-color: rgba(204, 204, 204, .3);
+                                text-align: center;
+                            }
+                        }
+                        .tbody {
+                            .tr {
+                                &:last-child {
+                                    .td {
+                                        border-bottom: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .job-control_auto {
+                width: 100%;
+            }
+        }
         .job-list {
             margin-bottom: 10px;
             border: 1px solid #cac9cb;
@@ -220,7 +464,7 @@
                         margin-left: 15px;
                         float: left;
                         background-image: url(../../assets/img/check.png);
-                        background-position:left center;
+                        background-position: left center;
                         background-repeat: no-repeat;
                     }
                     .checked {
@@ -254,6 +498,9 @@
                     margin-bottom: 10px;
                     .search_user_list_neme {
                         color: #1369c0;
+                        .disc_per {
+                            cursor: pointer;
+                        }
                         .disc_user_mes {
                             font-size: 12px;
                             padding-left: 10px;
@@ -322,7 +569,7 @@
                         text-align: right;
                         line-height: 18px;
                         background-image: url(../../assets/img/check.png);
-                        background-position:left center;
+                        background-position: left center;
                         background-repeat: no-repeat;
                     }
                 }

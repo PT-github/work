@@ -103,7 +103,7 @@
                 <div class="tbody">
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor" @click="jobDetailDialogVisible = true">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -135,7 +135,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -151,7 +151,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -175,7 +175,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -183,7 +183,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -191,7 +191,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -199,7 +199,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -207,7 +207,7 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -215,7 +215,47 @@
                     </div>
                     <div class="tr">
                         <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto">职位名称职位名称</div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
+                        <div class="td" style="width: 275px;">公司名称公司名称</div>
+                        <div class="td center" style="width: 120px;">上海</div>
+                        <div class="td center" style="width: 150px;">50-10万/年</div>
+                        <div class="td center" style="width: 110px;">06-04</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
+                        <div class="td flex-auto cursor">职位名称职位名称</div>
                         <div class="td" style="width: 275px;">公司名称公司名称</div>
                         <div class="td center" style="width: 120px;">上海</div>
                         <div class="td center" style="width: 150px;">50-10万/年</div>
@@ -224,7 +264,7 @@
                 </div>
             </div>
         </div>
-        <el-dialog class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false" :close-on-press-escape="false">
+        <el-dialog :before-close="handleClose" class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false" :close-on-press-escape="false">
             <div slot="title" class="areaTitle">选择地区 <span>（最多只能选择5项）</span></div>
             <div class="selectedArea clearfix">
                 <div class="areaBtn">长沙<i></i></div>
@@ -236,7 +276,43 @@
                 <div class="button cancel" @click="dialogVisible = false">取 消</div>
             </div>
         </el-dialog>
-
+        <el-dialog :visible.sync="jobDetailDialogVisible" width="600px" :close-on-click-modal="false" :close-on-press-escape="false">
+            <span slot="title">职位名称</span>
+            <div class="job-detail">
+                <div class="job-control">
+                    <div class="label">职位名称：</div>
+                    <div class="value">职位名称职位名称</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">职位月薪：</div>
+                    <div class="value">15W/年</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">招聘人数：</div>
+                    <div class="value">15人</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">学历要求：</div>
+                    <div class="value">本科</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">工作年限：</div>
+                    <div class="value">5年以上</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">上班地点：</div>
+                    <div class="value">湖南省芙蓉区五一广场1栋110</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">职位描述：</div>
+                    <div class="value">职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述</div>
+                </div>
+                <div class="job-control">
+                    <div class="label">公司信息：</div>
+                    <div class="value">公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍</div>
+                </div>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -251,9 +327,13 @@
                 dialogVisible: false,
                 showMore: false,
                 showMoreTitle: '展开更多选项▼',
+                jobDetailDialogVisible: false
             }
         },
         methods: {
+            handleClose() {
+                console.log('取消地区选择')
+            },
             toggleShowMore() {
                 this.showMore = !this.showMore
                 if (this.showMore) {
@@ -269,6 +349,24 @@
     .job-hunting {
         width: 1000px;
         margin: 0 auto;
+        .cursor {
+            cursor: pointer;
+        }
+        .job-detail {
+            .job-control {
+                display: flex;
+                font-size: 12px;
+                .label {
+                    width: 85px;
+                    text-align: right;
+                    padding-right: 10px;
+                }
+                .value {
+                    flex: 1;
+                    line-height: 25px;
+                }
+            }
+        }
         .job-list {
             margin-bottom: 10px;
             border: 1px solid #cac9cb;
@@ -281,6 +379,12 @@
                     }
                     .center {
                         text-align: center;
+                    }
+                    .cursor {
+                        &:hover {
+                            text-decoration: underline;
+                            color: #000;
+                        }
                     }
                 }
                 .tbody {
