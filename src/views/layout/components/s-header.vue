@@ -11,35 +11,39 @@
                 </div>
                 <div class="fr">
                     <div class="fr-top clearfix">
-                        <template v-if="false">
+                        <template v-if="true">
                             <span class="fr-top1" @click="showLoginDialog">登录</span>
                             <span class="fr-top2" @click="registVisible = true">个人/企业注册</span>
                         </template>
-                        <span class="fr-top3">
-                            企业用户-彭涛
-                            <ul class="userSelOptions">
-                                <li>基本信息</li>
-                                <li>我的招聘</li>
-                                <li>会员积分</li>
-                                <li>人才搜索</li>
-                                <li>职位申请记录</li>
-                                <li>我的面试申请</li>
-                                <li>我的人才库</li>
-                            </ul>
-                        </span>
-                        <span class="fr-top3" v-if="false">
-                            个人用户-彭涛
-                            <ul class="userSelOptions">
-                                <li>基本信息</li>
-                                <li>我的简历</li>
-                                <li>会员积分</li>
-                                <li>我的申请</li>
-                                <li>我的面试邀请</li>
-                                <li>我的订单</li>
-                                <li>高级人才申请</li>
-                            </ul>
-                        </span>
-                        <span class="fr-top4">站内信<i>2</i></span>
+                        <template v-if="false">
+                            <span class="fr-top3">
+                                企业用户-彭涛
+                                <ul class="userSelOptions">
+                                    <li>基本信息</li>
+                                    <li>我的招聘</li>
+                                    <li>会员积分</li>
+                                    <li>人才搜索</li>
+                                    <li>职位申请记录</li>
+                                    <li>我的面试申请</li>
+                                    <li>我的人才库</li>
+                                </ul>
+                            </span>
+                                <span class="fr-top3" v-if="false">
+                                个人用户-彭涛
+                                <ul class="userSelOptions">
+                                    <li>基本信息</li>
+                                    <li>我的简历</li>
+                                    <li>会员积分</li>
+                                    <li>我的申请</li>
+                                    <li>我的面试邀请</li>
+                                    <li>我的订单</li>
+                                    <li>高级人才申请</li>
+                                </ul>
+                            </span>
+                            <span class="fr-top4">站内信<i>2</i></span>
+                        </template>
+
+
                         <span @click="openDialog">在线留言</span>
                         <transition>
                             <div class="registBox" v-show="registVisible" id="RegistSeqBox">
