@@ -98,7 +98,7 @@
         margin: 10px auto;
         background-color: #FFF;
         position: relative;
-        min-height: 100px;
+        min-height: 500px;
         .pageBox {
             height: 58px;
             line-height: 58px;

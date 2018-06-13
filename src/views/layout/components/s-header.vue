@@ -11,15 +11,15 @@
                 </div>
                 <div class="fr">
                     <div class="fr-top clearfix">
-                        <template v-if="true">
+                        <template v-if="!isLogin">
                             <span class="fr-top1" @click="showLoginDialog">登录</span>
                             <span class="fr-top2" @click="registVisible = true">个人/企业注册</span>
                         </template>
-                        <template v-if="false">
-                            <span class="fr-top3">
+                        <template v-else>
+                            <span class="fr-top3" v-if="userType === 2">
                                 企业用户-彭涛
                                 <ul class="userSelOptions">
-                                    <li>基本信息</li>
+                                    <li><router-link tag="a" :to="{ path: 'sBaseInfo' }">基本信息</router-link></li>
                                     <li>我的招聘</li>
                                     <li>会员积分</li>
                                     <li>人才搜索</li>
@@ -28,10 +28,10 @@
                                     <li>我的人才库</li>
                                 </ul>
                             </span>
-                                <span class="fr-top3" v-if="false">
-                                个人用户-彭涛
+                            <span class="fr-top3" v-if="userType === 1">
+                                你好，<span style="color: #d91023">{{ nickName }}</span>
                                 <ul class="userSelOptions">
-                                    <li>基本信息</li>
+                                    <li><router-link tag="a" :to="{ path: 'baseInfo' }">基本信息</router-link></li>
                                     <li>我的简历</li>
                                     <li>会员积分</li>
                                     <li>我的申请</li>
@@ -78,16 +78,16 @@
                                         <span @click="exchangeLoginType(2)">扫码登录</span>
                                     </div>
                                     <div class="login-form_control">
-                                        <input type="text" placeholder="用户名">
+                                        <input type="text" v-model="username" placeholder="用户名">
                                     </div>
                                     <div class="login-form_control">
-                                        <input type="password" placeholder="密码">
+                                        <input type="password" v-model="password" placeholder="密码">
                                     </div>
                                     <div class="login-form_control">
-                                        <span class="sel active">个人用户</span><span class="sel">企业用户</span>
+                                        <span @click="changeLoginType(1)" :class="{ active: type === 1 }" class="sel">个人用户</span><span @click="changeLoginType(2)" :class="{ active: type === 2 }" class="sel">企业用户</span>
                                     </div>
                                     <div class="login-form_control form_control-submit">
-                                        <div class="submit">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
+                                        <div class="submit" @click="Login">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
                                     </div>
                                 </div>
                                 <div class="login-ewm" v-else>
@@ -159,8 +159,22 @@
                 centerDialogVisible: false,
                 dialogVisible: false,
                 loginType: 1,
-                registVisible: false
+                registVisible: false,
+                username: '',
+                password: '',
+                type: 1
             }
+        },
+        computed: {
+            isLogin: function() {
+                return !!this.$store.getters.isLogin
+            },
+            userType: function() {
+                return this.$store.state.user.type
+            },
+            nickName: function() {
+                return this.$store.state.user.username
+            },
         },
         mounted() {
             window.addEventListener('scroll',()=>{
@@ -182,6 +196,21 @@
             })
         },
         methods: {
+            changeLoginType(type) {
+                this.type = type
+            },
+            Login(){
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                this.$store.dispatch('Login', {username: this.username, password: this.password, type: this.type}).then(() => {
+                    loading.close()
+                    this.dialogVisible = false
+                })
+            },
             isChildOf(child, parent) {
                 var parentNode;
                 if (child && parent) {
@@ -229,7 +258,7 @@
             width: 200px;
             top: 23px;
             left: 40px;
-            z-index: 10000;
+            z-index: 1;
             box-shadow: 1px 1px 1px 1px #ccc;
             &:after {
                 content: '';

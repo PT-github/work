@@ -3,6 +3,21 @@ import { param2Obj } from '@/utils'
 
 export default {
     /**
+     * 登录
+     * @returns {*}
+     */
+    login: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id|+1": 1,
+                "nickname|1": ["张三","李四"],
+                "type": 1
+            }
+        })
+    },
+    /**
      * 分类新闻列表
      * @returns {*}
      */

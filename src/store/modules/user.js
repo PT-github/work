@@ -3,10 +3,22 @@ import {login, logout} from '@/api/login'
 const user = {
     state: {
         username: '',
-        sessionId: ''
+        sessionId: '',
+        userId: '',
+        type: '',
+        isLogin: false
     },
 
     mutations: {
+        SET_ISLOGIN: (state, isLogin) => {
+            state.isLogin = isLogin
+        },
+        SET_USERTYPE: (state, type) => {
+            state.type = type
+        },
+        SET_USERID: (state, userId) => {
+            state.userId = userId
+        },
         SET_USERNAME: (state, username) => {
             state.username = username
         },
@@ -20,10 +32,15 @@ const user = {
             const username = userInfo.username.trim()
             const password = userInfo.password.trim()
             return new Promise((resolve, reject) => {
-                login(username, userInfo.password).then(response => {
+                login(username, password, userInfo.type).then(response => {
                     const data = response.data
-                    commit('SET_USERNAME', userInfo.username)
-                    commit('SET_SESSIONID', data.data.sessionId)
+                    sessionStorage.setItem('userinfo', JSON.stringify(data))
+                    sessionStorage.setItem('isLogin', true)
+                    commit('SET_ISLOGIN', true)
+                    commit('SET_USERNAME', data.nickname)
+                    commit('SET_USERID', data.id)
+                    commit('SET_USERTYPE', data.type)
+                    commit('SET_SESSIONID', data.sessionId || '')
                     resolve()
                 }).catch(error => {
                     reject(error)

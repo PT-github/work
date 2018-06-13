@@ -22,4 +22,6 @@ Mock.mock(/\/queryTrainingAndDemeanor/, 'post', api.queryTrainingAndDemeanor)
 Mock.mock(/\/queryLatestNews/, 'post', api.queryLatestNews)
 Mock.mock(/\/queryNewsDetail/, 'post', api.queryNewsDetail)
 Mock.mock(/\/queryNewsListByCategory/, 'post', api.queryNewsListByCategory)
+//用户模块
+Mock.mock(/\/login$/, 'post', api.login)
 

@@ -15,6 +15,11 @@ export default new Router({
             redirect: 'home',
             children: [
                 {
+                    path: 'baseInfo',
+                    component: _import('layout/components/s-baseInfo'),
+                    name: 'sBaseInfo',
+                    meta: {title: '基本信息', keepAlive: true}
+                },{
                     path: 'home',
                     component: _import('home/home'),
                     name: 'home',

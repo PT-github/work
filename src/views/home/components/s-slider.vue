@@ -38,7 +38,6 @@
                 queryPoster().then((res) => {
 	                loading.close()
                     this.list = res.list
-                    console.log('====' + JSON.stringify(res));
                 }).catch(() => {
                 	loading.close()
                 })
