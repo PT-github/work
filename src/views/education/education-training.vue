@@ -7,11 +7,7 @@
           <div class="right">
               <div class="news-title">培训项目</div>
               <ul class="pro-list clearfix">
-                  <li>健康管理师</li>
-                  <li>健康管理师</li>
-                  <li>健康管理师</li>
-                  <li>健康管理师</li>
-                  <li>健康管理师</li>
+                  <li v-for="(item, index) in projectList" :key="'project-' + index">{{ item.title }}</li>
               </ul>
               <div class="title">
                   <p>电话热线</p>
@@ -24,337 +20,125 @@
       </div>
       <div class="video-list">
           <div class="title"></div>
-          <div class="part">
-              <div class="category">健康管理师</div>
+          <div class="part" v-for="(item, index) in videoList" :key="'category-' + index">
+              <div class="category">{{ item.name }}</div>
               <ul class="teacherBox clearfix">
-                  <li>
+                  <li v-for="(v, idx) in item.child">
                       <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
+                          <img :src="v.imgUrl" :alt="v.name">
                       </div>
                       <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
+                          <div class="name">{{ v.name }}</div>
+                          <div class="pro">点击率：<span class="orange">{{ v.click }}</span></div>
+                          <div class="des" :title="v.detail">{{ v.detail }}</div>
                       </div>
                   </li>
               </ul>
-              <div class="more"><span>- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>
-          </div>
-          <div class="part">
-              <div class="category">育婴师</div>
-              <ul class="teacherBox clearfix">
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-              </ul>
-              <div class="more"><span>- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>
-          </div>
-          <div class="part">
-              <div class="category">继续教育</div>
-              <ul class="teacherBox clearfix">
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="pic">
-                          <img src="../../assets/news/pic.png" alt="视频的名称">
-                      </div>
-                      <div class="detail">
-                          <div class="name">健康管理师学习</div>
-                          <div class="pro">点击率：<span class="orange">100</span></div>
-                          <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                      </div>
-                  </li>
-              </ul>
-              <div class="more"><span>- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>
+              <!--<div class="more"><span>- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>-->
           </div>
       </div>
       <div class="teacher-list">
           <div class="title"></div>
           <ul class="teacherBox clearfix">
-              <li>
+              <li v-for="(item, index) in teacherList" :key="'teacher-' + index">
                   <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
+                      <img :src="item.imgUrl" :alt="item.name">
                   </div>
                   <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
-                  </div>
-              </li>
-              <li>
-                  <div class="pic">
-                      <img src="../../assets/news/pic.png" alt="老师的名称">
-                  </div>
-                  <div class="detail">
-                      <div class="name">老师名字</div>
-                      <div class="pro">健康管理师</div>
-                      <div class="des" title="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息">介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息</div>
+                      <div class="name">{{ item.name }}</div>
+                      <div class="pro">{{ item.subject }}</div>
+                      <div class="des" :title="item.detail">{{ item.detail }}</div>
                   </div>
               </li>
           </ul>
-          <div class="more"><span>- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>
+          <div class="more" v-if="teacherShowMore"><span @click="getTeachersByPage">- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>
       </div>
   </div>
 </template>
 <script>
     import {sLesson} from '@/views/home/components'
+    import { queryProject, queryTeachersByPage, queryCategory,queryVideoByCategory } from '@/api/service'
     export default {
         name: 'educationTraining',
+        data() {
+            return {
+                projectList: [],
+                pageNum: 1,
+                pageSize: 9,
+                teacherList: [],
+                teacherShowMore: true,
+                videoList: []
+            }
+        },
+        mounted() {
+            this.getProject()
+            this.getTeachersByPage()
+            this.getVideoByCategory()
+        },
+        methods: {
+            getVideoByCategory() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.video-list')
+                })
+                queryCategory().then(res => {
+                    let obj = {}
+                    for (let i = 0; i < res.list.length; i++) {
+                        obj = res.list[i]
+                        obj.child = []
+                        queryVideoByCategory({categoryId: res.list[i].id}).then(ret => {
+                            obj.child.push(...ret.list)
+                            this.videoList.push(obj)
+                        })
+                    }
+
+                }).then(() => {
+                    this.$nextTick(() => {
+                        loading.close()
+                    })
+                })
+            },
+            getTeachersByPage() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.teacher-list')
+                })
+                queryTeachersByPage({
+                    pageNum: this.pageNum,
+                    pageSize: this.pageSize
+                }).then((res) => {
+                    loading.close()
+                    this.teacherList.push(...res.list)
+                    if (this.pageNum >= res.totalPage) {
+                        this.teacherShowMore = false
+                    }
+                    this.pageNum++
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            getProject() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.pro-list')
+                })
+                queryProject().then((res) => {
+                    loading.close()
+                    this.projectList = res.list
+                }).catch(() => {
+                    loading.close()
+                })
+            }
+        },
         components: {
             sLesson
         }
@@ -368,6 +152,7 @@
             border: 1px solid #cac9cb;
             margin-top: 10px;
             background-color: #FFF;
+            min-height: 200px;
             .category {
                 margin: 10px 2.5% 0;
                 background-color: rgba(204, 204, 204, .8);
@@ -454,6 +239,7 @@
             border: 1px solid #cac9cb;
             margin-top: 10px;
             background-color: #FFF;
+            min-height: 120px;
             .more {
                 font-size: 12px;
                 color: #999;
@@ -593,6 +379,7 @@
                 }
                 .pro-list {
                     padding: 36px 15px 0;
+                    min-height: 176px;
                     li {
                         float: left;
                         width: 50%;

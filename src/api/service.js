@@ -130,3 +130,37 @@ export function queryNewsListByCategory(data) {
     })
 }
 // =======================新闻二级页面结束=========================
+
+
+// =======================教育培新页面开始=========================
+// 培训项目列表
+export function queryProject() {
+    return request({
+        url: '/education/queryProject',
+        method: 'post'
+    })
+}
+// 培训项目列表
+export function queryTeachersByPage(data) {
+    return request({
+        url: '/education/queryTeachersByPage',
+        method: 'post',
+        data
+    })
+}
+// 获取分类列表
+export function queryCategory() {
+    return request({
+        url: '/education/queryCategory',
+        method: 'post'
+    })
+}
+// 通过分类获取视频列表
+export function queryVideoByCategory(params) {
+    return request({
+        url: '/education/queryVideoByCategory',
+        method: 'post',
+        params: params
+    })
+}
+// =======================教育培新页面结束=========================

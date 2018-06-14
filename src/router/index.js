@@ -19,6 +19,12 @@ export default new Router({
                     component: _import('layout/components/s-baseInfo'),
                     name: 'sBaseInfo',
                     meta: {title: '基本信息', keepAlive: true}
+                },
+                {
+                    path: 'resume',
+                    component: _import('layout/components/s-resume'),
+                    name: 'sResume',
+                    meta: {title: '简历中心', keepAlive: true}
                 },{
                     path: 'home',
                     component: _import('home/home'),

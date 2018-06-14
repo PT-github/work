@@ -32,7 +32,7 @@
                                 你好，<span style="color: #d91023">{{ nickName }}</span>
                                 <ul class="userSelOptions">
                                     <li><router-link tag="a" :to="{ path: 'baseInfo' }">基本信息</router-link></li>
-                                    <li>我的简历</li>
+                                    <li><router-link tag="a" :to="{ path: 'resume' }">我的简历</router-link></li>
                                     <li>会员积分</li>
                                     <li>我的申请</li>
                                     <li>我的面试邀请</li>

@@ -7,7 +7,7 @@ Mock.setup({
 Mock.mock(/\/queryPoster/, 'post', api.queryPoster)
 Mock.mock(/\/queryNews$/, 'post', api.queryNews)
 Mock.mock(/\/queryLessons/, 'post', api.queryLessons)
-Mock.mock(/\/queryTeachers/, 'post', api.queryTeachers)
+Mock.mock(/\/queryTeachers$/, 'post', api.queryTeachers)
 Mock.mock(/\/queryCompany/, 'post', api.queryCompany)
 Mock.mock(/\/queryJobs/, 'post', api.queryJobs)
 Mock.mock(/\/queryTalents/, 'post', api.queryTalents)
@@ -24,4 +24,10 @@ Mock.mock(/\/queryNewsDetail/, 'post', api.queryNewsDetail)
 Mock.mock(/\/queryNewsListByCategory/, 'post', api.queryNewsListByCategory)
 //用户模块
 Mock.mock(/\/login$/, 'post', api.login)
+
+// 教育培训
+Mock.mock(/\/queryProject/, 'post', api.queryProject)
+Mock.mock(/\/queryTeachersByPage$/, 'post', api.queryTeachersByPage)
+Mock.mock(/\/queryCategory$/, 'post', api.queryCategory)
+Mock.mock(/\/queryVideoByCategory/, 'post', api.queryVideoByCategory)
 

@@ -3,6 +3,77 @@ import { param2Obj } from '@/utils'
 
 export default {
     /**
+     * 通过分类获取视频列表
+     * @returns {*}
+     */
+    queryVideoByCategory: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|3": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["学习视频名称一","学习视频名称二", "学习视频名称三"],
+                    "click|1": [100,200,300,400],
+                    "detail": "介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息",
+                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                }
+            ]
+        })
+    },
+    /**
+     * 获取分类列表
+     * @returns {*}
+     */
+    queryCategory: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|3": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["分类一","分类二", "分类三"],
+                }
+            ]
+        })
+    },
+    /**
+     * 分页获取培训老师列表
+     * @returns {*}
+     */
+    queryTeachersByPage: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "totalPage": 4,
+            "list|9": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["张三","李四", "王五"],
+                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                    "subject|1": ["学科一","学科二","学科三","学科四","学科五"],
+                    "detail": "介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息"
+                }
+            ]
+        })
+    },
+    /**
+     * 获取培训项目列表
+     * @returns {*}
+     */
+    queryProject: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|8": [
+                {
+                    "id|+1": 1,
+                    "title|1": ["健康咨询师","育婴师", "催乳师"]
+                }
+            ]
+        })
+    },
+    /**
      * 登录
      * @returns {*}
      */
