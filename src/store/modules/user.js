@@ -35,8 +35,8 @@ const user = {
                 login(username, password, userInfo.type).then(response => {
                     const data = response.data
                     sessionStorage.setItem('userinfo', JSON.stringify(data))
-                    sessionStorage.setItem('isLogin', true)
-                    commit('SET_ISLOGIN', true)
+                    sessionStorage.setItem('isLogin', "1")
+                    commit('SET_ISLOGIN', "1")
                     commit('SET_USERNAME', data.nickname)
                     commit('SET_USERID', data.id)
                     commit('SET_USERTYPE', data.type)

@@ -167,7 +167,7 @@
         },
         computed: {
             isLogin: function() {
-                return !!this.$store.getters.isLogin
+                return this.$store.getters.isLogin === '1'
             },
             userType: function() {
                 return this.$store.state.user.type

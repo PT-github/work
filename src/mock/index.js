@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import api from './home'
 Mock.setup({
-    timeout: '2000'
+    timeout: '500'
 })
 // 拦截首页接口请求
 Mock.mock(/\/queryPoster/, 'post', api.queryPoster)
@@ -30,4 +30,10 @@ Mock.mock(/\/queryProject/, 'post', api.queryProject)
 Mock.mock(/\/queryTeachersByPage$/, 'post', api.queryTeachersByPage)
 Mock.mock(/\/queryCategory$/, 'post', api.queryCategory)
 Mock.mock(/\/queryVideoByCategory/, 'post', api.queryVideoByCategory)
+// 教育培训
+Mock.mock(/\/personel\/queryFilterOptions/, 'post', api.queryFilterOptions)
+Mock.mock(/\/personel\/queryResume$/, 'post', api.queryResume)
+Mock.mock(/\/personel\/invateInterViewByIds/, 'post', api.invateInterViewByIds)
+Mock.mock(/\/personel\/collectResumesByIds/, 'post', api.collectResumesByIds)
+Mock.mock(/\/personel\/queryResumeDetail/, 'post', api.queryResumeDetail)
 

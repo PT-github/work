@@ -6,7 +6,7 @@
                     关键字：
                 </div>
                 <div class="input-control">
-                    <input type="text">
+                    <input type="text" v-model="queryOptions.keywords" @keyup.enter="query">
                 </div>
             </div>
             <div class="form-control">
@@ -14,7 +14,8 @@
                     性别：
                 </div>
                 <div class="input-control">
-                    <span>所有</span><span>男</span><span>女</span>
+                    <span :class="{active: !queryOptions.sex}" @click="selSex()">所有</span>
+                    <span v-for="item in filterOptions.sex" :class="{active: queryOptions.sex === item.id}" :key="'sex-' + item.id" @click="selSex(item.id)">{{ item.name }}</span>
                 </div>
             </div>
             <div class="form-control">
@@ -22,10 +23,8 @@
                     归属地：
                 </div>
                 <div class="input-control">
-                    <span @click="dialogVisible = true">请选择</span>
-                    <span>上海</span>
-                    <span>长沙</span>
-                    <span>广州</span>
+                    <span @click="dialogVisible = true">请选择(多选)</span>
+                    <span @click="dialogVisible = true" class="active" v-for="(item, index) in queryOptions.cities" :key="'queryCity-' + index">{{ cities[item] }}</span>
                 </div>
             </div>
             <div class="form-control" :class="{'no-bottom': !showMore}">
@@ -33,7 +32,8 @@
                     发布日期：
                 </div>
                 <div class="input-control">
-                    <span>所有</span><span>24小时内</span><span>近三天</span><span>近一周</span><span>近一月</span><span>其他</span>
+                    <span :class="{active: !queryOptions.releaseDate}" @click="releaseDate()">所有</span>
+                    <span :class="{active: queryOptions.releaseDate === item.id}" v-for="item in filterOptions.releaseDate" :key="'releaseDate-' + item.id" @click="releaseDate(item.id)">{{ item.name }}</span>
                 </div>
             </div>
             <div class="more" @click="toggleShowMore">{{showMoreTitle}}</div>
@@ -44,7 +44,8 @@
                             期望月薪：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>2千以下</span><span>2-3千</span><span>3-4.5千</span><span>6-8千</span><span>0.8-1万</span><span>1-1.5万</span><span>1.5-2万</span><span>2-3万</span><span>3万以上</span>
+                            <span :class="{active: !queryOptions.expectedSalary}" @click="expectedSalary()">所有</span>
+                            <span :class="{active: queryOptions.expectedSalary === item.id}" v-for="item in filterOptions.expectedSalary" :key="'expectedSalary-' + item.id" @click="expectedSalary(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control">
@@ -52,7 +53,8 @@
                             工作年限：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>无经验</span><span>1-3年</span><span>3-5年</span><span>5-10年</span><span>10年以上</span>
+                            <span :class="{active: !queryOptions.wrokLife}" @click="wrokLife()">所有</span>
+                            <span :class="{active: queryOptions.wrokLife === item.id}" v-for="item in filterOptions.wrokLife" :key="'wrokLife-' + item.id" @click="wrokLife(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control no-bottom">
@@ -60,7 +62,8 @@
                             学历：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>初中及以下</span><span>高中/中专</span><span>大专</span><span>本科</span><span>硕士</span><span>博士</span>
+                            <span :class="{active: !queryOptions.education}" @click="education()">所有</span>
+                            <span :class="{active: queryOptions.education === item.id}" v-for="item in filterOptions.education" :key="'education-' + item.id" @click="education(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -68,59 +71,59 @@
         </div>
         <div class="job-list">
             <div class="job-box-header">
-                <div class="selectAll">
-                    <span>全选</span>
+                <div class="selectAll" @click="selectAll">
+                    <span :class="{active: resumes.length !== 0 && selectResumeArray.length === resumes.length}">全选</span>
                 </div>
                 <div class="flex-auto clearfix">
-                    <div class="applyBtn button"><i></i>邀约面试</div>
-                    <div class="collectBtn button"><i></i>收藏简历</div>
+                    <div class="applyBtn button" @click="invateInterView"><i></i>邀约面试</div>
+                    <div class="collectBtn button" @click="collectResumes"><i></i>收藏简历</div>
                 </div>
                 <div class="rt">
-                    <span id="rtPrev" class="dicon pre"></span>
-                    <span class="dw_c_orange">123</span> / 133
-                    <span id="rtNext" class="dicon next"></span>
+                    <span id="rtPrev" :class="{ active: queryOptions.pageNum > 1 }" class="dicon pre" @click="go('pre')"></span>
+                    <span class="dw_c_orange">{{queryOptions.pageNum}}</span> / {{totalPage}}
+                    <span id="rtNext" :class="{ active: queryOptions.pageNum < totalPage }" class="dicon next" @click="go('next')"></span>
                 </div>
-                <div class="rt">共17个人才</div>
+                <div class="rt">共{{total}}个人才</div>
             </div>
-            <ul class="list">
-                <li class="list-li">
+            <ul class="list personel-box">
+                <li class="list-li" v-for="item in resumes" :key="'resumes' + item.id">
                     <div class="flex">
                         <div class="checkbox">
-                            <span></span>
+                            <span :class="{checked: selectResumeArray.indexOf(item.id) !== -1}" @click="selectResume(item.id)"></span>
                         </div>
                         <div class="search_job_list">
                             <div class="part01 clearfix">
                                 <div class="search_user_list_neme fl">
-                                    <span class=" disc_per" @click="jobDetailDialogVisible = true">张三</span>
-                                    <span class="disc_user_mes">男,28岁,</span>
+                                    <span class=" disc_per" @click="getResumeDetail(item.id)">{{ item.name }}</span>
+                                    <span class="disc_user_mes">{{item.sex}},{{item.age}}岁,</span>
                                 </div>
-                                <div class="disc_time fr">更新时间：3天前</div>
+                                <div class="disc_time fr">更新时间：{{ item.updateTime }}</div>
                             </div>
                             <div class="company_det">
-                        <span class="search_job_list_box_s">
-                            意向：
-                            <span class="com_search_job_em">咨询师</span>
-                        </span>
+                                <span class="search_job_list_box_s">
+                                    意向：
+                                    <span class="com_search_job_em">{{item.itention}}</span>
+                                </span>
                                 <span class="search_job_list_box_line">|</span>
                                 <span class="search_job_list_box_s">
-                            薪资：
-                            <span class="com_search_job_em com_search_job_em_pay">2万/月</span>
-                        </span>
+                                    薪资：
+                                    <span class="com_search_job_em com_search_job_em_pay">{{item.salary}}</span>
+                                </span>
                                 <span class="search_job_list_box_line">|</span>
-                                <span class="search_job_list_box_s">
-                            经验：
-                            <span class="com_search_job_em">2年以上</span>
-                        </span>
+                                    <span class="search_job_list_box_s">
+                                    经验：
+                                    <span class="com_search_job_em">{{item.experience}}</span>
+                                </span>
                                 <span class="search_job_list_box_line">|</span>
-                                <span class="search_job_list_box_s">
-                            学历：
-                            <span class="com_search_job_em">博士</span>
-                        </span>
+                                    <span class="search_job_list_box_s">
+                                    学历：
+                                    <span class="com_search_job_em">{{item.education}}</span>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li class="list-li">
+                <!--<li class="list-li">
                     <div class="flex">
                         <div class="checkbox">
                             <span class="checked"></span>
@@ -156,20 +159,18 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li>-->
             </ul>
         </div>
-        <el-dialog class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false"
+        <el-dialog :before-close="queryByCity" class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false"
                    :close-on-press-escape="false">
             <div slot="title" class="areaTitle">选择地区 <span>（最多只能选择5项）</span></div>
-            <div class="selectedArea clearfix">
-                <div class="areaBtn">长沙<i></i></div>
-                <div class="areaBtn">上海<i></i></div>
+            <div class="selectedArea clearfix" v-if="queryOptions.cities.length > 0">
+                <div class="areaBtn" v-for="(item, index) in queryOptions.cities" :key="'selCity-' + index">{{ cities[item] }}<i @click="deleteCity(item)"></i></div>
             </div>
-            <areaComp></areaComp>
+            <areaComp :list="filterOptions.placeBelong" :cities="cities" :choosed="queryOptions.cities"></areaComp>
             <div slot="footer" class="dialog-footer">
-                <div class="button" @click="dialogVisible = false">确 定</div>
-                <div class="button cancel" @click="dialogVisible = false">取 消</div>
+                <div class="button" @click="queryByCity">确 定</div>
             </div>
         </el-dialog>
         <el-dialog :top="'2vh'" :visible.sync="jobDetailDialogVisible" width="1000px" :close-on-click-modal="false"
@@ -178,107 +179,111 @@
             <div class="job-detail">
                 <div class="job-control">
                     <div class="label">姓名：</div>
-                    <div class="value">张三</div>
+                    <div class="value">{{ activeResume.name }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">出生日期：</div>
-                    <div class="value">2008年9月</div>
+                    <div class="value">{{ activeResume.birth }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">手机：</div>
-                    <div class="value">150XXXXXXXX</div>
+                    <div class="value">{{ activeResume.phoneNumber }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">性别：</div>
-                    <div class="value">男</div>
+                    <div class="value">{{ activeResume.sex }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">名族：</div>
-                    <div class="value">汉族</div>
+                    <div class="value">{{ activeResume.nameFamily }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">邮箱：</div>
-                    <div class="value">xxxxxxxxxxx@163.com</div>
+                    <div class="value">{{ activeResume.email }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">户籍：</div>
-                    <div class="value">湖南省长沙市</div>
+                    <div class="value">{{ activeResume.householdRegister }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">身高：</div>
-                    <div class="value">170</div>
+                    <div class="value">{{ activeResume.height }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">QQ：</div>
-                    <div class="value">347985953</div>
+                    <div class="value">{{ activeResume.qq }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">体重：</div>
-                    <div class="value">50KG</div>
+                    <div class="value">{{ activeResume.weight }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">政治面貌：</div>
-                    <div class="value">党员</div>
+                    <div class="value">{{ activeResume.politicalOutlook }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">学历：</div>
-                    <div class="value">本科</div>
+                    <div class="value">{{ activeResume.education }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">固话：</div>
-                    <div class="value">010-86102658</div>
+                    <div class="value">{{ activeResume.faxedLine }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">毕业时间：</div>
-                    <div class="value">2008年7月</div>
+                    <div class="value">{{ activeResume.graduationTime }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">毕业院校：</div>
-                    <div class="value">湖南文理学院</div>
+                    <div class="value">{{ activeResume.universityGraduatedFrom }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">身份证：</div>
-                    <div class="value">430XXXXXXXXXXXXXX</div>
+                    <div class="value">{{ activeResume.certificate }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">专业：</div>
-                    <div class="value">电气自动化</div>
+                    <div class="value">{{ activeResume.major }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">现有职称：</div>
-                    <div class="value">高级软件开发工程师</div>
+                    <div class="value">{{ activeResume.technicalTitle }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">第二专业：</div>
-                    <div class="value">育婴师</div>
+                    <div class="value">{{ activeResume.secondMajor }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">现居住地：</div>
-                    <div class="value">湖南省长沙市五一广场9栋1801室</div>
+                    <div class="value">{{ activeResume.placeResidence }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">求职意向：</div>
-                    <div class="value">育婴师</div>
+                    <div class="value">
+                        <template v-for="item in activeResume.jobIntention">
+                            {{ item }}
+                        </template>
+                    </div>
                 </div>
                 <div class="job-control">
                     <div class="label">薪资类型：</div>
-                    <div class="value">按月</div>
+                    <div class="value">{{ activeResume.salaryType }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">期望薪资：</div>
-                    <div class="value">1W/月</div>
+                    <div class="value">{{ activeResume.expectSalary }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">职位：</div>
-                    <div class="value">高级软件开发工程师</div>
+                    <div class="value">{{ activeResume.job }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">希望工作地区：</div>
-                    <div class="value">湖南长沙</div>
+                    <div class="value">{{ activeResume.expectedArea }}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">到岗时间：</div>
-                    <div class="value">一个月后</div>
+                    <div class="value">{{ activeResume.postTime }}</div>
                 </div>
                 <div class="job-control job-control_auto">
                     <div class="label">工作经验：</div>
@@ -295,21 +300,13 @@
                                 </div>
                             </div>
                             <div class="tbody">
-                                <div class="tr">
-                                    <div class="td">2018年1月</div>
-                                    <div class="td">2019年2月</div>
-                                    <div class="td">湖南XXX公司</div>
-                                    <div class="td">育婴师</div>
-                                    <div class="td">工作的一些描述</div>
-                                    <div class="td">个人原因</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td">2018年1月</div>
-                                    <div class="td">2019年2月</div>
-                                    <div class="td">湖南XXX公司</div>
-                                    <div class="td">育婴师</div>
-                                    <div class="td">工作的一些描述</div>
-                                    <div class="td">个人原因</div>
+                                <div class="tr" :key="'job-' + item.id" v-for="item in activeResume.handsOnWorkExperience">
+                                    <div class="td">{{ item.entryTime }}</div>
+                                    <div class="td">{{item.departureTime}}</div>
+                                    <div class="td">{{item.company}}</div>
+                                    <div class="td">{{item.job}}</div>
+                                    <div class="td">{{item.jobDes}}</div>
+                                    <div class="td">{{item.reseanForLeaving}}</div>
                                 </div>
                             </div>
                         </div>
@@ -330,21 +327,13 @@
                                 </div>
                             </div>
                             <div class="tbody">
-                                <div class="tr">
-                                    <div class="td">2018年1月</div>
-                                    <div class="td">2019年2月</div>
-                                    <div class="td">湖南XXX学院</div>
-                                    <div class="td">本科</div>
-                                    <div class="td">电气自动化</div>
-                                    <div class="td">电子信息类学科</div>
-                                </div>
-                                <div class="tr">
-                                    <div class="td">2018年1月</div>
-                                    <div class="td">2019年2月</div>
-                                    <div class="td">湖南XXX学院</div>
-                                    <div class="td">本科</div>
-                                    <div class="td">电气自动化</div>
-                                    <div class="td">电子信息类学科</div>
+                                <div class="tr" :key="'education-pop-' + item.id" v-for="item in activeResume.educationExperience">
+                                    <div class="td">{{item.enrolmentTime}}</div>
+                                    <div class="td">{{item.graduationTime}}</div>
+                                    <div class="td">{{item.school}}</div>
+                                    <div class="td">{{item.education}}</div>
+                                    <div class="td">{{item.major}}</div>
+                                    <div class="td">{{item.professionalDes}}</div>
                                 </div>
                             </div>
                         </div>
@@ -352,11 +341,13 @@
                 </div>
                 <div class="job-control job-control_auto">
                     <div class="label">工作技能：</div>
-                    <div class="value">育婴师、健康管理师</div>
+                    <div class="value">
+                        <template v-for="item in activeResume.workingSkills">{{item}}</template>
+                    </div>
                 </div>
                 <div class="job-control job-control_auto">
                     <div class="label">自我评价：</div>
-                    <div class="value">我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX。</div>
+                    <div class="value">{{ activeResume.selfEvalution }}</div>
                 </div>
             </div>
         </el-dialog>
@@ -364,21 +355,333 @@
 </template>
 <script>
     import areaComp from './components/areaComp'
-
+    import { queryFilterOptions, queryResume, invateInterViewByIds, collectResumesByIds, queryResumeDetail } from '@/api/service'
     export default {
-        name: 'jobHunting',
+        name: 'personelList',
         components: {
             areaComp
         },
         data() {
             return {
+                activeResume: {
+                    id: '',
+                    name: '',
+                    birth: '',
+                    phoneNumber: '',
+                    sex: '',
+                    nameFamily: '',
+                    email: '',
+                    householdRegister: '',
+                    height: '',
+                    qq: '',
+                    weight: '',
+                    politicalOutlook: '',
+                    education: '',
+                    faxedLine: '',
+                    graduationTime: '',
+                    universityGraduatedFrom: '',
+                    certificate: '',
+                    major: '',
+                    technicalTitle: '',
+                    secondMajor: '',
+                    placeResidence: '',
+                    jobIntention: '',
+                    salaryType: '',
+                    expectSalary: '',
+                    job: '',
+                    expectedArea: '',
+                    postTime: '',
+                    handsOnWorkExperience: [],
+                    educationExperience: [],
+                    workingSkills: [],
+                    selfEvalution: ''
+                },
+                selectResumeArray: [],
+                resumes: [],
                 dialogVisible: false,
                 showMore: false,
                 showMoreTitle: '展开更多选项▼',
-                jobDetailDialogVisible: false
+                jobDetailDialogVisible: false,
+                filterOptions: {
+                    sex: [],
+                    placeBelong: [],
+                    releaseDate: [],
+                    expectedSalary: [],
+                    education: [],
+                    wrokLife: []
+                },
+                total: 0,
+                totalPage: 0,
+                queryOptions: {
+                    pageNum: 1,
+                    pageSize: 20,
+                    keywords: '',
+                    sex: '',
+                    cities: [],
+                    releaseDate: '',
+                    expectedSalary: '',
+                    education: '',
+                    wrokLife: ''
+                }
             }
         },
+        computed: {
+            cities() {
+                let obj = {},list = this.filterOptions.placeBelong
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].citys && list[i].citys.length > 0) {
+                        for (let j = 0; j < list[i].citys.length; j++) {
+                            obj[list[i].citys[j].id] = list[i].citys[j].name
+                        }
+                    }
+                }
+                return obj
+            }
+        },
+        mounted() {
+            this.getFilterOptions()
+            this.getPersons()
+        },
         methods: {
+            getResumeDetail(id) {
+                if (id === this.activeResume.id) {
+                    this.jobDetailDialogVisible = true
+                    return
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryResumeDetail({id: id}).then((res) => {
+                    console.log(res)
+                    loading.close()
+                    let data = res.data
+                    this.activeResume.id = data.id
+                    this.activeResume.name = data.name || ''
+                    this.activeResume.birth = data.birth || ''
+                    this.activeResume.phoneNumber = data.phoneNumber || ''
+                    this.activeResume.sex = data.sex || ''
+                    this.activeResume.nameFamily = data.nameFamily || ''
+                    this.activeResume.email = data.email || ''
+                    this.activeResume.householdRegister = data.householdRegister || ''
+                    this.activeResume.height = data.height || ''
+                    this.activeResume.weight = data.weight || ''
+                    this.activeResume.qq = data.qq || ''
+                    this.activeResume.politicalOutlook = data.politicalOutlook || ''
+                    this.activeResume.education = data.education || ''
+                    this.activeResume.faxedLine = data.faxedLine || ''
+                    this.activeResume.graduationTime = data.graduationTime || ''
+                    this.activeResume.universityGraduatedFrom = data.universityGraduatedFrom || ''
+                    this.activeResume.certificate = data.certificate || ''
+                    this.activeResume.major = data.major || ''
+                    this.activeResume.technicalTitle = data.technicalTitle || ''
+                    this.activeResume.secondMajor = data.secondMajor || ''
+                    this.activeResume.placeResidence = data.placeResidence || ''
+                    this.activeResume.jobIntention = data.jobIntention || []
+                    this.activeResume.salaryType = data.salaryType || ''
+                    this.activeResume.expectSalary = data.expectSalary || ''
+                    this.activeResume.job = data.job || ''
+                    this.activeResume.expectedArea = data.expectedArea || ''
+                    this.activeResume.postTime = data.postTime || ''
+                    this.activeResume.handsOnWorkExperience = data.handsOnWorkExperience || []
+                    this.activeResume.educationExperience = data.educationExperience || []
+                    this.activeResume.workingSkills = data.workingSkills || []
+                    this.activeResume.selfEvalution = data.selfEvalution || ''
+                    this.$nextTick(() => {
+                        this.jobDetailDialogVisible = true
+                    })
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            collectResumes() {
+                if (this.selectResumeArray.length <= 0) {
+                    this.$message({
+                        message: '请至少选择一项简历',
+                        type: 'warning'
+                    })
+                } else {
+                    if (this.$store.getters.isLogin !== '1') {
+                        this.$message({
+                            message: '请先登录',
+                            type: 'warning'
+                        })
+                        return;
+                    }
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    collectResumesByIds({ids: this.selectResumeArray.join(',')}).then((res) => {
+                        loading.close()
+                        this.$message({
+                            message: '简历收藏成功',
+                            type: 'success'
+                        })
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
+            },
+            invateInterView() {
+                if (this.selectResumeArray.length <= 0) {
+                    this.$message({
+                        message: '请至少选择一项简历',
+                        type: 'warning'
+                    })
+                } else {
+                    if (this.$store.getters.isLogin !== '1') {
+                        this.$message({
+                            message: '请先登录',
+                            type: 'warning'
+                        })
+                        return;
+                    }
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    invateInterViewByIds({ids: this.selectResumeArray.join(',')}).then((res) => {
+                        loading.close()
+                        this.$message({
+                            message: '邀约面试成功',
+                            type: 'success'
+                        })
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
+            },
+            selectResume(id) {
+                let idx = this.selectResumeArray.indexOf(id)
+                if (idx !== -1) {
+                    this.selectResumeArray.splice(idx, 1)
+                } else {
+                    this.selectResumeArray.push(id)
+                }
+            },
+            selectAll() {
+                if (this.resumes.length !== 0 && this.selectResumeArray.length === this.resumes.length) {
+                    this.selectResumeArray.splice(0, this.selectResumeArray.length)
+                } else {
+                    for (let i = 0; i < this.resumes.length; i++) {
+                        let idx = this.selectResumeArray.indexOf(this.resumes[i].id)
+                        if (idx === -1) {
+                            this.selectResumeArray.push(this.resumes[i].id)
+                        }
+                    }
+                }
+
+            },
+            go(key) {
+                if (key === 'pre') {
+                    if (this.queryOptions.pageNum <= 1) {
+                        return
+                    }
+                    this.queryOptions.pageNum--
+                    this.$nextTick(() => {
+                        this.getPersons()
+                    })
+                } else if (key === 'next') {
+                    if (this.queryOptions.pageNum >= this.totalPage) {
+                        return
+                    }
+                    this.queryOptions.pageNum++
+                    this.$nextTick(() => {
+                        this.getPersons()
+                    })
+                }
+            },
+            getPersons() {
+                this.selectResumeArray.splice(0, this.selectResumeArray.length)
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.personel-box')
+                })
+                queryResume(this.queryOptions).then((res) => {
+                    loading.close()
+                    this.resumes = res.list
+                    this.total = res.total
+                    this.totalPage = res.totalPage
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            queryByCity() {
+                this.dialogVisible = false
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            query() {
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            wrokLife(id) {
+                this.queryOptions.wrokLife = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            education(id) {
+                this.queryOptions.education = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            expectedSalary(id) {
+                this.queryOptions.expectedSalary = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            releaseDate(id) {
+                this.queryOptions.releaseDate = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            deleteCity(id) {
+                let idx = this.queryOptions.cities.indexOf(id)
+                this.queryOptions.cities.splice(idx, 1)
+            },
+            selSex(id) {
+                this.queryOptions.sex = id || ''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            getFilterOptions() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryFilterOptions().then((res) => {
+                    loading.close()
+                    this.filterOptions = res.data
+                }).catch(() => {
+                    loading.close()
+                })
+            },
             toggleShowMore() {
                 this.showMore = !this.showMore
                 if (this.showMore) {
@@ -572,6 +875,9 @@
                         background-position: left center;
                         background-repeat: no-repeat;
                     }
+                    span.active {
+                        background-image: url(../../assets/img/checked.png);
+                    }
                 }
                 .rt {
                     border-left: 1px solid #cac9cb;
@@ -594,9 +900,15 @@
                     .pre {
                         background-position: -150px 0;
                     }
+                    .pre.active {
+                        background-position: -150px -20px;
+                    }
                     .next {
                         left: auto;
                         right: 15px;
+                        background-position: -170px 0;
+                    }
+                    .next.active {
                         background-position: -170px -20px;
                     }
                     .dw_c_orange {
@@ -639,6 +951,7 @@
                 }
                 .input-control {
                     flex: 1;
+                    line-height: 32px;
                     input {
                         outline: none;
                         border-width: 0 0 1px 0;
@@ -648,17 +961,22 @@
                         height: 28px;
                         margin-top: 3px;
                         font-size: 12px;
-                        font-color: #666;
+                        color: #666;
                         font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
                     }
                     span {
-                        display: inline-block;
-                        height: 35px;
-                        line-height: 35px;
-                        padding: 0 5px;
+                        /*display: inline-block;*/
+                        /*height: 35px;*/
+                        /*line-height: 35px;*/
+                        padding: 3px 5px;
                         font-size: 12px;
                         color: #333;
                         cursor: pointer;
+                        margin-right: 5px;
+                    }
+                    span.active {
+                        color: #FFF;
+                        background-color: orange;
                     }
                 }
             }

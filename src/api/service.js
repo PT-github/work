@@ -164,3 +164,49 @@ export function queryVideoByCategory(params) {
     })
 }
 // =======================教育培新页面结束=========================
+
+
+// =======================招揽人才开始=========================
+// 获取过滤条件
+export function queryFilterOptions(data) {
+    return request({
+        url: '/personel/queryFilterOptions',
+        method: 'post',
+        data
+    })
+}
+// 获取简历
+export function queryResume(data) {
+    return request({
+        url: '/personel/queryResume',
+        method: 'post',
+        data
+    })
+}
+// 邀约面试
+export function invateInterViewByIds(data) {
+    return request({
+        url: '/personel/invateInterViewByIds',
+        method: 'post',
+        data
+    })
+}
+// 简历收藏
+export function collectResumesByIds(data) {
+    return request({
+        url: '/personel/collectResumesByIds',
+        method: 'post',
+        data
+    })
+}
+// 简历收藏
+export function queryResumeDetail(params) {
+    return request({
+        url: '/personel/queryResumeDetail',
+        method: 'post',
+        params
+    })
+}
+// =======================招揽人才结束=========================
+
+

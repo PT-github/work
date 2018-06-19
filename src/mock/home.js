@@ -3,6 +3,152 @@ import { param2Obj } from '@/utils'
 
 export default {
     /**
+     * 招揽人才 获取过滤条件
+     * @returns {*}
+     */
+    queryFilterOptions: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                sex: [
+                    {id: 1,name: '男'},
+                    {id: 2,name: '女'}
+                ],
+                placeBelong: [
+                    {id: 1, name: '热门城市', "citys|10": [ {"id|+1": 1, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 2, name: 'A B C', "citys|10": [ {"id|+1": 11, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 3, name: 'D E F G', "citys|10": [ {"id|+1": 21, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 4, name: 'H I', "citys|10": [ {"id|+1": 31, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 5, name: 'J K', "citys|10": [ {"id|+1": 41, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 6, name: 'L M N', "citys|10": [ {"id|+1": 51, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 7, name: 'O P Q R', "citys|10": [ {"id|+1": 61, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 8, name: 'S T U', "citys|10": [ {"id|+1": 71, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 9, name: 'V W X', "citys|10": [ {"id|+1": 81, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 10, name: 'Y Z', "citys|10": [ {"id|+1": 91, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 11, name: '所有省份', "citys|10": [ {"id|+1": 101, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
+                    {id: 12, name: '国外', "citys|10": [ {"id|+1": 111, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]}
+                ],
+                "releaseDate": [
+                    {"id": 100, "name": "24小时内"},
+                    {"id": 101, "name": "近三天"},
+                    {"id": 102, "name": "近一周"},
+                    {"id": 103, "name": "近一月"},
+                    {"id": 104, "name": "其他"}
+                ],
+                "expectedSalary": [
+                    {"id": 100, "name": "2千以下"},
+                    {"id": 101, "name": "2-3千"},
+                    {"id": 102, "name": "3-4.5千"},
+                    {"id": 103, "name": "4.5-6千"},
+                    {"id": 104, "name": "6-8千"},
+                    {"id": 105, "name": "0.8-1万"},
+                    {"id": 106, "name": "1-1.5万"},
+                    {"id": 107, "name": "1.5-2万"},
+                    {"id": 108, "name": "2-3万"},
+                    {"id": 109, "name": "3万以上"},
+                ],
+                "education": [
+                    {"id": 100, "name": "初中及以下"},
+                    {"id": 101, "name": "高中/中专"},
+                    {"id": 102, "name": "大专"},
+                    {"id": 103, "name": "本科"},
+                    {"id": 104, "name": "硕士"},
+                    {"id": 105, "name": "博士"}
+                ],
+                "wrokLife":[
+                    {"id": 100, "name": "无经验"},
+                    {"id": 101, "name": "1-3年"},
+                    {"id": 102, "name": "3-5年"},
+                    {"id": 103, "name": "5-10年"},
+                    {"id": 104, "name": "10年以上"}
+                ]
+            }
+        })
+    },
+    /**
+     * 通过过滤条件分页获取简历列表
+     * @returns {*}
+     */
+    queryResume: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "totalPage": 10,
+            "total": 198,
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["张三","李四", "王五"],
+                    "sex|1": ['男','女'],
+                    "age|1": ["28","30","18"],
+                    "salary|1": ["2万/月","3万/月"],
+                    "itention": "咨询师",
+                    "experience": "5年",
+                    "education|1": ["博士","硕士"],
+                    "updateTime|1": ["3天前","2天前","1天前"]
+                }
+            ]
+        })
+    },
+    queryResumeDetail: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            data: {
+                id: 1,
+                name: '张三',
+                birth: '2018年10月',
+                phoneNumber: '15364444444',
+                sex: '男',
+                nameFamily: '汉族',
+                email: 'xxxxxxxxx@163.com',
+                householdRegister: '湖南省长沙市',
+                height: '170',
+                qq: '333333333',
+                weight: '50KG',
+                politicalOutlook: '党员',
+                education: '本科',
+                faxedLine: '010-11111111',
+                graduationTime: '2008年1月',
+                universityGraduatedFrom: '湖南文理学院',
+                certificate: '4301211111111111111',
+                major: '电气自动化',
+                technicalTitle: '高级软件开发工程师',
+                secondMajor: '育婴师',
+                placeResidence: '湖南省长沙市天心区',
+                jobIntention: ['育婴师', '健康管理师'],
+                salaryType: '按月',
+                expectSalary: '1W/月',
+                job: '高级育婴师',
+                expectedArea: '湖南长沙',
+                postTime: '一个月后',
+                handsOnWorkExperience: [
+                    {id: 1, entryTime: '2018年1月',departureTime: '2018年2月','company:': '湖南XXX公司', job: '高级软件开发工程师', jobDes: '工作的一些描述', reseanForLeaving: '个人原因'},
+                    {id: 2, entryTime: '2018年2月',departureTime: '2018年3月','company:': '湖南AAA公司', job: '中级软件开发工程师', jobDes: '工作的一些描述22', reseanForLeaving: '个人原因'},
+                ],
+                educationExperience: [
+                    {id: 1, enrolmentTime: '2018年1月',graduationTime: '2018年2月','school:': '湖南XXX学校', education: '本科', major: '电气自动化', professionalDes: '专业的简单描述'},
+                    {id: 2, enrolmentTime: '2018年2月',graduationTime: '2018年3月','school:': '湖南BBB学校', education: '本科', major: '电气自动化', professionalDes: '专业的简单描述'}
+                ],
+                workingSkills: ['育婴师','催乳师','健康管理师'],
+                selfEvalution: '我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX'
+            }
+        })
+    },
+    collectResumesByIds: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功'
+        })
+    },
+    invateInterViewByIds: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功'
+        })
+    },
+    /**
      * 通过分类获取视频列表
      * @returns {*}
      */

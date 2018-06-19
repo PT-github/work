@@ -2,37 +2,64 @@
     <div class="area-comp">
         <div class="flex">
             <ul class="selOptions">
-                <li class="active">热门城市</li>
-                <li>A B C</li>
-                <li>D E F G</li>
-                <li>H I</li>
-                <li>J K</li>
-                <li>L M N</li>
-                <li>O P Q R</li>
-                <li>S T U</li>
-                <li>V W X</li>
-                <li>Y Z</li>
-                <li>所有省份(含港澳台)</li>
-                <li>国外</li>
+                <li :class="{active: activeCategory === index}" v-for="(item, index) in list" :key="'category-' + item.id" @click="exchangeCategory(index)">{{ item.name }}</li>
             </ul>
-            <ul class="flex-auto">
-                <li class="active"><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
-                <li><span>城市名称</span></li>
+            <ul class="flex-auto" v-if="list.length > 0">
+                <li :class="{active: choosedCities.indexOf(item.id) !== -1}" v-for="item in list[activeCategory].citys">
+                    <span @click="chooseCities(item.id)">{{ item.name }}</span>
+                </li>
             </ul>
         </div>
     </div>
 </template>
 <script>
     export default {
-        name: 'areaComp'
+        name: 'areaComp',
+        props: {
+            list: {
+                type: Array,
+                default: () => []
+            },
+            choosed: {
+                type: Array,
+                default: () => []
+            },
+            cities: {
+                type: Object,
+                default: () => {}
+            },
+        },
+        computed: {
+            choosedCities() {
+                return this.choosed
+            }
+        },
+        data() {
+            return {
+                activeCategory: 0
+            }
+        },
+        methods: {
+            exchangeCategory(index) {
+                this.activeCategory = index
+            },
+            chooseCities(id) {
+                let idx = this.choosedCities.indexOf(id)
+                if (idx !== -1) {
+                    this.choosedCities.splice(idx, 1)
+                } else {
+                    if (this.choosedCities.length === 5) {
+                        this.$message({
+                            message: '最多选取5个城市',
+                            type: 'warning'
+                        })
+                        return
+                    }
+                    this.choosedCities.push(id)
+                }
+                this.$emit('cityChanged', this.choosedCities)
+            }
+        }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
