@@ -3,8 +3,24 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 import 'normalize.css/normalize.css'
-import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+
+
+// import Element from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
+
+import { Dialog,Button, Loading, MessageBox, Message, Carousel, CarouselItem, } from 'element-ui';
+Vue.use(Dialog);
+
+Vue.use(Carousel);
+Vue.use(CarouselItem);
+Vue.use(Button);
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$prompt = MessageBox.prompt;
+Vue.prototype.$loading = Loading.service;
+Vue.prototype.$message = Message;
+
 import '@/styles/index.scss' // global css
 import App from './App'
 import router from './router'
@@ -20,9 +36,9 @@ import 'video.js/dist/video-js.css'
 import 'video.js/dist/lang/zh-CN'
 Vue.use(VueVideoPlayer)
 
-Vue.use(Element, {
-  size: 'medium' // set element-ui default size
-})
+// Vue.use(Element, {
+//   size: 'medium' // set element-ui default size
+// })
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
