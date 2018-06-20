@@ -436,6 +436,10 @@
                     }
                 }
                 return obj
+            },
+            mode() {
+                // senior-personnel-list 中高级人才
+                return this.$route.path.indexOf('senior-personnel-list') !== -1 ? 1 : 0
             }
         },
         mounted() {
@@ -607,7 +611,9 @@
                     fullscreen: false,
                     target: this.$el.querySelector('.personel-box')
                 })
-                queryResume(this.queryOptions).then((res) => {
+                // mode 0 非高级人才 1 高级人才
+                console.log(Object.assign(this.queryOptions, {mode: this.mode}))
+                queryResume(Object.assign(this.queryOptions, {mode: this.mode})).then((res) => {
                     loading.close()
                     this.resumes = res.list
                     this.total = res.total
