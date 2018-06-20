@@ -23,7 +23,7 @@
                     归属地：
                 </div>
                 <div class="input-control">
-                    <span @click="dialogVisible = true">请选择(多选)</span>
+                    <span @click="dialogVisible = true">请选择</span>
                     <span @click="dialogVisible = true" class="active" v-for="(item, index) in queryOptions.cities" :key="'queryCity-' + index">{{ cities[item] }}</span>
                 </div>
             </div>

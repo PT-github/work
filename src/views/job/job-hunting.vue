@@ -6,7 +6,7 @@
                     关键字：
                 </div>
                 <div class="input-control">
-                    <input type="text">
+                    <input type="text" v-model="queryOptions.keywords" @keyup.enter="query">
                 </div>
             </div>
             <div class="form-control">
@@ -15,9 +15,7 @@
                 </div>
                 <div class="input-control">
                     <span @click="dialogVisible = true">请选择</span>
-                    <span>上海</span>
-                    <span>长沙</span>
-                    <span>广州</span>
+                    <span @click="dialogVisible = true" class="active" v-for="(item, index) in queryOptions.cities" :key="'queryCity-' + index">{{ cities[item] }}</span>
                 </div>
             </div>
             <div class="form-control" :class="{'no-bottom': !showMore}">
@@ -25,7 +23,8 @@
                     发布日期：
                 </div>
                 <div class="input-control">
-                    <span>所有</span><span>24小时内</span><span>近三天</span><span>近一周</span><span>近一月</span><span>其他</span>
+                    <span :class="{active: !queryOptions.releaseDate}" @click="releaseDate()">所有</span>
+                    <span :class="{active: queryOptions.releaseDate === item.id}" v-for="item in filterOptions.releaseDate" :key="'releaseDate-' + item.id" @click="releaseDate(item.id)">{{ item.name }}</span>
                 </div>
             </div>
             <div class="more" @click="toggleShowMore">{{showMoreTitle}}</div>
@@ -36,7 +35,8 @@
                             月薪范围：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>2千以下</span><span>2-3千</span><span>3-4.5千</span><span>6-8千</span><span>0.8-1万</span><span>1-1.5万</span><span>1.5-2万</span><span>2-3万</span><span>3万以上</span>
+                            <span :class="{active: !queryOptions.expectedSalary}" @click="expectedSalary()">所有</span>
+                            <span :class="{active: queryOptions.expectedSalary === item.id}" v-for="item in filterOptions.expectedSalary" :key="'expectedSalary-' + item.id" @click="expectedSalary(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control">
@@ -44,7 +44,8 @@
                             公司性质：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>外资</span><span>合资</span><span>国企</span><span>民营公司</span><span>创业公司</span><span>政府机关</span><span>事业单位</span><span>非营利组织</span><span>上市公司</span>
+                            <span :class="{active: !queryOptions.natureOfCompany}" @click="natureOfCompany()">所有</span>
+                            <span :class="{active: queryOptions.natureOfCompany === item.id}" v-for="item in filterOptions.natureOfCompany" :key="'natureOfCompany-' + item.id" @click="natureOfCompany(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control">
@@ -52,7 +53,8 @@
                             工作年限：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>无经验</span><span>1-3年</span><span>3-5年</span><span>5-10年</span><span>10年以上</span>
+                            <span :class="{active: !queryOptions.wrokLife}" @click="wrokLife()">所有</span>
+                            <span :class="{active: queryOptions.wrokLife === item.id}" v-for="item in filterOptions.wrokLife" :key="'wrokLife-' + item.id" @click="wrokLife(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control">
@@ -60,7 +62,8 @@
                             学历要求：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>初中及以下</span><span>高中/中专</span><span>大专</span><span>本科</span><span>硕士</span><span>博士</span>
+                            <span :class="{active: !queryOptions.education}" @click="education()">所有</span>
+                            <span :class="{active: queryOptions.education === item.id}" v-for="item in filterOptions.education" :key="'education-' + item.id" @click="education(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control no-bottom">
@@ -68,7 +71,8 @@
                             公司规模：
                         </div>
                         <div class="input-control">
-                            <span>所有</span><span>少于50人</span><span>50-150人</span><span>150-500人</span><span>500-1000人</span><span>1000-5000人</span><span>5000-10000人</span><span>10000人以上</span>
+                            <span :class="{active: !queryOptions.companySize}" @click="companySize()">所有</span>
+                            <span :class="{active: queryOptions.companySize === item.id}" v-for="item in filterOptions.companySize" :key="'companySize-' + item.id" @click="companySize(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -76,19 +80,19 @@
         </div>
         <div class="job-list">
             <div class="job-box-header">
-                <div class="selectAll">
-                    <span>全选</span>
+                <div class="selectAll" @click="selectAll">
+                    <span :class="{active: resumes.length !== 0 && selectResumeArray.length === resumes.length}">全选</span>
                 </div>
                 <div class="flex-auto clearfix">
-                    <div class="applyBtn button"><i></i>申请职位</div>
-                    <div class="collectBtn button"><i></i>收藏职位</div>
+                    <div class="applyBtn button" @click="apply"><i></i>申请职位</div>
+                    <div class="collectBtn button" @click="collect"><i></i>收藏职位</div>
                 </div>
                 <div class="rt">
-                    <span id="rtPrev" class="dicon pre"></span>
-                    <span class="dw_c_orange">123</span> / 133
-                    <span id="rtNext" class="dicon next"></span>
+                    <span id="rtPrev" :class="{ active: queryOptions.pageNum > 1 }" class="dicon pre" @click="go('pre')"></span>
+                    <span class="dw_c_orange">{{queryOptions.pageNum}}</span> / {{totalPage}}
+                    <span id="rtNext" :class="{ active: queryOptions.pageNum < totalPage }" class="dicon next" @click="go('next')"></span>
                 </div>
-                <div class="rt">共17条职位</div>
+                <div class="rt">共{{total}}条职位</div>
             </div>
             <div class="table">
                 <div class="theader">
@@ -101,215 +105,64 @@
                     </div>
                 </div>
                 <div class="tbody">
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor" @click="jobDetailDialogVisible = true">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox checked"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
-                    </div>
-                    <div class="tr">
-                        <div class="td" style="width: 43px"><span class="checkbox"></span></div>
-                        <div class="td flex-auto cursor">职位名称职位名称</div>
-                        <div class="td" style="width: 275px;">公司名称公司名称</div>
-                        <div class="td center" style="width: 120px;">上海</div>
-                        <div class="td center" style="width: 150px;">50-10万/年</div>
-                        <div class="td center" style="width: 110px;">06-04</div>
+                    <div class="tr" v-for="item in resumes" :key="'job-' + item.id">
+                        <div class="td" style="width: 43px">
+                            <span :class="{checked: selectResumeArray.indexOf(item.id) !== -1}" @click="selectResume(item.id)"></span>
+                        </div>
+                        <div class="td flex-auto cursor" @click="getResumeDetail(item.id)">{{ item.name }}</div>
+                        <div class="td" style="width: 275px;">{{ item.companyName }}</div>
+                        <div class="td center" style="width: 120px;">{{ item.placeBelong }}</div>
+                        <div class="td center" style="width: 150px;">{{ item.salary }}</div>
+                        <div class="td center" style="width: 110px;">{{ item.updateTime }}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <el-dialog :before-close="handleClose" class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false" :close-on-press-escape="false">
+        <el-dialog :before-close="queryByCity" class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false"
+                   :close-on-press-escape="false">
             <div slot="title" class="areaTitle">选择地区 <span>（最多只能选择5项）</span></div>
-            <div class="selectedArea clearfix">
-                <div class="areaBtn">长沙<i></i></div>
-                <div class="areaBtn">上海<i></i></div>
+            <div class="selectedArea clearfix" v-if="queryOptions.cities.length > 0">
+                <div class="areaBtn" v-for="(item, index) in queryOptions.cities" :key="'selCity-' + index">{{ cities[item] }}<i @click="deleteCity(item)"></i></div>
             </div>
-            <areaComp></areaComp>
+            <areaComp :list="filterOptions.placeBelong" :cities="cities" :choosed="queryOptions.cities"></areaComp>
             <div slot="footer" class="dialog-footer">
-                <div class="button" @click="dialogVisible = false">确 定</div>
-                <div class="button cancel" @click="dialogVisible = false">取 消</div>
+                <div class="button" @click="queryByCity">确 定</div>
             </div>
         </el-dialog>
         <el-dialog :visible.sync="jobDetailDialogVisible" width="600px" :close-on-click-modal="false" :close-on-press-escape="false">
-            <span slot="title">职位名称</span>
+            <span slot="title">{{activeResume.name}}</span>
             <div class="job-detail">
                 <div class="job-control">
                     <div class="label">职位名称：</div>
-                    <div class="value">职位名称职位名称</div>
+                    <div class="value">{{activeResume.name}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">职位月薪：</div>
-                    <div class="value">15W/年</div>
+                    <div class="value">{{activeResume.salary}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">招聘人数：</div>
-                    <div class="value">15人</div>
+                    <div class="value">{{activeResume.numberRecruits}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">学历要求：</div>
-                    <div class="value">本科</div>
+                    <div class="value">{{activeResume.education}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">工作年限：</div>
-                    <div class="value">5年以上</div>
+                    <div class="value">{{activeResume.workingLife}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">上班地点：</div>
-                    <div class="value">湖南省芙蓉区五一广场1栋110</div>
+                    <div class="value">{{activeResume.workPlace}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">职位描述：</div>
-                    <div class="value">职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述职位描述</div>
+                    <div class="value">{{activeResume.jobDescription}}</div>
                 </div>
                 <div class="job-control">
                     <div class="label">公司信息：</div>
-                    <div class="value">公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍</div>
+                    <div class="value">{{activeResume.companyInfo}}</div>
                 </div>
             </div>
         </el-dialog>
@@ -317,20 +170,294 @@
 </template>
 <script>
     import areaComp from './components/areaComp'
+    import { queryFilterOptions, queryJobsByPage, applyJob, collectJobs, queryJobDetail } from '@/api/service'
     export default {
         name: 'jobHunting',
         components: {
             areaComp
         },
+        computed: {
+            cities() {
+                let obj = {},list = this.filterOptions.placeBelong
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].citys && list[i].citys.length > 0) {
+                        for (let j = 0; j < list[i].citys.length; j++) {
+                            obj[list[i].citys[j].id] = list[i].citys[j].name
+                        }
+                    }
+                }
+                return obj
+            }
+        },
         data() {
             return {
+                filterOptions: {
+                    placeBelong: [],
+                    releaseDate: [],
+                    expectedSalary: [],
+                    natureOfCompany: [],
+                    companySize: [],
+                    education: [],
+                    wrokLife: []
+                },
+                queryOptions:{
+                    pageNum: 1,
+                    pageSize: 20,
+                    keywords: '',
+                    cities: [],
+                    releaseDate: '',
+                    expectedSalary: '',
+                    natureOfCompany: '',
+                    companySize: '',
+                    education: '',
+                    wrokLife: ''
+                },
+                totalPage: 0,
+                total: 0,
+                selectResumeArray: [],
+                resumes: [],
                 dialogVisible: false,
                 showMore: false,
                 showMoreTitle: '展开更多选项▼',
-                jobDetailDialogVisible: false
+                jobDetailDialogVisible: false,
+                activeResume: {
+                    id: '',
+                    name: '',
+                    salary: '',
+                    numberRecruits: '',
+                    education: '',
+                    workingLife: '',
+                    workPlace: '',
+                    jobDescription: '',
+                    companyInfo: ''
+                },
             }
         },
+        mounted() {
+            this.getFilterOptions()
+            this.getJobs()
+        },
         methods: {
+            collect() {
+                if (this.selectResumeArray.length <= 0) {
+                    this.$message({
+                        message: '请至少选择一个职位',
+                        type: 'warning'
+                    })
+                } else {
+                    if (this.$store.getters.isLogin !== '1') {
+                        this.$message({
+                            message: '请先登录',
+                            type: 'warning'
+                        })
+                        return;
+                    }
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    collectJobs({ids: this.selectResumeArray.join(',')}).then((res) => {
+                        loading.close()
+                        this.$message({
+                            message: '职位收藏成功',
+                            type: 'success'
+                        })
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
+            },
+            apply() {
+                if (this.selectResumeArray.length <= 0) {
+                    this.$message({
+                        message: '请至少选择一个职位',
+                        type: 'warning'
+                    })
+                } else {
+                    if (this.$store.getters.isLogin !== '1') {
+                        this.$message({
+                            message: '请先登录',
+                            type: 'warning'
+                        })
+                        return;
+                    }
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    applyJob({ids: this.selectResumeArray.join(',')}).then((res) => {
+                        loading.close()
+                        this.$message({
+                            message: '已申请所选职位',
+                            type: 'success'
+                        })
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
+            },
+            getResumeDetail(id) {
+                if (id === this.activeResume.id) {
+                    this.jobDetailDialogVisible = true
+                    return
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryJobDetail({id: id}).then((res) => {
+                    console.log(res)
+                    loading.close()
+                    let data = res.data
+                    this.activeResume.id = data.id
+                    this.activeResume.name = data.name
+                    this.activeResume.salary = data.salary
+                    this.activeResume.numberRecruits = data.numberRecruits
+                    this.activeResume.education = data.education
+                    this.activeResume.workingLife = data.workingLife
+                    this.activeResume.workPlace = data.workPlace
+                    this.activeResume.jobDescription = data.jobDescription
+                    this.activeResume.companyInfo = data.companyInfo
+                    this.$nextTick(() => {
+                        this.jobDetailDialogVisible = true
+                    })
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            selectResume(id) {
+                let idx = this.selectResumeArray.indexOf(id)
+                if (idx !== -1) {
+                    this.selectResumeArray.splice(idx, 1)
+                } else {
+                    this.selectResumeArray.push(id)
+                }
+            },
+            selectAll() {
+                if (this.resumes.length !== 0 && this.selectResumeArray.length === this.resumes.length) {
+                    this.selectResumeArray.splice(0, this.selectResumeArray.length)
+                } else {
+                    for (let i = 0; i < this.resumes.length; i++) {
+                        let idx = this.selectResumeArray.indexOf(this.resumes[i].id)
+                        if (idx === -1) {
+                            this.selectResumeArray.push(this.resumes[i].id)
+                        }
+                    }
+                }
+
+            },
+            getJobs() {
+                this.selectResumeArray.splice(0, this.selectResumeArray.length)
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: false,
+                    target: this.$el.querySelector('.job-list')
+                })
+                queryJobsByPage(this.queryOptions).then((res) => {
+                    loading.close()
+                    this.resumes = res.list
+                    this.total = res.total
+                    this.totalPage = res.totalPage
+                }).catch(() => {
+                    loading.close()
+                })
+            },
+            query() {
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
+            companySize(id) {
+                this.queryOptions.companySize = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            natureOfCompany(id) {
+                this.queryOptions.natureOfCompany = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            education(id) {
+                this.queryOptions.education = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            wrokLife(id) {
+                this.queryOptions.wrokLife = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            expectedSalary(id) {
+                this.queryOptions.expectedSalary = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            releaseDate(id) {
+                this.queryOptions.releaseDate = id ||''
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            go(key) {
+                if (key === 'pre') {
+                    if (this.queryOptions.pageNum <= 1) {
+                        return
+                    }
+                    this.queryOptions.pageNum--
+                    this.$nextTick(() => {
+                        this.getJobs()
+                    })
+                } else if (key === 'next') {
+                    if (this.queryOptions.pageNum >= this.totalPage) {
+                        return
+                    }
+                    this.queryOptions.pageNum++
+                    this.$nextTick(() => {
+                        this.getJobs()
+                    })
+                }
+            },
+            queryByCity() {
+                this.dialogVisible = false
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getJobs()
+                })
+            },
+            getFilterOptions() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryFilterOptions().then((res) => {
+                    loading.close()
+                    this.filterOptions = res.data
+                }).catch(() => {
+                    loading.close()
+                })
+            },
             handleClose() {
                 console.log('取消地区选择')
             },
@@ -481,6 +608,9 @@
                         background-position:left center;
                         background-repeat: no-repeat;
                     }
+                    span.active {
+                        background-image: url(../../assets/img/checked.png);
+                    }
                 }
                 .rt {
                     border-left: 1px solid #cac9cb;
@@ -503,9 +633,15 @@
                     .pre {
                         background-position: -150px 0;
                     }
+                    .pre.active {
+                        background-position: -150px -20px;
+                    }
                     .next {
                         left: auto;
                         right: 15px;
+                        background-position: -170px 0;
+                    }
+                    .next.active {
                         background-position: -170px -20px;
                     }
                     .dw_c_orange {
@@ -548,6 +684,7 @@
                 }
                 .input-control {
                     flex: 1;
+                    line-height: 32px;
                     input {
                         outline: none;
                         border-width: 0 0 1px 0;
@@ -557,17 +694,22 @@
                         height: 28px;
                         margin-top: 3px;
                         font-size: 12px;
-                        font-color: #666;
+                        color: #666;
                         font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
                     }
                     span {
-                        display: inline-block;
+                        /*display: inline-block;
                         height: 35px;
-                        line-height: 35px;
+                        line-height: 35px;*/
                         padding: 0 5px;
                         font-size: 12px;
                         color: #333;
                         cursor: pointer;
+                        margin-right: 5px;
+                    }
+                    span.active {
+                        color: #FFF;
+                        background-color: orange;
                     }
                 }
             }

@@ -62,6 +62,26 @@ export default {
                     {"id": 102, "name": "3-5年"},
                     {"id": 103, "name": "5-10年"},
                     {"id": 104, "name": "10年以上"}
+                ],
+                "natureOfCompany": [
+                    {id: 1, name: '外资'},
+                    {id: 2, name: '合资'},
+                    {id: 3, name: '国企'},
+                    {id: 4, name: '民营公司'},
+                    {id: 5, name: '创业公司'},
+                    {id: 6, name: '政府机关'},
+                    {id: 7, name: '事业单位'},
+                    {id: 8, name: '非营利组织'},
+                    {id: 9, name: '上市公司'}
+                ],
+                "companySize": [
+                    {id: 1, name: '少于50人'},
+                    {id: 2, name: '50-150人'},
+                    {id: 3, name: '150-500人'},
+                    {id: 4, name: '500-1000人'},
+                    {id: 5, name: '1000-5000人'},
+                    {id: 6, name: '5000-10000人'},
+                    {id: 7, name: '10000人以上'}
                 ]
             }
         })
@@ -86,6 +106,28 @@ export default {
                     "itention": "咨询师",
                     "experience": "5年",
                     "education|1": ["博士","硕士"],
+                    "updateTime|1": ["3天前","2天前","1天前"]
+                }
+            ]
+        })
+    },
+    /**
+     * 通过过滤条件分页获取工作职位列表
+     * @returns {*}
+     */
+    queryJobsByPage: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "totalPage": 10,
+            "total": 192,
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "name|1": ["职位名称一","职位名称二", "职位名称三"],
+                    "companyName|1": ['公司名称一','公司名称二'],
+                    "placeBelong|1": ["长沙","上海","北京"],
+                    "salary|1": ["2万/月","3万/月","30-40万/年"],
                     "updateTime|1": ["3天前","2天前","1天前"]
                 }
             ]
@@ -133,6 +175,23 @@ export default {
                 ],
                 workingSkills: ['育婴师','催乳师','健康管理师'],
                 selfEvalution: '我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX'
+            }
+        })
+    },
+    queryJobDetail: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            data: {
+                id: 1,
+                name: '高级育婴师职位',
+                salary: '1万/月',
+                numberRecruits: '10人',
+                education: '本科',
+                workingLife: '3年以上',
+                workPlace: '北京',
+                jobDescription: '工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,',
+                companyInfo: '公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX'
             }
         })
     },

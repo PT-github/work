@@ -199,7 +199,7 @@ export function collectResumesByIds(data) {
         data
     })
 }
-// 简历收藏
+// 简历详情
 export function queryResumeDetail(params) {
     return request({
         url: '/personel/queryResumeDetail',
@@ -210,3 +210,38 @@ export function queryResumeDetail(params) {
 // =======================招揽人才结束=========================
 
 
+
+// =======================找工作开始=========================
+// 分页获取工作
+export function queryJobsByPage(data) {
+    return request({
+        url: '/personel/queryJobsByPage',
+        method: 'post',
+        data
+    })
+}
+// 职位申请
+export function applyJob(data) {
+    return request({
+        url: '/personel/applyJob',
+        method: 'post',
+        data
+    })
+}
+// 职位收藏
+export function collectJobs(data) {
+    return request({
+        url: '/personel/collectJobs',
+        method: 'post',
+        data
+    })
+}
+// 职位详情
+export function queryJobDetail(params) {
+    return request({
+        url: '/personel/queryJobDetail',
+        method: 'post',
+        params
+    })
+}
+// =======================找工作结束=========================

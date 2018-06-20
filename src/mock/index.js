@@ -9,7 +9,7 @@ Mock.mock(/\/queryNews$/, 'post', api.queryNews)
 Mock.mock(/\/queryLessons/, 'post', api.queryLessons)
 Mock.mock(/\/queryTeachers$/, 'post', api.queryTeachers)
 Mock.mock(/\/queryCompany/, 'post', api.queryCompany)
-Mock.mock(/\/queryJobs/, 'post', api.queryJobs)
+Mock.mock(/\/queryJobs$/, 'post', api.queryJobs)
 Mock.mock(/\/queryTalents/, 'post', api.queryTalents)
 Mock.mock(/\/queryFriendShips/, 'post', api.queryFriendShips)
 Mock.mock(/\/queryVideos/, 'post', api.queryVideos)
@@ -36,4 +36,11 @@ Mock.mock(/\/personel\/queryResume$/, 'post', api.queryResume)
 Mock.mock(/\/personel\/invateInterViewByIds/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/personel\/collectResumesByIds/, 'post', api.collectResumesByIds)
 Mock.mock(/\/personel\/queryResumeDetail/, 'post', api.queryResumeDetail)
+
+
+// 找工作
+Mock.mock(/\/personel\/queryJobsByPage/, 'post', api.queryJobsByPage)
+Mock.mock(/\/personel\/applyJob/, 'post', api.invateInterViewByIds)
+Mock.mock(/\/personel\/collectJobs/, 'post', api.invateInterViewByIds)
+Mock.mock(/\/personel\/queryJobDetail/, 'post', api.queryJobDetail)
 
