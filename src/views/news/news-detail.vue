@@ -15,7 +15,7 @@
             }
         },
         mounted() {
-            this.getNewsDetail(this.$route.query)
+            this.getNewsDetail(this.$route.query.id)
         },
         methods: {
             getNewsDetail(id) {
