@@ -342,7 +342,8 @@
                 <div class="job-control job-control_auto">
                     <div class="label">工作技能：</div>
                     <div class="value">
-                        <template v-for="item in activeResume.workingSkills">{{item}}</template>
+                        <!--template v-for="item in activeResume.workingSkills">{{item}}</template-->
+                        <div class="value">{{ activeResume.workingSkills }}</div>
                     </div>
                 </div>
                 <div class="job-control job-control_auto">
@@ -393,7 +394,7 @@
                     postTime: '',
                     handsOnWorkExperience: [],
                     educationExperience: [],
-                    workingSkills: [],
+                    workingSkills: '',
                     selfEvalution: ''
                 },
                 selectResumeArray: [],
@@ -491,7 +492,7 @@
                     this.activeResume.postTime = data.postTime || ''
                     this.activeResume.handsOnWorkExperience = data.handsOnWorkExperience || []
                     this.activeResume.educationExperience = data.educationExperience || []
-                    this.activeResume.workingSkills = data.workingSkills || []
+                    this.activeResume.workingSkills = data.workingSkills || ''
                     this.activeResume.selfEvalution = data.selfEvalution || ''
                     this.$nextTick(() => {
                         this.jobDetailDialogVisible = true

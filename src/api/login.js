@@ -7,9 +7,9 @@ export function login(username, password, type) {
         type
     }
     return request({
-        url: '/login',
-        method: 'post',
-        data
+      url: '/user/login',
+      method: 'post',
+      data
     })
 }
 
@@ -19,7 +19,7 @@ export function logout(username, sessionId) {
         sessionId
     }
     return request({
-        url: '/login',
+        url: '/user/logout',
         method: 'post',
         data
     })

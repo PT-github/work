@@ -6,7 +6,7 @@
                 <div class="search_job_list">
                     <div class="part01 clearfix">
                         <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="{ name: 'newsDetail', query: { id: item.id } }" class=" disc_per">{{item.title}}</router-link>
+                            <router-link tag="a" :to="{ name: 'newsDetail', query: { id: item.id } }" class=" disc_per">{{item.name}}</router-link>
                             <span class="disc_user_mes">{{item.category}}</span>
                         </div>
                         <div class="disc_time fr">发布时间：{{item.publishTime}}</div>

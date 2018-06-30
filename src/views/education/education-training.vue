@@ -7,7 +7,7 @@
           <div class="right">
               <div class="news-title">培训项目</div>
               <ul class="pro-list clearfix">
-                  <li v-for="(item, index) in projectList" :key="'project-' + index">{{ item.title }}</li>
+                  <li v-for="(item, index) in projectList" :key="'project-' + index">{{ item.name }}</li>
               </ul>
               <div class="title">
                   <p>电话热线</p>
@@ -91,8 +91,8 @@
                         obj.child = []
                         queryVideoByCategory({categoryId: res.list[i].id}).then(ret => {
                             obj.child.push(...ret.list)
-                            this.videoList.push(obj)
                         })
+                        this.videoList.push(obj)
                     }
 
                 }).then(() => {

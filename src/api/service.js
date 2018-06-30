@@ -31,14 +31,14 @@ export function queryTeachers() {
 // 首页热门招聘单位列表
 export function queryCompany() {
   return request({
-    url: '/home/queryCompany',
+    url: '/home/queryJobs',
     method: 'post'
   })
 }
 // 首页职位列表
 export function queryJobs() {
   return request({
-    url: '/home/queryJobs',
+    url: '/home/queryCompany',
     method: 'post'
   })
 }
@@ -118,7 +118,7 @@ export function queryNewsDetail(params) {
     return request({
         url: '/news/queryNewsDetail',
         method: 'post',
-        params: params
+        data: params
     })
 }
 // 分类新闻列表
@@ -136,41 +136,42 @@ export function queryNewsListByCategory(data) {
 // 培训项目列表
 export function queryProject() {
     return request({
-        url: '/education/queryProject',
+        url: '/train/queryTrainList',
         method: 'post'
     })
 }
 // 培训项目列表
 export function queryTeachersByPage(data) {
     return request({
-        url: '/education/queryTeachersByPage',
+        url: '/teacher/queryTeacherList',
         method: 'post',
-        data
+        data: data
     })
 }
 // 获取分类列表
 export function queryCategory() {
     return request({
-        url: '/education/queryCategory',
+        url: '/video/queryVideoKind',
         method: 'post'
     })
 }
 // 通过分类获取视频列表
 export function queryVideoByCategory(params) {
     return request({
-        url: '/education/queryVideoByCategory',
+        url: '/video/queryVideoList',
         method: 'post',
-        params: params
+        data: params
     })
 }
 // =======================教育培新页面结束=========================
+
 
 
 // =======================招揽人才开始=========================
 // 获取过滤条件
 export function queryFilterOptions(data) {
     return request({
-        url: '/personel/queryFilterOptions',
+        url: '/talent/queryFilterOptions',
         method: 'post',
         data
     })
@@ -178,23 +179,23 @@ export function queryFilterOptions(data) {
 // 获取简历
 export function queryResume(data) {
     return request({
-        url: '/personel/queryResume',
+        url: '/talent/queryResume',
         method: 'post',
         data
     })
 }
 // 邀约面试
 export function invateInterViewByIds(data) {
-    return request({
-        url: '/personel/invateInterViewByIds',
-        method: 'post',
-        data
-    })
+  return request({
+    url: '/talent/invateInterViewByIds',
+    method: 'post',
+    data
+  })
 }
 // 简历收藏
 export function collectResumesByIds(data) {
     return request({
-        url: '/personel/collectResumesByIds',
+        url: '/talent/collectResumesByIds',
         method: 'post',
         data
     })
@@ -202,10 +203,11 @@ export function collectResumesByIds(data) {
 // 简历详情
 export function queryResumeDetail(params) {
     return request({
-        url: '/personel/queryResumeDetail',
+      url: '/talent/queryResumeDetail',
         method: 'post',
-        params
+        data:params
     })
+
 }
 // =======================招揽人才结束=========================
 
@@ -215,7 +217,7 @@ export function queryResumeDetail(params) {
 // 分页获取工作
 export function queryJobsByPage(data) {
     return request({
-        url: '/personel/queryJobsByPage',
+        url: '/position/queryJobsByPage',
         method: 'post',
         data
     })
@@ -223,7 +225,7 @@ export function queryJobsByPage(data) {
 // 职位申请
 export function applyJob(data) {
     return request({
-        url: '/personel/applyJob',
+        url: '/position/applyJob',
         method: 'post',
         data
     })
@@ -231,17 +233,17 @@ export function applyJob(data) {
 // 职位收藏
 export function collectJobs(data) {
     return request({
-        url: '/personel/collectJobs',
+        url: '/position/collectJobs',
         method: 'post',
         data
     })
 }
 // 职位详情
-export function queryJobDetail(params) {
+export function queryJobDetail(data) {
     return request({
-        url: '/personel/queryJobDetail',
+        url: '/position/queryJobDetail',
         method: 'post',
-        params
+        data
     })
 }
 // =======================找工作结束=========================

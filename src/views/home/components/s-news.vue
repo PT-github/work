@@ -9,8 +9,8 @@
                         <div class="fl"><img :src="list[0].imgUrl" :alt="list[0].name"></div>
                         <div class="fr">
                             <p>
-                                <template v-if="list[0].desc && list[0].desc.length > 36">
-                                    {{ list[0].desc.substr(0, 34) + '......' }}
+                                <template v-if="list[0].simpleDesc && list[0].simpleDesc.length > 36">
+                                    {{ list[0].simpleDesc.substr(0, 34) + '......' }}
                                 </template>
                             </p>
                         </div>

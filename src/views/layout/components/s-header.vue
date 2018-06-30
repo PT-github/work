@@ -131,7 +131,7 @@
             <span slot="title" class="leaveMsgTitle">在线留言</span>
             <div class="leaveMsgContent">
                 <div class="form-control">
-                    <div class="label">主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</div>
+                    <div class="label">联&nbsp;&nbsp;系&nbsp;&nbsp人：</div>
                     <div class="input-control"><input type="text"></div>
                 </div>
                 <div class="form-control">

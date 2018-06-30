@@ -3,7 +3,7 @@
         <!---->
         <el-carousel ref="sliderComp" :autoplay="false" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
             <el-carousel-item v-for="item in list" :key="item.id">
-                <img :src="item.imgurl" :alt="item.name">
+                <img :src="item.imgUrl" :alt="item.name">
             </el-carousel-item>
         </el-carousel>
         <ul class="indicator-page">
