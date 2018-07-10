@@ -1,6 +1,7 @@
 <template>
     <div class="s-baseInfo">
-        <div class="title">基本信息</div>
+        <div class="title">我的账户</div>
+        <div class="pic"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png" alt=""></div>
         <div class="form">
             <div class="form-control">
                 <div class="label">登录名：</div>
@@ -65,15 +66,26 @@
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
     .s-baseInfo {
-        width: 1000px;
-        margin: 10px auto;
+        width: 100%;
+        padding: 10px 0;
         background-color: #FFF;
         position: relative;
         min-height: 300px;
+        .pic {
+            position: absolute;
+            width: 85px;
+            height: 104px;
+            right: 35px;
+            top: 65px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
         .form {
-            padding: 50px 10px 10px;
+            margin: 10px 0 10px 40px;
             .form-control {
-                width: 50%;
+                width: 100%;
                 float: left;
                 display: flex;
                 height: 35px;
@@ -82,7 +94,7 @@
                 margin-bottom: 10px;
                 .label {
                     width: 100px;
-                    text-align: right;
+                    text-align: left;
                     color: #666;
                 }
                 .value {
@@ -91,17 +103,13 @@
             }
         }
         .title {
-            position: absolute;
-            top: 7px;
-            left: -7px;
-            width: 1000px;
-            height: 29px;
-            background-image: url(../../../assets/news/title-2.png);
-            background-repeat: no-repeat;
-            background-position: left center;
-            font-size: 12px;
-            color: #FFF;
-            padding: 6px 0 0 14px;
+            height: 35px;
+            line-height: 35px;
+            text-indent: 20px;
+            border: 1px solid #CCC;
+            margin: 10px 10px 0;
+            font-size: 14px;
+            border-radius: 5px;
         }
     }
 </style>

@@ -148,17 +148,31 @@ export function queryTeachersByPage(data) {
         data: data
     })
 }
-// 获取分类列表
 export function queryCategory() {
     return request({
         url: '/video/queryVideoKind',
         method: 'post'
     })
 }
+export function queryCategory1() {
+    return request({
+        url: '/video/queryCategory',
+        method: 'post'
+    })
+}
+// 获取分类列表
 // 通过分类获取视频列表
 export function queryVideoByCategory(params) {
     return request({
         url: '/video/queryVideoList',
+        method: 'post',
+        data: params
+    })
+}
+// 通过分类获取视频列表
+export function queryVideoByCategory1(params) {
+    return request({
+        url: '/video/queryVideoByCategory',
         method: 'post',
         data: params
     })

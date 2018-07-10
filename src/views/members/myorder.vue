@@ -1,24 +1,21 @@
 <template>
     <div class="s-baseInfo">
-        <div class="title">我的简历</div>
+        <div class="title">我的订单</div>
         <div class="table">
             <div class="theader">
                 <div class="tr">
-                    <div class="th">简历名称</div>
-                    <div class="th">公开程度</div>
+                    <div class="th">时间</div>
+                    <div class="th">订单内容</div>
+                    <div class="th">价格</div>
                     <div class="th">操作</div>
                 </div>
             </div>
             <div class="tbody">
                 <div class="tr">
-                    <div class="td">我的简历</div>
-                    <div class="td">完全公开</div>
-                    <div class="td"><span>编辑</span><span>刷新</span><span>删除</span></div>
-                </div>
-                <div class="tr">
-                    <div class="td">我的简历</div>
-                    <div class="td">完全公开</div>
-                    <div class="td"><span>编辑</span><span>刷新</span><span>删除</span></div>
+                    <div class="td">2017-10-10-10 03:04:50</div>
+                    <div class="td">课程名称</div>
+                    <div class="td">1000元</div>
+                    <div class="td"><span>删除</span></div>
                 </div>
             </div>
         </div>
@@ -26,7 +23,7 @@
 </template>
 <script>
     export default {
-        name: 'sBaseInfo',
+        name: 'sMyorder',
         data() {
             return {
             }
@@ -42,13 +39,13 @@
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
     .s-baseInfo {
-        width: 1000px;
+        width: 100%;
         margin: 10px auto;
         background-color: #FFF;
         position: relative;
         min-height: 300px;
         .table {
-            padding: 50px 10px 10px;
+            padding: 10px;
             .theader {
                 .tr {
                     border: 1px solid #dedede;
@@ -87,17 +84,13 @@
             }
         }
         .title {
-            position: absolute;
-            top: 7px;
-            left: -7px;
-            width: 1000px;
-            height: 29px;
-            background-image: url(../../../assets/news/title-2.png);
-            background-repeat: no-repeat;
-            background-position: left center;
-            font-size: 12px;
-            color: #FFF;
-            padding: 6px 0 0 14px;
+            height: 35px;
+            line-height: 35px;
+            text-indent: 20px;
+            border: 1px solid #CCC;
+            margin: 10px 10px 0;
+            font-size: 14px;
+            border-radius: 5px;
         }
     }
 </style>

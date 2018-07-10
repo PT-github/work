@@ -19,7 +19,7 @@
                             <span class="fr-top3" v-if="userType === 2">
                                 企业用户-彭涛
                                 <ul class="userSelOptions">
-                                    <li><router-link tag="a" :to="{ path: 'sBaseInfo' }">基本信息</router-link></li>
+                                    <li><router-link tag="a" :to="'/members/sBaseInfo'">基本信息</router-link></li>
                                     <li>我的招聘</li>
                                     <li>会员积分</li>
                                     <li>人才搜索</li>
@@ -28,16 +28,17 @@
                                     <li>我的人才库</li>
                                 </ul>
                             </span>
-                            <span class="fr-top3" v-if="userType === 1">
+                            <span class="fr-top3" v-if="userType === 1" @mouseover="showTab = true" @mouseout="showTab = false">
                                 你好，<span style="color: #d91023">{{ nickName }}</span>
-                                <ul class="userSelOptions">
-                                    <li><router-link tag="a" :to="{ path: 'baseInfo' }">基本信息</router-link></li>
-                                    <li><router-link tag="a" :to="{ path: 'resume' }">我的简历</router-link></li>
-                                    <li>会员积分</li>
-                                    <li>我的申请</li>
-                                    <li>我的面试邀请</li>
-                                    <li>我的订单</li>
-                                    <li>高级人才申请</li>
+                                <ul class="userSelOptions" v-show="showTab">
+                                    <li><router-link tag="a" :to="{ path: '/members/baseInfo' }">基本信息</router-link></li>
+                                    <li><router-link tag="a" :to="{ path: '/members/income' }">我的收益</router-link></li>
+                                    <li><router-link tag="a" :to="{ path: '/members/resume' }">我的简历</router-link></li>
+                                    <li><router-link tag="a" :to="{ path: '/members/score' }">会员积分</router-link></li>
+                                    <li><router-link tag="a" :to="{ path: '/members/myjob' }">我的工作</router-link></li>
+                                    <li><router-link tag="a" :to="{ path: '/members/myvideo' }">我的视频</router-link></li>
+                                    <li><router-link tag="a" :to="{ path: '/members/myorder' }">我的订单</router-link></li>
+                                    <li @click="logout">安全退出</li>
                                 </ul>
                             </span>
                             <span class="fr-top4">站内信<i>2</i></span>
@@ -117,13 +118,13 @@
             </div>
             <div class="part2">
                 <ul class="flex">
-                    <li @click="go" path="home" class="home" :class="{ 'on': active === 'home'}">首页</li>
-                    <li @click="go" path="news" class="" :class="{ 'on': active === 'news'}">新闻中心</li>
-                    <li @click="go" path="education-training" class="" :class="{ 'on': active === 'education-training'}">教育培训</li>
-                    <li @click="go" path="personnel-list" class="" :class="{ 'on': active === 'personnel-list'}">招揽人才</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': active === 'job-hunting'}">找工作</li>
-                    <li @click="go" path="senior-personnel-list" class="" :class="{ 'on': active === 'senior-personnel-list'}">中高级人才</li>
-                    <li @click="go" path="about-us" class="" :class="{ 'on': active === 'about-us'}">关于我们</li>
+                    <li @click="go" path="home" class="home" :class="{ 'on': $route.path.indexOf('home') !== -1}">首页</li>
+                    <li @click="go" path="news" class="" :class="{ 'on': $route.path.indexOf('news') !== -1}">新闻中心</li>
+                    <li @click="go" path="education-training" class="" :class="{ 'on': $route.path.indexOf('education-training') !== -1}">教育培训</li>
+                    <li @click="go" path="personnel-list" class="" :class="{ 'on': $route.path.indexOf('personnel-list') !== -1}">招揽人才</li>
+                    <li @click="go" path="job-hunting" class="" :class="{ 'on': $route.path.indexOf('job-hunting') !== -1}">找工作</li>
+                    <li @click="go" path="senior-personnel-list" class="" :class="{ 'on': $route.path.indexOf('senior-personnel-list') !== -1}">中高级人才</li>
+                    <li @click="go" path="about-us" class="" :class="{ 'on': $route.path.indexOf('about-us') !== -1}">关于我们</li>
                 </ul>
             </div>
         </div>
@@ -162,7 +163,8 @@
                 registVisible: false,
                 username: '',
                 password: '',
-                type: 1
+                type: 1,
+                showTab: false
             }
         },
         computed: {
@@ -207,6 +209,18 @@
                     fullscreen: true
                 })
                 this.$store.dispatch('Login', {username: this.username, password: this.password, type: this.type}).then(() => {
+                    loading.close()
+                    this.dialogVisible = false
+                })
+            },
+            logout() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                this.$store.dispatch('LogOut', {username: this.$store.state.user.username, password: this.$store.state.user.sessionId}).then(() => {
                     loading.close()
                     this.dialogVisible = false
                 })
@@ -537,7 +551,6 @@
                         .fr-top3 {
                             right: 120px;
                             .userSelOptions {
-                                display: none;
                                 position: absolute;
                                 background-color: #FFF;
                                 border-radius: 5px;
@@ -548,6 +561,15 @@
                                 z-index: 10000;
                                 box-shadow: 1px 1px 2px 0px #ccc;
                                 border: 1px solid #d1d1d1;
+                                &:before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 10px;
+                                    position: absolute;
+                                    left: 0;
+                                    top: -8px;
+                                    background: transparent;
+                                }
                                 &:after {
                                     content: '';
                                     width: 10px;
@@ -566,11 +588,6 @@
                                     text-align: left;
                                     font-size: 12px;
                                     color: #333;
-                                }
-                            }
-                            &:hover{
-                                .userSelOptions {
-                                    display: block;
                                 }
                             }
                         }

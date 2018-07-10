@@ -23,7 +23,7 @@
           <div class="part" v-for="(item, index) in videoList" :key="'category-' + index">
               <div class="category">{{ item.name }}</div>
               <ul class="teacherBox clearfix">
-                  <li v-for="(v, idx) in item.child">
+                  <li v-for="(v, idx) in item.child" :key="'video-' + idx">
                       <div class="pic">
                           <img :src="v.imgUrl" :alt="v.name">
                       </div>

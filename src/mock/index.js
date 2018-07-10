@@ -29,7 +29,7 @@ Mock.mock(/\/login$/, 'post', api.login)
 Mock.mock(/\/queryProject/, 'post', api.queryProject)
 Mock.mock(/\/queryTeachersByPage$/, 'post', api.queryTeachersByPage)
 Mock.mock(/\/queryCategory$/, 'post', api.queryCategory)
-Mock.mock(/\/queryVideoByCategory/, 'post', api.queryVideoByCategory)
+Mock.mock(/\/queryVideoByCategory$/, 'post', api.queryVideoByCategory)
 // 教育培训
 Mock.mock(/\/personel\/queryFilterOptions/, 'post', api.queryFilterOptions)
 Mock.mock(/\/personel\/queryResume$/, 'post', api.queryResume)

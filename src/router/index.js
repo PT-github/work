@@ -10,22 +10,52 @@ import Layout from '../views/layout/Layout'
 export default new Router({
     routes: [
         {
-            path: '',
+            path: '/',
             component: Layout,
             redirect: 'home',
             children: [
                 {
-                    path: 'baseInfo',
-                    component: _import('layout/components/s-baseInfo'),
-                    name: 'sBaseInfo',
-                    meta: {title: '基本信息', keepAlive: true}
-                },
-                {
-                    path: 'resume',
-                    component: _import('layout/components/s-resume'),
-                    name: 'sResume',
-                    meta: {title: '简历中心', keepAlive: true}
-                },{
+                    path: '/members',
+                    component: _import('layout/MemberCenterComp'),
+                    children: [
+                        {
+                            path: '/members/baseInfo',
+                            component: _import('members/baseInfo'),
+                            name: 'sBaseInfo',
+                            meta: {title: '基本信息', keepAlive: false}
+                        },{
+                            path: '/members/resume',
+                            component: _import('members/resume'),
+                            name: 'sResume',
+                            meta: {title: '我的简历', keepAlive: false}
+                        },{
+                            path: '/members/income',
+                            component: _import('members/income'),
+                            name: 'sIncome',
+                            meta: {title: '我的收益', keepAlive: false}
+                        },{
+                            path: '/members/score',
+                            component: _import('members/score'),
+                            name: 'sScore',
+                            meta: {title: '我的积分', keepAlive: false}
+                        },{
+                            path: '/members/myjob',
+                            component: _import('members/myjob'),
+                            name: 'sMyjob',
+                            meta: {title: '我的工作', keepAlive: false}
+                        },{
+                            path: '/members/myvideo',
+                            component: _import('members/myvideo'),
+                            name: 'sMyvideo',
+                            meta: {title: '我的视频', keepAlive: false}
+                        },{
+                            path: '/members/myorder',
+                            component: _import('members/myorder'),
+                            name: 'sMyorder',
+                            meta: {title: '我的订单', keepAlive: false}
+                        },
+                    ]
+                }, {
                     path: 'home',
                     component: _import('home/home'),
                     name: 'home',
