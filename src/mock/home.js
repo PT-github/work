@@ -289,7 +289,7 @@ export default {
             "data": {
                 "id|+1": 1,
                 "nickname|1": ["张三","李四"],
-                "type": 1
+                "type": 2
             }
         })
     },

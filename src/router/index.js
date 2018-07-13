@@ -53,6 +53,26 @@ export default new Router({
                             component: _import('members/myorder'),
                             name: 'sMyorder',
                             meta: {title: '我的订单', keepAlive: false}
+                        },{
+                            path: '/company/company-baseInfo',
+                            component: _import('company/company-baseInfo'),
+                            name: 'sCompanyBaseInfo',
+                            meta: {title: '基本信息', keepAlive: false}
+                        },{
+                            path: '/company/job-control',
+                            component: _import('company/job-control'),
+                            name: 'sJobControl',
+                            meta: {title: '职位管理', keepAlive: false}
+                        },{
+                            path: '/company/interview-mana',
+                            component: _import('company/interview-mana'),
+                            name: 'sInterviewMana',
+                            meta: {title: '面试管理', keepAlive: false}
+                        },{
+                            path: '/company/talent-pool',
+                            component: _import('company/talent-pool'),
+                            name: 'sTalentPool',
+                            meta: {title: '企业人才库', keepAlive: false}
                         },
                     ]
                 }, {

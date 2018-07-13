@@ -1,7 +1,7 @@
 <template>
     <div class="member-center-comp">
         <div class="item-left">
-            <ul class="nav">
+            <ul class="nav" v-if="$store.state.user.type === 1">
                 <li class="nav-li" :class="{active: $route.path.indexOf('baseInfo') !== -1}">
                     <router-link tag="a" :to="{ path: '/members/baseInfo' }">基本信息</router-link>
                 </li>
@@ -22,6 +22,21 @@
                 </li>
                 <li class="nav-li" :class="{active: $route.path.indexOf('myorder') !== -1}">
                     <router-link tag="a" :to="{ path: '/members/myorder' }">我的订单</router-link>
+                </li>
+                <li class="nav-li" @click="logout">安全退出</li>
+            </ul>
+            <ul class="nav" v-if="$store.state.user.type === 2">
+                <li class="nav-li" :class="{active: $route.path.indexOf('company-baseInfo') !== -1}">
+                    <router-link tag="a" :to="{ path: '/company/company-baseInfo' }">基本信息</router-link>
+                </li>
+                <li class="nav-li" :class="{active: $route.path.indexOf('job-control') !== -1}">
+                    <router-link tag="a" :to="{ path: '/company/job-control' }">职位管理</router-link>
+                </li>
+                <li class="nav-li" :class="{active: $route.path.indexOf('interview-mana') !== -1}">
+                    <router-link tag="a" :to="{ path: '/company/interview-mana' }">面试管理</router-link>
+                </li>
+                <li class="nav-li" :class="{active: $route.path.indexOf('talent-pool') !== -1}">
+                    <router-link tag="a" :to="{ path: '/company/talent-pool' }">企业人才库</router-link>
                 </li>
                 <li class="nav-li" @click="logout">安全退出</li>
             </ul>

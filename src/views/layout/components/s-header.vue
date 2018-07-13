@@ -16,16 +16,15 @@
                             <span class="fr-top2" @click="registVisible = true">个人/企业注册</span>
                         </template>
                         <template v-else>
-                            <span class="fr-top3" v-if="userType === 2">
-                                企业用户-彭涛
-                                <ul class="userSelOptions">
-                                    <li><router-link tag="a" :to="'/members/sBaseInfo'">基本信息</router-link></li>
-                                    <li>我的招聘</li>
-                                    <li>会员积分</li>
-                                    <li>人才搜索</li>
-                                    <li>职位申请记录</li>
-                                    <li>我的面试申请</li>
-                                    <li>我的人才库</li>
+                            <span class="fr-top3" v-if="userType === 2" @mouseover="showTab = true" @mouseout="showTab = false">
+                                企业用户-{{ nickName }}
+                                <ul class="userSelOptions" v-show="showTab">
+                                    <li><router-link tag="a" :to="'/company/company-baseInfo'">基本信息</router-link></li>
+
+                                    <li><router-link tag="a" :to="'/company/job-control'">职位管理</router-link></li>
+                                    <li><router-link tag="a" :to="'/company/interview-mana'">面试管理</router-link></li>
+                                    <li><router-link tag="a" :to="'/company/talent-pool'">企业人才库</router-link></li>
+                                    <li @click="logout">安全退出</li>
                                 </ul>
                             </span>
                             <span class="fr-top3" v-if="userType === 1" @mouseover="showTab = true" @mouseout="showTab = false">
