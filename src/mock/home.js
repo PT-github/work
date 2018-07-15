@@ -218,10 +218,12 @@ export default {
             "list|3": [
                 {
                     "id|+1": 1,
-                    "name|1": ["学习视频名称一","学习视频名称二", "学习视频名称三"],
+                    "name|1": ["健康管理师培训视频","育婴师培训视频","催乳师培训视频"],
                     "click|1": [100,200,300,400],
                     "detail": "介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息",
-                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                    "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
+                    "videoUrl|1": ["http://www.w3school.com.cn/i/movie.ogg", "http://vjs.zencdn.net/v/oceans.mp4"],
+                    "videoPic": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"
                 }
             ]
         })
@@ -289,6 +291,25 @@ export default {
             "data": {
                 "id|+1": 1,
                 "nickname|1": ["张三","李四"],
+                "account": "account",
+                "tel": "18522222222",
+                "type": 2
+            }
+        })
+    },
+    /**
+     * 注册
+     * @returns {*}
+     */
+    regAction$: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id|+1": 1,
+                "nickname|1": ["张三","李四"],
+                "tel": "18522222222",
+                "account": "account",
                 "type": 2
             }
         })
@@ -463,6 +484,7 @@ export default {
                     "id|+1": 1,
                     "name|1": ["腾讯","百度","搜狐"],
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
+                    "link": "http://www.baidu.com"
                 }
             ]
         })
@@ -538,7 +560,8 @@ export default {
                     "id|+1": 1,
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
                     "name|1": ["张三", "李四", "刘文峰", "约翰"],
-                    "category|1": ["健康科学讲师","育婴师讲师","继续教育讲师"]
+                    "category|1": ["健康科学讲师","育婴师讲师","继续教育讲师"],
+                    "des": '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述'
                 }
             ]
         })
@@ -599,7 +622,7 @@ export default {
             "list|3-4": [
                 {
                     "'id|+1": 1,
-                    "imgurl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
+                    "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
                     "link": "https://www.baidu.com"
                 }
             ]

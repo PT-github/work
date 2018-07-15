@@ -50,22 +50,23 @@
                                 <div class="login-form">
                                     <div class="title">个人注册</div>
                                     <div class="login-form_control">
-                                        <input type="text" placeholder="用户名">
+                                        <input type="text" v-model="regUserName" placeholder="用户名">
                                     </div>
                                     <div class="login-form_control">
-                                        <input type="password" placeholder="密码">
+                                        <input type="password" v-model="regPwd" placeholder="密码">
                                     </div>
                                     <div class="login-form_control">
-                                        <input type="text" placeholder="联系电话">
+                                        <input type="text" v-model="regTel" placeholder="联系电话">
                                     </div>
                                     <div class="login-form_control">
-                                        <input type="text" placeholder="邮箱">
+                                        <input type="text" v-model="regMail" placeholder="邮箱">
                                     </div>
                                     <div class="login-form_control">
-                                        <span class="sel active">个人用户</span><span class="sel">企业用户</span>
+                                        <span @click="registerType = 0" class="sel" :class="{ active: registerType === 0 }">个人用户</span>
+                                        <span @click="registerType = 1" class="sel" :class="{ active: registerType === 1 }">企业用户</span>
                                     </div>
                                     <div class="login-form_control form_control-submit">
-                                        <div class="submit">注&nbsp;&nbsp;&nbsp;&nbsp;册</div>
+                                        <div @click="reg" class="submit">注&nbsp;&nbsp;&nbsp;&nbsp;册</div>
                                     </div>
                                 </div>
                             </div>
@@ -117,13 +118,27 @@
             </div>
             <div class="part2">
                 <ul class="flex">
-                    <li @click="go" path="home" class="home" :class="{ 'on': $route.path.indexOf('home') !== -1}">首页</li>
-                    <li @click="go" path="news" class="" :class="{ 'on': $route.path.indexOf('news') !== -1}">新闻中心</li>
-                    <li @click="go" path="education-training" class="" :class="{ 'on': $route.path.indexOf('education-training') !== -1}">教育培训</li>
-                    <li @click="go" path="personnel-list" class="" :class="{ 'on': $route.path.indexOf('personnel-list') !== -1}">招揽人才</li>
-                    <li @click="go" path="job-hunting" class="" :class="{ 'on': $route.path.indexOf('job-hunting') !== -1}">找工作</li>
-                    <li @click="go" path="senior-personnel-list" class="" :class="{ 'on': $route.path.indexOf('senior-personnel-list') !== -1}">中高级人才</li>
-                    <li @click="go" path="about-us" class="" :class="{ 'on': $route.path.indexOf('about-us') !== -1}">关于我们</li>
+                    <li class="home" :class="{ 'on': $route.path.indexOf('home') !== -1}">
+                        <router-link tag="a" :to="'home'">首页</router-link>
+                    </li>
+                    <li :class="{ 'on': $route.path.indexOf('news') !== -1}">
+                        <router-link tag="a" :to="'news'">新闻中心</router-link>
+                    </li>
+                    <li :class="{ 'on': $route.path.indexOf('education-training') !== -1}">
+                        <router-link tag="a" :to="'education-training'">教育培训</router-link>
+                    </li>
+                    <li :class="{ 'on': $route.path.indexOf('personnel-list') !== -1 && $route.path.indexOf('senior-personnel-list') === -1}">
+                        <router-link tag="a" :to="{ path: '/personnel-list'}">招揽人才</router-link>
+                    </li>
+                    <li :class="{ 'on': $route.path.indexOf('job-hunting') !== -1}">
+                        <router-link tag="a" :to="{ path: '/job-hunting'}">找工作</router-link>
+                    </li>
+                    <li :class="{ 'on': $route.path.indexOf('senior-personnel-list') !== -1}">
+                        <router-link tag="a" :to="{ path: '/senior-personnel-list'}">中高级人才</router-link>
+                    </li>
+                    <li  :class="{ 'on': $route.path.indexOf('about-us') !== -1}">
+                        <router-link tag="a" :to="{ path: '/about-us'}">关于我们</router-link>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -151,10 +166,13 @@
     </div>
 </template>
 <script>
+    import { regAction } from '@/api/login'
+    import { Message } from 'element-ui'
     export default {
         name: 'sHeader',
         data() {
             return {
+                registerType: 0,
                 active: 'home',
                 centerDialogVisible: false,
                 dialogVisible: false,
@@ -163,7 +181,11 @@
                 username: '',
                 password: '',
                 type: 1,
-                showTab: false
+                showTab: false,
+                regUserName: '',
+                regPwd: '',
+                regTel: '',
+                regMail: '',
             }
         },
         computed: {
@@ -197,6 +219,35 @@
             })
         },
         methods: {
+            reg() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                regAction({
+                    username: this.regUserName,
+                    password: this.regPwd,
+                    tel: this.regTel,
+                    email: this.regMail
+                }).then(response => {
+                    loading.close()
+                    if (response.success) {
+                        this.$store.dispatch('SetLoginData', response.data)
+                        Message({
+                            message: '注册成功',
+                            type: 'success'
+                        })
+                        this.registVisible = false
+                    } else {
+                        Message({
+                            message: '注册失败',
+                            type: 'error' + response.message
+                        })
+                    }
+                })
+            },
             changeLoginType(type) {
                 this.type = type
             },
@@ -450,6 +501,9 @@
                         font-size: 15px;
                         background-repeat: repeat-x;
                         background-image: url("../../../assets/header/nav-bg.png");
+                        a {
+                            display: block;
+                        }
                     }
                     li:hover {
                         color: #FFF;

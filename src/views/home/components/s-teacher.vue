@@ -7,7 +7,7 @@
                 <span class="l fl">SHOW</span>
             </div>
             <div class="fr">
-                <router-link tag='a' :to="'/'" class="more">
+                <router-link tag='a' :to="'/education-training'" class="more">
                     <img src="../../../assets/teacher/more.png" alt="更多">
                 </router-link>
             </div>
@@ -20,7 +20,7 @@
             <div class="s-teacher-content">
                 <el-carousel ref="teacherSlider" :interval="5000" class="s-teacher-slider" :autoplay="true" arrow="never" indicator-position="none" trigger="click" height="174px">
                     <el-carousel-item v-for="(item, index) in list" :key="'carousel-' + index">
-                        <div class="teacher-l fl" v-for="v in item">
+                        <div class="teacher-l fl" v-for="v in item" :title="v.des">
                             <div class="t-pic">
                                 <img :src="v.imgUrl" :alt="v.name">
                             </div>

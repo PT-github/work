@@ -1,9 +1,11 @@
 <template>
     <div class="s-slider">
         <!---->
-        <el-carousel ref="sliderComp" :autoplay="false" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
+        <el-carousel ref="sliderComp" :autoplay="true" @change="slideChange" indicator-position="none" trigger="click"  height="296px" arrow="always">
             <el-carousel-item v-for="item in list" :key="item.id">
-                <img :src="item.imgUrl" :alt="item.name">
+                <a :href="item.link">
+                    <img :src="item.imgUrl" :alt="item.name">
+                </a>
             </el-carousel-item>
         </el-carousel>
         <ul class="indicator-page">
@@ -95,6 +97,9 @@
                     }
                 }
             }
+        }
+        .el-carousel__item a {
+            display: block;
         }
         .el-carousel__item img {
             display: block;

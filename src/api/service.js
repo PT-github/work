@@ -154,6 +154,13 @@ export function queryCategory() {
         method: 'post'
     })
 }
+export function signUpOnlineAction(data) {
+    return request({
+        url: '/home/signUpOnlineAction',
+        method: 'post',
+        data
+    })
+}
 export function queryCategory1() {
     return request({
         url: '/video/queryCategory',

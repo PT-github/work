@@ -22,6 +22,7 @@ const getters = {
             }
         }
         return state.user.isLogin
-    }
+    },
+    tel: state => state.user.tel
 }
 export default getters

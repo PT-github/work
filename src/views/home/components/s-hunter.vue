@@ -2,7 +2,7 @@
     <div class="s-hunter clearfix">
         <div class="fl">
             <div class="title">
-                <router-link tag='a' :to="'/'" class="more">
+                <router-link tag='a' :to="'/job-hunting'" class="more">
                     <img src="../../../assets/teacher/more.png" alt="更多">
                 </router-link>
             </div>
@@ -19,8 +19,8 @@
         </div>
         <div class="fr">
             <div class="title">
-                热门职位
-                <router-link tag='a' :to="'/'" class="more">
+                热门单位
+                <router-link tag='a' :to="'/job-hunting'" class="more">
                     <img src="../../../assets/teacher/more.png" alt="更多">
                 </router-link>
             </div>

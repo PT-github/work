@@ -7,12 +7,13 @@ Mock.setup({
 Mock.mock(/\/queryPoster/, 'post', api.queryPoster)
 Mock.mock(/\/queryNews$/, 'post', api.queryNews)
 Mock.mock(/\/queryLessons/, 'post', api.queryLessons)
-Mock.mock(/\/queryTeachers$/, 'post', api.queryTeachers)
+Mock.mock(/\/home\/queryTeachers$/, 'post', api.queryTeachers)
 Mock.mock(/\/queryCompany/, 'post', api.queryCompany)
 Mock.mock(/\/queryJobs$/, 'post', api.queryJobs)
 Mock.mock(/\/queryTalents/, 'post', api.queryTalents)
 Mock.mock(/\/queryFriendShips/, 'post', api.queryFriendShips)
 Mock.mock(/\/queryVideos/, 'post', api.queryVideos)
+Mock.mock(/\/home\/signUpOnlineAction$/, 'post', api.queryVideos)
 //拦截新闻二级页面接口请求
 Mock.mock(/\/queryWorkDynamics/, 'post', api.queryWorkDynamics)
 Mock.mock(/\/queryNoticeList/, 'post', api.queryNoticeList)
@@ -24,23 +25,24 @@ Mock.mock(/\/queryNewsDetail/, 'post', api.queryNewsDetail)
 Mock.mock(/\/queryNewsListByCategory/, 'post', api.queryNewsListByCategory)
 //用户模块
 Mock.mock(/\/login$/, 'post', api.login)
+Mock.mock(/\/user\/regAction$/, 'post', api.regAction$)
 
 // 教育培训
 Mock.mock(/\/queryProject/, 'post', api.queryProject)
-Mock.mock(/\/queryTeachersByPage$/, 'post', api.queryTeachersByPage)
-Mock.mock(/\/queryCategory$/, 'post', api.queryCategory)
-Mock.mock(/\/queryVideoByCategory$/, 'post', api.queryVideoByCategory)
+Mock.mock(/\/queryTeacherList$/, 'post', api.queryTeachersByPage)
+Mock.mock(/\/video\/queryVideoKind$/, 'post', api.queryCategory)
+Mock.mock(/\/queryVideoList/, 'post', api.queryVideoByCategory)
 // 教育培训
-Mock.mock(/\/personel\/queryFilterOptions/, 'post', api.queryFilterOptions)
-Mock.mock(/\/personel\/queryResume$/, 'post', api.queryResume)
+Mock.mock(/\/talent\/queryFilterOptions/, 'post', api.queryFilterOptions)
+Mock.mock(/\/talent\/queryResume$/, 'post', api.queryResume)
 Mock.mock(/\/personel\/invateInterViewByIds/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/personel\/collectResumesByIds/, 'post', api.collectResumesByIds)
-Mock.mock(/\/personel\/queryResumeDetail/, 'post', api.queryResumeDetail)
+Mock.mock(/\/talent\/queryResumeDetail/, 'post', api.queryResumeDetail)
 
 
 // 找工作
-Mock.mock(/\/personel\/queryJobsByPage/, 'post', api.queryJobsByPage)
+Mock.mock(/\/position\/queryJobsByPage/, 'post', api.queryJobsByPage)
 Mock.mock(/\/personel\/applyJob/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/personel\/collectJobs/, 'post', api.invateInterViewByIds)
-Mock.mock(/\/personel\/queryJobDetail/, 'post', api.queryJobDetail)
+Mock.mock(/\/position\/queryJobDetail/, 'post', api.queryJobDetail)
 

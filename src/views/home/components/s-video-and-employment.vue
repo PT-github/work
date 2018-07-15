@@ -1,7 +1,7 @@
 <template>
     <div class="s-video-and-employment">
         <div class="title">
-            <router-link tag='a' :to="'/'" class="more">
+            <router-link tag='a' :to="'/education-training'" class="more">
                 <img src="../../../assets/teacher/more.png" alt="更多">
             </router-link>
         </div>
@@ -32,10 +32,11 @@
         name: 'sVideoAndEmployment',
         data() {
             return {
-                dialogVisible: false,
+
                 playFlag: false,
                 list: [],
                 list2: [],
+                dialogVisible: false,
 	            videoUrl: '',
                 videoPic: ''
             }

@@ -11,7 +11,16 @@
             </div>
             <div class="form-control">
                 <div class="label">
-                    地点：
+                    性别：
+                </div>
+                <div class="input-control">
+                    <span :class="{active: !queryOptions.sex}" @click="selSex()">所有</span>
+                    <span v-for="item in filterOptions.sex" :class="{active: queryOptions.sex === item.id}" :key="'sex-' + item.id" @click="selSex(item.id)">{{ item.name }}</span>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="label">
+                    归属地：
                 </div>
                 <div class="input-control">
                     <span @click="dialogVisible = true">请选择</span>
@@ -32,20 +41,11 @@
                 <div v-show="showMore">
                     <div class="form-control">
                         <div class="label">
-                            月薪范围：
+                            期望月薪：
                         </div>
                         <div class="input-control">
                             <span :class="{active: !queryOptions.expectedSalary}" @click="expectedSalary()">所有</span>
                             <span :class="{active: queryOptions.expectedSalary === item.id}" v-for="item in filterOptions.expectedSalary" :key="'expectedSalary-' + item.id" @click="expectedSalary(item.id)">{{ item.name }}</span>
-                        </div>
-                    </div>
-                    <div class="form-control">
-                        <div class="label">
-                            公司性质：
-                        </div>
-                        <div class="input-control">
-                            <span :class="{active: !queryOptions.natureOfCompany}" @click="natureOfCompany()">所有</span>
-                            <span :class="{active: queryOptions.natureOfCompany === item.id}" v-for="item in filterOptions.natureOfCompany" :key="'natureOfCompany-' + item.id" @click="natureOfCompany(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                     <div class="form-control">
@@ -57,22 +57,13 @@
                             <span :class="{active: queryOptions.wrokLife === item.id}" v-for="item in filterOptions.wrokLife" :key="'wrokLife-' + item.id" @click="wrokLife(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control no-bottom">
                         <div class="label">
-                            学历要求：
+                            学历：
                         </div>
                         <div class="input-control">
                             <span :class="{active: !queryOptions.education}" @click="education()">所有</span>
                             <span :class="{active: queryOptions.education === item.id}" v-for="item in filterOptions.education" :key="'education-' + item.id" @click="education(item.id)">{{ item.name }}</span>
-                        </div>
-                    </div>
-                    <div class="form-control no-bottom">
-                        <div class="label">
-                            公司规模：
-                        </div>
-                        <div class="input-control">
-                            <span :class="{active: !queryOptions.companySize}" @click="companySize()">所有</span>
-                            <span :class="{active: queryOptions.companySize === item.id}" v-for="item in filterOptions.companySize" :key="'companySize-' + item.id" @click="companySize(item.id)">{{ item.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -84,41 +75,93 @@
                     <span :class="{active: resumes.length !== 0 && selectResumeArray.length === resumes.length}">全选</span>
                 </div>
                 <div class="flex-auto clearfix">
-                    <div class="applyBtn button" @click="apply"><i></i>申请职位</div>
-                    <div class="collectBtn button" @click="collect"><i></i>收藏职位</div>
+                    <div class="applyBtn button" @click="invateInterView"><i></i>邀约面试</div>
+                    <div class="collectBtn button" @click="collectResumes"><i></i>收藏简历</div>
                 </div>
                 <div class="rt">
                     <span id="rtPrev" :class="{ active: queryOptions.pageNum > 1 }" class="dicon pre" @click="go('pre')"></span>
                     <span class="dw_c_orange">{{queryOptions.pageNum}}</span> / {{totalPage}}
                     <span id="rtNext" :class="{ active: queryOptions.pageNum < totalPage }" class="dicon next" @click="go('next')"></span>
                 </div>
-                <div class="rt">共{{total}}条职位</div>
+                <div class="rt">共{{total}}个人才</div>
             </div>
-            <div class="table">
-                <div class="theader">
-                    <div class="tr">
-                        <div class="th flex-auto">职位名</div>
-                        <div class="th" style="width: 275px;">公司名</div>
-                        <div class="th" style="width: 120px;">工作地点</div>
-                        <div class="th" style="width: 150px;">薪资</div>
-                        <div class="th" style="width: 110px;">发布时间</div>
-                    </div>
-                </div>
-                <div class="tbody">
-                    <div class="tr" v-for="item in resumes" :key="'job-' + item.id">
-                        <div class="td" style="width: 43px">
+            <ul class="list personel-box">
+                <li class="list-li" v-for="item in resumes" :key="'resumes' + item.id">
+                    <div class="flex">
+                        <div class="checkbox">
                             <span :class="{checked: selectResumeArray.indexOf(item.id) !== -1}" @click="selectResume(item.id)"></span>
                         </div>
-                        <div class="td flex-auto cursor"><!-- @click="getResumeDetail(item.id)"-->
-                            <a :href="'/#/job-detail?id=' + item.id" target="_blank">{{ item.name }}</a>
+                        <div class="search_job_list">
+                            <div class="part01 clearfix">
+                                <div class="search_user_list_neme fl">
+                                    <!--<span class=" disc_per" @click="getResumeDetail(item.id)">{{ item.name }}</span>-->
+                                    <a :href="'/#/resume-detail?id=' + item.id" class="disc_per" target="_blank">{{item.name}}</a>
+                                    <span class="disc_user_mes">{{item.sex}},{{item.age}}岁,</span>
+                                </div>
+                                <div class="disc_time fr">更新时间：{{ item.updateTime }}</div>
+                            </div>
+                            <div class="company_det">
+                                <span class="search_job_list_box_s">
+                                    意向：
+                                    <span class="com_search_job_em">{{item.itention}}</span>
+                                </span>
+                                <span class="search_job_list_box_line">|</span>
+                                <span class="search_job_list_box_s">
+                                    薪资：
+                                    <span class="com_search_job_em com_search_job_em_pay">{{item.salary}}</span>
+                                </span>
+                                <span class="search_job_list_box_line">|</span>
+                                <span class="search_job_list_box_s">
+                                    经验：
+                                    <span class="com_search_job_em">{{item.experience}}</span>
+                                </span>
+                                <span class="search_job_list_box_line">|</span>
+                                <span class="search_job_list_box_s">
+                                    学历：
+                                    <span class="com_search_job_em">{{item.education}}</span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="td" style="width: 275px;">{{ item.companyName }}</div>
-                        <div class="td center" style="width: 120px;">{{ item.placeBelong }}</div>
-                        <div class="td center" style="width: 150px;">{{ item.salary }}</div>
-                        <div class="td center" style="width: 110px;">{{ item.updateTime }}</div>
                     </div>
-                </div>
-            </div>
+                </li>
+                <!--<li class="list-li">
+                    <div class="flex">
+                        <div class="checkbox">
+                            <span class="checked"></span>
+                        </div>
+                        <div class="search_job_list">
+                            <div class="part01 clearfix">
+                                <div class="search_user_list_neme fl">
+                                    <span class=" disc_per" @click="jobDetailDialogVisible = true">张三</span>
+                                    <span class="disc_user_mes">男,28岁,</span>
+                                </div>
+                                <div class="disc_time fr">更新时间：3天前</div>
+                            </div>
+                            <div class="company_det">
+                        <span class="search_job_list_box_s">
+                            意向：
+                            <span class="com_search_job_em">咨询师</span>
+                        </span>
+                                <span class="search_job_list_box_line">|</span>
+                                <span class="search_job_list_box_s">
+                            薪资：
+                            <span class="com_search_job_em com_search_job_em_pay">2万/月</span>
+                        </span>
+                                <span class="search_job_list_box_line">|</span>
+                                <span class="search_job_list_box_s">
+                            经验：
+                            <span class="com_search_job_em">2年以上</span>
+                        </span>
+                                <span class="search_job_list_box_line">|</span>
+                                <span class="search_job_list_box_s">
+                            学历：
+                            <span class="com_search_job_em">博士</span>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>-->
+            </ul>
         </div>
         <el-dialog :before-close="queryByCity" class="areaDialog" :visible.sync="dialogVisible" width="960px" :close-on-click-modal="false"
                    :close-on-press-escape="false">
@@ -131,19 +174,86 @@
                 <div class="button" @click="queryByCity">确 定</div>
             </div>
         </el-dialog>
-        <el-dialog :visible.sync="jobDetailDialogVisible" width="600px" :close-on-click-modal="false" :close-on-press-escape="false">
-            <span slot="title">{{activeResume.name}}</span>
-
+        <el-dialog :top="'2vh'" :visible.sync="jobDetailDialogVisible" width="1000px" :close-on-click-modal="false"
+                   :close-on-press-escape="false">
+            <span slot="title">简历详情</span>
+            <resumeDetail :activeResume="activeResume"></resumeDetail>
         </el-dialog>
     </div>
 </template>
 <script>
     import areaComp from './components/areaComp'
-    import { queryFilterOptions, queryJobsByPage, applyJob, collectJobs, queryJobDetail } from '@/api/service'
+    import resumeDetail from './components/resume-detail'
+    import { queryFilterOptions, queryResume, invateInterViewByIds, collectResumesByIds, queryResumeDetail } from '@/api/service'
     export default {
-        name: 'jobHunting',
+        name: 'seniorPersonnelList',
         components: {
-            areaComp
+            areaComp,
+            resumeDetail
+        },
+        data() {
+            return {
+                activeResume: {
+                    id: '',
+                    name: '',
+                    birth: '',
+                    phoneNumber: '',
+                    sex: '',
+                    nameFamily: '',
+                    email: '',
+                    householdRegister: '',
+                    height: '',
+                    qq: '',
+                    weight: '',
+                    politicalOutlook: '',
+                    education: '',
+                    faxedLine: '',
+                    graduationTime: '',
+                    universityGraduatedFrom: '',
+                    certificate: '',
+                    major: '',
+                    technicalTitle: '',
+                    secondMajor: '',
+                    placeResidence: '',
+                    jobIntention: '',
+                    salaryType: '',
+                    expectSalary: '',
+                    job: '',
+                    expectedArea: '',
+                    postTime: '',
+                    handsOnWorkExperience: [],
+                    educationExperience: [],
+                    workingSkills: '',
+                    selfEvalution: ''
+                },
+                selectResumeArray: [],
+                resumes: [],
+                dialogVisible: false,
+                showMore: false,
+                showMoreTitle: '展开更多选项▼',
+                jobDetailDialogVisible: false,
+                filterOptions: {
+                    sex: [],
+                    placeBelong: [],
+                    releaseDate: [],
+                    expectedSalary: [],
+                    education: [],
+                    wrokLife: []
+                },
+                total: 0,
+                totalPage: 0,
+                queryOptions: {
+                    pageNum: 1,
+                    pageSize: 20,
+                    keywords: '',
+                    sex: '',
+                    cities: [],
+                    releaseDate: '',
+                    expectedSalary: '',
+                    education: '',
+                    wrokLife: ''
+                }
+            }
         },
         computed: {
             cities() {
@@ -156,119 +266,17 @@
                     }
                 }
                 return obj
-            }
-        },
-        data() {
-            return {
-                filterOptions: {
-                    placeBelong: [],
-                    releaseDate: [],
-                    expectedSalary: [],
-                    natureOfCompany: [],
-                    companySize: [],
-                    education: [],
-                    wrokLife: []
-                },
-                queryOptions:{
-                    pageNum: 1,
-                    pageSize: 20,
-                    keywords: '',
-                    cities: [],
-                    releaseDate: '',
-                    expectedSalary: '',
-                    natureOfCompany: '',
-                    companySize: '',
-                    education: '',
-                    wrokLife: ''
-                },
-                totalPage: 0,
-                total: 0,
-                selectResumeArray: [],
-                resumes: [],
-                dialogVisible: false,
-                showMore: false,
-                showMoreTitle: '展开更多选项▼',
-                jobDetailDialogVisible: false,
-                activeResume: {
-                    id: '',
-                    name: '',
-                    salary: '',
-                    numberRecruits: '',
-                    education: '',
-                    workingLife: '',
-                    workPlace: '',
-                    jobDescription: '',
-                    companyInfo: ''
-                },
+            },
+            mode() {
+                // senior-personnel-list 中高级人才
+                return this.$route.path.indexOf('senior-personnel-list') !== -1 ? 1 : 0
             }
         },
         mounted() {
             this.getFilterOptions()
-            this.getJobs()
+            this.getPersons()
         },
         methods: {
-            collect() {
-                if (this.selectResumeArray.length <= 0) {
-                    this.$message({
-                        message: '请至少选择一个职位',
-                        type: 'warning'
-                    })
-                } else {
-                    if (this.$store.getters.isLogin !== '1') {
-                        this.$message({
-                            message: '请先登录',
-                            type: 'warning'
-                        })
-                        return;
-                    }
-                    const loading = this.$loading({
-                        lock: true,
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.1)',
-                        fullscreen: true
-                    })
-                    collectJobs({ids: this.selectResumeArray.join(',')}).then((res) => {
-                        loading.close()
-                        this.$message({
-                            message: '职位收藏成功',
-                            type: 'success'
-                        })
-                    }).catch(() => {
-                        loading.close()
-                    })
-                }
-            },
-            apply() {
-                if (this.selectResumeArray.length <= 0) {
-                    this.$message({
-                        message: '请至少选择一个职位',
-                        type: 'warning'
-                    })
-                } else {
-                    if (this.$store.getters.isLogin !== '1') {
-                        this.$message({
-                            message: '请先登录',
-                            type: 'warning'
-                        })
-                        return;
-                    }
-                    const loading = this.$loading({
-                        lock: true,
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.1)',
-                        fullscreen: true
-                    })
-                    applyJob({ids: this.selectResumeArray.join(',')}).then((res) => {
-                        loading.close()
-                        this.$message({
-                            message: '已申请所选职位',
-                            type: 'success'
-                        })
-                    }).catch(() => {
-                        loading.close()
-                    })
-                }
-            },
             getResumeDetail(id) {
                 if (id === this.activeResume.id) {
                     this.jobDetailDialogVisible = true
@@ -280,25 +288,109 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                queryJobDetail({id: id}).then((res) => {
+                queryResumeDetail({id: id}).then((res) => {
                     console.log(res)
                     loading.close()
                     let data = res.data
                     this.activeResume.id = data.id
-                    this.activeResume.name = data.name
-                    this.activeResume.salary = data.salary
-                    this.activeResume.numberRecruits = data.numberRecruits
-                    this.activeResume.education = data.education
-                    this.activeResume.workingLife = data.workingLife
-                    this.activeResume.workPlace = data.workPlace
-                    this.activeResume.jobDescription = data.jobDescription
-                    this.activeResume.companyInfo = data.companyInfo
+                    this.activeResume.name = data.name || ''
+                    this.activeResume.birth = data.birth || ''
+                    this.activeResume.phoneNumber = data.phoneNumber || ''
+                    this.activeResume.sex = data.sex || ''
+                    this.activeResume.nameFamily = data.nameFamily || ''
+                    this.activeResume.email = data.email || ''
+                    this.activeResume.householdRegister = data.householdRegister || ''
+                    this.activeResume.height = data.height || ''
+                    this.activeResume.weight = data.weight || ''
+                    this.activeResume.qq = data.qq || ''
+                    this.activeResume.politicalOutlook = data.politicalOutlook || ''
+                    this.activeResume.education = data.education || ''
+                    this.activeResume.faxedLine = data.faxedLine || ''
+                    this.activeResume.graduationTime = data.graduationTime || ''
+                    this.activeResume.universityGraduatedFrom = data.universityGraduatedFrom || ''
+                    this.activeResume.certificate = data.certificate || ''
+                    this.activeResume.major = data.major || ''
+                    this.activeResume.technicalTitle = data.technicalTitle || ''
+                    this.activeResume.secondMajor = data.secondMajor || ''
+                    this.activeResume.placeResidence = data.placeResidence || ''
+                    this.activeResume.jobIntention = data.jobIntention || []
+                    this.activeResume.salaryType = data.salaryType || ''
+                    this.activeResume.expectSalary = data.expectSalary || ''
+                    this.activeResume.job = data.job || ''
+                    this.activeResume.expectedArea = data.expectedArea || ''
+                    this.activeResume.postTime = data.postTime || ''
+                    this.activeResume.handsOnWorkExperience = data.handsOnWorkExperience || []
+                    this.activeResume.educationExperience = data.educationExperience || []
+                    this.activeResume.workingSkills = data.workingSkills || ''
+                    this.activeResume.selfEvalution = data.selfEvalution || ''
                     this.$nextTick(() => {
                         this.jobDetailDialogVisible = true
                     })
                 }).catch(() => {
                     loading.close()
                 })
+            },
+            collectResumes() {
+                if (this.selectResumeArray.length <= 0) {
+                    this.$message({
+                        message: '请至少选择一项简历',
+                        type: 'warning'
+                    })
+                } else {
+                    if (this.$store.getters.isLogin !== '1') {
+                        this.$message({
+                            message: '请先登录',
+                            type: 'warning'
+                        })
+                        return;
+                    }
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    collectResumesByIds({ids: this.selectResumeArray.join(',')}).then((res) => {
+                        loading.close()
+                        this.$message({
+                            message: '简历收藏成功',
+                            type: 'success'
+                        })
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
+            },
+            invateInterView() {
+                if (this.selectResumeArray.length <= 0) {
+                    this.$message({
+                        message: '请至少选择一项简历',
+                        type: 'warning'
+                    })
+                } else {
+                    if (this.$store.getters.isLogin !== '1') {
+                        this.$message({
+                            message: '请先登录',
+                            type: 'warning'
+                        })
+                        return;
+                    }
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    invateInterViewByIds({ids: this.selectResumeArray.join(',')}).then((res) => {
+                        loading.close()
+                        this.$message({
+                            message: '邀约面试成功',
+                            type: 'success'
+                        })
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
             },
             selectResume(id) {
                 let idx = this.selectResumeArray.indexOf(id)
@@ -321,16 +413,38 @@
                 }
 
             },
-            getJobs() {
+            go(key) {
+                if (key === 'pre') {
+                    if (this.queryOptions.pageNum <= 1) {
+                        return
+                    }
+                    this.queryOptions.pageNum--
+                    this.$nextTick(() => {
+                        this.getPersons()
+                    })
+                } else if (key === 'next') {
+                    if (this.queryOptions.pageNum >= this.totalPage) {
+                        return
+                    }
+                    this.queryOptions.pageNum++
+                    this.$nextTick(() => {
+                        this.getPersons()
+                    })
+                }
+            },
+            getPersons() {
                 this.selectResumeArray.splice(0, this.selectResumeArray.length)
                 const loading = this.$loading({
                     lock: true,
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: false,
-                    target: this.$el.querySelector('.job-list')
+                    target: this.$el.querySelector('.personel-box')
                 })
-                queryJobsByPage(this.queryOptions).then((res) => {
+                // mode 0 非高级人才 1 高级人才
+
+                console.log(Object.assign(this.queryOptions, {mode: this.mode}))
+                queryResume(Object.assign(this.queryOptions, {mode: this.mode})).then((res) => {
                     loading.close()
                     this.resumes = res.list
                     this.total = res.total
@@ -339,78 +453,56 @@
                     loading.close()
                 })
             },
+            queryByCity() {
+                this.dialogVisible = false
+                this.queryOptions.pageNum = 1
+                this.$nextTick(() => {
+                    this.getPersons()
+                })
+            },
             query() {
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
                     this.getPersons()
                 })
             },
-            companySize(id) {
-                this.queryOptions.companySize = id ||''
+            wrokLife(id) {
+                this.queryOptions.wrokLife = id ||''
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
-                    this.getJobs()
-                })
-            },
-            natureOfCompany(id) {
-                this.queryOptions.natureOfCompany = id ||''
-                this.queryOptions.pageNum = 1
-                this.$nextTick(() => {
-                    this.getJobs()
+                    this.getPersons()
                 })
             },
             education(id) {
                 this.queryOptions.education = id ||''
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
-                    this.getJobs()
-                })
-            },
-            wrokLife(id) {
-                this.queryOptions.wrokLife = id ||''
-                this.queryOptions.pageNum = 1
-                this.$nextTick(() => {
-                    this.getJobs()
+                    this.getPersons()
                 })
             },
             expectedSalary(id) {
                 this.queryOptions.expectedSalary = id ||''
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
-                    this.getJobs()
+                    this.getPersons()
                 })
             },
             releaseDate(id) {
                 this.queryOptions.releaseDate = id ||''
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
-                    this.getJobs()
+                    this.getPersons()
                 })
             },
-            go(key) {
-                if (key === 'pre') {
-                    if (this.queryOptions.pageNum <= 1) {
-                        return
-                    }
-                    this.queryOptions.pageNum--
-                    this.$nextTick(() => {
-                        this.getJobs()
-                    })
-                } else if (key === 'next') {
-                    if (this.queryOptions.pageNum >= this.totalPage) {
-                        return
-                    }
-                    this.queryOptions.pageNum++
-                    this.$nextTick(() => {
-                        this.getJobs()
-                    })
-                }
+            deleteCity(id) {
+                let idx = this.queryOptions.cities.indexOf(id)
+                this.queryOptions.cities.splice(idx, 1)
             },
-            queryByCity() {
-                this.dialogVisible = false
+            selSex(id) {
+                this.queryOptions.sex = id || ''
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
-                    this.getJobs()
+                    this.getPersons()
                 })
             },
             getFilterOptions() {
@@ -427,9 +519,6 @@
                     loading.close()
                 })
             },
-            handleClose() {
-                console.log('取消地区选择')
-            },
             toggleShowMore() {
                 this.showMore = !this.showMore
                 if (this.showMore) {
@@ -445,78 +534,70 @@
     .job-hunting {
         width: 1000px;
         margin: 0 auto;
-        .cursor {
-            cursor: pointer;
-        }
-        .job-detail {
-            .job-control {
-                display: flex;
-                font-size: 12px;
-                .label {
-                    width: 85px;
-                    text-align: right;
-                    padding-right: 10px;
-                }
-                .value {
-                    flex: 1;
-                    line-height: 25px;
-                }
-            }
-        }
         .job-list {
             margin-bottom: 10px;
             border: 1px solid #cac9cb;
-            .table {
-                .tr {
-                    display: flex;
-                    border-bottom: 1px solid #e8e8e8;
-                    .flex-auto {
-                        flex: 1;
+            .flex {
+                display: flex;
+                border-bottom: 1px solid #e4e4e4;
+                .checkbox {
+                    width: 43px;
+                    span {
+                        display: inline-block;
+                        width: 15px;
+                        height: 15px;
+                        margin-top: 21px;
+                        margin-left: 15px;
+                        float: left;
+                        background-image: url(../../assets/img/check.png);
+                        background-position: left center;
+                        background-repeat: no-repeat;
                     }
-                    .center {
-                        text-align: center;
-                    }
-                    .cursor {
-                        &:hover {
-                            text-decoration: underline;
-                            color: #000;
-                        }
-                    }
-                }
-                .tbody {
-                    .tr {
-                        font-size: 14px;
-                        color: #333;
-                        height: 40px;
-                        line-height: 40px;
-                        &:last-child {
-                            border-bottom: 0;
-                        }
-                        .td {
-                            span {
-                                display: inline-block;
-                                width: 15px;
-                                height: 15px;
-                                margin-top: 12px;
-                                margin-left: 15px;
-                                float: left;
-                                background-image: url(../../assets/img/check.png);
-                                background-position:left center;
-                                background-repeat: no-repeat;
-                            }
-                            .checked {
-                                background-image: url(../../assets/img/checked.png);
-                            }
-                        }
+                    .checked {
+                        background-image: url(../../assets/img/checked.png);
                     }
                 }
-                .theader {
-                    height: 30px;
-                    line-height: 30px;
-                    text-align: center;
-
+            }
+            .list-li {
+                &:last-child {
+                    > .flex {
+                        border-bottom: 0;
+                    }
+                }
+            }
+            .search_job_list {
+                flex: 1;
+                margin-left: 10px;
+                margin-right: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                color: #676767;
+                position: relative;
+                font-size: 13px;
+                .company_det {
                     font-size: 12px;
-                    color: #999;
+                    .com_search_job_em_pay {
+                        color: #e8620e;
+                    }
+                }
+                .part01 {
+                    margin-bottom: 10px;
+                    .search_user_list_neme {
+                        color: #1369c0;
+                        .disc_per {
+                            cursor: pointer;
+                        }
+                        .disc_user_mes {
+                            font-size: 12px;
+                            padding-left: 10px;
+                            color: #a4a4a4;
+                        }
+                    }
+                    .disc_time {
+                        color: #9d9999;
+                        font-size: 12px;
+                        padding-top: 1px;
+                    }
                 }
             }
             .job-box-header {
@@ -574,7 +655,7 @@
                         text-align: right;
                         line-height: 18px;
                         background-image: url(../../assets/img/check.png);
-                        background-position:left center;
+                        background-position: left center;
                         background-repeat: no-repeat;
                     }
                     span.active {
@@ -667,10 +748,10 @@
                         font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
                     }
                     span {
-                        /*display: inline-block;
-                        height: 35px;
-                        line-height: 35px;*/
-                        padding: 0 5px;
+                        /*display: inline-block;*/
+                        /*height: 35px;*/
+                        /*line-height: 35px;*/
+                        padding: 3px 5px;
                         font-size: 12px;
                         color: #333;
                         cursor: pointer;

@@ -8,6 +8,16 @@ Vue.use(Router)
 import Layout from '../views/layout/Layout'
 
 export default new Router({
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return {
+                x: 0,
+                y: 0
+            }
+        }
+    },
     routes: [
         {
             path: '/',
@@ -109,12 +119,12 @@ export default new Router({
                     path: 'personnel-list',
                     component: _import('job/personnel-list'),
                     name: 'personnelList',
-                    meta: {title: '招揽人才', keepAlive: true}
+                    meta: {title: '招揽人才', keepAlive: false}
                 }, {
                     path: 'senior-personnel-list',
-                    component: _import('job/personnel-list'),
+                    component: _import('job/senior-personnel-list'),
                     name: 'seniorPersonnelList',
-                    meta: {title: '中高级人才', keepAlive: true}
+                    meta: {title: '中高级人才', keepAlive: false}
                 }, {
                     path: 'about-us',
                     component: _import('about/about-us'),
@@ -126,8 +136,16 @@ export default new Router({
             path: "/login",
             component: _import('login/index')
         }, {
+            path: "/resume-detail",
+            component: _import('job/resume-detail')
+        }, {
+            path: "/job-detail",
+            component: _import('job/job-detail'),
+            meta: {title: '职位详情', keepAlive: false}
+        }, {
             path: "/member-center",
-            component: _import('members/member-center')
+            component: _import('members/member-center'),
+            meta: {title: '简历详情', keepAlive: false}
         }, {
             path: "*",
             redirect: "/"

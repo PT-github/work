@@ -1,7 +1,7 @@
 <template>
     <div class="s-talent-list">
         <div class="title">
-            <router-link tag='a' :to="'/'" class="more">
+            <router-link tag='a' :to="'/personnel-list'" class="more">
                 <img src="../../../assets/teacher/more.png" alt="更多">
             </router-link>
         </div>
@@ -10,7 +10,8 @@
                 <div class="search_job_list">
                     <div class="part01 clearfix">
                         <div class="search_user_list_neme fl">
-                            <router-link tag="a" :to="'/'" class=" disc_per">{{item.name}}</router-link>
+                            <!--<span class="disc_per" @click="getResumeDetail(item.id)">{{item.name}}</span>-->
+                            <a :href="'/#/resume-detail?id=' + item.id" class="disc_per" target="_blank">{{item.name}}</a>
                             <span class="disc_user_mes">{{item.sex}},{{item.age}}岁,</span>
                         </div>
                         <div class="disc_time fr">更新时间：{{item.updateTime}}</div>
@@ -38,20 +39,62 @@
                     </div>
                 </div>
             </li>
-
         </ul>
+        <el-dialog :top="'2vh'" :visible.sync="jobDetailDialogVisible" width="1000px" :close-on-click-modal="false"
+                   :close-on-press-escape="false">
+            <span slot="title">简历详情</span>
+            <resumeDetail :activeResume="activeResume"></resumeDetail>
+        </el-dialog>
     </div>
 </template>
 <script>
-    import { queryTalents } from '@/api/service'
+    import { queryTalents, queryResumeDetail } from '@/api/service'
+    import resumeDetail from '@/views/job/components/resume-detail'
     export default {
         name: 'sTalentList',
         mounted() {
             this.getTalents()
         },
+        components: {
+            resumeDetail
+        },
         data() {
             return {
-                list: []
+                list: [],
+                jobDetailDialogVisible: false,
+                activeResume: {
+                    id: '',
+                    name: '',
+                    birth: '',
+                    phoneNumber: '',
+                    sex: '',
+                    nameFamily: '',
+                    email: '',
+                    householdRegister: '',
+                    height: '',
+                    qq: '',
+                    weight: '',
+                    politicalOutlook: '',
+                    education: '',
+                    faxedLine: '',
+                    graduationTime: '',
+                    universityGraduatedFrom: '',
+                    certificate: '',
+                    major: '',
+                    technicalTitle: '',
+                    secondMajor: '',
+                    placeResidence: '',
+                    jobIntention: '',
+                    salaryType: '',
+                    expectSalary: '',
+                    job: '',
+                    expectedArea: '',
+                    postTime: '',
+                    handsOnWorkExperience: [],
+                    educationExperience: [],
+                    workingSkills: '',
+                    selfEvalution: ''
+                }
             }
         },
         methods: {
@@ -109,6 +152,9 @@
                 margin-bottom: 10px;
                 .search_user_list_neme {
                     color: #1369c0;
+                    .disc_per {
+                        cursor: pointer;
+                    }
                     .disc_user_mes {
                         font-size: 12px;
                         padding-left: 10px;

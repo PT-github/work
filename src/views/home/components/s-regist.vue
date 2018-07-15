@@ -29,7 +29,7 @@
         <div class="title">
             <p>电话热线</p>
         </div>
-        <div class="button button1">
+        <div class="button button1" @click="centerDialogVisible = true">
             <p class="p1">网上在线报名</p>
             <p class="p2">Online registration</p>
         </div>
@@ -40,13 +40,47 @@
         <p class="p3">两大报名方式，课前试听</p>
         <p class="p4"><span class="orange">网上报名</span>快捷方便，更<span class="orange">优惠</span></p>
         <p class="p4">学前<span class="orange">试听</span>，互相了解，让学有所值</p>-->
+        <el-dialog :visible.sync="centerDialogVisible" width="430px" center :close-on-click-modal="false" :close-on-press-escape="false">
+            <span slot="title" class="leaveMsgTitle">网上报名</span>
+            <div class="leaveMsgContent">
+                <template v-if="!$store.state.user.isLogin">
+                    <div class="form-control">
+                        <div class="label">账号：</div>
+                        <div class="input-control"><input type="text" v-model="account"></div>
+                    </div>
+                    <div class="form-control">
+                        <div class="label">密码：</div>
+                        <div class="input-control"><input type="password" v-model="password"></div>
+                    </div>
+                </template>
+                <div class="form-control">
+                    <div class="label">姓名：</div>
+                    <div class="input-control"><input type="text" v-model="username"></div>
+                </div>
+                <div class="form-control" v-if="!$store.state.user.tel">
+                    <div class="label">手机：</div>
+                    <div class="input-control"><input type="text" v-model="tel"></div>
+                </div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="centerDialogVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="signUpOnline">确 定</el-button>
+            </span>
+        </el-dialog>
+
     </div>
 </template>
 <script>
+    import { signUpOnlineAction } from '@/api/service'
     export default {
         name: 'sRegist',
         data() {
             return {
+                tel: '',
+                account: '',
+                username: '',
+                password: '',
+                centerDialogVisible: false,
                 selectUlShow: false,
                 form: {
                     name: '',
@@ -61,6 +95,34 @@
             }
         },
         methods: {
+            signUpOnline() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                signUpOnlineAction({
+                    tel: this.tel,
+                    account: this.account,
+                    username: this.username,
+                    password: this.password,
+                }).then(response => {
+                    loading.close()
+                    if (response.success) {
+                        this.centerDialogVisible = false
+                        this.$message({
+                            message: '报名成功',
+                            type: 'success'
+                        })
+                    } else {
+                        this.$message({
+                            message: '报名失败，原因：' + response.message,
+                            type: 'error'
+                        })
+                    }
+                })
+            },
             exchangeType(e) {
                 var type = e.target.getAttribute('type')
                 if (this.form.type !== type) {
@@ -85,6 +147,35 @@
     }
 </script>
 <style res="stylesheet/scss" lang="scss" scoped>
+    .leaveMsgTitle {
+        color: #666;
+    }
+    .form-control {
+        display: flex;
+        width: 100%;
+        height: 35px;
+        margin-bottom: 10px;
+        .label {
+            width:70px;
+            height: 35px;
+            line-height: 35px;
+            text-align: right;
+            font-size: 12px;
+            padding-right: 5px;
+        }
+        .input-control {
+            flex: 1;
+            input {
+                height: 35px;
+                width: 100%;
+                border: 1px solid #dedede;
+                background:none;
+                border-radius: 5px;
+                outline: none;
+                padding: 0 5px;
+            }
+        }
+    }
     .s-regist {
         width: 278px;
         height: 300px;
@@ -254,6 +345,11 @@
 </style>
 
 <style rel="stylesheet/scss" lang="scss">
+    .s-regist {
+        .el-dialog--center .el-dialog__body {
+            padding: 10px 25px 0px;
+        }
+    }
     .queryForm {
         .el-form-item {
             .el-input__inner {

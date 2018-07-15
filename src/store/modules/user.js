@@ -4,8 +4,10 @@ const user = {
     state: {
         username: '',
         sessionId: '',
+        tel: '',
         userId: '',
         type: '',
+        account: '',
         isLogin: false
     },
 
@@ -19,6 +21,12 @@ const user = {
         SET_USERID: (state, userId) => {
             state.userId = userId
         },
+        SET_TEL: (state, tel) => {
+            state.tel = tel
+        },
+        SET_ACCOUNT: (state, account) => {
+            state.account = account
+        },
         SET_USERNAME: (state, username) => {
             state.username = username
         },
@@ -27,6 +35,20 @@ const user = {
         }
     },
     actions: {
+        SetLoginData({commit}, data) {
+            const username = data.username || data.nickname
+            const password = data.password || ''
+            const type = data.type
+            sessionStorage.setItem('userinfo', JSON.stringify({ username, password, type }))
+            sessionStorage.setItem('isLogin', "1")
+            commit('SET_ISLOGIN', "1")
+            commit('SET_USERNAME', data.nickname)
+            commit('SET_USERID', data.id)
+            commit('SET_ACCOUNT', data.account)
+            commit('SET_TEL', data.tel)
+            commit('SET_USERTYPE', data.type)
+            commit('SET_SESSIONID', data.sessionId || '')
+        },
         // 用户登录
         Login({commit}, userInfo) {
             const username = userInfo.username.trim()
@@ -38,7 +60,9 @@ const user = {
                     sessionStorage.setItem('isLogin', "1")
                     commit('SET_ISLOGIN', "1")
                     commit('SET_USERNAME', data.nickname)
+                    commit('SET_ACCOUNT', data.account)
                     commit('SET_USERID', data.id)
+                    commit('SET_TEL', data.tel)
                     commit('SET_USERTYPE', data.type)
                     commit('SET_SESSIONID', data.sessionId || '')
                     resolve()

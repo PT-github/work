@@ -25,3 +25,11 @@ export function logout(username, sessionId) {
     })
 }
 
+export function regAction(data) {
+    return request({
+        url: '/user/regAction',
+        method: 'post',
+        data
+    })
+}
+

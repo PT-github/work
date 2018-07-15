@@ -23,7 +23,7 @@
           <div class="part" v-for="(item, index) in videoList" :key="'category-' + index">
               <div class="category">{{ item.name }}</div>
               <ul class="teacherBox clearfix">
-                  <li v-for="(v, idx) in item.child" :key="'video-' + idx">
+                  <li @click="playShow(v.videoUrl, v.videoPic)" v-for="(v, idx) in item.child" :key="'video-' + idx">
                       <div class="pic">
                           <img :src="v.imgUrl" :alt="v.name">
                       </div>
@@ -53,11 +53,16 @@
           </ul>
           <div class="more" v-if="teacherShowMore"><span @click="getTeachersByPage">- - - - - - - - - - - - - - - - 查看更多- - - - - - - - - - - - - - - - - - -</span></div>
       </div>
+      <el-dialog @close="close" :close-on-click-modal="false" :close-on-press-escape="false"
+                 :visible.sync="dialogVisible" width="1000px">
+          <sVideoPlay :videoUrl="videoUrl" :videoPic="videoPic" ref="sVideoPlayDom"></sVideoPlay>
+      </el-dialog>
   </div>
 </template>
 <script>
     import {sLesson} from '@/views/home/components'
     import { queryProject, queryTeachersByPage, queryCategory,queryVideoByCategory } from '@/api/service'
+    import sVideoPlay from '../home/components/s-video-play'
     export default {
         name: 'educationTraining',
         data() {
@@ -67,7 +72,10 @@
                 pageSize: 9,
                 teacherList: [],
                 teacherShowMore: true,
-                videoList: []
+                videoList: [],
+                dialogVisible: false,
+                videoUrl: '',
+                videoPic: ''
             }
         },
         mounted() {
@@ -76,6 +84,17 @@
             this.getVideoByCategory()
         },
         methods: {
+            close() {
+                this.$refs['sVideoPlayDom'].pause()
+            },
+            playShow(url, pic) {
+                this.videoUrl = url
+                this.videoPic = pic
+                this.dialogVisible = true
+                this.$nextTick(() => {
+                    this.$refs['sVideoPlayDom'].play()
+                })
+            },
             getVideoByCategory() {
                 const loading = this.$loading({
                     lock: true,
@@ -89,12 +108,13 @@
                     for (let i = 0; i < res.list.length; i++) {
                         obj = res.list[i]
                         obj.child = []
-                        queryVideoByCategory({categoryId: res.list[i].id}).then(ret => {
-                            obj.child.push(...ret.list)
-                        })
                         this.videoList.push(obj)
                     }
-
+                    this.videoList.forEach((item, index) => {
+                        queryVideoByCategory({categoryId: item.id}).then(ret => {
+                            this.videoList[index].child.push(...ret.list)
+                        })
+                    })
                 }).then(() => {
                     this.$nextTick(() => {
                         loading.close()
@@ -140,7 +160,8 @@
             }
         },
         components: {
-            sLesson
+            sLesson,
+            sVideoPlay
         }
     }
 </script>
