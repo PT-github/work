@@ -1,5 +1,75 @@
 import request from '@/utils/request'
+
+//====================企业信息查询开始===================
+
+// 企业基本查询
+export function queryCompanyMessage() {
+    return request({
+        url: '/company/queryCompanyMessage',
+        method: 'post'
+    })
+}
+// 企业密码修改
+export function modifyCompanyPassword(data) {
+    return request({
+        url: '/company/modifyCompanyPassword',
+        method: 'post',
+        data
+    })
+}
+// 企业职位列表
+export function queryPubJobs(data) {
+    return request({
+        url: '/company/queryPubJobs',
+        method: 'post',
+        data
+    })
+}
+// 刷新职位
+export function refreshCompanyJob(data) {
+    return request({
+        url: '/company/refreshCompanyJob',
+        method: 'post',
+        data
+    })
+}
+// 发布职位
+export function publishCompanyJob(data) {
+    return request({
+        url: '/company/publishCompanyJob',
+        method: 'post',
+        data
+    })
+}
+// 撤回职位
+export function revokeCompanyJob(data) {
+    return request({
+        url: '/company/revokeCompanyJob',
+        method: 'post',
+        data
+    })
+}
+// 删除职位
+export function deleteCompanyJob(data) {
+    return request({
+        url: '/company/deleteCompanyJob',
+        method: 'post',
+        data
+    })
+}
+//====================企业信息查询结束===================
+
 // =======================首页开始=========================
+
+// 证书查询
+export function queryCerti(data) {
+    return request({
+        url: '/home/queryCertificate',
+        method: 'post',
+        data
+    })
+}
+
 // 首页左右滑动区域=>获取广告列表
 export function queryPoster() {
   return request({

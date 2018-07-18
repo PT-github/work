@@ -91,6 +91,11 @@ export default new Router({
                     name: 'home',
                     meta: {title: '首页', keepAlive: true}
                 }, {
+                    path: 'certifate-query',
+                    component: _import('home/components/s-certificate-query'),
+                    name: 'sCertificateQuery',
+                    meta: {title: '证书查询', keepAlive: false}
+                }, {
                     path: 'news',
                     component: _import('news/news-list'),
                     name: 'newsList',

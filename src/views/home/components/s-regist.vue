@@ -6,7 +6,7 @@
         <div class="queryForm">
             <div class="form-control">
                 <div class="input-control">
-                    <input type="text" placeholder="请输入姓名">
+                    <input type="text" v-model="form.name" placeholder="请输入姓名">
                 </div>
             </div>
             <div class="form-control">
@@ -19,11 +19,11 @@
                     </ul>
                 </div>
                 <div class="input-control">
-                    <input class="no-left" type="text" placeholder="请输入身份证或证书编号">
+                    <input class="no-left" v-model="form.value" type="text" placeholder="请输入身份证或证书编号">
                 </div>
             </div>
             <div class="form-control" style="margin-bottom: 15px;">
-                <div class="form-control_submit">查&nbsp;&nbsp;&nbsp;&nbsp;询</div>
+                <div class="form-control_submit" @click="certiQuery">查&nbsp;&nbsp;&nbsp;&nbsp;询</div>
             </div>
         </div>
         <div class="title">
@@ -95,6 +95,26 @@
             }
         },
         methods: {
+            certiQuery() {
+                if (!this.form.name) {
+                    this.$message({
+                        message: '请输入查询用户姓名',
+                        type: 'error'
+                    })
+                    return
+                }
+                let message = this.form.typeValue
+                if (!this.form.value) {
+                    this.$message({
+                        message: '请输入' + message + '信息',
+                        type: 'error'
+                    })
+                    return
+                }
+                this.$router.push({
+                    path: '/certifate-query', query: this.form
+                })
+            },
             signUpOnline() {
                 const loading = this.$loading({
                     lock: true,
@@ -189,6 +209,7 @@
                 margin-bottom: 10px;
                 height: 29px;
                 .form-control_submit {
+                    cursor: pointer;
                     width: 230px;
                     height: 30px;
                     font-size: 12px;

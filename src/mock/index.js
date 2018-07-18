@@ -3,6 +3,14 @@ import api from './home'
 Mock.setup({
     timeout: '500'
 })
+// 企业
+Mock.mock(/\/company\/queryCompanyMessage$/, 'post', api.queryCompanyMessage)
+Mock.mock(/\/company\/modifyCompanyPassword$/, 'post', api.queryCompanyMessage)
+Mock.mock(/\/company\/queryPubJobs$/, 'post', api.queryPubJobs)
+Mock.mock(/\/company\/refreshCompanyJob$/, 'post', api.queryPubJobs)
+Mock.mock(/\/company\/publishCompanyJob/, 'post', api.queryPubJobs)
+Mock.mock(/\/company\/revokeCompanyJob/, 'post', api.queryPubJobs)
+Mock.mock(/\/company\/deleteCompanyJob/, 'post', api.queryPubJobs)
 // 拦截首页接口请求
 Mock.mock(/\/queryPoster/, 'post', api.queryPoster)
 Mock.mock(/\/queryNews$/, 'post', api.queryNews)
@@ -14,6 +22,7 @@ Mock.mock(/\/queryTalents/, 'post', api.queryTalents)
 Mock.mock(/\/queryFriendShips/, 'post', api.queryFriendShips)
 Mock.mock(/\/queryVideos/, 'post', api.queryVideos)
 Mock.mock(/\/home\/signUpOnlineAction$/, 'post', api.queryVideos)
+Mock.mock(/\/home\/queryCertificate$/, 'post', api.queryCertificate)
 //拦截新闻二级页面接口请求
 Mock.mock(/\/queryWorkDynamics/, 'post', api.queryWorkDynamics)
 Mock.mock(/\/queryNoticeList/, 'post', api.queryNoticeList)

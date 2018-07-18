@@ -1,64 +1,64 @@
 <template>
     <div class="company-baseInfo">
         <ul class="tab clearfix">
-            <li :class="{on: active === 0}" @click="getData(0)">基本信息</li>
-            <li :class="{on: active === 1}" @click="getData(1)">公司图片</li>
-            <li :class="{on: active === 2}" @click="getData(2)">营业执照</li>
-            <li :class="{on: active === 3}" @click="getData(3)">账户信息</li>
-            <li :class="{on: active === 4}" @click="getData(4)">密码修改</li>
+            <li :class="{on: active === 0}" @click="setActive(0)">基本信息</li>
+            <li :class="{on: active === 1}" @click="setActive(1)">公司图片</li>
+            <li :class="{on: active === 2}" @click="setActive(2)">营业执照</li>
+            <li :class="{on: active === 3}" @click="setActive(3)">账户信息</li>
+            <li :class="{on: active === 4}" @click="setActive(4)">密码修改</li>
         </ul>
         <ul class="baseinfo clearfix" v-show="active === 0">
             <li>
                 <div class="label">公司名称：</div>
-                <div class="value">XXXX公司</div>
+                <div class="value">{{ companyData.companyName }}</div>
             </li>
             <li>
                 <div class="label">公司规模：</div>
-                <div class="value">10000人</div>
+                <div class="value">{{ companyData.companySize }}</div>
             </li>
             <li>
                 <div class="label">公司性质：</div>
-                <div class="value">上市公司</div>
+                <div class="value">{{ companyData.natureOfCompany }}</div>
             </li>
             <li>
                 <div class="label">法人：</div>
-                <div class="value">XXXXX</div>
+                <div class="value">{{ companyData.legalPerson }}</div>
             </li>
             <li>
                 <div class="label">公司注册地：</div>
-                <div class="value">湖南长沙</div>
+                <div class="value">{{ companyData.regSite }}</div>
             </li>
             <li>
                 <div class="label">联系方式：</div>
-                <div class="value">180XXXXXXXX</div>
+                <div class="value">{{ companyData.contact }}</div>
             </li>
             <li>
                 <div class="label">联系人：</div>
-                <div class="value">XXXXXX</div>
+                <div class="value">{{ companyData.contacts }}</div>
             </li>
         </ul>
         <div class="pic-list" v-show="active === 1">
-            <template v-for="item in 5">
-                <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=287515486,199635557&fm=173&app=25&f=JPEG?w=510&h=346&s=EC32109D0E9452D24723D0DD0300E0B8" alt="">
+            <template v-if="companyData.imgUrls && companyData.imgUrls.length > 0" v-for="item in companyData.imgUrls">
+                <img :src="item" alt="">
             </template>
         </div>
         <div class="pic-list" v-show="active === 2">
-            <template v-for="item in 5">
-                <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=287515486,199635557&fm=173&app=25&f=JPEG?w=510&h=346&s=EC32109D0E9452D24723D0DD0300E0B8" alt="">
+            <template v-if="companyData.businessLicense && companyData.businessLicense.length > 0" v-for="item in companyData.businessLicense">
+                <img :src="item" alt="">
             </template>
         </div>
         <ul class="baseinfo clearfix" v-show="active === 3">
             <li>
                 <div class="label">账户名称：</div>
-                <div class="value">XXXXXXXXXXXXXX@163.com</div>
+                <div class="value">{{ companyData.account }}</div>
             </li>
             <li>
                 <div class="label">账户状态：</div>
-                <div class="value">有效</div>
+                <div class="value">{{ companyData.accountState }}</div>
             </li>
             <li>
                 <div class="label">账户等级：</div>
-                <div class="value">高级认证</div>
+                <div class="value">{{ companyData.accountLevel }}</div>
             </li>
         </ul>
         <div class="modifyPwd" v-show="active === 4">
@@ -66,35 +66,109 @@
                 <ul class="enter-box clearfix">
                     <li>
                         <div class="label">原始密码：</div>
-                        <div class="value"><input type="text" placeholder="请输入原始密码"></div>
+                        <div class="value"><input type="password" v-model="password" placeholder="请输入原始密码"></div>
                     </li>
                     <li>
                         <div class="label">修改密码：</div>
-                        <div class="value"><input type="password" placeholder="请输入需要修改的密码"></div>
+                        <div class="value"><input type="password" v-model="modifyPwd" placeholder="请输入需要修改的密码"></div>
                     </li>
                     <li>
                         <div class="label">确认密码：</div>
-                        <div class="value"><input type="password" placeholder="请确认修改的密码"></div>
+                        <div class="value"><input type="password" v-model="confirmPwd" placeholder="请确认修改的密码"></div>
                     </li>
                 </ul>
                 <div class="submit-box">
-                    <div class="submit-btn">确认修改</div>
+                    <div class="submit-btn" @click="mocifyPwdFun">确认修改</div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { queryCompanyMessage, modifyCompanyPassword } from '@/api/service'
     export default {
         name: 'sJobControl',
         data() {
             return {
                 active: 0,
+                companyData: {},
+                password: '',
+                modifyPwd: '',
+                confirmPwd: ''
             }
         },
+        mounted() {
+            this.getData()
+        },
         methods: {
-            getData(i) {
+            mocifyPwdFun() {
+                if (!this.password) {
+                    this.$message({
+                        message: '请输入原始密码',
+                        type: 'error'
+                    })
+                    return
+                }
+                if (!this.modifyPwd) {
+                    this.$message({
+                        message: '请输入修改密码',
+                        type: 'error'
+                    })
+                    return
+                }
+                if (!this.confirmPwd) {
+                    this.$message({
+                        message: '请输入确认密码',
+                        type: 'error'
+                    })
+                    return
+                }
+                if (this.confirmPwd !== this.modifyPwd) {
+                    this.$message({
+                        message: '两次密码不一致',
+                        type: 'error'
+                    })
+                    return
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                modifyCompanyPassword({
+                    password: this.password,
+                    newPassword: this.modifyPwd,
+                    id: this.companyData.id
+                }).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '密码修改成功',
+                            type: 'success'
+                        })
+                    } else {
+                        this.$message({
+                            message: '密码修改失败',
+                            type: 'error'
+                        })
+                    }
+                }).catch(() => {
+                    this.$message({
+                        message: '密码修改失败',
+                        type: 'error'
+                    })
+                })
+            },
+            setActive(i) {
                 this.active = i
+            },
+            getData() {
+                /*获取企业基本信息*/
+                queryCompanyMessage().then(res => {
+                    console.log(res.data)
+                    this.companyData = res.data
+                })
             }
         }
     }

@@ -1,7 +1,49 @@
 import Mock from 'mockjs'
-import { param2Obj } from '@/utils'
+import {param2Obj} from '@/utils'
 
 export default {
+    /**
+     * 企业职位查询
+     * @returns {*}
+     */
+    queryPubJobs: () => {
+        // 状态 0 未发布 1 已发布 2 已撤回 3 已删除
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|2": [
+                { id: 1, job: '职位名称0', lookNums: '1000', applyNums: '300', status: '未发布',statusCode: 0, pubTime: '2010-10-10 13:10:10' },
+                { id: 2, job: '职位名称1', lookNums: '1000', applyNums: '500', status: '已发布',statusCode: 1, pubTime: '2010-10-10 13:10:10' },
+                { id: 3, job: '职位名称2', lookNums: '1000', applyNums: '10', status: '已撤回',statusCode: 2, pubTime: '2010-10-10 13:10:10' },
+                { id: 4, job: '职位名称3', lookNums: '1000', applyNums: '20', status: '已删除',statusCode: 3, pubTime: '2010-10-10 13:10:10' }
+            ]
+        })
+    },
+    /**
+     * 企业基本信息查询
+     * @returns {*}
+     */
+    queryCompanyMessage: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id": 1,
+                "companyName": "XXXX公司",
+                "companySize": "1000人",
+                "natureOfCompany": "上市公司",
+                "legalPerson": "XXXXX",
+                "regSite": "湖南长沙",
+                "contact": "180XXXXXXXX",
+                "contacts": "XXXXXX",
+                "imgUrls": ["https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=287515486,199635557&fm=173&app=25&f=JPEG?w=510&h=346&s=EC32109D0E9452D24723D0DD0300E0B8","http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg", "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                "businessLicense": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg", "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=287515486,199635557&fm=173&app=25&f=JPEG?w=510&h=346&s=EC32109D0E9452D24723D0DD0300E0B8","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                "account": "xxxx@163.com",
+                "accountState": "有效",
+                "accountLevel": "高级认证"
+            }
+        })
+    },
     /**
      * 招揽人才 获取过滤条件
      * @returns {*}
@@ -12,22 +54,22 @@ export default {
             "message": '成功',
             "data": {
                 sex: [
-                    {id: 1,name: '男'},
-                    {id: 2,name: '女'}
+                    {id: 1, name: '男'},
+                    {id: 2, name: '女'}
                 ],
                 placeBelong: [
-                    {id: 1, name: '热门城市', "citys|10": [ {"id|+1": 1, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 2, name: 'A B C', "citys|10": [ {"id|+1": 11, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 3, name: 'D E F G', "citys|10": [ {"id|+1": 21, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 4, name: 'H I', "citys|10": [ {"id|+1": 31, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 5, name: 'J K', "citys|10": [ {"id|+1": 41, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 6, name: 'L M N', "citys|10": [ {"id|+1": 51, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 7, name: 'O P Q R', "citys|10": [ {"id|+1": 61, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 8, name: 'S T U', "citys|10": [ {"id|+1": 71, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 9, name: 'V W X', "citys|10": [ {"id|+1": 81, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 10, name: 'Y Z', "citys|10": [ {"id|+1": 91, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 11, name: '所有省份', "citys|10": [ {"id|+1": 101, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]},
-                    {id: 12, name: '国外', "citys|10": [ {"id|+1": 111, "name|1": ['长沙','长沙2','长沙3','长沙4']} ]}
+                    {id: 1, name: '热门城市', "citys|10": [{"id|+1": 1, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 2, name: 'A B C', "citys|10": [{"id|+1": 11, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 3, name: 'D E F G', "citys|10": [{"id|+1": 21, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 4, name: 'H I', "citys|10": [{"id|+1": 31, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 5, name: 'J K', "citys|10": [{"id|+1": 41, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 6, name: 'L M N', "citys|10": [{"id|+1": 51, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 7, name: 'O P Q R', "citys|10": [{"id|+1": 61, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 8, name: 'S T U', "citys|10": [{"id|+1": 71, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 9, name: 'V W X', "citys|10": [{"id|+1": 81, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 10, name: 'Y Z', "citys|10": [{"id|+1": 91, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 11, name: '所有省份', "citys|10": [{"id|+1": 101, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]},
+                    {id: 12, name: '国外', "citys|10": [{"id|+1": 111, "name|1": ['长沙', '长沙2', '长沙3', '长沙4']}]}
                 ],
                 "releaseDate": [
                     {"id": 100, "name": "24小时内"},
@@ -56,7 +98,7 @@ export default {
                     {"id": 104, "name": "硕士"},
                     {"id": 105, "name": "博士"}
                 ],
-                "wrokLife":[
+                "wrokLife": [
                     {"id": 100, "name": "无经验"},
                     {"id": 101, "name": "1-3年"},
                     {"id": 102, "name": "3-5年"},
@@ -99,16 +141,46 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["张三","李四", "王五"],
-                    "sex|1": ['男','女'],
-                    "age|1": ["28","30","18"],
-                    "salary|1": ["2万/月","3万/月"],
+                    "name|1": ["张三", "李四", "王五"],
+                    "sex|1": ['男', '女'],
+                    "age|1": ["28", "30", "18"],
+                    "salary|1": ["2万/月", "3万/月"],
                     "itention": "咨询师",
                     "experience": "5年",
-                    "education|1": ["博士","硕士"],
-                    "updateTime|1": ["3天前","2天前","1天前"]
+                    "education|1": ["博士", "硕士"],
+                    "updateTime|1": ["3天前", "2天前", "1天前"]
                 }
             ]
+        })
+    },
+    /**
+     * 证书查询结果
+     * @returns {*}
+     */
+    queryCertificate: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id|+1": 1,
+                "username|1": ["张三", "李四", "王五"],
+                "sex|1": ['男', '女'],
+                "certId|1": ["430XXXXXXXXXXXXX", "520XXXXXXXXXXXXXXX"],
+                "birth|1": ["2011-03-19", "2012-10-08"],
+                "imgUrl|1" : ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg", "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                "certifications|2": [{
+                    "id|+1": 10,
+                    "cerType": "岗位能力培训证书",
+                    "cerName": "中医康复理疗",
+                    "cerNo": "xxxxxxxxxxxxxx",
+                    "cerLevel": "高级",
+                    "cerReport": "合格",
+                    "education": "大专",
+                    "getCerTime": "2016-10-09",
+                    "issuingAgency": "国家卫生计生委能力剑圣和继续教育中心，中国健康促进基金会",
+                    "remark": "《健康服务业岗位能力培新合格证书》XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                }]
+            }
         })
     },
     /**
@@ -124,11 +196,11 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["职位名称一","职位名称二", "职位名称三"],
-                    "companyName|1": ['公司名称一','公司名称二'],
-                    "placeBelong|1": ["长沙","上海","北京"],
-                    "salary|1": ["2万/月","3万/月","30-40万/年"],
-                    "updateTime|1": ["3天前","2天前","1天前"]
+                    "name|1": ["职位名称一", "职位名称二", "职位名称三"],
+                    "companyName|1": ['公司名称一', '公司名称二'],
+                    "placeBelong|1": ["长沙", "上海", "北京"],
+                    "salary|1": ["2万/月", "3万/月", "30-40万/年"],
+                    "updateTime|1": ["3天前", "2天前", "1天前"]
                 }
             ]
         })
@@ -166,14 +238,46 @@ export default {
                 expectedArea: '湖南长沙',
                 postTime: '一个月后',
                 handsOnWorkExperience: [
-                  {id: 1, entryTime: '2018年1月',departureTime: '2018年2月',company: '湖南XXX公司', job: '高级软件开发工程师', jobDes: '工作的一些描述', reseanForLeaving: '个人原因'},
-                  {id: 2, entryTime: '2018年2月',departureTime: '2018年3月',company: '湖南AAA公司', job: '中级软件开发工程师', jobDes: '工作的一些描述22', reseanForLeaving: '个人原因'},
+                    {
+                        id: 1,
+                        entryTime: '2018年1月',
+                        departureTime: '2018年2月',
+                        company: '湖南XXX公司',
+                        job: '高级软件开发工程师',
+                        jobDes: '工作的一些描述',
+                        reseanForLeaving: '个人原因'
+                    },
+                    {
+                        id: 2,
+                        entryTime: '2018年2月',
+                        departureTime: '2018年3月',
+                        company: '湖南AAA公司',
+                        job: '中级软件开发工程师',
+                        jobDes: '工作的一些描述22',
+                        reseanForLeaving: '个人原因'
+                    },
                 ],
                 educationExperience: [
-                  {id: 1, enrolmentTime: '2018年1月',graduationTime: '2018年2月',school: '湖南XXX学校', education: '本科', major: '电气自动化', professionalDes: '专业的简单描述'},
-                  {id: 2, enrolmentTime: '2018年2月',graduationTime: '2018年3月',school: '湖南BBB学校', education: '本科', major: '电气自动化', professionalDes: '专业的简单描述'}
+                    {
+                        id: 1,
+                        enrolmentTime: '2018年1月',
+                        graduationTime: '2018年2月',
+                        school: '湖南XXX学校',
+                        education: '本科',
+                        major: '电气自动化',
+                        professionalDes: '专业的简单描述'
+                    },
+                    {
+                        id: 2,
+                        enrolmentTime: '2018年2月',
+                        graduationTime: '2018年3月',
+                        school: '湖南BBB学校',
+                        education: '本科',
+                        major: '电气自动化',
+                        professionalDes: '专业的简单描述'
+                    }
                 ],
-                workingSkills: ['育婴师','催乳师','健康管理师'],
+                workingSkills: ['育婴师', '催乳师', '健康管理师'],
                 selfEvalution: '我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX'
             }
         })
@@ -218,8 +322,8 @@ export default {
             "list|3": [
                 {
                     "id|+1": 1,
-                    "name|1": ["健康管理师培训视频","育婴师培训视频","催乳师培训视频"],
-                    "click|1": [100,200,300,400],
+                    "name|1": ["健康管理师培训视频", "育婴师培训视频", "催乳师培训视频"],
+                    "click|1": [100, 200, 300, 400],
                     "detail": "介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息",
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
                     "videoUrl|1": ["http://www.w3school.com.cn/i/movie.ogg", "http://vjs.zencdn.net/v/oceans.mp4"],
@@ -239,7 +343,7 @@ export default {
             "list|3": [
                 {
                     "id|+1": 1,
-                    "name|1": ["分类一","分类二", "分类三"],
+                    "name|1": ["分类一", "分类二", "分类三"],
                 }
             ]
         })
@@ -256,9 +360,9 @@ export default {
             "list|9": [
                 {
                     "id|+1": 1,
-                    "name|1": ["张三","李四", "王五"],
-                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
-                    "subject|1": ["学科一","学科二","学科三","学科四","学科五"],
+                    "name|1": ["张三", "李四", "王五"],
+                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg", "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"],
+                    "subject|1": ["学科一", "学科二", "学科三", "学科四", "学科五"],
                     "detail": "介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息"
                 }
             ]
@@ -275,7 +379,7 @@ export default {
             "list|8": [
                 {
                     "id|+1": 1,
-                    "title|1": ["健康咨询师","育婴师", "催乳师"]
+                    "title|1": ["健康咨询师", "育婴师", "催乳师"]
                 }
             ]
         })
@@ -290,7 +394,7 @@ export default {
             "message": '成功',
             "data": {
                 "id|+1": 1,
-                "nickname|1": ["张三","李四"],
+                "nickname|1": ["张三", "李四"],
                 "account": "account",
                 "tel": "18522222222",
                 "type": 2
@@ -307,7 +411,7 @@ export default {
             "message": '成功',
             "data": {
                 "id|+1": 1,
-                "nickname|1": ["张三","李四"],
+                "nickname|1": ["张三", "李四"],
                 "tel": "18522222222",
                 "account": "account",
                 "type": 2
@@ -326,10 +430,10 @@ export default {
             "list|30": [
                 {
                     "id|+1": 1,
-                    "title|1": ["新闻的标题","内容标题在哪里"],
+                    "title|1": ["新闻的标题", "内容标题在哪里"],
                     "category": "新闻的分类",
-                    "publishTime|1": ["2018-10-10 10:10:20","2015-09-09 09:09:09",],
-                    "publishMan|1": ["系统管理员","国家领导人"],
+                    "publishTime|1": ["2018-10-10 10:10:20", "2015-09-09 09:09:09",],
+                    "publishMan|1": ["系统管理员", "国家领导人"],
                     "clickRate|1": ["100", "200"]
                 }
             ]
@@ -345,7 +449,7 @@ export default {
             "message": '成功',
             "data": {
                 "id|+1": 1,
-                "title|1": ["新闻的标题","内容标题在哪里"],
+                "title|1": ["新闻的标题", "内容标题在哪里"],
                 "content": "AAAAAAAAAAAAA<br/>BBBBBBBBBBBBBBB<br/>CCCCCCCCCC"
             }
         })
@@ -361,7 +465,7 @@ export default {
             "list|4": [
                 {
                     "id|+1": 1,
-                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg","http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"]
+                    "imgUrl|1": ["http://www.hnjkfwy.com/upload/day_180520/201805201139129214.jpg", "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"]
                 }
             ]
         })
@@ -379,7 +483,7 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                    "name|1": ["培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采培训风采", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
                 }
             ]
         })
@@ -397,7 +501,7 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                    "name|1": ["政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表政法政规列表", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
                 }
             ]
         })
@@ -415,7 +519,7 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                    "name|1": ["行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表行业资讯列表", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
                 }
             ]
         })
@@ -431,7 +535,7 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                    "name|1": ["通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
                 }
             ]
         })
@@ -447,7 +551,7 @@ export default {
             "list|10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["工作动态工作动态工作动态工作动态工作动态工作动态","内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
+                    "name|1": ["工作动态工作动态工作动态工作动态工作动态工作动态", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"]
                 }
             ]
         })
@@ -463,10 +567,10 @@ export default {
             "list|15": [
                 {
                     "id|+1": 1,
-                    "name|1": ["健康管理师培训视频","育婴师培训视频","催乳师培训视频"],
+                    "name|1": ["健康管理师培训视频", "育婴师培训视频", "催乳师培训视频"],
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
-	                "videoUrl|1": ["http://www.w3school.com.cn/i/movie.ogg", "http://vjs.zencdn.net/v/oceans.mp4"],
-	                "videoPic": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"
+                    "videoUrl|1": ["http://www.w3school.com.cn/i/movie.ogg", "http://vjs.zencdn.net/v/oceans.mp4"],
+                    "videoPic": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"
                 }
             ]
         })
@@ -482,7 +586,7 @@ export default {
             "list|16": [
                 {
                     "id|+1": 1,
-                    "name|1": ["腾讯","百度","搜狐"],
+                    "name|1": ["腾讯", "百度", "搜狐"],
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
                     "link": "http://www.baidu.com"
                 }
@@ -500,14 +604,14 @@ export default {
             "list|1-10": [
                 {
                     "id|+1": 1,
-                    "name|1": ["张三","李四","王五"],
+                    "name|1": ["张三", "李四", "王五"],
                     "sex|1": ["男", "女"],
                     "age|18-60": 60,
-                    "itention|1": ["健康管理师","咨询师","育婴师"],
-                    "salary|1": ["面议","1万/月","2万/月"],
-                    "education|1": ["大专","本科","研究生","博士"],
-                    "experience|1": ["8年以上","7年以上","6年以上","5年以上","4年以上","3年以上","2年以上"],
-                    "updateTime|1": ["7小时前","8小时前","9小时前","1天前","2天前","3天前","4天前"]
+                    "itention|1": ["健康管理师", "咨询师", "育婴师"],
+                    "salary|1": ["面议", "1万/月", "2万/月"],
+                    "education|1": ["大专", "本科", "研究生", "博士"],
+                    "experience|1": ["8年以上", "7年以上", "6年以上", "5年以上", "4年以上", "3年以上", "2年以上"],
+                    "updateTime|1": ["7小时前", "8小时前", "9小时前", "1天前", "2天前", "3天前", "4天前"]
                 }
             ]
         })
@@ -523,7 +627,7 @@ export default {
             "list|6": [
                 {
                     "id|+1": 1,
-                    "name|1": ["健康管理咨询师XXX","育婴师XXXXXXXXX","理疗师XXXXXXXXXX"]
+                    "name|1": ["健康管理咨询师XXX", "育婴师XXXXXXXXX", "理疗师XXXXXXXXXX"]
                 }
             ]
         })
@@ -539,10 +643,10 @@ export default {
             "list|6": [
                 {
                     "id|+1": 1,
-                    "job|1": ["健康管理咨询师","育婴师","理疗师"],
+                    "job|1": ["健康管理咨询师", "育婴师", "理疗师"],
                     "name|1": ["湖南省健康管理公司", "湖南省健康管理公司2", "湖南省健康管理公司3", "湖南省健康管理公司4"],
-                    "salary|1": ["1.5万-2.5万/月","1万/月","2万/月"],
-                    "place|1": ["长沙","株洲","常德"],
+                    "salary|1": ["1.5万-2.5万/月", "1万/月", "2万/月"],
+                    "place|1": ["长沙", "株洲", "常德"],
                 }
             ]
         })
@@ -560,7 +664,7 @@ export default {
                     "id|+1": 1,
                     "imgUrl": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg",
                     "name|1": ["张三", "李四", "刘文峰", "约翰"],
-                    "category|1": ["健康科学讲师","育婴师讲师","继续教育讲师"],
+                    "category|1": ["健康科学讲师", "育婴师讲师", "继续教育讲师"],
                     "des": '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述'
                 }
             ]
@@ -581,7 +685,7 @@ export default {
                     "data|4": [
                         {
                             "id|+1": 100,
-                            "name|1":["课程名称","课程名称1","课程名称2","课程名称3"],
+                            "name|1": ["课程名称", "课程名称1", "课程名称2", "课程名称3"],
                             "openDate": "03月10日-09月12日",
                             "classHour": "18天",
                             "tranningFee": "1000元",
@@ -615,8 +719,8 @@ export default {
      * banner左右滑动广告位数据
      * @returns {*}
      */
-	queryPoster: () => {
-		return Mock.mock({
+    queryPoster: () => {
+        return Mock.mock({
             'success': true,
             "message": '成功',
             "list|3-4": [
@@ -627,5 +731,5 @@ export default {
                 }
             ]
         })
-	}
+    }
 }
