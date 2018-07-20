@@ -123,8 +123,9 @@
                     fullscreen: true
                 })
                 signUpOnlineAction({
-                    tel: this.tel,
-                    account: this.account,
+                    id: this.$store.state.user.id,
+                    tel: this.tel || this.$store.state.user.tel,
+                    account: this.account || this.$store.state.user.account,
                     username: this.username,
                     password: this.password,
                 }).then(response => {
