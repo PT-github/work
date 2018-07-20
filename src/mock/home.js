@@ -3,6 +3,91 @@ import {param2Obj} from '@/utils'
 
 export default {
     /**
+     * 应聘记录
+     * @returns {*}
+     */
+    queryApplyRecordList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, job: '职位名称0', name: '张三', status: '已面试', date: '2010-10-10 13:10:10' },
+                { id: 2, job: '职位名称1', name: '李四', status: '未面试', date: '2010-10-10 13:10:10' },
+                { id: 3, job: '职位名称2', name: '王五', status: '已面试', date: '2010-10-10 13:10:10' },
+                { id: 4, job: '职位名称3', name: '小花', status: '已面试', date: '2010-10-10 13:10:10' },
+                { id: 5, job: '职位名称4', name: '小狗', status: '已面试', date: '2010-10-10 13:10:10' }
+            ]
+        })
+    },
+    /**
+     * 自有人才库
+     * @returns {*}
+     */
+    queryOwnTalentList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, education: '本科', name: '张三', status: '找工作中', workExperience: '10年' },
+                { id: 2, education: '本科', name: '李四', status: '正在工作中', workExperience: '10年' },
+                { id: 3, education: '本科', name: '王五', status: '观望中', workExperience: '10年' },
+                { id: 4, education: '本科', name: '小花', status: '找工作中', workExperience: '10年' },
+                { id: 5, education: '本科', name: '小狗', status: '找工作中', workExperience: '10年' }
+            ]
+        })
+    },
+    /**
+     * 网站人才库
+     * @returns {*}
+     */
+    queryNetWorkTalentList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, education: '博士', name: '张三', status: '找工作中', workExperience: '10年' },
+                { id: 2, education: '博士', name: '李四', status: '正在工作中', workExperience: '10年' },
+                { id: 3, education: '博士', name: '王五', status: '观望中', workExperience: '10年' },
+                { id: 4, education: '博士', name: '小花', status: '找工作中', workExperience: '10年' },
+                { id: 5, education: '博士', name: '小狗', status: '找工作中', workExperience: '10年' }
+            ]
+        })
+    },
+    /**
+     * 企业面试记录
+     * @returns {*}
+     */
+    queryInterviewList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, name: 'XXXXXXX', job: '育婴师', status: '已经面试', interviewTime: '2010-10-10 13:10:10' },
+                { id: 2, name: 'XXXXXXX', job: '健康管理师', status: '面试成功', interviewTime: '2010-10-10 13:10:10' },
+                { id: 3, name: 'XXXXXXX', job: '催乳师', status: '面试失败', interviewTime: '2010-10-10 13:10:10' },
+                { id: 4, name: 'XXXXXXX', job: '继续教育', status: '已删除', interviewTime: '2010-10-10 13:10:10' },
+                { id: 5, name: 'XXXXXXX', job: '育婴师', status: '已经面试', interviewTime: '2010-10-10 13:10:10' }
+            ]
+        })
+    },
+    /**
+     * 企业收藏记录
+     * @returns {*}
+     */
+    queryCollectList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, name: '张三', resumeName: '简历名称'},
+                { id: 2, name: '李四', resumeName: '简历名称'},
+                { id: 3, name: '张三', resumeName: '简历名称'},
+                { id: 4, name: '李四', resumeName: '简历名称'},
+                { id: 5, name: '张三', resumeName: '简历名称'},
+            ]
+        })
+    },
+    /**
      * 企业职位查询
      * @returns {*}
      */
@@ -205,6 +290,23 @@ export default {
             ]
         })
     },
+    /**
+     * 我的订单
+     * @returns {*}
+     */
+    queryMyOrder: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|10": [
+                {
+                    "id|+1": 1,
+                    "content|1": ["课程名称一", "课程名称2", "课程名称3"],
+                    "updateTime|1": ["2017-10-10 12:30:10", "2013-10-10 12:30:10", "2011-10-10 12:30:10"]
+                }
+            ]
+        })
+    },
     queryResumeDetail: () => {
         return Mock.mock({
             'success': true,
@@ -397,8 +499,117 @@ export default {
                 "nickname|1": ["张三", "李四"],
                 "account": "account",
                 "tel": "18522222222",
-                "type": 2
+                "type": 1
             }
+        })
+    },
+    /**
+     * 基本信息
+     * @returns {*}
+     */
+    queryMyBaseInfo: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "imgUrl": "http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png",
+                "nickname|1": ["张三", "李四"],
+                "account": "account",
+                "truename": "彭涛",
+                "birth": "2017-10-11",
+                "tel": "180********",
+                "telIsValidate": 1,
+                "mail": "pengtao_it@163.com",
+                "mailIsValidate": "1",
+                "bindMxChat": "1",
+                "invitedCode": "XXXX-XXXX-XXXX-XXXX"
+            }
+        })
+    },
+    /**
+     * 我的收益
+     * @returns {*}
+     */
+    queryIncome: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                totalIncome: '10000元',
+                currentIncome: '0元',
+                level: '兼职/主管'
+            }
+        })
+    },
+    /**
+     * 我的积分
+     * @returns {*}
+     */
+    queryScore: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                totalIncome: '10000分',
+                scoreList: [
+                    { id: 1, score: '100', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
+                    { id: 2, score: '20', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
+                    { id: 3, score: '30', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
+                    { id: 4, score: '40', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
+                    { id: 5, score: '500', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' }
+                ]
+            }
+        })
+    },
+    /**
+     * 我的所有收益列表
+     * @returns {*}
+     */
+    queryAllIncomeList: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 2, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 3, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 4, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 5, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' }
+            ]
+        })
+    },
+    /**
+     * 职位收藏夹
+     * @returns {*}
+     */
+    queryCollectJobs: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, job: '职位名称0', num: '10', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
+                { id: 2, job: '职位名称1', num: '10', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
+                { id: 3, job: '职位名称2', num: '10', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
+                { id: 4, job: '职位名称3', num: '10', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
+                { id: 5, job: '职位名称4', num: '10', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' }
+            ]
+        })
+    },
+    /**
+     * 我的本季度收益列表
+     * @returns {*}
+     */
+    queryQuarterIncome: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, money: '200元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 2, money: '200元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 3, money: '200元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 4, money: '200元', des: '收益的描述', time: '2017-1-1 10:10:10' },
+                { id: 5, money: '200元', des: '收益的描述', time: '2017-1-1 10:10:10' }
+            ]
         })
     },
     /**

@@ -1,65 +1,77 @@
 <template>
     <div class="s-baseInfo">
         <div class="title">我的账户</div>
-        <div class="pic"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png" alt=""></div>
+        <div class="pic"><img :src="userInfo.imgUrl" alt=""></div>
         <div class="form">
             <div class="form-control">
                 <div class="label">登录名：</div>
-                <div class="value">彭涛</div>
+                <div class="value">{{ userInfo.account }}</div>
             </div>
             <div class="form-control">
                 <div class="label">昵称：</div>
-                <div class="value">彭涛AAA</div>
+                <div class="value">{{ userInfo.nickname }}</div>
             </div>
             <div class="form-control">
-                <div class="label">真是姓名：</div>
-                <div class="value">彭涛</div>
+                <div class="label">真实姓名：</div>
+                <div class="value">{{ userInfo.truename }}</div>
             </div>
             <div class="form-control">
                 <div class="label">生日：</div>
-                <div class="value">2018-01</div>
+                <div class="value">{{ userInfo.birth }}</div>
             </div>
             <div class="form-control">
                 <div class="label">手机：</div>
-                <div class="value">180XXXXXXXXXXXXXXXX</div>
+                <div class="value">{{ userInfo.tel }}</div>
             </div>
             <div class="form-control">
                 <div class="label">手机是否验证：</div>
-                <div class="value">是</div>
+                <div class="value">{{ userInfo.telIsValidate === 1 ? '是' : '否' }}</div>
             </div>
             <div class="form-control">
                 <div class="label">邮箱：</div>
-                <div class="value">pengtao_it@jjj.com</div>
+                <div class="value">{{ userInfo.mail }}</div>
             </div>
             <div class="form-control">
                 <div class="label">邮箱是否验证：</div>
-                <div class="value">是</div>
+                <div class="value">{{ userInfo.mailIsValidate === 1 ? '是' : '否' }}</div>
             </div>
             <div class="form-control">
                 <div class="label">是否绑定微信：</div>
-                <div class="value">是</div>
+                <div class="value">{{ userInfo.bindMxChat === 1 ? '是' : '否' }}</div>
             </div>
             <div class="form-control">
                 <div class="label">我的邀请码：</div>
-                <div class="value">XXXX-XXXX-XXXX-XXXX</div>
+                <div class="value">{{ userInfo.invitedCode }}</div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { queryMyBaseInfo} from '@/api/service'
     export default {
         name: 'sBaseInfo',
         data() {
             return {
+                userInfo: {}
             }
         },
         computed: {
         },
         mounted() {
+            this.getData()
         },
         methods: {
-            changeLoginType(type) {
-                this.type = type
+            getData() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryMyBaseInfo({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    this.userInfo = res.data
+                })
             },
         }
     }

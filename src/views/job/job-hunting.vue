@@ -207,6 +207,10 @@
             this.getJobs()
         },
         methods: {
+            deleteCity(id) {
+                let idx = this.queryOptions.cities.indexOf(id)
+                this.queryOptions.cities.splice(idx, 1)
+            },
             collect() {
                 if (this.selectResumeArray.length <= 0) {
                     this.$message({

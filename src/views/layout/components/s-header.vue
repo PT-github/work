@@ -147,26 +147,27 @@
             <div class="leaveMsgContent">
                 <div class="form-control">
                     <div class="label">联&nbsp;&nbsp;系&nbsp;&nbsp人：</div>
-                    <div class="input-control"><input type="text"></div>
+                    <div class="input-control"><input type="text" v-model="contactor"></div>
                 </div>
                 <div class="form-control">
                     <div class="label">联系方式：</div>
-                    <div class="input-control"><input type="text"></div>
+                    <div class="input-control"><input type="text" v-model="phoneNumber"></div>
                 </div>
                 <div class="form-control form-control_textarea">
                     <div class="label">留言内容：</div>
-                    <div class="input-control"><textarea></textarea></div>
+                    <div class="input-control"><textarea v-model="desc"></textarea></div>
                 </div>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button size="mini" @click="centerDialogVisible = false">取 消</el-button>
-                <el-button size="mini" type="primary" @click="centerDialogVisible = false">确 定</el-button>
+                <el-button size="mini" type="primary" @click="onSubmit">确 定</el-button>
             </span>
         </el-dialog>
     </div>
 </template>
 <script>
     import { regAction } from '@/api/login'
+    import { leaveMessgage } from '@/api/service'
     import { Message } from 'element-ui'
     export default {
         name: 'sHeader',
@@ -186,17 +187,20 @@
                 regPwd: '',
                 regTel: '',
                 regMail: '',
+                desc: '',
+                contactor: '',
+                phoneNumber: ''
             }
         },
         computed: {
             isLogin: function() {
-                return this.$store.getters.isLogin === '1'
+                return this.$store.state.user.isLogin
             },
             userType: function() {
                 return this.$store.state.user.type
             },
             nickName: function() {
-                return this.$store.state.user.username
+                return this.$store.state.user.nickname
             },
         },
         mounted() {
@@ -219,6 +223,35 @@
             })
         },
         methods: {
+            onSubmit() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                leaveMessgage({
+                    contactor: this.contactor,
+                    phoneNumber: this.phoneNumber,
+                    desc: this.desc,
+                    id: this.$store.state.user.id
+                }).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '感谢您的宝贵意见',
+                            type: 'success'
+                        })
+                        this.centerDialogVisible = false
+                    } else {
+                        this.$message({
+                            message: '出错啦',
+                            type: 'error'
+                        })
+                    }
+                })
+
+            },
             reg() {
                 const loading = this.$loading({
                     lock: true,
@@ -270,7 +303,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                this.$store.dispatch('LogOut', {username: this.$store.state.user.username, password: this.$store.state.user.sessionId}).then(() => {
+                this.$store.dispatch('LogOut').then(() => {
                     loading.close()
                     this.dialogVisible = false
                 })

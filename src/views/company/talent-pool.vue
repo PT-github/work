@@ -2,9 +2,9 @@
     <div class="s-myjob">
         <div class="title">企业人才库</div>
         <ul class="tab clearfix">
-            <li :class="{on: active === 0}" @click="getData(0)">应聘记录</li>
-            <li :class="{on: active === 1}" @click="getData(1)">自有人才库</li>
-            <li :class="{on: active === 2}" @click="getData(2)">网站人才库</li>
+            <li :class="{on: active === 0}" @click="setActive(0)">应聘记录</li>
+            <li :class="{on: active === 1}" @click="setActive(1)">自有人才库</li>
+            <li :class="{on: active === 2}" @click="setActive(2)">网站人才库</li>
         </ul>
         <div class="table" v-show="active === 0">
             <div class="theader">
@@ -22,7 +22,7 @@
                     <div class="td">{{ item.name }}</div>
                     <div class="td">{{ item.job }}</div>
                     <div class="td">{{ item.status }}</div>
-                    <div class="td"><span>删除</span></div>
+                    <div class="td"><span @click="deleteApply(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <div class="td">{{ item.education }}</div>
                     <div class="td">{{ item.workExperience }}</div>
                     <div class="td">{{ item.status }}</div>
-                    <div class="td"><span>删除</span></div>
+                    <div class="td"><span @click="deleteOwnTalant(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
@@ -62,44 +62,146 @@
                     <div class="td">{{ item.education }}</div>
                     <div class="td">{{ item.workExperience }}</div>
                     <div class="td">{{ item.status }}</div>
-                    <div class="td"><span>删除</span></div>
+                    <div class="td"><span @click="deleteNetWorkTalent(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+
+    import { queryApplyRecordList, deleteApplyRecordList, queryOwnTalentList, deleteOwnTalentList, queryNetWorkTalentList, deleteNetWorkTalentList} from '@/api/service'
     export default {
         name: 'sMyjob',
         data() {
             return {
                 active: 0,
-                applyRecordList: [
-                    { id: 1, job: '职位名称0', name: '张三', status: '已面试', date: '2010-10-10 13:10:10' },
-                    { id: 2, job: '职位名称1', name: '李四', status: '未面试', date: '2010-10-10 13:10:10' },
-                    { id: 3, job: '职位名称2', name: '王五', status: '已面试', date: '2010-10-10 13:10:10' },
-                    { id: 4, job: '职位名称3', name: '小花', status: '已面试', date: '2010-10-10 13:10:10' },
-                    { id: 5, job: '职位名称4', name: '小狗', status: '已面试', date: '2010-10-10 13:10:10' }
-                ],
-                ownTalentList: [
-                    { id: 1, education: '本科', name: '张三', status: '找工作中', workExperience: '10年' },
-                    { id: 2, education: '本科', name: '李四', status: '正在工作中', workExperience: '10年' },
-                    { id: 3, education: '本科', name: '王五', status: '观望中', workExperience: '10年' },
-                    { id: 4, education: '本科', name: '小花', status: '找工作中', workExperience: '10年' },
-                    { id: 5, education: '本科', name: '小狗', status: '找工作中', workExperience: '10年' }
-                ],
-                netWorkTalentList: [
-                    { id: 1, education: '博士', name: '张三', status: '找工作中', workExperience: '10年' },
-                    { id: 2, education: '博士', name: '李四', status: '正在工作中', workExperience: '10年' },
-                    { id: 3, education: '博士', name: '王五', status: '观望中', workExperience: '10年' },
-                    { id: 4, education: '博士', name: '小花', status: '找工作中', workExperience: '10年' },
-                    { id: 5, education: '博士', name: '小狗', status: '找工作中', workExperience: '10年' }
-                ]
+                applyRecordList: [],
+                ownTalentList: [],
+                netWorkTalentList: []
             }
         },
+        mounted() {
+            this.getApplyRecordList()
+        },
         methods: {
-            getData(i) {
+            deleteApply(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                deleteApplyRecordList(id).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        })
+                        this.getApplyRecordList()
+                    } else {
+                        this.$message({
+                            message: '删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            deleteOwnTalant(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                deleteOwnTalentList(id).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        })
+                        this.getOwnTalentList()
+                    } else {
+                        this.$message({
+                            message: '删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            deleteNetWorkTalent(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                deleteNetWorkTalentList(id).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        })
+                        this.getNetWorkTalentList()
+                    } else {
+                        this.$message({
+                            message: '删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            setActive(i) {
                 this.active = i
+                if (i === 0 && this.applyRecordList.length === 0) {
+                    this.getApplyRecordList()
+                } else if (i === 1 && this.ownTalentList.length === 0) {
+                    this.getOwnTalentList()
+                } else if (i === 2 && this.netWorkTalentList.length === 0) {
+                    this.getNetWorkTalentList()
+                }
+            },
+            getApplyRecordList() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryApplyRecordList({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    this.applyRecordList.splice(0, this.applyRecordList.length)
+                    this.applyRecordList.push(...res.list)
+                })
+            },
+            getOwnTalentList() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryOwnTalentList({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    this.ownTalentList.splice(0, this.ownTalentList.length)
+                    this.ownTalentList.push(...res.list)
+                })
+            },
+            getNetWorkTalentList() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryNetWorkTalentList({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    this.netWorkTalentList.splice(0, this.netWorkTalentList.length)
+                    this.netWorkTalentList.push(...res.list)
+                })
             }
         }
     }

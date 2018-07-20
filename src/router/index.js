@@ -7,7 +7,7 @@ Vue.use(Router)
 
 import Layout from '../views/layout/Layout'
 
-export default new Router({
+const router =  new Router({
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
             return savedPosition
@@ -27,62 +27,63 @@ export default new Router({
                 {
                     path: '/members',
                     component: _import('layout/MemberCenterComp'),
+                    redirect: '/members/baseInfo',
                     children: [
                         {
                             path: '/members/baseInfo',
                             component: _import('members/baseInfo'),
                             name: 'sBaseInfo',
-                            meta: {title: '基本信息', keepAlive: false}
+                            meta: {title: '基本信息', keepAlive: false, needLogin: true}
                         },{
                             path: '/members/resume',
                             component: _import('members/resume'),
                             name: 'sResume',
-                            meta: {title: '我的简历', keepAlive: false}
+                            meta: {title: '我的简历', keepAlive: false, needLogin: true}
                         },{
                             path: '/members/income',
                             component: _import('members/income'),
                             name: 'sIncome',
-                            meta: {title: '我的收益', keepAlive: false}
+                            meta: {title: '我的收益', keepAlive: false, needLogin: true}
                         },{
                             path: '/members/score',
                             component: _import('members/score'),
                             name: 'sScore',
-                            meta: {title: '我的积分', keepAlive: false}
+                            meta: {title: '我的积分', keepAlive: false, needLogin: true}
                         },{
                             path: '/members/myjob',
                             component: _import('members/myjob'),
                             name: 'sMyjob',
-                            meta: {title: '我的工作', keepAlive: false}
+                            meta: {title: '我的工作', keepAlive: false, needLogin: true}
                         },{
                             path: '/members/myvideo',
                             component: _import('members/myvideo'),
                             name: 'sMyvideo',
-                            meta: {title: '我的视频', keepAlive: false}
+                            meta: {title: '我的视频', keepAlive: false, needLogin: true}
                         },{
                             path: '/members/myorder',
                             component: _import('members/myorder'),
                             name: 'sMyorder',
-                            meta: {title: '我的订单', keepAlive: false}
+                            meta: {title: '我的订单', keepAlive: false, needLogin: true}
                         },{
                             path: '/company/company-baseInfo',
                             component: _import('company/company-baseInfo'),
                             name: 'sCompanyBaseInfo',
-                            meta: {title: '基本信息', keepAlive: false}
+                            meta: {title: '基本信息', keepAlive: false, needLogin: true}
                         },{
                             path: '/company/job-control',
                             component: _import('company/job-control'),
                             name: 'sJobControl',
-                            meta: {title: '职位管理', keepAlive: false}
+                            meta: {title: '职位管理', keepAlive: false, needLogin: true}
                         },{
                             path: '/company/interview-mana',
                             component: _import('company/interview-mana'),
                             name: 'sInterviewMana',
-                            meta: {title: '面试管理', keepAlive: false}
+                            meta: {title: '面试管理', keepAlive: false, needLogin: true}
                         },{
                             path: '/company/talent-pool',
                             component: _import('company/talent-pool'),
                             name: 'sTalentPool',
-                            meta: {title: '企业人才库', keepAlive: false}
+                            meta: {title: '企业人才库', keepAlive: false, needLogin: true}
                         },
                     ]
                 }, {
@@ -119,7 +120,7 @@ export default new Router({
                     path: 'job-hunting',
                     component: _import('job/job-hunting'),
                     name: 'jobHunting',
-                    meta: {title: '找工作', keepAlive: true}
+                    meta: {title: '找工作', keepAlive: false}
                 }, {
                     path: 'personnel-list',
                     component: _import('job/personnel-list'),
@@ -157,3 +158,13 @@ export default new Router({
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.needLogin && !sessionStorage.getItem("userInfo")) {
+        next({path: "/"});
+    } else {
+        next()
+    }
+})
+
+export default router

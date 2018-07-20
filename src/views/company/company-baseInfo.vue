@@ -165,8 +165,8 @@
             },
             getData() {
                 /*获取企业基本信息*/
-                queryCompanyMessage().then(res => {
-                    console.log(res.data)
+                queryCompanyMessage(this.$store.state.user.id).then(res => {
+                    console.log(res)
                     this.companyData = res.data
                 })
             }

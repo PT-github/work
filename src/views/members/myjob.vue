@@ -2,10 +2,10 @@
     <div class="s-myjob">
         <div class="title">我的工作</div>
         <ul class="tab clearfix">
-            <li :class="{on: active === 0}" @click="getData(0)">职位收藏夹</li>
-            <li :class="{on: active === 1}" @click="getData(1)">职位申请记录</li>
-            <li :class="{on: active === 2}" @click="getData(2)">我的面试机会</li>
-            <li :class="{on: active === 3}" @click="getData(3)">简历被查看记录</li>
+            <li :class="{on: active === 0}" @click="setActive(0)">职位收藏夹</li>
+            <li :class="{on: active === 1}" @click="setActive(1)">职位申请记录</li>
+            <li :class="{on: active === 2}" @click="setActive(2)">我的面试机会</li>
+            <li :class="{on: active === 3}" @click="setActive(3)">简历被查看记录</li>
         </ul>
         <div class="table" v-show="active === 0">
             <div class="theader">
@@ -18,42 +18,226 @@
                 </div>
             </div>
             <div class="tbody">
-                <div class="tr" v-for="(item, index) in collecList" :key="'collecList-' + index">
+                <div class="tr" v-for="(item, index) in collectList" :key="'collectList-' + index">
                     <div class="td">{{ item.job }}</div>
                     <div class="td">{{ item.company }}</div>
                     <div class="td">{{ item.place }}</div>
                     <div class="td">{{ item.salary }}</div>
-                    <div class="td"><span>编辑</span><span>申请</span><span>删除</span></div>
+                    <div class="td"><span @click="applyJob(item.id)">申请</span><span @click="deleteRecords(item.id)">删除</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="table" v-show="active === 1">
+            <div class="theader">
+                <div class="tr">
+                    <div class="th">职位名</div>
+                    <div class="th">公司名</div>
+                    <div class="th">工作地点</div>
+                    <div class="th">薪资</div>
+                    <div class="th">操作</div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="tr" v-for="(item, index) in jobApplyRecods" :key="'jobApplyRecods-' + index">
+                    <div class="td">{{ item.job }}</div>
+                    <div class="td">{{ item.company }}</div>
+                    <div class="td">{{ item.place }}</div>
+                    <div class="td">{{ item.salary }}</div>
+                    <div class="td"><span @click="applyJob(item.id)">申请</span><span @click="deleteRecords(item.id)">删除</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="table" v-show="active === 2">
+            <div class="theader">
+                <div class="tr">
+                    <div class="th">职位名</div>
+                    <div class="th">公司名</div>
+                    <div class="th">工作地点</div>
+                    <div class="th">薪资</div>
+                    <div class="th">操作</div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="tr" v-for="(item, index) in invitedChance" :key="'invitedChance-' + index">
+                    <div class="td">{{ item.job }}</div>
+                    <div class="td">{{ item.company }}</div>
+                    <div class="td">{{ item.place }}</div>
+                    <div class="td">{{ item.salary }}</div>
+                    <div class="td"><span @click="applyJob(item.id)">申请</span><span @click="deleteRecords(item.id)">删除</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="table" v-show="active === 3">
+            <div class="theader">
+                <div class="tr">
+                    <div class="th">职位名</div>
+                    <div class="th">公司名</div>
+                    <div class="th">被查看次数</div>
+                    <div class="th">工作地点</div>
+                    <div class="th">薪资</div>
+                    <div class="th">操作</div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="tr" v-for="(item, index) in lookedRecords" :key="'lookedRecords-' + index">
+                    <div class="td">{{ item.job }}</div>
+                    <div class="td">{{ item.company }}</div>
+                    <div class="td">{{ item.num }}</div>
+                    <div class="td">{{ item.place }}</div>
+                    <div class="td">{{ item.salary }}</div>
+                    <div class="td"><span @click="applyJob(item.id)">申请</span><span @click="deleteRecords(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { applyJob, queryCollectJobs, queryJobApplyRecods, queryInvitedChance, queryLookedRecords, deleteCollectJobs, deleteJobApplyRecods, deleteInvitedChance, deleteLookedRecords, } from '@/api/service'
     export default {
         name: 'sMyjob',
         data() {
             return {
                 active: 0,
-                collecList: [
-                    { id: 1, job: '职位名称0', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
-                    { id: 2, job: '职位名称1', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
-                    { id: 3, job: '职位名称2', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
-                    { id: 4, job: '职位名称3', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' },
-                    { id: 5, job: '职位名称4', company: '公司名称', place: '长沙-雨花区', salary: '100元/小时' }
-                ],
-                currentIncomeList: [
-                    { id: 1, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 2, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 3, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 4, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 5, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' }
-                ]
+                collectList: [],
+                jobApplyRecods: [],
+                invitedChance: [],
+                lookedRecords: []
             }
         },
+        mounted() {
+            this.getCollectJobs()
+        },
         methods: {
-            getData(i) {
+            applyJob(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                applyJob({jobId: id, userId: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '职位申请成功',
+                            type: 'success'
+                        })
+                    } else {
+                        this.$message({
+                            message: '职位申请失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            deleteRecords(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                let request, callback
+                if (this.active === 0) {
+                    request = deleteCollectJobs
+                    callback = this.getCollectJobs
+                } else if (this.active === 1) {
+                    request = deleteJobApplyRecods
+                    callback = this.getJobApplyRecods
+                } else if (this.active === 2) {
+                    request = deleteInvitedChance
+                    callback = this.getInvitedChance
+                } else if (this.active === 3) {
+                    request = deleteLookedRecords
+                    callback = this.getLookedRecords
+                }
+                request({id: id}).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '记录删除成功',
+                            type: 'success'
+                        })
+                        callback()
+                    } else {
+                        this.$message({
+                            message: '记录删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            setActive(i) {
                 this.active = i
+                if (i === 0 && this.collectList.length <= 0) {
+                    this.getCollectJobs()
+                } else if (i === 1 && this.jobApplyRecods.length <= 0) {
+                    this.getJobApplyRecods()
+                } else if (i === 2 && this.invitedChance.length <= 0) {
+                    this.getInvitedChance()
+                } else if (i === 3 && this.lookedRecords.length <= 0) {
+                    this.getLookedRecords()
+                }
+            },
+            // 职位收藏夹
+            getCollectJobs() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryCollectJobs({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        this.collectList.push(...res.list)
+                    }
+                })
+            },
+            // 职位申请记录
+            getJobApplyRecods() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryJobApplyRecods({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        this.jobApplyRecods.push(...res.list)
+                    }
+                })
+            },
+            // 我的面试机会
+            getInvitedChance() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryInvitedChance({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        this.invitedChance.push(...res.list)
+                    }
+                })
+            },
+            // 简历被查看记录
+            getLookedRecords() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryLookedRecords({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        this.lookedRecords.push(...res.list)
+                    }
+                })
             }
         }
     }

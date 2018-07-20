@@ -6,34 +6,69 @@
                 <div class="tr">
                     <div class="th">时间</div>
                     <div class="th">订单内容</div>
-                    <div class="th">价格</div>
                     <div class="th">操作</div>
                 </div>
             </div>
             <div class="tbody">
-                <div class="tr">
-                    <div class="td">2017-10-10-10 03:04:50</div>
-                    <div class="td">课程名称</div>
-                    <div class="td">1000元</div>
-                    <div class="td"><span>删除</span></div>
+                <div class="tr" v-for="(item, index) in myOrders" :key="'myOrders_' + index">
+                    <div class="td">{{ item.updateTime }}</div>
+                    <div class="td">{{ item.content }}</div>
+                    <div class="td"><span @click="deleteOrderById(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { queryMyOrder, deleteOrder } from '@/api/service'
     export default {
         name: 'sMyorder',
         data() {
             return {
+                myOrders: []
             }
         },
-        computed: {
-        },
         mounted() {
+            this.getData()
         },
         methods: {
-
+            getData() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryMyOrder({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        this.myOrders.push(...res.list)
+                    }
+                })
+            },
+            deleteOrderById(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                deleteOrder({id, userId: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '订单删除成功',
+                            type: 'success'
+                        })
+                        this.getData()
+                    } else {
+                        this.$message({
+                            message: '订单删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
         }
     }
 </script>

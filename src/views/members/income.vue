@@ -7,10 +7,10 @@
             <p>当前级别：{{ incomeObj.level }}</p>
         </div>
         <ul class="tab clearfix">
-            <li :class="{on: active === 0}" @click="getIncome(0)">所有</li>
-            <li :class="{on: active === 1}" @click="getIncome(1)">本季度</li>
+            <li :class="{on: active === 0}" @click="setActive(0)">所有</li>
+            <li :class="{on: active === 1}" @click="setActive(1)">本季度</li>
         </ul>
-        <div class="table">
+        <div class="table" v-show="active === 0">
             <div class="theader">
                 <div class="tr">
                     <div class="th">时间</div>
@@ -26,38 +26,81 @@
                 </div>
             </div>
         </div>
+        <div class="table" v-show="active === 1">
+            <div class="theader">
+                <div class="tr">
+                    <div class="th">时间</div>
+                    <div class="th">收益描述</div>
+                    <div class="th">收益</div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="tr" v-for="(item, index) in currentIncomeList" :key="'currentIncomeList-' + index">
+                    <div class="td">{{ item.time }}</div>
+                    <div class="td">{{ item.des }}</div>
+                    <div class="td">{{ item.money }}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
+    import { queryIncome, queryAllIncomeList, queryQuarterIncome } from '@/api/service'
     export default {
         name: 'sIncome',
         data() {
             return {
                 active: 0,
-                incomeObj: {
-                    totalIncome: '10000元',
-                    currentIncome: '0元',
-                    level: '兼职/主管'
-                },
-                totalIncomeList: [
-                    { id: 1, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 2, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 3, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 4, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 5, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' }
-                ],
-                currentIncomeList: [
-                    { id: 1, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 2, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 3, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 4, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' },
-                    { id: 5, money: '100元', des: '收益的描述', time: '2017-1-1 10:10:10' }
-                ]
+                incomeObj: {},
+                totalIncomeList: [],
+                currentIncomeList: []
             }
         },
+        mounted() {
+            const loading = this.$loading({
+                lock: true,
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.1)',
+                fullscreen: true
+            })
+            Promise.all([this.init(), this.getAllIncomeList()]).then(() => {
+                this.$nextTick(() => {
+                    loading.close()
+                })
+            })
+        },
         methods: {
-            getIncome(i) {
+            setActive(i) {
                 this.active = i
+                if (i === 1 && this.currentIncomeList.length <= 0) {
+                    this.getQuarterIncomeList()
+                }
+            },
+            init() {
+                return queryIncome({id: this.$store.state.user.id}).then(res => {
+                    this.incomeObj = res.data
+                })
+            },
+            getAllIncomeList() {
+                return queryAllIncomeList({id: this.$store.state.user.id}).then(res => {
+                    if (res.list && res.list.length > 0) {
+                        this.totalIncomeList.push(...res.list)
+                    }
+                })
+            },
+            getQuarterIncomeList() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryQuarterIncome({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.list && res.list.length > 0) {
+                        this.currentIncomeList.push(...res.list)
+                    }
+                })
             }
         }
     }

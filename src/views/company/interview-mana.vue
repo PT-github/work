@@ -2,8 +2,8 @@
     <div class="interview-mana">
         <div class="title">面试管理</div>
         <ul class="tab clearfix">
-            <li :class="{on: active === 0}" @click="getData(0)">面试邀请</li>
-            <li :class="{on: active === 1}" @click="getData(1)">简历收藏记录</li>
+            <li :class="{on: active === 0}" @click="setActive(0)">面试邀请</li>
+            <li :class="{on: active === 1}" @click="setActive(1)">简历收藏记录</li>
         </ul>
         <div class="table" v-show="active === 0">
             <div class="theader">
@@ -21,7 +21,7 @@
                     <div class="td">{{ item.job }}</div>
                     <div class="td">{{ item.status }}</div>
                     <div class="td">{{ item.interviewTime }}</div>
-                    <div class="td"><span>删除</span></div>
+                    <div class="td"><span @click="deleteInterview(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
@@ -37,37 +37,98 @@
                 <div class="tr" v-for="(item, index) in collectList" :key="'collectList-' + index">
                     <div class="td">{{ item.name }}</div>
                     <div class="td">{{ item.resumeName }}</div>
-                    <div class="td"><span>删除</span></div>
+                    <div class="td"><span @click="deleteCollect(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import { queryInterviewList, queryCollectList, deleteInterviewById, deleteCollectById} from '@/api/service'
     export default {
         name: 'sInterviewMana',
         data() {
             return {
                 active: 0,
-                interviewList: [
-                    { id: 1, name: 'XXXXXXX', job: '育婴师', status: '已经面试', interviewTime: '2010-10-10 13:10:10' },
-                    { id: 2, name: 'XXXXXXX', job: '健康管理师', status: '面试成功', interviewTime: '2010-10-10 13:10:10' },
-                    { id: 3, name: 'XXXXXXX', job: '催乳师', status: '面试失败', interviewTime: '2010-10-10 13:10:10' },
-                    { id: 4, name: 'XXXXXXX', job: '继续教育', status: '已删除', interviewTime: '2010-10-10 13:10:10' },
-                    { id: 5, name: 'XXXXXXX', job: '育婴师', status: '已经面试', interviewTime: '2010-10-10 13:10:10' }
-                ],
-                collectList: [
-                    { id: 1, name: '张三', resumeName: '简历名称'},
-                    { id: 2, name: '李四', resumeName: '简历名称'},
-                    { id: 3, name: '张三', resumeName: '简历名称'},
-                    { id: 4, name: '李四', resumeName: '简历名称'},
-                    { id: 5, name: '张三', resumeName: '简历名称'},
-                ]
+                interviewList: [],
+                collectList: []
             }
         },
+        mounted() {
+            this.init()
+        },
         methods: {
-            getData(i) {
+            deleteCollect(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                deleteInterviewById(id).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        })
+                        this.getInterviewList()
+                    } else {
+                        this.$message({
+                            message: '删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            deleteInterview(id) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                deleteCollectById(id).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        })
+                        this.getCollectList()
+                    } else {
+                        this.$message({
+                            message: '删除失败',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            setActive(i) {
                 this.active = i
+            },
+            init() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                Promise.all([this.getInterviewList(), this.getCollectList()]).then(() => {
+                    loading.close()
+                })
+            },
+            getInterviewList() {
+                return queryInterviewList({id: this.$store.state.user.id}).then(res => {
+                    this.interviewList.splice(0, this.interviewList.length)
+                    this.interviewList.push(...res.list)
+                })
+            },
+            getCollectList() {
+                return queryCollectList({id: this.$store.state.user.id}).then(res => {
+                    this.collectList.splice(0, this.collectList.length)
+                    this.collectList.push(...res.list)
+                })
             }
         }
     }

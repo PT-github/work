@@ -60,6 +60,7 @@
                 this.$store.dispatch('LogOut', {username: this.$store.state.user.username, password: this.$store.state.user.sessionId}).then(() => {
                     loading.close()
                     this.dialogVisible = false
+                    this.$router.push({path: '/'})
                 })
             }
         }

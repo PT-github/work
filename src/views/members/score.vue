@@ -2,7 +2,7 @@
     <div class="s-income">
         <div class="title">我的积分</div>
         <div class="incomeBox">
-            <p>当前积分：{{ incomeObj.totalIncome }} <span class="exchange" @click="exchange">兑换(选择商品)</span></p>
+            <p>当前积分：{{ totalIncome }} <span class="exchange" @click="exchange">兑换(选择商品)</span></p>
         </div>
         <ul class="tab clearfix">
             <li class="on">积分明细</li>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="tbody">
-                <div class="tr" v-for="(item, index) in totalIncomeList" :key="'totalIncomeList-' + index">
+                <div class="tr" v-for="(item, index) in scoreList" :key="'scoreList-' + index">
                     <div class="td">{{ item.time }}</div>
                     <div class="td">{{ item.des }}</div>
                     <div class="td">{{ item.score }}</div>
@@ -26,26 +26,34 @@
     </div>
 </template>
 <script>
+    import { queryScore } from '@/api/service'
     export default {
         name: 'sScore',
         data() {
             return {
                 active: 0,
-                incomeObj: {
-                    totalIncome: '10000元',
-                    currentIncome: '0元',
-                    level: '兼职/主管'
-                },
-                totalIncomeList: [
-                    { id: 1, score: '100', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
-                    { id: 2, score: '20', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
-                    { id: 3, score: '30', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
-                    { id: 4, score: '40', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
-                    { id: 5, score: '500', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' }
-                ]
+                totalIncome: '10000分',
+                scoreList: []
             }
         },
+        mounted() {
+            this.init()
+        },
         methods: {
+            init() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryScore({id: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    let data = res.data
+                    this.totalIncome = data.totalIncome
+                    this.scoreList.push(...data.scoreList)
+                })
+            },
             exchange() {
                 alert('选择商品')
             }

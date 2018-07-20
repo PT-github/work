@@ -34,40 +34,37 @@
                 </div>
             </div>
         </div>
-        <el-dialog title="职位新增" :visible.sync="dialogVisible" width="1000px">
-            <el-form ref="form" size="small" :model="form" label-width="80px">
-                <el-form-item label="职位名称">
+        <el-dialog title="职位新增" :visible.sync="dialogVisible" width="1000px" :close-on-click-modal="false"
+                   :close-on-press-escape="false">
+            <el-form ref="form" size="small" :model="form" :rules="rules" label-width="100px" class="myForm">
+                <el-form-item label="职位名称：" prop="name">
                     <el-input v-model="form.name"></el-input>
                 </el-form-item>
-                <el-form-item label="招聘人数">
-                    <el-input v-model="form.num"></el-input>
+                <el-form-item label="招聘人数：" prop="num">
+                    <el-input @keyup.native="changeNums" v-model="form.num" style="width: 100px"></el-input> 人
                 </el-form-item>
-                <el-form-item label="工作地点">
-
+                <el-form-item label="工作地点：">
+                    <el-button @click="cityDialogVisible = true" size="mini" v-for="(item, index) in form.cities" :key="'job-control_selCity_' + index">{{ cities[item] }}</el-button>
+                    <template v-if="form.cities.length < 5">
+                        <el-button size="mini" type="primary" @click="cityDialogVisible = true">请选择</el-button>
+                    </template>
                 </el-form-item>
-                <el-form-item label="月薪范围">
-                    <el-radio-group v-model="form.resource">
-                        <el-radio :label="item.id" v-for="(item, index) in filterOptions.expectedSalary" :key="'expectedSalary' + index">{{ item.name }}</el-radio>
+                <el-form-item label="月薪范围：">
+                    <el-radio-group v-model="form.expectedSalary" size="small">
+                        <el-radio :label="item.id" border v-for="(item, index) in filterOptions.expectedSalary" :key="'expectedSalary' + index">{{ item.name }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="学历要求">
-                    <el-radio-group v-model="form.resource">
-                        <el-radio label="线上品牌商赞助"></el-radio>
-                        <el-radio label="线下场地免费"></el-radio>
+                <el-form-item label="学历要求：">
+                    <el-radio-group v-model="form.education" size="small">
+                        <el-radio :label="item.id" border v-for="(item, index) in filterOptions.education" :key="'education' + index">{{ item.name }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="工作年限">
-                    <el-radio-group v-model="form.resource">
-                        <el-radio label="线上品牌商赞助"></el-radio>
-                        <el-radio label="线下场地免费"></el-radio>
+                <el-form-item label="工作年限：">
+                    <el-radio-group v-model="form.wrokLife" size="small">
+                        <el-radio :label="item.id" border v-for="(item, index) in filterOptions.wrokLife" :key="'wrokLife' + index">{{ item.name }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
-
-
-                <el-form-item label="职位描述">
-                    <el-input type="textarea" v-model="form.desc"></el-input>
-                </el-form-item>
-                <el-form-item label="公司信息">
+                <el-form-item label="职位描述：" prop="desc">
                     <el-input type="textarea" v-model="form.desc"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -77,22 +74,23 @@
             </el-form>
         </el-dialog>
 
-        <!--<el-dialog :before-close="queryByCity" class="areaDialog" :visible.sync="cityDialogVisible" width="960px" :close-on-click-modal="false"
+        <el-dialog class="areaDialog" :visible.sync="cityDialogVisible" width="960px" :close-on-click-modal="false"
                    :close-on-press-escape="false">
             <div slot="title" class="areaTitle">选择地区 <span>（最多只能选择5项）</span></div>
-            <div class="selectedArea clearfix" v-if="addJob.cities.length > 0">
-                <div class="areaBtn" v-for="(item, index) in addJob.cities" :key="'selCity-' + index">{{ cities[item] }}<i @click="deleteCity(item)"></i></div>
+            <div class="selectedArea clearfix" v-if="form.cities.length > 0">
+                <div class="areaBtn" v-for="(item, index) in form.cities" :key="'selCity-' + index">{{ cities[item] }}<i @click="deleteCity(item)"></i></div>
             </div>
-            <areaComp :list="filterOptions.placeBelong" :cities="cities" :choosed="queryOptions.cities"></areaComp>
+            <areaComp :list="filterOptions.placeBelong" :cities="cities" :choosed="form.cities"></areaComp>
             <div slot="footer" class="dialog-footer">
-                <div class="button" @click="queryByCity">确 定</div>
+                <div class="button" @click="cityDialogVisible = false">确 定</div>
             </div>
-        </el-dialog>-->
+        </el-dialog>
     </div>
 </template>
 <script>
-    import { queryPubJobs, refreshCompanyJob, publishCompanyJob, revokeCompanyJob, deleteCompanyJob, queryFilterOptions } from '@/api/service'
+    import { queryPubJobs, refreshCompanyJob, publishCompanyJob, revokeCompanyJob, deleteCompanyJob, queryFilterOptions, addCompanyJob } from '@/api/service'
     import { Form, FormItem, Button, Input, RadioGroup, Radio  } from 'element-ui'
+    import areaComp from '@/views/job/components/areaComp'
     export default {
         name: 'sMyjob',
         data() {
@@ -103,13 +101,30 @@
                 cityDialogVisible: false,
                 loadFilterOptins: false,
                 form: {
-
+                    name: '',
+                    num: '',
+                    expectedSalary: '',
+                    education: '',
+                    wrokLife: '',
+                    desc: '',
+                    cities: []
+                },
+                rules: {
+                    name: [
+                        { required: true, message: '请输入职位名称', trigger: 'blur' }
+                    ],
+                    num: [
+                        { required: true, message: '请输入招聘人数', trigger: 'blur' }
+                    ],
+                    desc: [
+                        {  required: true, message: '请输入职位描述信息', trigger: 'blur' }
+                    ]
                 },
                 filterOptions: {
                     expectedSalary: [],
                     wrokLife: [],
                     education: [],
-
+                    placeBelong: []
                 },
                 addJob: {
                     name: '',
@@ -122,10 +137,65 @@
                 }
             }
         },
+        computed: {
+            cities() {
+                let obj = {},list = this.filterOptions.placeBelong
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].citys && list[i].citys.length > 0) {
+                        for (let j = 0; j < list[i].citys.length; j++) {
+                            obj[list[i].citys[j].id] = list[i].citys[j].name
+                        }
+                    }
+                }
+                return obj
+            }
+        },
         mounted() {
             this.getData()
         },
         methods: {
+            deleteCity(id) {
+                let idx = this.form.cities.indexOf(id)
+                this.form.cities.splice(idx, 1)
+            },
+            changeNums() {
+                this.form.num=this.form.num.replace(/[^\.\d]/g,'');
+                this.form.num=this.form.num.replace('.','');
+            },
+            onSubmit() {
+                this.$refs['form'].validate((valid) => {
+                    if (valid) {
+                        const loading = this.$loading({
+                            lock: true,
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(0, 0, 0, 0.1)',
+                            fullscreen: true
+                        })
+                        addCompanyJob(Object.assign(this.form, {
+                            id: this.$store.state.user.id
+                        })).then(res => {
+                            loading.close()
+                            if (res.success) {
+                                this.$message({
+                                    message: '职位新增成功',
+                                    type: 'success'
+                                })
+                                this.dialogVisible = false
+                                this.jobList.splice(0, this.jobList.length)
+                                this.getData()
+                            } else {
+                                this.$message({
+                                    message: '职位新增失败',
+                                    type: 'error'
+                                })
+                            }
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                })
+            },
             companySize(id) {
                 this.addJob.companySize = id || ''
             },
@@ -257,7 +327,7 @@
             },
             getData() {
                 queryPubJobs({
-                    id: this.$store.state.user.userId
+                    id: this.$store.state.user.id
                 }).then(res => {
                     this.jobList.splice(0, this.jobList.length)
                     if (res.list && res.list.length > 0) {
@@ -267,6 +337,7 @@
             }
         },
         components: {
+            areaComp,
             [Form.name]: Form,
             [FormItem.name]: FormItem,
             [Button.name]: Button,
@@ -277,6 +348,23 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+    .areaTitle {
+        font-weight: bold;
+        font-size: 18px;
+        span {
+            font-size: 12px;
+        }
+    }
+    .myForm {
+        .el-radio.is-bordered {
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+        .el-radio.is-bordered+.el-radio.is-bordered {
+            margin-left: 0;
+
+        }
+    }
     .s-myjob {
         margin: 20px 0;
         .title {
@@ -377,6 +465,72 @@
             p {
                 height: 30px;
                 line-height: 30px;
+            }
+        }
+    }
+</style>
+<style rel="stylesheet/scss" lang="scss">
+    .areaDialog {
+        .selectedArea {
+            padding: 15px 10px 5px;
+            background-color: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            .areaBtn {
+                position: relative;
+                float: left;
+                height: 26px;
+                line-height: 26px;
+                font-size: 12px;
+                color: #333;
+                white-space: nowrap;
+                margin: 0 8px 5px 0;
+                padding: 0 20px 0 6px;
+                background-color: #fff;
+                border: 1px solid #ff9f20;
+                cursor: pointer;
+                i {
+                    position: absolute;
+                    width: 20px;
+                    top: -1px;
+                    right: 0;
+                    height: 26px;
+                    background: url(../../assets/img/close2.png) center no-repeat;
+                }
+            }
+        }
+        .el-dialog__header {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .areaTitle {
+            font-weight: bold;
+            font-size: 18px;
+            span {
+                font-size: 12px;
+            }
+        }
+        .el-dialog__body {
+            padding: 0 0 10px 0;
+        }
+        .dialog-footer {
+            text-align: center;
+            .button {
+                display: inline-block;
+                height: 28px;
+                line-height: 27px;
+                font-size: 14px;
+                color: #fff;
+                text-align: center;
+                cursor: pointer;
+                margin: 0 10px;
+                padding: 0 30px;
+                background-color: #ff6000;
+                border: 1px solid #ff6000;
+                border-radius: 2px;
+            }
+            .cancel {
+                color: #999;
+                background-color: #fff;
+                border-color: #b0b0b0;
             }
         }
     }
