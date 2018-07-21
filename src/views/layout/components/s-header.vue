@@ -40,7 +40,7 @@
                                     <li @click="logout">安全退出</li>
                                 </ul>
                             </span>
-                            <span class="fr-top4">站内信<i>2</i></span>
+                            <span class="fr-top4" @click="goMail">站内信<i v-if="count > 0">{{ count }}</i></span>
                         </template>
 
 
@@ -105,10 +105,10 @@
                     <div class="fr-search">
                         <div class="flex">
                             <div class="input">
-                                <input type="text">
+                                <input type="text" v-model="keywords">
                             </div>
                             <div class="btn">
-                                <div class="search-btn">
+                                <div class="search-btn" @click="searchByKeywords">
                                     <i class="el-icon-search"></i>
                                 </div>
                             </div>
@@ -167,12 +167,14 @@
 </template>
 <script>
     import { regAction } from '@/api/login'
-    import { leaveMessgage } from '@/api/service'
+    import { leaveMessgage, queryCounts } from '@/api/service'
     import { Message } from 'element-ui'
     export default {
         name: 'sHeader',
         data() {
             return {
+                count: 0,
+                keywords: '',
                 registerType: 0,
                 active: 'home',
                 centerDialogVisible: false,
@@ -208,6 +210,9 @@
                 this.dialogVisible = false
                 this.registVisible = false
             })
+            if (!!this.$store.state.user.id) {
+                this.getCounts()
+            }
             document.body.addEventListener('click', (e) => {
                 var target = e.target,loginSeqBox = document.getElementById('LoginSeqBox'),registSeqBox = document.getElementById('RegistSeqBox')
                 if (target.className.indexOf('fr-top1') !== -1 || loginSeqBox === target || this.isChildOf(target, loginSeqBox)) {
@@ -222,7 +227,38 @@
                 }
             })
         },
+        watch: {
+            '$store.state.user.id': function(v) {
+                if (!!v) {
+                    this.getCounts()
+                }
+            }
+        },
         methods: {
+            goMail() {
+                if (this.$route.path.indexOf('mail') !== -1 && this.$route.query.count == this.count) {
+                    window.location.reload()
+                } else {
+                    this.$router.push({ path: '/mail', query: {count: this.count} })
+                    this.$nextTick(() => {
+                        this.count = 0
+                    })
+                }
+            },
+            getCounts() {
+                setInterval(() => {
+                    queryCounts(this.$store.state.user.id).then(res => {
+                        console.log(res)
+                        this.count = res.data.count
+                        if (res.data.count > 0) {
+                            this.$store.dispatch('setCount', true)
+                        }
+                    })
+                }, 5000)
+            },
+            searchByKeywords() {
+                this.$router.push({ path: '/search-result', query: { keywords: this.keywords } })
+            },
             onSubmit() {
                 const loading = this.$loading({
                     lock: true,

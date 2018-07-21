@@ -1,11 +1,11 @@
 <template>
-    <div class="company-baseInfo">
+    <div class="company-baseInfo" :class="{ isOthers: isOthers }">
         <ul class="tab clearfix">
             <li :class="{on: active === 0}" @click="setActive(0)">基本信息</li>
             <li :class="{on: active === 1}" @click="setActive(1)">公司图片</li>
             <li :class="{on: active === 2}" @click="setActive(2)">营业执照</li>
-            <li :class="{on: active === 3}" @click="setActive(3)">账户信息</li>
-            <li :class="{on: active === 4}" @click="setActive(4)">密码修改</li>
+            <li :class="{on: active === 3}" @click="setActive(3)" v-if="!isOthers">账户信息</li>
+            <li :class="{on: active === 4}" @click="setActive(4)" v-if="!isOthers">密码修改</li>
         </ul>
         <ul class="baseinfo clearfix" v-show="active === 0">
             <li>
@@ -97,6 +97,11 @@
                 confirmPwd: ''
             }
         },
+        computed: {
+            isOthers() {
+                return !!this.$route.query.id
+            }
+        },
         mounted() {
             this.getData()
         },
@@ -175,7 +180,7 @@
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
     .company-baseInfo {
-        margin: 20px 0;
+        margin: 20px auto;
         .modifyPwd {
             .form {
                 width: 540px;
@@ -275,5 +280,11 @@
                 background-color: #CCC;
             }
         }
+    }
+    .isOthers {
+        background-color: #FFF;
+        padding: 20px;
+        max-width: 1000px;
+        border: 1px solid #CCC;
     }
 </style>

@@ -8,25 +8,27 @@
             </div>
             <ul class="company-box clearfix">
                 <li v-for="item in list">
-                    <div class="company-content">
-                        <div class="hunt-for">{{ item.job }}</div>
-                        <div class="company-name">{{ item.name }}</div>
-                        <div class="money">{{ item.salary }}</div>
-                        <div class="area">{{ item.place }}</div>
-                    </div>
+                    <router-link tag='a' target="_blank" :to="{ path: '/job-detail', query: { id: item.id } }">
+                        <div class="company-content">
+                            <div class="hunt-for">{{ item.job }}</div>
+                            <div class="company-name">{{ item.name }}</div>
+                            <div class="money">{{ item.salary }}</div>
+                            <div class="area">{{ item.place }}</div>
+                        </div>
+                    </router-link>
                 </li>
             </ul>
         </div>
         <div class="fr">
             <div class="title">
                 热门单位
-                <router-link tag='a' :to="'/job-hunting'" class="more">
+                <!--<router-link tag='a' :to="'/job-hunting'" class="more">
                     <img src="../../../assets/teacher/more.png" alt="更多">
-                </router-link>
+                </router-link>-->
             </div>
             <ul class="job-box">
                 <li v-for="item in jobs">
-                    <router-link tag="a" :to="'/'">{{ item.name }}</router-link>
+                    <router-link tag='a' target="_blank" :to="{ path: '/company-detail', query: { id: item.id } }">{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>
