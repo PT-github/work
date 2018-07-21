@@ -91,6 +91,16 @@ const router =  new Router({
                     component: _import('home/home'),
                     name: 'home',
                     meta: {title: '首页', keepAlive: true}
+                },{
+                    path: '/company-detail',
+                    component: _import('company/company-baseInfo'),
+                    name: 'companyDetail',
+                    meta: {title: '基本信息', keepAlive: false}
+                },{
+                    path: '/mail',
+                    component: _import('home/mail'),
+                    name: 'Mail',
+                    meta: {title: '消息', keepAlive: false, needLogin: true}
                 }, {
                     path: 'certifate-query',
                     component: _import('home/components/s-certificate-query'),
@@ -129,6 +139,11 @@ const router =  new Router({
                     component: _import('job/job-hunting'),
                     name: 'jobHunting',
                     meta: {title: '找工作', keepAlive: false}
+                }, {
+                    path: 'search-result',
+                    component: _import('home/search-result'),
+                    name: 'searchResult',
+                    meta: {title: '搜索结果', keepAlive: false}
                 }, {
                     path: 'personnel-list',
                     component: _import('job/personnel-list'),

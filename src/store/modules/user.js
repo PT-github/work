@@ -10,7 +10,8 @@ const user = {
         account: userInfo ? userInfo.account : '',
         tel: userInfo ? userInfo.tel : '',
         type: userInfo ? userInfo.type : '',
-        isLogin: userInfo ? true : false
+        isLogin: userInfo ? true : false,
+        count: false
     },
 
     mutations: {
@@ -24,12 +25,18 @@ const user = {
         SET_ISLOGIN: (state, isLogin) => {
             state.isLogin = isLogin
         },
+        SET_COUNT: (state, count) => {
+            state.count = count
+        }
     },
     actions: {
         SetLoginData({commit}, data) {
             sessionStorage.setItem('userInfo', JSON.stringify(data))
             commit('SET_USERINFO', data)
             commit('SET_ISLOGIN', true)
+        },
+        setCount({commit}, count) {
+            commit('SET_COUNT', count)
         },
         // 用户登录
         Login({commit}, userInfo) {

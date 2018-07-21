@@ -512,6 +512,32 @@ export function queryVideoByCategory(params) {
         data: params
     })
 }
+// 查询消息数
+export function queryCounts(id) {
+    return request({
+        url: '/home/queryCounts',
+        method: 'post',
+        params: {userId: id}
+    })
+}
+// 查询消息列表
+export function searchMail(id) {
+    return request({
+        url: '/home/searchMail',
+        method: 'post',
+        params: {userId: id}
+    })
+}
+// 通过分类获取视频列表
+export function searchByKeywords(keywords) {
+    return request({
+        url: '/home/searchByKeywords',
+        method: 'post',
+        params: {
+            keywords: keywords
+        }
+    })
+}
 
 // 通过分类获取视频列表
 export function queryVideoByCategory1(params) {
