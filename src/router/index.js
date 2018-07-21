@@ -107,6 +107,14 @@ const router =  new Router({
                     name: 'newsDetail',
                     meta: {title: '新闻详情', keepAlive: false}
                 }, {
+                    path: "/lesson-detail",
+                    component: _import('education/lesson-detail'),
+                    meta: {title: '课程详情', keepAlive: false}
+                }, {
+                    path: "/project-detail",
+                    component: _import('education/project-detail'),
+                    meta: {title: '项目详情', keepAlive: false}
+                }, {
                     path: 'news-cate-list',
                     component: _import('news/news-cate-list'),
                     name: 'newsCateList',
@@ -143,15 +151,16 @@ const router =  new Router({
             component: _import('login/index')
         }, {
             path: "/resume-detail",
-            component: _import('job/resume-detail')
+            component: _import('job/resume-detail'),
+            meta: {title: '简历详情', keepAlive: false}
         }, {
             path: "/job-detail",
             component: _import('job/job-detail'),
             meta: {title: '职位详情', keepAlive: false}
         }, {
-            path: "/member-center",
-            component: _import('members/member-center'),
-            meta: {title: '简历详情', keepAlive: false}
+            path: "/resume-edit",
+            component: _import('job/resume-edit'),
+            meta: {title: '简历编辑', keepAlive: false, needLogin: true}
         }, {
             path: "*",
             redirect: "/"

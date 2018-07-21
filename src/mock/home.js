@@ -333,7 +333,7 @@ export default {
                 technicalTitle: '高级软件开发工程师',
                 secondMajor: '育婴师',
                 placeResidence: '湖南省长沙市天心区',
-                jobIntention: ['育婴师', '健康管理师'],
+                jobIntention: '育婴师 健康管理师',
                 salaryType: '按月',
                 expectSalary: '1W/月',
                 job: '高级育婴师',
@@ -481,7 +481,7 @@ export default {
             "list|8": [
                 {
                     "id|+1": 1,
-                    "title|1": ["健康咨询师", "育婴师", "催乳师"]
+                    "name|1": ["健康咨询师", "育婴师", "催乳师"]
                 }
             ]
         })
@@ -550,7 +550,7 @@ export default {
             'success': true,
             "message": '成功',
             "data": {
-                totalIncome: '10000分',
+                totalIncome: '10000',
                 scoreList: [
                     { id: 1, score: '100', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
                     { id: 2, score: '20', des: '因为什么获取积分的描述', time: '2017-1-1 10:10:10' },
@@ -662,6 +662,36 @@ export default {
                 "id|+1": 1,
                 "title|1": ["新闻的标题", "内容标题在哪里"],
                 "content": "AAAAAAAAAAAAA<br/>BBBBBBBBBBBBBBB<br/>CCCCCCCCCC"
+            }
+        })
+    },
+    /**
+     * 课程详情列表
+     * @returns {*}
+     */
+    queryLessonDetail: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id|+1": 1,
+                "title|1": ["课程的标题", "课程的标题2"],
+                "content": "<p>AAAAAAAAAAAAA<br/>BBBBBBBBBBBBBBB<br/>CCCCCCCCCC</p>"
+            }
+        })
+    },
+    /**
+     * 培训项目详情
+     * @returns {*}
+     */
+    queryProjectDetail: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "id|+1": 1,
+                "title|1": ["培训项目的标题", "培训项目的标题2"],
+                "content": "<p>AAAAAAAAAAAAA<br/>BBBBBBBBBBBBBBB<br/>CCCCCCCCCC</p>"
             }
         })
     },
@@ -904,6 +934,44 @@ export default {
                             "totalFee": "1100元"
                         }
                     ]
+                }
+            ]
+        })
+    },
+    /**
+     * 积分兑换课程列表
+     * @returns {*}
+     */
+    queryScoreLessons: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|3-5": [
+                {
+                    "id|+1": 100,
+                    "name|1": ["课程名称", "课程名称1", "课程名称2", "课程名称3"],
+                    "openDate": "03月10日-09月12日",
+                    "classHour": "18天",
+                    "score": "1000",
+                    "examinationFee": "100元",
+                    "totalFee": "1100元"
+                }
+            ]
+        })
+    },
+    /**
+     * 我的简历列表
+     * @returns {*}
+     */
+    queryMyResume: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|3-5": [
+                {
+                    "id|+1": 100,
+                    "name|1": ["简历名称", "简历名称1", "简历名称2", "简历名称3"],
+                    "openness|1": ["完全公开", "保密"]
                 }
             ]
         })

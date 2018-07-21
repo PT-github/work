@@ -119,13 +119,13 @@
             <div class="part2">
                 <ul class="flex">
                     <li class="home" :class="{ 'on': $route.path.indexOf('home') !== -1}">
-                        <router-link tag="a" :to="'home'">首页</router-link>
+                        <router-link tag="a" :to="'/home'">首页</router-link>
                     </li>
                     <li :class="{ 'on': $route.path.indexOf('news') !== -1}">
-                        <router-link tag="a" :to="'news'">新闻中心</router-link>
+                        <router-link tag="a" :to="'/news'">新闻中心</router-link>
                     </li>
                     <li :class="{ 'on': $route.path.indexOf('education-training') !== -1}">
-                        <router-link tag="a" :to="'education-training'">教育培训</router-link>
+                        <router-link tag="a" :to="'/education-training'">教育培训</router-link>
                     </li>
                     <li :class="{ 'on': $route.path.indexOf('personnel-list') !== -1 && $route.path.indexOf('senior-personnel-list') === -1}">
                         <router-link tag="a" :to="{ path: '/personnel-list'}">招揽人才</router-link>

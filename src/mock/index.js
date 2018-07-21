@@ -26,6 +26,8 @@ Mock.mock(/\/company\/deleteNetWorkTalentList/, 'post', api.queryNetWorkTalentLi
 Mock.mock(/\/queryPoster/, 'post', api.queryPoster)
 Mock.mock(/\/queryNews$/, 'post', api.queryNews)
 Mock.mock(/\/queryLessons/, 'post', api.queryLessons)
+Mock.mock(/\/queryScoreLessons/, 'post', api.queryScoreLessons)
+Mock.mock(/\/exchangeLesson/, 'post', api.queryScoreLessons)
 Mock.mock(/\/home\/queryTeachers$/, 'post', api.queryTeachers)
 Mock.mock(/\/queryCompany$/, 'post', api.queryCompany)
 Mock.mock(/\/queryJobs$/, 'post', api.queryJobs)
@@ -65,7 +67,7 @@ Mock.mock(/\/user\/queryMyOrder/, 'post', api.queryMyOrder)
 Mock.mock(/\/user\/deleteOrder/, 'post', api.queryMyOrder)
 
 // 教育培训
-Mock.mock(/\/queryProject/, 'post', api.queryProject)
+Mock.mock(/\/train\/queryTrainList/, 'post', api.queryProject)
 Mock.mock(/\/queryTeacherList$/, 'post', api.queryTeachersByPage)
 Mock.mock(/\/video\/queryVideoKind$/, 'post', api.queryCategory)
 Mock.mock(/\/queryVideoList/, 'post', api.queryVideoByCategory)
@@ -75,6 +77,8 @@ Mock.mock(/\/talent\/queryResume$/, 'post', api.queryResume)
 Mock.mock(/\/personel\/invateInterViewByIds/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/personel\/collectResumesByIds/, 'post', api.collectResumesByIds)
 Mock.mock(/\/talent\/queryResumeDetail/, 'post', api.queryResumeDetail)
+Mock.mock(/\/education\/queryLessonDetail/, 'post', api.queryLessonDetail)
+Mock.mock(/\/education\/queryProjectDetail/, 'post', api.queryProjectDetail)
 
 
 // 找工作
@@ -82,4 +86,8 @@ Mock.mock(/\/position\/queryJobsByPage/, 'post', api.queryJobsByPage)
 Mock.mock(/\/position\/applyJob/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/personel\/collectJobs/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/position\/queryJobDetail/, 'post', api.queryJobDetail)
+Mock.mock(/\/member\/queryMyResume/, 'post', api.queryMyResume)
+Mock.mock(/\/member\/refreshMyResume/, 'post', api.queryMyResume)
+Mock.mock(/\/member\/deleteMyResume/, 'post', api.queryMyResume)
+Mock.mock(/\/member\/editResumeSubmit/, 'post', api.queryMyResume)
 

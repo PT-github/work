@@ -7,7 +7,9 @@
           <div class="right">
               <div class="news-title">培训项目</div>
               <ul class="pro-list clearfix">
-                  <li v-for="(item, index) in projectList" :key="'project-' + index">{{ item.name }}</li>
+                  <li v-for="(item, index) in projectList" :key="'project-' + index">
+                      <router-link tag="a" :to="{ path: '/project-detail', query: { id: item.id } }">{{ item.name }}</router-link>
+                  </li>
               </ul>
               <div class="title">
                   <p>电话热线</p>

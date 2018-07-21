@@ -9,103 +9,105 @@
         <div class="job-detail">
             <div class="job-control">
                 <div class="label">姓名：</div>
-                <div class="value">{{ activeResume.name }}</div>
+                <div class="value"><input type="text" v-model="activeResume.name"></div>
             </div>
             <div class="job-control">
                 <div class="label">出生日期：</div>
-                <div class="value">{{ activeResume.birth }}</div>
+                <div class="value"><input type="text" v-model="activeResume.birth"></div>
             </div>
             <div class="job-control">
                 <div class="label">手机：</div>
-                <div class="value">{{ activeResume.phoneNumber }}</div>
+                <div class="value"><input type="text" v-model="activeResume.phoneNumber"></div>
             </div>
             <div class="job-control">
                 <div class="label">性别：</div>
-                <div class="value">{{ activeResume.sex }}</div>
+                <div class="value"><input type="text" v-model="activeResume.sex"></div>
             </div>
             <div class="job-control">
                 <div class="label">名族：</div>
-                <div class="value">{{ activeResume.nameFamily }}</div>
+                <div class="value"><input type="text" v-model="activeResume.nameFamily"></div>
             </div>
             <div class="job-control">
                 <div class="label">邮箱：</div>
-                <div class="value">{{ activeResume.email }}</div>
+                <div class="value"><input type="text" v-model="activeResume.email"></div>
             </div>
             <div class="job-control">
                 <div class="label">户籍：</div>
-                <div class="value">{{ activeResume.householdRegister }}</div>
+                <div class="value"><input type="text" v-model="activeResume.householdRegister"></div>
             </div>
             <div class="job-control">
                 <div class="label">身高：</div>
-                <div class="value">{{ activeResume.height }}</div>
+                <div class="value"><input type="text" v-model="activeResume.height"></div>
             </div>
             <div class="job-control">
                 <div class="label">QQ：</div>
-                <div class="value">{{ activeResume.qq }}</div>
+                <div class="value"><input type="text" v-model="activeResume.qq"></div>
             </div>
             <div class="job-control">
                 <div class="label">体重：</div>
-                <div class="value">{{ activeResume.weight }}</div>
+                <div class="value"><input type="text" v-model="activeResume.weight"></div>
             </div>
             <div class="job-control">
                 <div class="label">政治面貌：</div>
-                <div class="value">{{ activeResume.politicalOutlook }}</div>
+                <div class="value"><input type="text" v-model="activeResume.politicalOutlook"></div>
             </div>
             <div class="job-control">
                 <div class="label">学历：</div>
-                <div class="value">{{ activeResume.education }}</div>
+                <div class="value"><input type="text" v-model="activeResume.education"></div>
             </div>
             <div class="job-control">
                 <div class="label">固话：</div>
-                <div class="value">{{ activeResume.faxedLine }}</div>
+                <div class="value"><input type="text" v-model="activeResume.faxedLine"></div>
             </div>
             <div class="job-control">
                 <div class="label">毕业时间：</div>
-                <div class="value">{{ activeResume.graduationTime }}</div>
+                <div class="value"><input type="text" v-model="activeResume.graduationTime"></div>
             </div>
             <div class="job-control">
                 <div class="label">毕业院校：</div>
-                <div class="value">{{ activeResume.universityGraduatedFrom }}</div>
+                <div class="value"><input type="text" v-model="activeResume.universityGraduatedFrom"></div>
             </div>
             <div class="job-control">
                 <div class="label">身份证：</div>
-                <div class="value">{{ activeResume.certificate }}</div>
+                <div class="value"><input type="text" v-model="activeResume.certificate"></div>
             </div>
             <div class="job-control">
                 <div class="label">专业：</div>
-                <div class="value">{{ activeResume.major }}</div>
+                <div class="value"><input type="text" v-model="activeResume.major"></div>
             </div>
             <div class="job-control">
                 <div class="label">现有职称：</div>
-                <div class="value">{{ activeResume.technicalTitle }}</div>
+                <div class="value"><input type="text" v-model="activeResume.technicalTitle"></div>
             </div>
             <div class="job-control">
                 <div class="label">第二专业：</div>
-                <div class="value">{{ activeResume.secondMajor }}</div>
+                <div class="value"><input type="text" v-model="activeResume.secondMajor"></div>
             </div>
             <div class="job-control">
                 <div class="label">现居住地：</div>
-                <div class="value">{{ activeResume.placeResidence }}</div>
+                <div class="value"><input type="text" v-model="activeResume.placeResidence"></div>
             </div>
             <div class="job-control">
                 <div class="label">求职意向：</div>
-                <div class="value" >{{ activeResume.jobIntention }}</div>
+                <div class="value"><input type="text" v-model="activeResume.jobIntention"></div>
             </div>
             <div class="job-control">
                 <div class="label">期望薪资：</div>
-                <div class="value">{{ activeResume.expectSalary }}</div>
+                <div class="value"><input type="text" v-model="activeResume.expectSalary"></div>
             </div>
             <div class="job-control">
                 <div class="label">职位：</div>
-                <div class="value">{{ activeResume.job }}</div>
+                <div class="value"><input type="text" v-model="activeResume.job"></div>
             </div>
+
             <div class="job-control">
                 <div class="label">希望工作地区：</div>
-                <div class="value">{{ activeResume.expectedArea }}</div>
+                <div class="value"><input type="text" v-model="activeResume.expectedArea"></div>
             </div>
+
             <div class="job-control">
                 <div class="label">到岗时间：</div>
-                <div class="value">{{ activeResume.postTime }}</div>
+                <div class="value"><input type="text" v-model="activeResume.postTime"></div>
             </div>
             <div class="job-control job-control_auto">
                 <div class="label">工作经验：</div>
@@ -122,16 +124,18 @@
                             </div>
                         </div>
                         <div class="tbody">
-                            <div class="tr" v-if="activeResume.handsOnWorkExperience && activeResume.handsOnWorkExperience.length > 0" :key="'job-' + item.id" v-for="item in activeResume.handsOnWorkExperience">
-                                <div class="td">{{ item.entryTime }}</div>
-                                <div class="td">{{item.departureTime}}</div>
-                                <div class="td">{{item.company}}</div>
-                                <div class="td">{{item.job}}</div>
-                                <div class="td">{{item.jobDes}}</div>
-                                <div class="td">{{item.reseanForLeaving}}</div>
+                            <div class="tr" v-if="activeResume.handsOnWorkExperience && activeResume.handsOnWorkExperience.length > 0" :key="'job-' + index" v-for="(item, index) in activeResume.handsOnWorkExperience">
+                                <div class="td"><input type="text" v-model="item.entryTime"></div>
+                                <div class="td"><input type="text" v-model="item.departureTime"></div>
+                                <div class="td"><input type="text" v-model="item.company"></div>
+                                <div class="td"><input type="text" v-model="item.job"></div>
+                                <div class="td"><input type="text" v-model="item.jobDes"></div>
+                                <div class="td"><input type="text" v-model="item.reseanForLeaving"></div>
+                                <span class="delete" @click="deleteWordExperience(index)">x</span>
                             </div>
                         </div>
                     </div>
+                    <div class="addMore" @click="addWordExperience">新增一条</div>
                 </div>
             </div>
             <div class="job-control job-control_auto">
@@ -149,36 +153,41 @@
                             </div>
                         </div>
                         <div class="tbody">
-                            <div class="tr" v-if="activeResume.educationExperience && activeResume.educationExperience.length > 0" :key="'education-pop-' + item.id" v-for="item in activeResume.educationExperience">
-                                <div class="td">{{item.enrolmentTime}}</div>
-                                <div class="td">{{item.graduationTime}}</div>
-                                <div class="td">{{item.school}}</div>
-                                <div class="td">{{item.education}}</div>
-                                <div class="td">{{item.major}}</div>
-                                <div class="td">{{item.professionalDes}}</div>
+                            <div class="tr" v-if="activeResume.educationExperience && activeResume.educationExperience.length > 0" :key="'education-pop-' + index" v-for="(item, index) in activeResume.educationExperience">
+                                <div class="td"><input type="text" v-model="item.enrolmentTime"></div>
+                                <div class="td"><input type="text" v-model="item.graduationTime"></div>
+                                <div class="td"><input type="text" v-model="item.school"></div>
+                                <div class="td"><input type="text" v-model="item.education"></div>
+                                <div class="td"><input type="text" v-model="item.major"></div>
+                                <div class="td"><input type="text" v-model="item.professionalDes"></div>
+                                <span class="delete" @click="deleteEducationExperience(index)">x</span>
                             </div>
                         </div>
                     </div>
+                    <div class="addMore" @click="addEducationExperience">新增一条</div>
                 </div>
             </div>
             <div class="job-control job-control_auto">
                 <div class="label">工作技能：</div>
                 <div class="value">
-                    <!--template v-for="item in activeResume.workingSkills">{{item}}</template-->
-                    <div class="value">{{ activeResume.workingSkills }}</div>
+                    <div class="value"><input type="text" v-model="activeResume.workingSkills"></div>
                 </div>
             </div>
             <div class="job-control job-control_auto">
                 <div class="label">自我评价：</div>
-                <div class="value">{{ activeResume.selfEvalution }}</div>
+                <div class="value"><textarea v-model="activeResume.selfEvalution"></textarea></div>
             </div>
+        </div>
+        <div class="submit-area">
+            <el-button size="small" type="primary" @click="resumeEditSubmit">提&nbsp;&nbsp;&nbsp;&nbsp;交</el-button>
+            <!--<el-button size="small" icon="el-icon-view" @click="">预览</el-button>-->
         </div>
     </div>
 </template>
 <script>
-    import { queryResumeDetail } from '@/api/service'
+    import { queryResumeDetail, editResumeSubmit } from '@/api/service'
     export default {
-        name: 'resumeDetail',
+        name: 'resumeEdit',
         data() {
             return {
                 activeResume: {
@@ -221,6 +230,61 @@
             }
         },
         methods: {
+            resumeEditSubmit() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                let ms = '新增'
+                if (this.activeResume.id) {
+                    ms = '修改'
+                }
+                editResumeSubmit(Object.assign(this.activeResume, {userId: this.$store.state.user.id})).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '简历' + ms + '成功，页面即将返回',
+                            type: 'success'
+                        })
+                        setTimeout(() => {
+                            history.back()
+                        }, 1000)
+                    } else {
+                        this.$message({
+                            message: '简历' + ms + '失败:' + res.message,
+                            type: 'error'
+                        })
+                    }
+                })
+            },
+            addWordExperience() {
+                this.activeResume.handsOnWorkExperience.push({
+                    entryTime: '',
+                    departureTime: '',
+                    company: '',
+                    job: '',
+                    jobDes: '',
+                    reseanForLeaving: ''
+                })
+            },
+            deleteWordExperience(index) {
+                this.activeResume.handsOnWorkExperience.splice(index, 1)
+            },
+            addEducationExperience() {
+                this.activeResume.educationExperience.push({
+                    enrolmentTime: '',
+                    graduationTime: '',
+                    school: '',
+                    education: '',
+                    major: '',
+                    professionalDes: ''
+                })
+            },
+            deleteEducationExperience(index) {
+                this.activeResume.educationExperience.splice(index, 1)
+            },
             getResumeDetail(id) {
                 if (id === this.activeResume.id) {
                     this.jobDetailDialogVisible = true
@@ -262,8 +326,12 @@
                     this.activeResume.job = data.job || ''
                     this.activeResume.expectedArea = data.expectedArea || ''
                     this.activeResume.postTime = data.postTime || ''
-                    this.activeResume.handsOnWorkExperience = data.handsOnWorkExperience || []
-                    this.activeResume.educationExperience = data.educationExperience || []
+                    if (data.handsOnWorkExperience && data.handsOnWorkExperience.length > 0) {
+                        this.activeResume.handsOnWorkExperience.push(...data.handsOnWorkExperience)
+                    }
+                    if (data.educationExperience && data.educationExperience.length > 0) {
+                        this.activeResume.educationExperience.push(...data.educationExperience)
+                    }
                     this.activeResume.workingSkills = data.workingSkills || ''
                     this.activeResume.selfEvalution = data.selfEvalution || ''
                     this.$nextTick(() => {
@@ -277,6 +345,10 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+    .submit-area {
+        text-align: center;
+        width: 100%;
+    }
     .resume-detail_box {
         width: 1000px;
         margin: 10px auto;
@@ -319,10 +391,27 @@
             .value {
                 flex: 1;
                 line-height: 25px;
+                input {
+                    height: 25px;
+                    width: 100%;
+                    border-radius: 3px;
+                    border: 1px solid #ccc;
+                    background: none;
+                    padding: 0 10px;
+                }
+                textarea {
+                    height: 50px;
+                    width: 100%;
+                    border-radius: 3px;
+                    border: 1px solid #ccc;
+                    background: none;
+                    padding: 0 10px;
+                }
                 .table {
                     border: 1px solid #cac9cb;
                     .tr {
                         display: flex;
+                        position: relative;
                         .td, .th {
                             flex: 1;
                             font-size: 12px;
@@ -335,6 +424,9 @@
                         .td {
                             padding-left: 5px;
                             padding-right: 5px;
+                            input {
+                                margin: 2px;
+                            }
                         }
                         .th {
                             background-color: rgba(204, 204, 204, .3);
@@ -343,13 +435,42 @@
                     }
                     .tbody {
                         .tr {
+                            .delete {
+                                cursor: pointer;
+                                position: absolute;
+                                top: 0;
+                                right: -5px;
+                                color: red;
+                                font-size: 10px;
+                                height: 8px;
+                                line-height: 8px;
+                                width: 8px;
+                                text-align: center;
+                                border-radius: 10px;
+                                display: none;
+                            }
                             &:last-child {
                                 .td {
                                     border-bottom: 0;
                                 }
                             }
                         }
+                        .tr:hover {
+                            .delete {
+                                display: block;
+                            }
+                        }
                     }
+                }
+                .addMore {
+                    width: 100px;
+                    margin: 10px auto;
+                    text-align: center;
+                    border: 1px solid #CCC;
+                    height: 30px;
+                    line-height: 30px;
+                    border-radius: 2px;
+                    cursor: pointer;
                 }
             }
         }

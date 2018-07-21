@@ -7,9 +7,10 @@ export function queryCompanyMessage(id) {
     return request({
         url: '/company/queryCompanyMessage',
         method: 'post',
-        params: { id }
+        params: {id}
     })
 }
+
 // 留言
 export function leaveMessgage(data) {
     return request({
@@ -18,6 +19,7 @@ export function leaveMessgage(data) {
         data
     })
 }
+
 // 我的基本信息
 export function queryMyBaseInfo(data) {
     return request({
@@ -26,6 +28,7 @@ export function queryMyBaseInfo(data) {
         data
     })
 }
+
 // 我的收益
 export function queryIncome(data) {
     return request({
@@ -34,6 +37,7 @@ export function queryIncome(data) {
         data
     })
 }
+
 // 我的所有收益列表
 export function queryAllIncomeList(data) {
     return request({
@@ -42,6 +46,7 @@ export function queryAllIncomeList(data) {
         data
     })
 }
+
 // 我的本季度收益列表
 export function queryQuarterIncome(data) {
     return request({
@@ -50,6 +55,7 @@ export function queryQuarterIncome(data) {
         data
     })
 }
+
 // 我的积分
 export function queryScore(data) {
     return request({
@@ -58,6 +64,7 @@ export function queryScore(data) {
         data
     })
 }
+
 // 职位收藏夹
 export function queryCollectJobs(data) {
     return request({
@@ -66,6 +73,7 @@ export function queryCollectJobs(data) {
         data
     })
 }
+
 // 职位申请记录
 export function queryJobApplyRecods(data) {
     return request({
@@ -74,6 +82,7 @@ export function queryJobApplyRecods(data) {
         data
     })
 }
+
 // 我的面试机会
 export function queryInvitedChance(data) {
     return request({
@@ -82,6 +91,7 @@ export function queryInvitedChance(data) {
         data
     })
 }
+
 // 简历被查看记录
 export function queryLookedRecords(data) {
     return request({
@@ -90,6 +100,7 @@ export function queryLookedRecords(data) {
         data
     })
 }
+
 // 企业密码修改
 export function modifyCompanyPassword(data) {
     return request({
@@ -98,6 +109,7 @@ export function modifyCompanyPassword(data) {
         data
     })
 }
+
 // 企业职位列表
 export function queryPubJobs(data) {
     return request({
@@ -106,6 +118,7 @@ export function queryPubJobs(data) {
         data
     })
 }
+
 // 刷新职位
 export function refreshCompanyJob(data) {
     return request({
@@ -114,6 +127,7 @@ export function refreshCompanyJob(data) {
         data
     })
 }
+
 // 发布职位
 export function publishCompanyJob(data) {
     return request({
@@ -122,6 +136,7 @@ export function publishCompanyJob(data) {
         data
     })
 }
+
 // 撤回职位
 export function revokeCompanyJob(data) {
     return request({
@@ -130,6 +145,7 @@ export function revokeCompanyJob(data) {
         data
     })
 }
+
 // 删除职位
 export function deleteCompanyJob(data) {
     return request({
@@ -138,6 +154,7 @@ export function deleteCompanyJob(data) {
         data
     })
 }
+
 // 新增职位
 export function addCompanyJob(data) {
     return request({
@@ -146,6 +163,7 @@ export function addCompanyJob(data) {
         data
     })
 }
+
 // 面试邀请列表
 export function queryInterviewList(data) {
     return request({
@@ -154,6 +172,7 @@ export function queryInterviewList(data) {
         data
     })
 }
+
 // 删除面试邀请
 export function deleteInterviewById(id) {
     return request({
@@ -162,6 +181,7 @@ export function deleteInterviewById(id) {
         params: {id}
     })
 }
+
 // 收藏记录
 export function queryCollectList(data) {
     return request({
@@ -170,6 +190,7 @@ export function queryCollectList(data) {
         data
     })
 }
+
 // 应聘记录
 export function queryApplyRecordList(data) {
     return request({
@@ -178,6 +199,7 @@ export function queryApplyRecordList(data) {
         data
     })
 }
+
 // 自有人才库
 export function queryOwnTalentList(data) {
     return request({
@@ -186,6 +208,7 @@ export function queryOwnTalentList(data) {
         data
     })
 }
+
 // 网站人才库
 export function queryNetWorkTalentList(data) {
     return request({
@@ -194,6 +217,7 @@ export function queryNetWorkTalentList(data) {
         data
     })
 }
+
 // 删除面试邀请
 export function deleteCollectById(id) {
     return request({
@@ -202,6 +226,7 @@ export function deleteCollectById(id) {
         params: {id}
     })
 }
+
 // 删除应聘记录
 export function deleteApplyRecordList(id) {
     return request({
@@ -210,6 +235,7 @@ export function deleteApplyRecordList(id) {
         params: {id}
     })
 }
+
 // 删除自有人才库
 export function deleteOwnTalentList(id) {
     return request({
@@ -218,6 +244,7 @@ export function deleteOwnTalentList(id) {
         params: {id}
     })
 }
+
 // 删除网站人才库
 export function deleteNetWorkTalentList(id) {
     return request({
@@ -226,6 +253,7 @@ export function deleteNetWorkTalentList(id) {
         params: {id}
     })
 }
+
 //====================企业信息查询结束===================
 
 // =======================首页开始=========================
@@ -241,68 +269,124 @@ export function queryCerti(data) {
 
 // 首页左右滑动区域=>获取广告列表
 export function queryPoster() {
-  return request({
-    url: '/home/queryPoster',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryPoster',
+        method: 'post'
+    })
 }
+
 // 首页新闻列表
 export function queryNews() {
-  return request({
-    url: '/home/queryNews',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryNews',
+        method: 'post'
+    })
 }
+
 // 首页课程列表
 export function queryLessons() {
-  return request({
-    url: '/home/queryLessons',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryLessons',
+        method: 'post'
+    })
 }
+
+// 积分兑换的课程列表
+export function queryScoreLessons() {
+    return request({
+        url: '/home/queryScoreLessons',
+        method: 'post'
+    })
+}
+
+// 积分兑换课程
+export function exchangeLesson(data) {
+    return request({
+        url: '/home/exchangeLesson',
+        method: 'post',
+        data
+    })
+}
+
+// 我的简历
+export function queryMyResume(data) {
+    return request({
+        url: '/member/queryMyResume',
+        method: 'post',
+        data
+    })
+}
+// 刷新简历
+export function refreshMyResume(data) {
+    return request({
+        url: '/member/refreshMyResume',
+        method: 'post',
+        data
+    })
+}
+// 刷新简历
+export function editResumeSubmit(data) {
+    return request({
+        url: '/member/editResumeSubmit',
+        method: 'post',
+        data
+    })
+}
+// 删除简历
+export function deleteMyResume(data) {
+    return request({
+        url: '/member/deleteMyResume',
+        method: 'post',
+        data
+    })
+}
+
 // 首页导师列表
 export function queryTeachers() {
-  return request({
-    url: '/home/queryTeachers',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryTeachers',
+        method: 'post'
+    })
 }
+
 // 首页热门招聘单位列表
 export function queryCompany() {
-  return request({
-    url: '/home/queryJobs',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryJobs',
+        method: 'post'
+    })
 }
+
 // 首页职位列表
 export function queryJobs() {
-  return request({
-    url: '/home/queryCompany',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryCompany',
+        method: 'post'
+    })
 }
+
 // 首页人才列表
 export function queryTalents() {
-  return request({
-    url: '/home/queryTalents',
-    method: 'post'
-  })
+    return request({
+        url: '/home/queryTalents',
+        method: 'post'
+    })
 }
 
 // 首页友情链接列表
 export function queryFriendShips() {
-	return request({
-		url: '/home/queryFriendShips',
-		method: 'post'
-	})
+    return request({
+        url: '/home/queryFriendShips',
+        method: 'post'
+    })
 }
 
 // 首页视频列表
 export function queryVideos() {
-	return request({
-		url: '/home/queryVideos',
-		method: 'post'
-	})
+    return request({
+        url: '/home/queryVideos',
+        method: 'post'
+    })
 }
 
 // =======================首页结束=========================
@@ -316,6 +400,7 @@ export function queryWorkDynamics() {
         method: 'post'
     })
 }
+
 // 通知列表
 export function queryNoticeList() {
     return request({
@@ -323,6 +408,7 @@ export function queryNoticeList() {
         method: 'post'
     })
 }
+
 // 行业资讯列表
 export function queryIndustryInfos() {
     return request({
@@ -330,6 +416,7 @@ export function queryIndustryInfos() {
         method: 'post'
     })
 }
+
 // 政法政规列表
 export function queryPoliticalAndRegulations() {
     return request({
@@ -337,6 +424,7 @@ export function queryPoliticalAndRegulations() {
         method: 'post'
     })
 }
+
 // 培训风采列表
 export function queryTrainingAndDemeanor(data) {
     return request({
@@ -345,6 +433,7 @@ export function queryTrainingAndDemeanor(data) {
         data: data
     })
 }
+
 // 最新新闻-滚图列表
 export function queryLatestNews() {
     return request({
@@ -352,6 +441,7 @@ export function queryLatestNews() {
         method: 'post'
     })
 }
+
 // 新闻详情列表
 export function queryNewsDetail(params) {
     return request({
@@ -360,6 +450,7 @@ export function queryNewsDetail(params) {
         data: params
     })
 }
+
 // 分类新闻列表
 export function queryNewsListByCategory(data) {
     return request({
@@ -368,6 +459,7 @@ export function queryNewsListByCategory(data) {
         data: data
     })
 }
+
 // =======================新闻二级页面结束=========================
 
 
@@ -379,6 +471,7 @@ export function queryProject() {
         method: 'post'
     })
 }
+
 // 培训项目列表
 export function queryTeachersByPage(data) {
     return request({
@@ -387,12 +480,14 @@ export function queryTeachersByPage(data) {
         data: data
     })
 }
+
 export function queryCategory() {
     return request({
         url: '/video/queryVideoKind',
         method: 'post'
     })
 }
+
 export function signUpOnlineAction(data) {
     return request({
         url: '/home/signUpOnlineAction',
@@ -400,12 +495,14 @@ export function signUpOnlineAction(data) {
         data
     })
 }
+
 export function queryCategory1() {
     return request({
         url: '/video/queryCategory',
         method: 'post'
     })
 }
+
 // 获取分类列表
 // 通过分类获取视频列表
 export function queryVideoByCategory(params) {
@@ -415,6 +512,7 @@ export function queryVideoByCategory(params) {
         data: params
     })
 }
+
 // 通过分类获取视频列表
 export function queryVideoByCategory1(params) {
     return request({
@@ -423,8 +521,8 @@ export function queryVideoByCategory1(params) {
         data: params
     })
 }
-// =======================教育培新页面结束=========================
 
+// =======================教育培新页面结束=========================
 
 
 // =======================招揽人才开始=========================
@@ -436,6 +534,7 @@ export function queryFilterOptions(data) {
         data
     })
 }
+
 // 获取简历
 export function queryResume(data) {
     return request({
@@ -444,14 +543,16 @@ export function queryResume(data) {
         data
     })
 }
+
 // 邀约面试
 export function invateInterViewByIds(data) {
-  return request({
-    url: '/talent/invateInterViewByIds',
-    method: 'post',
-    data
-  })
+    return request({
+        url: '/talent/invateInterViewByIds',
+        method: 'post',
+        data
+    })
 }
+
 // 简历收藏
 export function collectResumesByIds(data) {
     return request({
@@ -460,17 +561,18 @@ export function collectResumesByIds(data) {
         data
     })
 }
+
 // 简历详情
 export function queryResumeDetail(params) {
     return request({
-      url: '/talent/queryResumeDetail',
+        url: '/talent/queryResumeDetail',
         method: 'post',
-        data:params
+        data: params
     })
 
 }
-// =======================招揽人才结束=========================
 
+// =======================招揽人才结束=========================
 
 
 // =======================找工作开始=========================
@@ -482,6 +584,7 @@ export function queryJobsByPage(data) {
         data
     })
 }
+
 // 职位申请
 export function applyJob(data) {
     return request({
@@ -490,6 +593,7 @@ export function applyJob(data) {
         data
     })
 }
+
 // 职位收藏夹删除
 export function deleteCollectJobs(data) {
     return request({
@@ -498,6 +602,7 @@ export function deleteCollectJobs(data) {
         data
     })
 }
+
 // 职位申请记录删除
 export function deleteJobApplyRecods(data) {
     return request({
@@ -506,6 +611,7 @@ export function deleteJobApplyRecods(data) {
         data
     })
 }
+
 // 我的面试机会删除
 export function deleteInvitedChance(data) {
     return request({
@@ -514,6 +620,7 @@ export function deleteInvitedChance(data) {
         data
     })
 }
+
 // 删除简历被查看记录
 export function deleteLookedRecords(data) {
     return request({
@@ -522,6 +629,7 @@ export function deleteLookedRecords(data) {
         data
     })
 }
+
 // 我的订单
 export function queryMyOrder(data) {
     return request({
@@ -530,6 +638,7 @@ export function queryMyOrder(data) {
         data
     })
 }
+
 // 订单删除
 export function deleteOrder(data) {
     return request({
@@ -538,6 +647,7 @@ export function deleteOrder(data) {
         data
     })
 }
+
 // 职位收藏
 export function collectJobs(data) {
     return request({
@@ -546,6 +656,7 @@ export function collectJobs(data) {
         data
     })
 }
+
 // 职位详情
 export function queryJobDetail(data) {
     return request({
@@ -554,4 +665,23 @@ export function queryJobDetail(data) {
         data
     })
 }
+
+// 课程详情
+export function queryLessonDetail(data) {
+    return request({
+        url: '/education/queryLessonDetail',
+        method: 'post',
+        data
+    })
+}
+
+// 培训项目详情
+export function queryProjectDetail(data) {
+    return request({
+        url: '/education/queryProjectDetail',
+        method: 'post',
+        data
+    })
+}
+
 // =======================找工作结束=========================

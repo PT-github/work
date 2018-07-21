@@ -2,8 +2,33 @@
     <div class="s-income">
         <div class="title">我的积分</div>
         <div class="incomeBox">
-            <p>当前积分：{{ totalIncome }} <span class="exchange" @click="exchange">兑换(选择商品)</span></p>
+            <p>当前积分：{{ totalIncome + '分' }} <span class="exchange" @click="exchange">兑换(选择商品)</span></p>
         </div>
+        <template v-if="showExchangePanel">
+            <ul class="tab clearfix">
+                <li class="on">积分兑换课程</li>
+            </ul>
+            <div class="table">
+                <div class="theader">
+                    <div class="tr">
+                        <div class="th">开班时间</div>
+                        <div class="th">课程名称</div>
+                        <div class="th">课时</div>
+                        <div class="th">积分</div>
+                        <div class="th">操作</div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    <div class="tr" v-for="(item, index) in lessionList" :key="'lessionList-' + index">
+                        <div class="td">{{ item.openDate }}</div>
+                        <div class="td"><router-link tag="a" :to="{ path: '/lesson-detail', query: { id: item.id } }">{{ item.name }}</router-link></div>
+                        <div class="td">{{ item.classHour }}</div>
+                        <div class="td">{{ item.score }}</div>
+                        <div class="td"><span @click="exchangeLessonFun(item.id, item.score)">兑换</span></div>
+                    </div>
+                </div>
+            </div>
+        </template>
         <ul class="tab clearfix">
             <li class="on">积分明细</li>
         </ul>
@@ -19,21 +44,23 @@
                 <div class="tr" v-for="(item, index) in scoreList" :key="'scoreList-' + index">
                     <div class="td">{{ item.time }}</div>
                     <div class="td">{{ item.des }}</div>
-                    <div class="td">{{ item.score }}</div>
+                    <div class="td">{{ item.score + '分' }}</div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import { queryScore } from '@/api/service'
+    import { queryScore, queryScoreLessons, exchangeLesson } from '@/api/service'
     export default {
         name: 'sScore',
         data() {
             return {
                 active: 0,
-                totalIncome: '10000分',
-                scoreList: []
+                totalIncome: '10000',
+                scoreList: [],
+                showExchangePanel: false,
+                lessionList: []
             }
         },
         mounted() {
@@ -55,7 +82,45 @@
                 })
             },
             exchange() {
-                alert('选择商品')
+                this.showExchangePanel = true
+                if (this.lessionList.length === 0) {
+                    this.getLessons()
+                }
+            },
+            getLessons() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                queryScoreLessons().then(res => {
+                    loading.close()
+                    this.lessionList.push(...res.list)
+                })
+            },
+            exchangeLessonFun(id, score) {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                exchangeLesson({id, userId: this.$store.state.user.id}).then(res => {
+                    loading.close()
+                    if (res.success) {
+                        this.$message({
+                            message: '课程兑换成功',
+                            type: 'success'
+                        })
+                        this.totalIncome = this.totalIncome - score
+                    } else {
+                        this.$message({
+                            message: '课程兑换失败:' + res.message,
+                            type: 'error'
+                        })
+                    }
+                })
             }
         }
     }
@@ -131,6 +196,10 @@
             p {
                 height: 30px;
                 line-height: 30px;
+                .exchange {
+                    color: orange;
+                    cursor: pointer;
+                }
             }
         }
         .title {
