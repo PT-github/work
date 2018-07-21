@@ -4,7 +4,7 @@
         <div class="part" v-for="(item, index) in videoList" :key="'category-' + index">
             <div class="category">{{ item.name }}</div>
             <ul class="teacherBox clearfix">
-                <li v-for="(v, idx) in item.child" :key="'video-' + idx">
+                <li v-for="(v, idx) in item.child" :key="'video-' + idx" @click="playShow(v.videoUrl, v.videoPic)">
                     <div class="pic">
                         <img :src="v.imgUrl" :alt="v.name">
                     </div>
@@ -16,46 +16,66 @@
                 </li>
             </ul>
         </div>
+        <el-dialog @close="close" :close-on-click-modal="false" :close-on-press-escape="false"
+                   :visible.sync="dialogVisible" width="1000px">
+            <sVideoPlay :videoUrl="videoUrl" :videoPic="videoPic" ref="sVideoPlayDom"></sVideoPlay>
+        </el-dialog>
     </div>
 </template>
 <script>
-    import { queryCategory1,queryVideoByCategory1 } from '@/api/service'
+    import { queryCategory,queryVideoByCategory } from '@/api/service'
+    import sVideoPlay from '@/views/home/components/s-video-play'
     export default {
         name: 'sMyvideo',
         data() {
             return {
-                videoList: []
+                videoList: [],
+                dialogVisible: false,
+                videoUrl: '',
+                videoPic: ''
             }
         },
         mounted() {
-            this.getVideoByCategory()
+            const loading = this.$loading({
+                lock: true,
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.1)',
+                fullscreen: false,
+                target: this.$el.querySelector('.video-list')
+            })
+            this.getVideoByCategory().then(() => {
+                loading.close()
+            })
         },
         methods: {
-            async getVideoByCategory() {
-                const loading = this.$loading({
-                    lock: true,
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.1)',
-                    fullscreen: false,
-                    target: this.$el.querySelector('.video-list')
+            close() {
+                this.$refs['sVideoPlayDom'].pause()
+            },
+            playShow(url, pic) {
+                this.videoUrl = url
+                this.videoPic = pic
+                this.dialogVisible = true
+                this.$nextTick(() => {
+                    this.$refs['sVideoPlayDom'].play()
                 })
-                await queryCategory1().then(res => {
+            },
+            getVideoByCategory() {
+                return queryCategory().then(res => {
                     let obj = {}
                     for (let i = 0; i < res.list.length; i++) {
                         obj = res.list[i]
                         obj.child = []
                         this.videoList.push(obj)
-                        queryVideoByCategory1({categoryId: res.list[i].id}).then(ret => {
+                        queryVideoByCategory({categoryId: res.list[i].id}).then(ret => {
                             this.videoList[i].child.push(...ret.list)
                         })
                     }
 
-                }).then(() => {
-                    this.$nextTick(() => {
-                        loading.close()
-                    })
                 })
             },
+        },
+        components: {
+            sVideoPlay
         }
     }
 </script>
