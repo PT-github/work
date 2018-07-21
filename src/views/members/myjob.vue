@@ -70,21 +70,29 @@
         <div class="table" v-show="active === 3">
             <div class="theader">
                 <div class="tr">
-                    <div class="th">职位名</div>
-                    <div class="th">公司名</div>
-                    <div class="th">被查看次数</div>
-                    <div class="th">工作地点</div>
-                    <div class="th">薪资</div>
+                    <!--<div class="th">职位名</div>-->
+                    <!--<div class="th">公司名</div>-->
+                    <!--<div class="th">被查看次数</div>-->
+                    <!--<div class="th">工作地点</div>-->
+                    <!--<div class="th">薪资</div>-->
+                  <div class="th">简历名称</div>
+                  <div class="th">公司名</div>
+                  <div class="th">被查看次数</div>
+                  <div class="th">查看时间</div>
                     <div class="th">操作</div>
                 </div>
             </div>
             <div class="tbody">
                 <div class="tr" v-for="(item, index) in lookedRecords" :key="'lookedRecords-' + index">
-                    <div class="td">{{ item.job }}</div>
-                    <div class="td">{{ item.company }}</div>
-                    <div class="td">{{ item.num }}</div>
-                    <div class="td">{{ item.place }}</div>
-                    <div class="td">{{ item.salary }}</div>
+                    <!--<div class="td">{{ item.job }}</div>-->
+                    <!--<div class="td">{{ item.company }}</div>-->
+                    <!--<div class="td">{{ item.num }}</div>-->
+                    <!--<div class="td">{{ item.place }}</div>-->
+                    <!--<div class="td">{{ item.salary }}</div>-->
+                  <div class="td">{{ item.vitaeName }}</div>
+                  <div class="td">{{ item.companyName }}</div>
+                  <div class="td">{{ item.lookNum }}</div>
+                  <div class="td">{{ item.updateTime }}</div>
                     <div class="td"><span @click="applyJob(item.id)">申请</span><span @click="deleteRecords(item.id)">删除</span></div>
                 </div>
             </div>

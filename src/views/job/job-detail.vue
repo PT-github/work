@@ -2,9 +2,9 @@
     <div class="resume-detail_box">
         <div class="title-logo clearfix">
             <div class="pic fl">
-                <img src="/static/imgs/logo.png" alt="湖南健康服务业协会">
+                <img src="/static/imgs/logo.png" alt="湖南省健康人才网">
             </div>
-            <div class="title fl">湖南健康服务业协会</div>
+            <div class="title fl">湖南省健康人才网</div>
         </div>
         <div class="job-detail">
             <div class="job-control">

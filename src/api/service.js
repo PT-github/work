@@ -23,7 +23,7 @@ export function leaveMessgage(data) {
 // 我的基本信息
 export function queryMyBaseInfo(data) {
     return request({
-        url: '/user/queryMyBaseInfo',
+        url: '/login/user/queryMyBaseInfo',
         method: 'post',
         data
     })
@@ -32,7 +32,7 @@ export function queryMyBaseInfo(data) {
 // 我的收益
 export function queryIncome(data) {
     return request({
-        url: '/user/queryIncome',
+        url: '/login/income/queryIncome',
         method: 'post',
         data
     })
@@ -41,7 +41,7 @@ export function queryIncome(data) {
 // 我的所有收益列表
 export function queryAllIncomeList(data) {
     return request({
-        url: '/user/queryAllIncomeList',
+        url: '/login/income/queryAllIncomeList',
         method: 'post',
         data
     })
@@ -50,7 +50,7 @@ export function queryAllIncomeList(data) {
 // 我的本季度收益列表
 export function queryQuarterIncome(data) {
     return request({
-        url: '/user/queryQuarterIncome',
+        url: '/login/income/queryQuarterIncome',
         method: 'post',
         data
     })
@@ -59,7 +59,7 @@ export function queryQuarterIncome(data) {
 // 我的积分
 export function queryScore(data) {
     return request({
-        url: '/user/queryScore',
+        url: '/login/score/queryScore',
         method: 'post',
         data
     })
@@ -68,7 +68,7 @@ export function queryScore(data) {
 // 职位收藏夹
 export function queryCollectJobs(data) {
     return request({
-        url: '/user/queryCollectJobs',
+        url: '/login/position/queryCollectJobs',
         method: 'post',
         data
     })
@@ -77,7 +77,7 @@ export function queryCollectJobs(data) {
 // 职位申请记录
 export function queryJobApplyRecods(data) {
     return request({
-        url: '/user/queryJobApplyRecods',
+        url: '/login/positionapply/queryJobApplyRecods',
         method: 'post',
         data
     })
@@ -86,7 +86,7 @@ export function queryJobApplyRecods(data) {
 // 我的面试机会
 export function queryInvitedChance(data) {
     return request({
-        url: '/user/queryInvitedChance',
+        url: '/login/interview/queryInvitedChance',
         method: 'post',
         data
     })
@@ -95,7 +95,7 @@ export function queryInvitedChance(data) {
 // 简历被查看记录
 export function queryLookedRecords(data) {
     return request({
-        url: '/user/queryLookedRecords',
+        url: '/login/vitae/queryLookedRecords',
         method: 'post',
         data
     })
@@ -261,7 +261,7 @@ export function deleteNetWorkTalentList(id) {
 // 证书查询
 export function queryCerti(data) {
     return request({
-        url: '/home/queryCertificate',
+        url: '/cert/queryCertificate',
         method: 'post',
         data
     })
@@ -483,14 +483,14 @@ export function queryTeachersByPage(data) {
 
 export function queryCategory() {
     return request({
-        url: '/video/queryVideoKind',
+        url: '/video/queryCategory',
         method: 'post'
     })
 }
 
 export function signUpOnlineAction(data) {
     return request({
-        url: '/home/signUpOnlineAction',
+        url: '/signup/signUpOnlineAction',
         method: 'post',
         data
     })
@@ -507,7 +507,7 @@ export function queryCategory1() {
 // 通过分类获取视频列表
 export function queryVideoByCategory(params) {
     return request({
-        url: '/video/queryVideoList',
+        url: '/video/queryVideoByCategory',
         method: 'post',
         data: params
     })
@@ -516,7 +516,7 @@ export function queryVideoByCategory(params) {
 // 通过分类获取视频列表
 export function queryVideoByCategory1(params) {
     return request({
-        url: '/video/queryVideoByCategory',
+        url: '/login/video/queryVideoByCategory',
         method: 'post',
         data: params
     })
@@ -633,7 +633,7 @@ export function deleteLookedRecords(data) {
 // 我的订单
 export function queryMyOrder(data) {
     return request({
-        url: '/user/queryMyOrder',
+        url: '/login/order/queryMyOrder',
         method: 'post',
         data
     })
@@ -669,7 +669,7 @@ export function queryJobDetail(data) {
 // 课程详情
 export function queryLessonDetail(data) {
     return request({
-        url: '/education/queryLessonDetail',
+        url: '/lesson/queryLessonDetail',
         method: 'post',
         data
     })
@@ -678,7 +678,7 @@ export function queryLessonDetail(data) {
 // 培训项目详情
 export function queryProjectDetail(data) {
     return request({
-        url: '/education/queryProjectDetail',
+        url: '/train/queryProjectDetail',
         method: 'post',
         data
     })
