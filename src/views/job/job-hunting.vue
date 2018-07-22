@@ -218,7 +218,7 @@
                         type: 'warning'
                     })
                 } else {
-                    if (this.$store.getters.isLogin !== '1') {
+                    if (!this.$store.state.user.isLogin) {
                         this.$message({
                             message: '请先登录',
                             type: 'warning'
@@ -249,7 +249,8 @@
                         type: 'warning'
                     })
                 } else {
-                    if (this.$store.getters.isLogin !== '1') {
+                    console.log(this.$store.state.user.isLogin)
+                    if (!this.$store.state.user.isLogin) {
                         this.$message({
                             message: '请先登录',
                             type: 'warning'

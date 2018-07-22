@@ -173,6 +173,7 @@
         name: 'sHeader',
         data() {
             return {
+                timer: null,
                 count: 0,
                 keywords: '',
                 registerType: 0,
@@ -246,14 +247,19 @@
                 }
             },
             getCounts() {
-                setInterval(() => {
-                    queryCounts(this.$store.state.user.id).then(res => {
-                        console.log(res)
-                        this.count = res.data.count
-                        if (res.data.count > 0) {
-                            this.$store.dispatch('setCount', true)
-                        }
-                    })
+                this.timer = setInterval(() => {
+                    if (this.$store.state.user.id) {
+                        queryCounts(this.$store.state.user.id).then(res => {
+                            console.log(res)
+                            this.count = res.data.count
+                            if (res.data.count > 0) {
+                                this.$store.dispatch('setCount', true)
+                            }
+                        })
+                    } else {
+                        clearInterval(this.timer)
+                    }
+
                 }, 5000)
             },
             searchByKeywords() {
