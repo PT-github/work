@@ -2,18 +2,17 @@
     <div class="s-footer">
         <div class="s-footer-container clearfix">
             <div class="fl fl-left">
-                <p>湖南省健康服务业协会</p>
-                <p class="s">HUNAN HEALHT SERVICE INDUSTRY ASSOCLATION</p>
+                <p>湖南省健康人才网</p>
+                <p class="s">HUNAN HEALTH TALENT SERVICE WEBSITE</p>
             </div>
             <div class="fl fl-right">
                 <p class="s">
-                    <span>地址：XXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
-                    <span>邮编：000000</span>
-                    <span>座机：000-12345678</span>
+                    <span>地址：长沙市蔡锷北路529号宏建大厦二楼湖南省健康服务业协会(湘雅医院老门诊楼斜对面长沙电子工业学校旁）</span>
+                    <span>邮编：410005</span>
                 </p>
                 <p class="s">
-                    <span>联系方式：12345678901</span>
-                    <span>12345678901</span>
+                    <span>联系方式：刘老师 18673183662</span>
+                    <span>座机：0731---82595909 82595808</span>
                 </p>
                 <p class="s">
                     <span>版权所有：© 2018-2050    xxxxxxxxxxxxxxxxx公司    川ICP备000000号</span>

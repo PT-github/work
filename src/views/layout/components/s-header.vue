@@ -5,8 +5,8 @@
                 <div class="fl clearfix">
                     <div class="fl logo"><img src="/static/imgs/logo.png" alt="健康人才网"></div>
                     <div class="fl bt">
-                        <p class="title">湖南省健康服务业协会</p>
-                        <p class="title-des">HUNAN HEALHT SERVICE INDUSTRY ASSOCLATION</p>
+                        <p class="title">湖南省健康人才网</p>
+                        <p class="title-des">HUNAN HEALHT TALENT SERVICE WEBSITE</p>
                     </div>
                 </div>
                 <div class="fr">
@@ -302,10 +302,11 @@
                     fullscreen: true
                 })
                 regAction({
-                    username: this.regUserName,
+                    userName: this.regUserName,
                     password: this.regPwd,
                     tel: this.regTel,
-                    email: this.regMail
+                    email: this.regMail,
+                    type: this.registerType
                 }).then(response => {
                     loading.close()
                     if (response.success) {
