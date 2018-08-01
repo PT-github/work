@@ -65,7 +65,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                deleteInterviewById(id).then(res => {
+                deleteCollectById(id).then(res => {
                     loading.close()
                     if (res.success) {
                         this.$message({
@@ -88,7 +88,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                deleteCollectById(id).then(res => {
+                deleteInterviewById(id).then(res => {
                     loading.close()
                     if (res.success) {
                         this.$message({

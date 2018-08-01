@@ -2,7 +2,7 @@
     <ul class="search-result">
         <li class="search-result_li" v-for="(item, index) in list" :key="'mail_' + index">
             <div class="search-name">
-                <router-link tag='a' target="_blank" :to="{ path: '/news-detail', query: { id: item.id } }">{{ item.des }}</router-link>
+                {{ item.des }}
             </div>
             <template v-if="index < unreadCounts">
                 <div class="tag">

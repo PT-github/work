@@ -516,7 +516,7 @@ export default {
                 "nickname|1": ["张三", "李四"],
                 "account": "account",
                 "tel": "18522222222",
-                "type": 2
+                "type": 1
             }
         })
     },

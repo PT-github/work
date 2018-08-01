@@ -13,15 +13,11 @@ export function login(username, password, type) {
     })
 }
 
-export function logout(username, sessionId) {
-    const data = {
-        username,
-        sessionId
-    }
+export function logout(account) {
     return request({
         url: '/user/logout',
         method: 'post',
-        data
+        params: {account}
     })
 }
 
