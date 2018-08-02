@@ -93,7 +93,7 @@
                   <div class="td">{{ item.companyName }}</div>
                   <div class="td">{{ item.lookNum }}</div>
                   <div class="td">{{ item.updateTime }}</div>
-                    <div class="td"><span @click="applyJob(item.id)">申请</span><span @click="deleteRecords(item.id)">删除</span></div>
+                    <div class="td"><span @click="deleteRecords(item.id)">删除</span></div>
                 </div>
             </div>
         </div>
@@ -242,6 +242,7 @@
                 })
                 queryLookedRecords({id: this.$store.state.user.id}).then(res => {
                     loading.close()
+                    this.lookedRecords.splice(0, this.lookedRecords.length)
                     if (res.list && res.list.length > 0) {
                         this.lookedRecords.push(...res.list)
                     }

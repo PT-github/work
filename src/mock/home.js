@@ -638,6 +638,19 @@ export default {
             ]
         })
     },
+    queryLookedRecords: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, vitaeName: '职位名称0', lookNum: '10', companyName: '公司名称', updateTime: '2018-1-1 10:10:10', salary: '100元/小时' },
+                { id: 2, vitaeName: '职位名称1', lookNum: '10', companyName: '公司名称', updateTime: '2018-1-1 10:10:10', salary: '100元/小时' },
+                { id: 3, vitaeName: '职位名称2', lookNum: '10', companyName: '公司名称', updateTime: '2018-1-1 10:10:10', salary: '100元/小时' },
+                { id: 4, vitaeName: '职位名称3', lookNum: '10', companyName: '公司名称', updateTime: '2018-1-1 10:10:10', salary: '100元/小时' },
+                { id: 5, vitaeName: '职位名称4', lookNum: '10', companyName: '公司名称', updateTime: '2018-1-1 10:10:10', salary: '100元/小时' }
+            ]
+        })
+    },
     /**
      * 我的本季度收益列表
      * @returns {*}
