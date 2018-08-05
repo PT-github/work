@@ -350,7 +350,7 @@
                         background: 'rgba(0, 0, 0, 0.1)',
                         fullscreen: true
                     })
-                    collectResumesByIds({ids: this.selectResumeArray.join(',')}).then((res) => {
+                    collectResumesByIds({ids: this.selectResumeArray.join(','), userId: this.$store.state.user.id}).then((res) => {
                         loading.close()
                         this.$message({
                             message: '简历收藏成功',
@@ -381,7 +381,7 @@
                         background: 'rgba(0, 0, 0, 0.1)',
                         fullscreen: true
                     })
-                    invateInterViewByIds({ids: this.selectResumeArray.join(',')}).then((res) => {
+                    invateInterViewByIds({ids: this.selectResumeArray.join(','), userId: this.$store.state.user.id}).then((res) => {
                         loading.close()
                         this.$message({
                             message: '邀约面试成功',
