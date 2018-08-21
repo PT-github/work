@@ -139,7 +139,7 @@
 </template>
 <script>
     import areaComp from './components/areaComp'
-    import { queryFilterOptions, queryJobsByPage, applyJob, collectJobs, queryJobDetail } from '@/api/service'
+    import { queryJobFilterOptions, queryJobsByPage, applyJob, collectJobs, queryJobDetail } from '@/api/service'
     export default {
         name: 'jobHunting',
         components: {
@@ -203,7 +203,7 @@
             }
         },
         mounted() {
-            this.getFilterOptions()
+            this.queryJobFilterOptions()
             this.getJobs()
         },
         methods: {
@@ -418,14 +418,14 @@
                     this.getJobs()
                 })
             },
-            getFilterOptions() {
+          queryJobFilterOptions() {
                 const loading = this.$loading({
                     lock: true,
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                queryFilterOptions().then((res) => {
+              queryJobFilterOptions().then((res) => {
                     loading.close()
                     this.filterOptions = res.data
                 }).catch(() => {

@@ -562,6 +562,16 @@ export function queryFilterOptions(data) {
     })
 }
 
+export function queryJobFilterOptions(data) {
+  return request({
+    url: '/position/queryFilterOptions',
+    method: 'post',
+    data
+  })
+}
+
+
+
 // 获取简历
 export function queryResume(data) {
     return request({

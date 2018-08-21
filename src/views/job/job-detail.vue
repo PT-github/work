@@ -33,11 +33,11 @@
             </div>
             <div class="job-control">
                 <div class="label">职位描述：</div>
-                <div class="value">{{activeResume.jobDescription}}</div>
+              <div class="value"><pre>{{activeResume.jobDescription}}</pre></div>
             </div>
             <div class="job-control">
                 <div class="label">公司信息：</div>
-                <div class="value">{{activeResume.companyInfo}}</div>
+              <div class="value"><pre>{{activeResume.companyInfo}}</pre></div>
             </div>
         </div>
     </div>

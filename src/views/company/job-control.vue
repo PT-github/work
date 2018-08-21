@@ -88,7 +88,7 @@
     </div>
 </template>
 <script>
-    import { queryPubJobs, refreshCompanyJob, publishCompanyJob, revokeCompanyJob, deleteCompanyJob, queryFilterOptions, addCompanyJob } from '@/api/service'
+    import { queryPubJobs, refreshCompanyJob, publishCompanyJob, revokeCompanyJob, deleteCompanyJob, queryJobFilterOptions, addCompanyJob } from '@/api/service'
     import { Form, FormItem, Button, Input, RadioGroup, Radio  } from 'element-ui'
     import areaComp from '@/views/job/components/areaComp'
     export default {
@@ -211,7 +211,7 @@
             expectedSalary(id) {
                 this.addJob.expectedSalary = id || ''
             },
-            getFilterOptions() {
+          queryJobFilterOptions() {
                 if (this.loadFilterOptins) {
                     this.dialogVisible = true
                     return
@@ -222,7 +222,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                queryFilterOptions().then((res) => {
+                queryJobFilterOptions().then((res) => {
                     this.dialogVisible = true
                     loading.close()
                     this.filterOptions = res.data
@@ -231,7 +231,7 @@
                 })
             },
             showPubJobDialog() {
-                this.getFilterOptions()
+                this.queryJobFilterOptions()
             },
             publishJob(id) {
                 const loading = this.$loading({

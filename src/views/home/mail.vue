@@ -2,7 +2,7 @@
     <ul class="search-result">
         <li class="search-result_li" v-for="(item, index) in list" :key="'mail_' + index">
             <div class="search-name">
-                {{ item.des }}
+                {{ item.name }}
             </div>
             <template v-if="index < unreadCounts">
                 <div class="tag">

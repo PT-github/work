@@ -85,6 +85,7 @@ Mock.mock(/\/education\/queryProjectDetail/, 'post', api.queryProjectDetail)
 
 
 // 找工作
+Mock.mock(/\/position\/queryFilterOptions/, 'post', api.queryFilterOptions)
 Mock.mock(/\/position\/queryJobsByPage/, 'post', api.queryJobsByPage)
 Mock.mock(/\/position\/applyJob/, 'post', api.invateInterViewByIds)
 Mock.mock(/\/position\/collectJobs/, 'post', api.invateInterViewByIds)

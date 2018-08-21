@@ -295,12 +295,12 @@
 
             },
             reg() {
-                const loading = this.$loading({
-                    lock: true,
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.1)',
-                    fullscreen: true
-                })
+//                const loading = this.$loading({
+//                    lock: true,
+//                    spinner: 'el-icon-loading',
+//                    background: 'rgba(0, 0, 0, 0.1)',
+//                    fullscreen: true
+//                })
                 regAction({
                     userName: this.regUserName,
                     password: this.regPwd,
@@ -308,7 +308,7 @@
                     email: this.regMail,
                     type: this.registerType
                 }).then(response => {
-                    loading.close()
+//                    loading.close()
                     if (response.success) {
                         this.$store.dispatch('SetLoginData', response.data)
                         Message({
@@ -328,14 +328,14 @@
                 this.type = type
             },
             Login(){
-                const loading = this.$loading({
-                    lock: true,
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.1)',
-                    fullscreen: true
-                })
+//                const loading = this.$loading({
+//                    lock: true,
+//                    spinner: 'el-icon-loading',
+//                    background: 'rgba(0, 0, 0, 0.1)',
+//                    fullscreen: true
+//                })
                 this.$store.dispatch('Login', {username: this.username, password: this.password, type: this.type}).then(() => {
-                    loading.close()
+//                    loading.close()
                     this.dialogVisible = false
                 })
             },
