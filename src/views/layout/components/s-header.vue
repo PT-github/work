@@ -105,7 +105,7 @@
                     <div class="fr-search">
                         <div class="flex">
                             <div class="input">
-                                <input type="text" v-model="keywords">
+                                <input type="text" v-model="keywords" @keyup.enter="searchByKeywords">
                             </div>
                             <div class="btn">
                                 <div class="search-btn" @click="searchByKeywords">

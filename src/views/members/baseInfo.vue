@@ -1,8 +1,15 @@
 <template>
     <div class="s-baseInfo">
         <div class="title">我的账户</div>
-        <div class="pic"><img :src="userInfo.imgUrl" alt=""></div>
-        <div class="form">
+        <div class="pic">
+            <img :src="userInfo.imgUrl" alt="">
+            <span class="modifyBtn">
+                头像修改
+                <input @change="fileUpload($event)" class="file" type="file" name="file"
+                       accept="image/jpeg,image/png,image/gif">
+            </span>
+        </div>
+        <div class="form clearfix">
             <div class="form-control">
                 <div class="label">登录名：</div>
                 <div class="value">{{ userInfo.account }}</div>
@@ -25,7 +32,7 @@
             </div>
             <div class="form-control">
                 <div class="label">手机是否验证：</div>
-                <div class="value">{{ userInfo.telIsValidate === 1 ? '是' : '否' }}</div>
+                <div class="value">{{ userInfo.telIsValidate == 1 ? '是' : '否' }}</div>
             </div>
             <div class="form-control">
                 <div class="label">邮箱：</div>
@@ -33,34 +40,110 @@
             </div>
             <div class="form-control">
                 <div class="label">邮箱是否验证：</div>
-                <div class="value">{{ userInfo.mailIsValidate === 1 ? '是' : '否' }}</div>
+                <div class="value">{{ userInfo.mailIsValidate == 1 ? '是' : '否' }}</div>
+            </div>
+            <div class="form-control" v-if="userInfo.bindMxChat == 1">
+                <div class="label">微信号：</div>
+                <div class="value">{{ userInfo.mxChat }}</div>
             </div>
             <div class="form-control">
                 <div class="label">是否绑定微信：</div>
-                <div class="value">{{ userInfo.bindMxChat === 1 ? '是' : '否' }}</div>
+                <div class="value">{{ userInfo.bindMxChat == 1 ? '是' : '否' }}</div>
             </div>
             <div class="form-control">
                 <div class="label">我的邀请码：</div>
                 <div class="value">{{ userInfo.invitedCode }}</div>
             </div>
         </div>
+        <div class="createResume"><span @click="showPopup">账户修改</span></div>
+        <el-dialog title="账户修改" :visible.sync="dialogFormVisible">
+            <el-form size="small" :model="form" label-width="100px">
+                <el-form-item label="昵称">
+                    <el-input v-model="form.nickname" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="真实姓名">
+                    <el-input v-model="form.truename" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="生日">
+                    <el-date-picker v-model="form.birth" type="date" placeholder="选择日期"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="手机">
+                    <el-input v-model="form.tel" auto-complete="off">
+                        <el-button slot="append" type="primary">验证</el-button>
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-input v-model="form.mail" auto-complete="off">
+                        <el-button slot="append" type="primary">验证</el-button>
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="微信号">
+                    <el-input v-model="form.mxChat" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="邀请码">
+                    <el-input readonly="true" v-model="form.invitedCode" auto-complete="off">
+                        <el-button slot="append" type="primary">一键生成</el-button>
+                    </el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
-    import { queryMyBaseInfo} from '@/api/service'
+    import {queryMyBaseInfo, upload} from '@/api/service'
+    import {Form, FormItem, Input, DatePicker} from 'element-ui'
+    import axios from 'axios'
+
     export default {
         name: 'sBaseInfo',
         data() {
             return {
-                userInfo: {}
+                userInfo: {},
+                file: '',
+                src: '',
+                formData: new FormData(),
+                dialogFormVisible: false,
+                form: {
+                    nickname: '',
+                    truename: '',
+                    birth: '',
+                    tel: '',
+                    telIsValidate: 0,
+                    mail: '',
+                    mailIsValidate: 0,
+                    invitedCode: '',
+                    bindMxChat: 0
+                }
             }
-        },
-        computed: {
         },
         mounted() {
             this.getData()
         },
         methods: {
+            showPopup() {
+                this.dialogFormVisible = true
+            },
+            fileUpload(event) {
+                this.file = event.target.files[0];//获取文件
+                var windowURL = window.URL || window.webkitURL;
+                this.file = event.target.files[0];
+                //创建图片文件的url
+                this.src = windowURL.createObjectURL(event.target.files[0]);
+                let formdata = new FormData();
+                formdata.append('file', this.file);
+                upload(formdata).then((res) => {
+                    //做处理
+                    this.$set(this.userInfo, 'imgUrl', this.src)
+                    this.$message({
+                        message: '头像修改成功',
+                        type: 'success'
+                    })
+                })
+            },
             getData() {
                 const loading = this.$loading({
                     lock: true,
@@ -70,9 +153,20 @@
                 })
                 queryMyBaseInfo({id: this.$store.state.user.id}).then(res => {
                     loading.close()
-                    this.userInfo = res.data
+                    for (let prop in res.data) {
+                        this.$set(this.userInfo, prop, res.data[prop])
+                        this.$set(this.form, prop, res.data[prop])
+                    }
+                }).catch(() => {
+                    loading.close()
                 })
             },
+        },
+        components: {
+            [Input.name]: Input,
+            [FormItem.name]: FormItem,
+            [DatePicker.name]: DatePicker,
+            [Form.name]: Form
         }
     }
 </script>
@@ -83,6 +177,16 @@
         background-color: #FFF;
         position: relative;
         min-height: 300px;
+        .createResume {
+            font-size: 14px;
+            border: 1px solid #CCC;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .pic {
             position: absolute;
             width: 85px;
@@ -92,6 +196,27 @@
             img {
                 width: 100%;
                 height: 100%;
+            }
+            .modifyBtn {
+                font-size: 12px;
+                position: absolute;
+                bottom: -22px;
+                width: 100%;
+                text-align: center;
+                color: #999;
+                border: 1px solid #999;
+                border-radius: 5px;
+                height: 20px;
+                line-height: 20px;
+                overflow: hidden;
+                .file {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    opacity: 0;
+                }
             }
         }
         .form {

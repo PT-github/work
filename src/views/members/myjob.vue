@@ -195,6 +195,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
+                this.collectList.splice(0, this.collectList.length)
                 queryCollectJobs({id: this.$store.state.user.id}).then(res => {
                     loading.close()
                     if (res.list && res.list.length > 0) {
@@ -210,6 +211,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
+                this.jobApplyRecods.splice(0, this.jobApplyRecods.length)
                 queryJobApplyRecods({id: this.$store.state.user.id}).then(res => {
                     loading.close()
                     if (res.list && res.list.length > 0) {
@@ -225,6 +227,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
+                this.invitedChance.splice(0, this.invitedChance.length)
                 queryInvitedChance({id: this.$store.state.user.id}).then(res => {
                     loading.close()
                     if (res.list && res.list.length > 0) {
@@ -240,9 +243,9 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
+                this.lookedRecords.splice(0, this.lookedRecords.length)
                 queryLookedRecords({id: this.$store.state.user.id}).then(res => {
                     loading.close()
-                    this.lookedRecords.splice(0, this.lookedRecords.length)
                     if (res.list && res.list.length > 0) {
                         this.lookedRecords.push(...res.list)
                     }

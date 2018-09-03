@@ -94,4 +94,5 @@ Mock.mock(/\/vitae\/queryMyResume/, 'post', api.queryMyResume)
 Mock.mock(/\/vitae\/refreshMyResume/, 'post', api.queryMyResume)
 Mock.mock(/\/vitae\/deleteMyResume/, 'post', api.queryMyResume)
 Mock.mock(/\/member\/editResumeSubmit/, 'post', api.queryMyResume)
+Mock.mock(/\/upload/, 'post', api.upload)
 

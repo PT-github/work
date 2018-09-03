@@ -166,7 +166,8 @@
                     } else {
                         this.hasData = false
                     }
-
+                }).catch(() => {
+                    loading.close()
                 })
             }
         },

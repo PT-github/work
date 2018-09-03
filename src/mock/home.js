@@ -552,6 +552,7 @@ export default {
                 "mail": "pengtao_it@163.com",
                 "mailIsValidate": "1",
                 "bindMxChat": "1",
+                "mxChat": "pengtao787878",
                 "invitedCode": "XXXX-XXXX-XXXX-XXXX"
             }
         })
@@ -1065,6 +1066,15 @@ export default {
                     "link": "https://www.baidu.com"
                 }
             ]
+        })
+    },
+    upload: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": {
+                "url": "http://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1527600577&di=a49676be1b756f35b8e3ab3cb4585143&imgtype=jpg&src=http%3A%2F%2Fimg6.bdstatic.com%2Fimg%2Fimage%2Fpublic%2Fwuqiuhuang.jpg"
+            }
         })
     }
 }
