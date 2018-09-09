@@ -313,6 +313,16 @@ export default {
             "message": '成功',
             data: {
                 id: 1,
+                imgUrl: 'http://www.120job.cn/UpLoadfiles/Default/PersonPhoto.gif',
+                maritalStatus: '已婚',
+                engagedIndustry: '医疗医药',
+                workNature: '全职',
+                expectIndustry: '医疗',
+                nowJob: '医院各科室',
+                nowLevel: '中级职位',
+                workingLife: '10年以上',
+                salary: '月薪8000人民币',
+                overseasExperience: '没有',
                 name: '张三',
                 birth: '2018年10月',
                 phoneNumber: '15364444444',
@@ -334,11 +344,25 @@ export default {
                 secondMajor: '育婴师',
                 placeResidence: '湖南省长沙市天心区',
                 jobIntention: '育婴师 健康管理师',
+                expectPostName: 'expectPostName',
                 salaryType: '按月',
                 expectSalary: '1W/月',
                 job: '高级育婴师',
                 expectedArea: '湖南长沙',
                 postTime: '一个月后',
+                otherRequire: '包吃住',
+                languages: [
+                    {
+                        id: 1,
+                        language: '英语',
+                        degree: '精通'
+                    },
+                    {
+                        id: 2,
+                        language: '粤语',
+                        degree: '精通'
+                    }
+                ],
                 handsOnWorkExperience: [
                     {
                         id: 1,
@@ -346,8 +370,8 @@ export default {
                         departureTime: '2018年2月',
                         company: '湖南XXX公司',
                         job: '高级软件开发工程师',
-                        jobDes: '工作的一些描述',
-                        reseanForLeaving: '个人原因'
+                        industry: '医疗医药',
+                        nature: '医师（中级职称）'
                     },
                     {
                         id: 2,
@@ -355,8 +379,8 @@ export default {
                         departureTime: '2018年3月',
                         company: '湖南AAA公司',
                         job: '中级软件开发工程师',
-                        jobDes: '工作的一些描述22',
-                        reseanForLeaving: '个人原因'
+                        industry: '医疗医药2',
+                        nature: '医师（中级职称2）'
                     },
                 ],
                 educationExperience: [
@@ -367,7 +391,8 @@ export default {
                         school: '湖南XXX学校',
                         education: '本科',
                         major: '电气自动化',
-                        professionalDes: '专业的简单描述'
+                        certificate: '英语专八',
+                        natureOfSchool: '统招本科'
                     },
                     {
                         id: 2,
@@ -376,11 +401,12 @@ export default {
                         school: '湖南BBB学校',
                         education: '本科',
                         major: '电气自动化',
-                        professionalDes: '专业的简单描述'
+                        certificate: '计算机国二',
+                        natureOfSchool: '专科'
                     }
                 ],
                 workingSkills: ['育婴师', '催乳师', '健康管理师'],
-                selfEvalution: '我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX，我是一个XXXXXXXXXXXXXXXXXXXXXXXXXXXX，我是一个XXX'
+                selfEvalution: '内科、全科、b超（彩色多普勒）都有多年临床经验。内科20年、全科和超声10多年工作经验。'
             }
         })
     },
@@ -516,7 +542,7 @@ export default {
                 "nickname|1": ["张三", "李四"],
                 "account": "account",
                 "tel": "18522222222",
-                "type": 1
+                "type": 2
             }
         })
     },
