@@ -136,6 +136,9 @@
                             type: 'success'
                         })
                     }
+                }).catch((error) => {
+                    console.log(error)
+                    loading.close()
                 })
             },
             deleteRecords(id) {
