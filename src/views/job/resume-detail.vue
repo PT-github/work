@@ -220,7 +220,7 @@
                 </div>
             </div>
             <div class="resume-title">联系方式</div>
-            <div class="err-message" v-if="!$store.state.user.isLogin">企业会员注册并登录后才能查看联系方式，点击[<a href="/">回到首页</a>]进行登录或注册</div>
+            <div class="err-message" v-if="!isLogin">企业会员注册并登录后才能查看联系方式，点击[<a href="/">回到首页</a>]进行登录或注册</div>
             <div class="resume-detail_flex" v-else>
                 <div class="job-detail job-colum_2 flex-auto">
                     <div class="job-control">
@@ -258,6 +258,11 @@
         mounted() {
             if (this.$route.query.id) {
                 this.getResumeDetail(this.$route.query.id)
+            }
+        },
+        computed: {
+            isLogin () {
+                return !!localStorage.getItem('userInfo')
             }
         },
         methods: {

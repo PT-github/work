@@ -5,7 +5,7 @@
                 <li :class="{active: activeCategory === index}" v-for="(item, index) in list" :key="'category-' + item.id" @click="exchangeCategory(index)">{{ item.name }}</li>
             </ul>
             <ul class="flex-auto" v-if="list.length > 0">
-                <li :class="{active: choosedCities.indexOf(item.id) !== -1}" v-for="item in list[activeCategory].citys">
+                <li :class="{active: choosedCities.indexOf(item.id) !== -1}" v-for="(item, index) in list[activeCategory].citys" :key="'activeCategory_' + index">
                     <span @click="chooseCities(item.id)">{{ item.name }}</span>
                 </li>
             </ul>
@@ -90,6 +90,8 @@
             .selOptions {
                 width: 130px;
                 height: 408px;
+                overflow-y: auto;
+                overflow-x: hidden;
                 li {
                     width: 100%;
                     height: 34px;

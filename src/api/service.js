@@ -10,6 +10,22 @@ export function queryCompanyMessage(id) {
         data: {id}
     })
 }
+// 邮箱验证码校验
+export function validateEmailCode(data) {
+    return request({
+        url: '/validateEmailCode',
+        method: 'post',
+        data
+    })
+}
+// 邮箱验证码校验
+export function modifyUserInfo(data) {
+    return request({
+        url: '/user/modifyUserInfo',
+        method: 'post',
+        data
+    })
+}
 
 // 留言
 export function leaveMessgage(data) {

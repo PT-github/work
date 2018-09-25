@@ -1,4 +1,4 @@
-const s = sessionStorage
+const s = localStorage
 
 export function getItem(key) {
   return s.getItem(key)

@@ -347,7 +347,7 @@
             query() {
                 this.queryOptions.pageNum = 1
                 this.$nextTick(() => {
-                    this.getPersons()
+                    this.getJobs()
                 })
             },
             companySize(id) {

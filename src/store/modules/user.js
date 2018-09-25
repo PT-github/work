@@ -1,5 +1,5 @@
 import {login, logout} from '@/api/login'
-let userInfo = sessionStorage.getItem('userInfo') || ''
+let userInfo = localStorage.getItem('userInfo') || ''
 if (!!userInfo) {
     userInfo = JSON.parse(userInfo)
 }
@@ -31,7 +31,7 @@ const user = {
     },
     actions: {
         SetLoginData({commit}, data) {
-            sessionStorage.setItem('userInfo', JSON.stringify(data))
+            localStorage.setItem('userInfo', JSON.stringify(data))
             commit('SET_USERINFO', data)
             commit('SET_ISLOGIN', true)
         },
@@ -45,7 +45,7 @@ const user = {
             return new Promise((resolve, reject) => {
                 login(username, password, userInfo.type).then(response => {
                     const data = response.data
-                    sessionStorage.setItem('userInfo', JSON.stringify(data))
+                    localStorage.setItem('userInfo', JSON.stringify(data))
                     commit('SET_USERINFO', data)
                     commit('SET_ISLOGIN', true)
                     resolve()
@@ -60,7 +60,7 @@ const user = {
                 logout(state.account).then(() => {
                     commit('SET_USERINFO', {})
                     commit('SET_ISLOGIN', false)
-                    sessionStorage.clear()
+                    localStorage.clear()
                     resolve()
                 }).catch(error => {
                     reject(error)

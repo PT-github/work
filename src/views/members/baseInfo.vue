@@ -65,7 +65,7 @@
                     <el-input v-model="form.truename" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="生日">
-                    <el-date-picker v-model="form.birth" type="date" placeholder="选择日期"></el-date-picker>
+                    <el-date-picker v-model="form.birth" value-format="yyyy-MM-dd" type="date" placeholder="选择日期"></el-date-picker>
                 </el-form-item>
                 <el-form-item label="手机">
                     <el-input v-model="form.tel" auto-complete="off">
@@ -74,27 +74,38 @@
                 </el-form-item>
                 <el-form-item label="邮箱">
                     <el-input v-model="form.mail" auto-complete="off">
-                        <el-button slot="append" type="primary">验证</el-button>
+                        <el-button slot="append" type="primary" @click="emailValidateVisible = true">验证</el-button>
                     </el-input>
                 </el-form-item>
                 <el-form-item label="微信号">
                     <el-input v-model="form.mxChat" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="邀请码">
-                    <el-input readonly="true" v-model="form.invitedCode" auto-complete="off">
+                    <el-input :readonly="true" v-model="form.invitedCode" auto-complete="off">
                         <el-button slot="append" type="primary">一键生成</el-button>
                     </el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                <el-button type="primary" @click="modifyUserInfoFun">确 定</el-button>
+            </div>
+        </el-dialog>
+        <el-dialog title="账户修改" :visible.sync="emailValidateVisible">
+            <el-form size="small" :model="validateForm" label-width="100px">
+                <el-form-item label="验证码">
+                    <el-input v-model="validateForm.emailCode" placeholder="请输入邮箱收到的验证码"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="emailValidateVisible = false">取 消</el-button>
+                <el-button type="primary" @click="validateEmailCodeFun">确 定</el-button>
             </div>
         </el-dialog>
     </div>
 </template>
 <script>
-    import {queryMyBaseInfo, upload} from '@/api/service'
+    import {queryMyBaseInfo, upload, validateEmailCode, modifyUserInfo} from '@/api/service'
     import {Form, FormItem, Input, DatePicker} from 'element-ui'
     import axios from 'axios'
 
@@ -117,13 +128,68 @@
                     mailIsValidate: 0,
                     invitedCode: '',
                     bindMxChat: 0
-                }
+                },
+                validateForm: {
+                    emailCode: ''
+                },
+                emailValidateVisible: false
             }
         },
         mounted() {
             this.getData()
         },
         methods: {
+            modifyUserInfoFun() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                modifyUserInfo(this.form).then(res => {
+                    loading.close()
+                    this.$message({
+                        message: '用户信息修改成功',
+                        type: 'success'
+                    })
+                    this.dialogFormVisible = false
+                    this.$nextTick(() => {
+                        this.getData()
+                    })
+                }).catch((error) => {
+                    loading.close()
+                    console.log(error, '用户信息修改失败')
+                })
+            },
+            validateEmailCodeFun() {
+                if (!this.validateForm.emailCode) {
+                    this.$message({
+                        message: '请输入邮箱的验证码',
+                        type: 'error'
+                    })
+                    return
+                } else {
+                    const loading = this.$loading({
+                        lock: true,
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                        fullscreen: true
+                    })
+                    validateEmailCode({
+                        email: this.form.mail,
+                        code: this.validateForm.emailCode
+                    }).then(res => {
+                        loading.close()
+                        this.$message({
+                            message: '邮箱校验成功',
+                            type: 'success'
+                        })
+                        this.emailValidateVisible = true
+                    }).catch(() => {
+                        loading.close()
+                    })
+                }
+            },
             showPopup() {
                 this.dialogFormVisible = true
             },

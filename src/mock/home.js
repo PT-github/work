@@ -542,8 +542,28 @@ export default {
                 "nickname|1": ["张三", "李四"],
                 "account": "account",
                 "tel": "18522222222",
-                "type": 2
+                "type": 1
             }
+        })
+    },
+    /**
+     * 邮箱校验
+     * @returns {*}
+     */
+    validateEmailCode: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功'
+        })
+    },
+    /**
+     * 修改用户信息
+     * @returns {*}
+     */
+    modifyUserInfo: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功'
         })
     },
     /**

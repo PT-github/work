@@ -3,6 +3,9 @@ import api from './home'
 Mock.setup({
     timeout: '500'
 })
+// 邮箱校验
+Mock.mock(/\/validateEmailCode$/, 'post', api.validateEmailCode)
+Mock.mock(/\/user\/modifyUserInfo$/, 'post', api.modifyUserInfo)
 // 企业
 Mock.mock(/\/company\/queryCompanyMessage/, 'post', api.queryCompanyMessage)
 Mock.mock(/\/company\/modifyCompanyPassword$/, 'post', api.queryCompanyMessage)

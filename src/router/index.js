@@ -184,7 +184,7 @@ const router =  new Router({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.needLogin && !sessionStorage.getItem("userInfo")) {
+    if (to.meta.needLogin && !localStorage.getItem("userInfo")) {
         next({path: "/"});
     } else {
         next()

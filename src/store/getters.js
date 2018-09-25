@@ -8,10 +8,10 @@ const getters = {
     setting: state => state.user.setting,
     isLogin: state => {
         if (state.user.isLogin !== "1") {
-            let isLogin = sessionStorage.getItem('isLogin')
+            let isLogin = localStorage.getItem('isLogin')
             if (isLogin === "1") {
                 state.user.isLogin = "1"
-                let userInfoStr = sessionStorage.getItem('userinfo')
+                let userInfoStr = localStorage.getItem('userinfo')
                 if (userInfoStr) {
                     let userInfo = JSON.parse(userInfoStr)
                     state.user.username = userInfo.nickname
