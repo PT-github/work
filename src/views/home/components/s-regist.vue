@@ -199,7 +199,7 @@
     }
     .s-regist {
         width: 278px;
-        height: 300px;
+        height: 314px;
         border: 1px solid #cac9cb;
         background-color: #fefefe;
         .queryForm {
@@ -330,7 +330,7 @@
             }
         }
         .button1 {
-            margin-top:14px;
+            margin-top:18px;
         }
         .button2 {
             margin-top:16px;

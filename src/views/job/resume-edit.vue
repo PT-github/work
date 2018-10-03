@@ -372,11 +372,42 @@
         data() {
             return {
                 activeResume: {
+                    name: '',
+                    sex: '',
+                    birth: '',
+                    maritalStatus: '',
+                    householdRegister: '',
+                    nameFamily: '',
+                    height: '',
+                    weight: '',
+                    politicalOutlook: '',
+                    education: '',
+                    technicalTitle: '',
+                    secondMajor: '',
+                    placeResidence: '',
+                    imgUrl: '',
+                    nowIndustry: '',
+                    nowJob: '',
+                    nowLevel: '',
+                    workingLife: '',
+                    salary: '',
+                    overseasExperience: '',
+                    workNature: '',
+                    expectIndustry: '',
+                    jobIntention: '',
+                    expectSalary: '',
+                    expectPostName: '',
+                    postTime: '',
+                    otherRequire: '',
+                    selfEvalution: '',
                     educationExperience: [],
                     handsOnWorkExperience: [],
                     languages: [],
-                    imgUrl: '',
-                    expectedArea: []
+                    expectedArea: [],
+                    faxedLine: '',
+                    qq: '',
+                    email: '',
+                    phoneNumber: '',
                 },
                 options: [{label: '男',value: 0},{label: '女',value: 1}],
                 options2: [{label: '未婚',value: 0},{label: '已婚',value: 1}],
@@ -389,6 +420,7 @@
             }
         },
         mounted() {
+            console.log(this.$store.state.user, '====')
             if (this.$route.query.id) {
                 this.getResumeDetail(this.$route.query.id)
             }
@@ -420,6 +452,11 @@
             }
         },
         methods: {
+            reset () {
+                for(let prop in this.activeResume) {
+                    this.$set(this.activeResume, prop, typeof this.activeResume[prop] === 'object' ? [] : '')
+                }
+            },
             handleChange(value) {
                 console.log('11111111', value)
             },
@@ -434,16 +471,18 @@
                 if (this.activeResume.id) {
                     ms = '修改'
                 }
-                editResumeSubmit(Object.assign(this.activeResume, {userId: this.$store.state.user.id})).then(res => {
+                console.log(this.$store.state.user, '==222==')
+                console.log(Object.assign(this.activeResume, {userId: this.$store.state.user.id, userType: this.$store.state.user.type}))
+                editResumeSubmit(Object.assign(this.activeResume, {userId: this.$store.state.user.id, userType: this.$store.state.user.type})).then(res => {
                     loading.close()
                     if (res.success) {
                         this.$message({
-                            message: '简历' + ms + '成功，页面即将返回',
+                            message: '简历' + ms + '成功',
                             type: 'success'
                         })
-                        setTimeout(() => {
-                            history.back()
-                        }, 1000)
+                        this.$nextTick(() => {
+                            this.reset()
+                        })
                     } else {
                         this.$message({
                             message: '简历' + ms + '失败:' + res.message,

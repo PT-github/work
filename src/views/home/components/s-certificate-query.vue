@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="title">获证信息</div>
-            <div class="table" v-if="renderData.certifications && renderData.certifications.length > 0" v-for="item in renderData.certifications">
+            <div class="table" v-if="renderData.certifications && renderData.certifications.length > 0" v-for="(item, index) in renderData.certifications" :key="'certifications', index">
                 <div class="tbody">
                     <div class="tr">
                         <div class="td">

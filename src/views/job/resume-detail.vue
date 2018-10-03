@@ -243,16 +243,21 @@
                     <div class="borderBottom"></div>
                 </div>
             </div>
+            <div class="join-btn" v-if="isCompany">
+                <el-button size="mini" type="primary" @click="joinTalentPoolFun">加入人才库</el-button>
+            </div>
         </div>
     </div>
 </template>
 <script>
-    import { queryResumeDetail } from '@/api/service'
+    import { queryResumeDetail, joinTalentPool } from '@/api/service'
     export default {
         name: 'resumeDetail',
         data() {
             return {
-                activeResume: {}
+                activeResume: {},
+                userType: '',
+                userId: ''
             }
         },
         mounted() {
@@ -263,9 +268,40 @@
         computed: {
             isLogin () {
                 return !!localStorage.getItem('userInfo')
+            },
+            isCompany () {
+                let userInfo = localStorage.getItem('userInfo')
+                if (userInfo) {
+                    try {
+                        userInfo = JSON.parse(userInfo)
+                        this.userId = userInfo.id
+                        this.userType = userInfo.type
+                        return userInfo.type === 2
+                    } catch(e) {
+                        return false
+                    }
+                }
+                return false
             }
         },
         methods: {
+            joinTalentPoolFun () {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                joinTalentPool({id: this.$route.query.id, userId: this.userId, userType: this.userType}).then((res) => {
+                    loading.close()
+                    this.$message({
+                        message: '人才添加成功',
+                        type: 'success'
+                    })
+                }).catch(() => {
+                    loading.close()
+                })
+            },
             getResumeDetail(id) {
                 const loading = this.$loading({
                     lock: true,
@@ -274,9 +310,7 @@
                     fullscreen: true
                 })
                 queryResumeDetail({id: id}).then((res) => {
-                    console.log(res)
                     loading.close()
-
                     let data = res.data
                     for (let prop in data) {
                         this.$set(this.activeResume, prop, data[prop])
@@ -284,11 +318,15 @@
                 }).catch(() => {
                     loading.close()
                 })
-            },
+            }
         }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+    .join-btn {
+        text-align: center;
+        margin: 10px;
+    }
     .err-message{
         font-size: 12px;
         height: 35px;

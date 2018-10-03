@@ -1,5 +1,5 @@
 <template>
-    <div class="s-lesson">
+    <div class="s-lesson clearfix">
         <div class="fl">
             <div class="title">课程培训</div>
         </div>
@@ -7,14 +7,14 @@
             <div class="tabs" v-if="list && list.length > 0">
                 <div class="tabs-nav flex">
                     <template v-for="(item, index) in list">
-                        <div class="tabs-nav-span" :class="{ 'active': activeTab === index }" @click="exchangeTabs(index)">
+                        <div class="tabs-nav-span" :key="'lesson_category_' + index" :class="{ 'active': activeTab === index }" @click="exchangeTabs(index)">
                             <span>{{ item.title }}</span>
                         </div>
                     </template>
                 </div>
                 <div class="tabs-content">
                     <template v-for="(item, index) in list">
-                        <div class="tabs-content-01" :class="{ 'active': activeTab === index }">
+                        <div class="tabs-content-01" :key="'lesson_content-' + index" :class="{ 'active': activeTab === index }">
                             <div class="table">
                                 <div class="theader">
                                     <div class="tr">
@@ -28,8 +28,8 @@
                                 </div>
                                 <div class="tbody">
                                     <template v-if="item.data && item.data.length > 0">
-                                        <template v-for="v in item.data">
-                                            <div class="tr">
+                                        <template v-for="(v, idx) in item.data">
+                                            <div class="tr" :key="'lesson_content-data' + idx">
                                                 <div class="td blue" style="width: 115px;"><router-link tag="a" :to="{ path: '/lesson-detail', query: { id: v.id } }">{{ v.name }}</router-link></div>
                                                 <div class="td flex-auto">{{ v.openDate }}</div>
                                                 <div class="td sky-blue" style="width: 85px;">{{v.classHour}}</div>
@@ -45,6 +45,7 @@
                     </template>
                 </div>
             </div>
+            <div class="more"><router-link :to="'education/education-list'" tag="a">&gt;&gt;&nbsp;查看更多&nbsp;&lt;&lt;</router-link></div>
         </div>
     </div>
 </template>
@@ -90,6 +91,13 @@
         height: 100%;
         border: 1px solid #cac9cb;
         background-color: #FFF;
+        .more {
+            font-size: 12px;
+            text-align: center;
+            color: #999;
+            height: 25px;
+            line-height: 25px;
+        }
         .fr {
             margin-right: 18px;
             .tabs {

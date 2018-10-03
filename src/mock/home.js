@@ -421,9 +421,30 @@ export default {
                 numberRecruits: '10人',
                 education: '本科',
                 workingLife: '3年以上',
-                workPlace: '北京',
-                jobDescription: '工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,工作的描述信息XXXXXX,',
-                companyInfo: '公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX'
+                workPlace: '湖南长沙中电软件园',
+                jobDescription: `1、负责内部局域网络维护；
+                <br>2、进行小型机、服务器、路由器等设备<a href="../../JobSeek/2154.aspx" target="_blank">管理</a>，以及网络平台的运行监控和维护；
+                <br>3、进行办公设备的日常维护及管理；技术档案维护；
+                <br>4、负责病毒的查杀，维护网络系统安全；
+                <br>5、处理网络及计算机故障；
+                <br>6、负责内部信息系统建设、维护；进行域名、后台数据、邮箱管理。`,
+                companyInfo: '公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX公司信息XXXX',
+                scale: '1000-2000人',
+                nature: '国企',
+                industry: '医药',
+                jobNature: '全职',
+                jobHuntDepart: '本部',
+                pubTime: '2018-09-30',
+                endTime: '2019-03-29',
+                ageRange: '不限',
+                sexRange: '不限',
+                languageRange: '不限',
+                resumeLanguageRange: '不限',
+                contact: '0731-86098876',
+                jobQua: `1、计算机或it相关专业，大学本科，25岁以下
+                <br>2、一年的网络管理、服务器网管工作经验；
+                <br>3、熟悉路由器，交换机、防火墙的网络设备的设置与管理；
+                <br>4、了解操作系统，熟悉web、ftp、mail服务器的架设；`,
             }
         })
     },
@@ -521,10 +542,29 @@ export default {
         return Mock.mock({
             'success': true,
             "message": '成功',
+            "totalPage": 4,
             "list|8": [
                 {
                     "id|+1": 1,
                     "name|1": ["健康咨询师", "育婴师", "催乳师"]
+                }
+            ]
+        })
+    },
+    /**
+     * 获取积分兑换的商品
+     * @returns {*}
+     */
+    queryScoreProduct: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "totalPage": 4,
+            "list|8": [
+                {
+                    "id|+1": 1,
+                    "title|1": ["商品名称商品名称商品名称商品名称", "商品名称商品名称", "商品名称商品名称商品名称"],
+                    "score": 20
                 }
             ]
         })
@@ -554,6 +594,50 @@ export default {
         return Mock.mock({
             'success': true,
             "message": '成功'
+        })
+    },
+    /**
+     * 其他企业职位列表
+     * @returns {*}
+     */
+    queryOtherCompanyJobs: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list": [
+                { id: 1, job: '职位名称0', place: '长沙', nums: '1', pubTime: '2010-10-10 13:10:10', endTime: '2010-10-10 13:10:10' },
+                { id: 2, job: '职位名称1', place: '株洲', nums: '2', pubTime: '2010-10-10 13:10:10', endTime: '2010-10-10 13:10:10' },
+                { id: 3, job: '职位名称2', place: '武汉', nums: '3', pubTime: '2010-10-10 13:10:10', endTime: '2010-10-10 13:10:10' },
+                { id: 4, job: '职位名称3', place: '湘潭', nums: '4', pubTime: '2010-10-10 13:10:10', endTime: '2010-10-10 13:10:10' },
+                { id: 5, job: '职位名称4', place: '邵阳', nums: '若干', pubTime: '2010-10-10 13:10:10', endTime: '2010-10-10 13:10:10' }
+            ]
+        })
+    },
+    /**
+     * 其他企业职位列表
+     * @returns {*}
+     */
+    queryOtherDetail: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "data": { 
+                id: 1,
+                name: '燕郊国医堂医院',
+                industry: '医院',
+                nature: '私营．民营企业',
+                scale: '1000-2000人',
+                region: '河北廊坊',
+                welfare: '社保、提供住宿、提供饭餐',
+                tel: '0731-82800100',
+                desction: '燕郊国医堂医院位于北京东燕郊国家高新技术开发区境内，是一所集医疗、预防、科研、中医中药研究为一体的一级综合性医院。本院建筑面积2100平方米，位于燕郊迎宾路口东南角（京客隆对面）；现设有中医科、内科、外科、检验科、影像科、b超室、心电图室等医技科室，科室技术力量雄厚，拥有多名高级卫技人员,中医主任副主任医师。 本院以弘扬中医传统特色为主，中西医结合治疗各种常见、多发、疑难杂症。 本院医疗诊疗环境舒适，科室、病房设备齐全，全部带有空调，饮水机等物品！ 本院认真贯彻落实国家医疗卫生政策，切实减轻病人负担，让病人得到了实惠。本院坚持病人至上，承诺医术为本，保证依法执业，主张尊重生命。我们将以诚信、优质的医疗服务造福京东周边地区的广大人民群众！',
+                imgs:[
+                    'http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png',
+                    'http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png',
+                    'http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png',
+                    'http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png',
+                ]
+            }
         })
     },
     /**
@@ -1037,6 +1121,43 @@ export default {
                             "totalFee": "1100元"
                         }
                     ]
+                }
+            ]
+        })
+    },
+    /**
+     * 通过条件查询课程培训列表
+     * @returns {*}
+     */
+    filterLessons: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|8-10": [
+                {
+                    "id|+1": 100,
+                    "name|1": ["课程名称", "课程名称1", "课程名称2", "课程名称3"],
+                    "openDate": "03月10日-09月12日",
+                    "classHour": "18天",
+                    "tranningFee": "1000元",
+                    "examinationFee": "100元",
+                    "totalFee": "1100元"
+                }
+            ]
+        })
+    },
+    /**
+     * 课程分类列表
+     * @returns {*}
+     */
+    queryLessonCate: () => {
+        return Mock.mock({
+            'success': true,
+            "message": '成功',
+            "list|3-5": [
+                {
+                    "id|+1": 1,
+                    "title|1": ["健康管理师", "育婴师", "心理咨询师", "催乳师", "继续教育"],
                 }
             ]
         })

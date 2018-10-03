@@ -72,7 +72,7 @@
                             message: '删除成功',
                             type: 'success'
                         })
-                        this.getInterviewList()
+                        this.getCollectList()
                     } else {
                         this.$message({
                             message: '删除失败',
@@ -95,7 +95,7 @@
                             message: '删除成功',
                             type: 'success'
                         })
-                        this.getCollectList()
+                        this.getInterviewList()
                     } else {
                         this.$message({
                             message: '删除失败',

@@ -10,7 +10,7 @@
         </el-carousel>
         <ul class="indicator-page">
             <template v-for="(item, idx) in list">
-                <li @click="sliderTo(idx)" :class="{ 'active': index === idx }"></li>
+                <li @click="sliderTo(idx)" :key="'slider_' + idx" :class="{ 'active': index === idx }"></li>
             </template>
         </ul>
     </div>

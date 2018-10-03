@@ -3,6 +3,12 @@ import api from './home'
 Mock.setup({
     timeout: '500'
 })
+Mock.mock(/\/queryScoreProduct$/, 'post', api.queryScoreProduct)
+Mock.mock(/\/joinTalentPool$/, 'post', api.queryOtherCompanyJobs)
+Mock.mock(/\/queryOtherCompanyJobs$/, 'post', api.queryOtherCompanyJobs)
+Mock.mock(/\/queryOtherDetail$/, 'post', api.queryOtherDetail)
+Mock.mock(/\/queryLessonCate$/, 'post', api.queryLessonCate)
+Mock.mock(/\/filterLessons$/, 'post', api.filterLessons)
 // 邮箱校验
 Mock.mock(/\/validateEmailCode$/, 'post', api.validateEmailCode)
 Mock.mock(/\/user\/modifyUserInfo$/, 'post', api.modifyUserInfo)
@@ -18,7 +24,9 @@ Mock.mock(/\/company\/addCompanyJob/, 'post', api.queryPubJobs)
 Mock.mock(/\/login\/vitae\/queryCollectList/, 'post', api.queryCollectList)
 Mock.mock(/\/login\/interview\/queryInterviewList/, 'post', api.queryInterviewList)
 Mock.mock(/\/company\/deleteCollectById/, 'post', api.queryInterviewList)
+Mock.mock(/\/login\/vitae\/deleteCollectById/, 'post', api.queryInterviewList)
 Mock.mock(/\/company\/deleteInterviewById/, 'post', api.queryInterviewList)
+Mock.mock(/\/login\/interview\/deleteInterviewById/, 'post', api.queryInterviewList)
 Mock.mock(/\/positionapply\/queryApplyRecordList/, 'post', api.queryApplyRecordList)
 Mock.mock(/\/talent\/queryOwnTalentList/, 'post', api.queryOwnTalentList)
 Mock.mock(/\/talent\/queryNetWorkTalentList/, 'post', api.queryNetWorkTalentList)

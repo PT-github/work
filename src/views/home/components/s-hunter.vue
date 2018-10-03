@@ -7,8 +7,8 @@
                 </router-link>
             </div>
             <ul class="company-box clearfix">
-                <li v-for="item in list">
-                    <router-link tag='a' target="_blank" :to="{ path: '/job-detail', query: { id: item.id } }">
+                <li v-for="(item, index) in list" :key="'job_detail_' + index">
+                    <router-link tag='a' :to="{ path: '/job-detail', query: { id: item.id } }">
                         <div class="company-content">
                             <div class="hunt-for">{{ item.job }}</div>
                             <div class="company-name">{{ item.name }}</div>
@@ -27,8 +27,8 @@
                 </router-link>-->
             </div>
             <ul class="job-box">
-                <li v-for="item in jobs">
-                    <router-link tag='a' target="_blank" :to="{ path: '/company-detail', query: { id: item.id } }">{{ item.name }}</router-link>
+                <li v-for="(item, index) in jobs" :key="'company_detail_' + index">
+                    <router-link tag='a' target="_blank" :to="{ path: '/company/other-company-detail', query: { id: item.id } }">{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>

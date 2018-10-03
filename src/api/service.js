@@ -2,6 +2,30 @@ import request from '@/utils/request'
 
 //====================企业信息查询开始===================
 
+// 查询其他企业职位列表
+export function joinTalentPool(data) {
+    return request({
+        url: '/company/joinTalentPool',
+        method: 'post',
+        data
+    })
+}
+// 查询其他企业职位列表
+export function getOtherCompanyJobs(id) {
+    return request({
+        url: '/company/queryOtherCompanyJobs',
+        method: 'post',
+        data: {id}
+    })
+}
+// 查询其他企业详情
+export function getOtherCompanyDetail(id) {
+    return request({
+        url: '/company/queryOtherDetail',
+        method: 'post',
+        data: {id}
+    })
+}
 // 企业基本查询
 export function queryCompanyMessage(id) {
     return request({
@@ -307,11 +331,33 @@ export function queryLessons() {
         method: 'post'
     })
 }
+// 课程分类
+export function queryLessonCate() {
+    return request({
+        url: '/home/queryLessonCate',
+        method: 'post'
+    })
+}
+// 通过过滤条件查询课程列表
+export function filterLessons(data) {
+    return request({
+        url: '/home/filterLessons',
+        method: 'post',
+        data
+    })
+}
 
 // 积分兑换的课程列表
+// export function queryScoreLessons() {
+//     return request({
+//         url: '/home/queryScoreLessons',
+//         method: 'post'
+//     })
+// }
+// 积分兑换的商品列表
 export function queryScoreLessons() {
     return request({
-        url: '/home/queryScoreLessons',
+        url: '/home/queryScoreProduct',
         method: 'post'
     })
 }
@@ -482,10 +528,11 @@ export function queryNewsListByCategory(data) {
 
 // =======================教育培新页面开始=========================
 // 培训项目列表
-export function queryProject() {
+export function queryProject(data) {
     return request({
         url: '/train/queryTrainList',
-        method: 'post'
+        method: 'post',
+        data
     })
 }
 

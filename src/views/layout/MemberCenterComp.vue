@@ -1,7 +1,15 @@
 <template>
     <div class="member-center-comp">
         <div class="item-left">
-            <ul class="nav" v-if="$store.state.user.type === 1">
+            <ul class="nav" v-if="!!$route.query.id">
+                <li class="nav-li" :class="{active: $route.path.indexOf('other-company-detail') !== -1}">
+                    <router-link tag="a" :to="{ path: '/company/other-company-detail', query: { id: $route.query.id } }">基本信息</router-link>
+                </li>
+                <li class="nav-li" :class="{active: $route.path.indexOf('other-company-jobs') !== -1}">
+                    <router-link tag="a" :to="{ path: '/company/other-company-jobs', query: { id: $route.query.id } }">招聘职位</router-link>
+                </li>
+            </ul>
+            <ul class="nav" v-else-if="$store.state.user.type === 1">
                 <li class="nav-li" :class="{active: $route.path.indexOf('baseInfo') !== -1}">
                     <router-link tag="a" :to="{ path: '/members/baseInfo' }">基本信息</router-link>
                 </li>
@@ -25,7 +33,7 @@
                 </li>
                 <li class="nav-li" @click="logout">安全退出</li>
             </ul>
-            <ul class="nav" v-if="$store.state.user.type === 2">
+            <ul class="nav" v-else-if="$store.state.user.type === 2">
                 <li class="nav-li" :class="{active: $route.path.indexOf('company-baseInfo') !== -1}">
                     <router-link tag="a" :to="{ path: '/company/company-baseInfo' }">基本信息</router-link>
                 </li>

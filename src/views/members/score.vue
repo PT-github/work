@@ -6,25 +6,25 @@
         </div>
         <template v-if="showExchangePanel">
             <ul class="tab clearfix">
-                <li class="on">积分兑换课程</li>
+                <li class="on">积分兑换商品</li>
             </ul>
             <div class="table">
                 <div class="theader">
                     <div class="tr">
-                        <div class="th">开班时间</div>
-                        <div class="th">课程名称</div>
+                        <div class="th">商品名称</div>
+                        <!-- <div class="th">课程名称</div>
                         <div class="th">课时</div>
-                        <div class="th">积分</div>
-                        <div class="th">操作</div>
+                        <div class="th">积分</div> -->
+                        <div class="th" style="width: 100px;flex: none;">操作</div>
                     </div>
                 </div>
                 <div class="tbody">
                     <div class="tr" v-for="(item, index) in lessionList" :key="'lessionList-' + index">
-                        <div class="td">{{ item.openDate }}</div>
+                        <!-- <div class="td">{{ item.openDate }}</div>
                         <div class="td"><router-link tag="a" :to="{ path: '/lesson-detail', query: { id: item.id } }">{{ item.name }}</router-link></div>
-                        <div class="td">{{ item.classHour }}</div>
-                        <div class="td">{{ item.score }}</div>
-                        <div class="td"><span @click="exchangeLessonFun(item.id, item.score)">兑换</span></div>
+                        <div class="td">{{ item.classHour }}</div> -->
+                        <div class="td" :title="item.title">{{ item.title }}</div>
+                        <div class="td" style="width: 100px;flex: none;"><span @click="exchangeLessonFun(item.id, item.score)">兑换</span></div>
                     </div>
                 </div>
             </div>
@@ -182,6 +182,10 @@
                     font-size: 12px;
                     flex: 1;
                     text-align: center;
+                    &:first-child {
+                        text-align: left;
+                        padding-left:10px;
+                    }
                 }
             }
         }

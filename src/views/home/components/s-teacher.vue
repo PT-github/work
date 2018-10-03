@@ -20,7 +20,7 @@
             <div class="s-teacher-content">
                 <el-carousel ref="teacherSlider" :interval="5000" class="s-teacher-slider" :autoplay="true" arrow="never" indicator-position="none" trigger="click" height="174px">
                     <el-carousel-item v-for="(item, index) in list" :key="'carousel-' + index">
-                        <div class="teacher-l fl" v-for="v in item" :title="v.des">
+                        <div class="teacher-l fl" v-for="(v, idx) in item" :title="v.des" :key="'teacher-l_' + idx">
                             <div class="t-pic">
                                 <img :src="v.imgUrl" :alt="v.name">
                             </div>

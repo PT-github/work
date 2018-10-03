@@ -48,7 +48,10 @@
                         <transition>
                             <div class="registBox" v-show="registVisible" id="RegistSeqBox">
                                 <div class="login-form">
-                                    <div class="title">个人注册</div>
+                                    <div class="title">{{registerType === 0 ? '个人注册' : '企业注册'}}</div>
+                                    <div class="login-form_control" v-if="registerType === 1">
+                                        <input type="text" v-model="regCompanyName" placeholder="企业名称">
+                                    </div>
                                     <div class="login-form_control">
                                         <input type="text" v-model="regUserName" placeholder="用户名">
                                     </div>
@@ -190,6 +193,7 @@
                 regPwd: '',
                 regTel: '',
                 regMail: '',
+                regCompanyName: '',
                 desc: '',
                 contactor: '',
                 phoneNumber: ''
@@ -306,7 +310,8 @@
                     password: this.regPwd,
                     tel: this.regTel,
                     email: this.regMail,
-                    type: this.registerType
+                    type: this.registerType,
+                    companyName: this.regCompanyName
                 }).then(response => {
 //                    loading.close()
                     if (response.success) {

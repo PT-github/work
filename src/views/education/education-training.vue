@@ -5,7 +5,14 @@
               <sLesson></sLesson>
           </div>
           <div class="right">
-              <div class="news-title">培训项目</div>
+              <div class="news-title">
+                    培训项目
+                    <div class="news-title-right">
+                        <div class="pre" @click="changePage(-1)">&lt;</div>
+                        <div class="current">{{form.pageNum}}</div>
+                        <div class="next" @click="changePage(1)">></div>
+                    </div>
+              </div>
               <ul class="pro-list clearfix">
                   <li v-for="(item, index) in projectList" :key="'project-' + index">
                       <router-link tag="a" :to="{ path: '/project-detail', query: { id: item.id } }">{{ item.name }}</router-link>
@@ -14,12 +21,39 @@
               <div class="title">
                   <p>电话热线</p>
               </div>
-              <div class="button button1">
+              <div class="button button1" @click="centerDialogVisible = true">
                   <p class="p1">网上在线报名</p>
                   <p class="p2">Online registration</p>
               </div>
           </div>
       </div>
+      <el-dialog :visible.sync="centerDialogVisible" width="430px" center :close-on-click-modal="false" :close-on-press-escape="false">
+            <span slot="title" class="leaveMsgTitle">网上报名</span>
+            <div class="leaveMsgContent">
+                <template v-if="!$store.state.user.isLogin">
+                    <div class="form-control">
+                        <div class="label">账号：</div>
+                        <div class="input-control"><input type="text" v-model="account"></div>
+                    </div>
+                    <div class="form-control">
+                        <div class="label">密码：</div>
+                        <div class="input-control"><input type="password" v-model="password"></div>
+                    </div>
+                </template>
+                <div class="form-control">
+                    <div class="label">姓名：</div>
+                    <div class="input-control"><input type="text" v-model="username"></div>
+                </div>
+                <div class="form-control" v-if="!$store.state.user.tel">
+                    <div class="label">手机：</div>
+                    <div class="input-control"><input type="text" v-model="tel"></div>
+                </div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="centerDialogVisible = false">取 消</el-button>
+                <el-button size="mini" type="primary" @click="signUpOnline">确 定</el-button>
+            </span>
+        </el-dialog>
       <div class="video-list">
           <div class="title"></div>
           <div class="part" v-for="(item, index) in videoList" :key="'category-' + index">
@@ -63,7 +97,7 @@
 </template>
 <script>
     import {sLesson} from '@/views/home/components'
-    import { queryProject, queryTeachersByPage, queryCategory,queryVideoByCategory } from '@/api/service'
+    import { queryProject, queryTeachersByPage, queryCategory,queryVideoByCategory,signUpOnlineAction } from '@/api/service'
     import sVideoPlay from '../home/components/s-video-play'
     export default {
         name: 'educationTraining',
@@ -77,7 +111,17 @@
                 videoList: [],
                 dialogVisible: false,
                 videoUrl: '',
-                videoPic: ''
+                videoPic: '',
+                centerDialogVisible: false,
+                tel: '',
+                account: '',
+                username: '',
+                password: '',
+                form: {
+                    pageNum: 1,
+                    pageSize: 8
+                },
+                projectTotalPage: 0
             }
         },
         mounted() {
@@ -86,6 +130,46 @@
             this.getVideoByCategory()
         },
         methods: {
+            changePage(v) {
+                if (v < 0 && this.form.pageNum === 1) {
+                    return
+                } else if (v > 0 && this.form.pageNum === this.projectTotalPage) {
+                    return
+                }
+                this.form.pageNum += v
+                this.$nextTick(() => {
+                    this.getProject()
+                })
+            },
+            signUpOnline() {
+                const loading = this.$loading({
+                    lock: true,
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.1)',
+                    fullscreen: true
+                })
+                signUpOnlineAction({
+                    id: this.$store.state.user.id,
+                    tel: this.tel || this.$store.state.user.tel,
+                    account: this.account || this.$store.state.user.account,
+                    username: this.username,
+                    password: this.password,
+                }).then(response => {
+                    loading.close()
+                    if (response.success) {
+                        this.centerDialogVisible = false
+                        this.$message({
+                            message: '报名成功',
+                            type: 'success'
+                        })
+                    } else {
+                        this.$message({
+                            message: '报名失败，原因：' + response.message,
+                            type: 'error'
+                        })
+                    }
+                })
+            },
             close() {
                 this.$refs['sVideoPlayDom'].pause()
             },
@@ -153,9 +237,12 @@
                     fullscreen: false,
                     target: this.$el.querySelector('.pro-list')
                 })
-                queryProject().then((res) => {
+                this.projectList.splice(0, this.projectList.length)
+                queryProject(this.form).then((res) => {
                     loading.close()
-                    this.projectList = res.list
+                    this.projectList.splice(0, this.projectList.length)
+                    this.projectList.push(...res.list)
+                    this.projectTotalPage = res.totalPage
                 }).catch(() => {
                     loading.close()
                 })
@@ -171,6 +258,63 @@
     .edication-training {
         width: 1000px;
         margin: 10px auto;
+        .news-title-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            z-index: 10000;
+            width: 70px;
+            >div {
+                flex: 1;
+                text-align: center;
+                background-color: #CCC;
+                height: 20px;
+                line-height: 20px;
+                cursor: pointer;
+                border-radius: 5px;
+                width: 20px;
+                flex: none;
+                &.current {
+                    background: none;
+                    color:#666;
+                    flex: 1;
+                    width: auto;
+                }
+            }
+        }
+        .leaveMsgTitle {
+            color: #666;
+        }
+        .el-dialog__body {
+            padding: 10px 25px 0px;
+        }
+        .form-control {
+            display: flex;
+            width: 100%;
+            height: 35px;
+            margin-bottom: 10px;
+            .label {
+                width:70px;
+                height: 35px;
+                line-height: 35px;
+                text-align: right;
+                font-size: 12px;
+                padding-right: 5px;
+            }
+            .input-control {
+                flex: 1;
+                input {
+                    height: 35px;
+                    width: 100%;
+                    border: 1px solid #dedede;
+                    background:none;
+                    border-radius: 5px;
+                    outline: none;
+                    padding: 0 5px;
+                }
+            }
+        }
         .video-list {
             border: 1px solid #cac9cb;
             margin-top: 10px;
@@ -391,7 +535,7 @@
                     }
                 }
                 .button1 {
-                    margin-top:14px;
+                    margin-top:18px;
                 }
                 .button2 {
                     margin-top:16px;
@@ -441,3 +585,11 @@
         }
     }
 </style>
+<style lang="scss">
+.edication-training {
+    .el-dialog__body {
+        padding: 10px 25px 0px;
+    }
+}
+</style>
+

@@ -38,13 +38,13 @@
             </li>
         </ul>
         <div class="pic-list" v-show="active === 1">
-            <template v-if="companyData.imgUrls && companyData.imgUrls.length > 0" v-for="item in companyData.imgUrls">
-                <img :src="item" alt="">
+            <template v-if="companyData.imgUrls && companyData.imgUrls.length > 0" v-for="(item, index) in companyData.imgUrls">
+                <img :src="item" alt="" :key="'businessLicense_imgUrls' + index">
             </template>
         </div>
         <div class="pic-list" v-show="active === 2">
-            <template v-if="companyData.businessLicense && companyData.businessLicense.length > 0" v-for="item in companyData.businessLicense">
-                <img :src="item" alt="">
+            <template v-if="companyData.businessLicense && companyData.businessLicense.length > 0" v-for="(item, index) in companyData.businessLicense">
+                <img :src="item" alt="" :key="'businessLicense_' + index">
             </template>
         </div>
         <ul class="baseinfo clearfix" v-show="active === 3">

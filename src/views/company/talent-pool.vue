@@ -45,6 +45,7 @@
                     <div class="td"><span @click="deleteOwnTalant(item.id)">删除</span></div>
                 </div>
             </div>
+            <div class="createResume"><router-link tag="a" :to="'/resume-edit'" target="_blank">新增+</router-link></div>
         </div>
         <div class="table" v-show="active === 2">
             <div class="theader">
@@ -209,6 +210,16 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
     .s-myjob {
         margin: 20px 0;
+        .createResume {
+            font-size: 14px;
+            border: 1px solid #CCC;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .title {
             height: 35px;
             line-height: 35px;

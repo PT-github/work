@@ -30,6 +30,16 @@ const router =  new Router({
                     redirect: '/members/baseInfo',
                     children: [
                         {
+                            path: '/company/other-company-detail',
+                            component: _import('company/other-company-detail'),
+                            name: 'otherCompanyDetail',
+                            meta: {title: '基本信息', keepAlive: false, needLogin: false}
+                        },{
+                            path: '/company/other-company-jobs',
+                            component: _import('company/other-company-jobs'),
+                            name: 'otherCompanyJob',
+                            meta: {title: '职位列表', keepAlive: false, needLogin: false}
+                        },{
                             path: '/members/baseInfo',
                             component: _import('members/baseInfo'),
                             name: 'sBaseInfo',
@@ -86,6 +96,11 @@ const router =  new Router({
                             meta: {title: '企业人才库', keepAlive: false, needLogin: true}
                         },
                     ]
+                }, {
+                    path: 'education/education-list',
+                    component: _import('education/lesson-list'),
+                    name: 'educationList',
+                    meta: {title: '课程列表', keepAlive: true, needLogin: false}
                 }, {
                     path: 'home',
                     component: _import('home/home'),
@@ -159,6 +174,10 @@ const router =  new Router({
                     component: _import('about/about-us'),
                     name: 'aboutUs',
                     meta: {title: '关于我们', keepAlive: true}
+                }, {
+                    path: "/job-detail",
+                    component: _import('job/job-detail'),
+                    meta: {title: '职位详情', keepAlive: false}
                 }
             ]
         }, {
@@ -168,10 +187,6 @@ const router =  new Router({
             path: "/resume-detail",
             component: _import('job/resume-detail'),
             meta: {title: '简历详情', keepAlive: false}
-        }, {
-            path: "/job-detail",
-            component: _import('job/job-detail'),
-            meta: {title: '职位详情', keepAlive: false}
         }, {
             path: "/resume-edit",
             component: _import('job/resume-edit'),
