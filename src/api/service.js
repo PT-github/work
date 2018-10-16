@@ -697,7 +697,7 @@ export function applyJob(data) {
 // 职位收藏夹删除
 export function deleteCollectJobs(data) {
     return request({
-        url: '/user/deleteCollectJobs',
+        url: '/login/position/deleteCollectJobs',
         method: 'post',
         data
     })
@@ -706,7 +706,7 @@ export function deleteCollectJobs(data) {
 // 职位申请记录删除
 export function deleteJobApplyRecods(data) {
     return request({
-        url: '/user/deleteJobApplyRecods',
+        url: '/login/positionapply/deleteJobApplyRecods',
         method: 'post',
         data
     })
@@ -715,7 +715,7 @@ export function deleteJobApplyRecods(data) {
 // 我的面试机会删除
 export function deleteInvitedChance(data) {
     return request({
-        url: '/user/deleteInvitedChance',
+        url: '/login/interview/deleteInvitedChance',
         method: 'post',
         data
     })
@@ -724,7 +724,7 @@ export function deleteInvitedChance(data) {
 // 删除简历被查看记录
 export function deleteLookedRecords(data) {
     return request({
-        url: '/user/deleteLookedRecords',
+        url: '/login/vitae/deleteLookedRecords',
         method: 'post',
         data
     })

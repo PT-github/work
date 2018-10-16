@@ -51,3 +51,6 @@
         }
     }
 </style>
+<style rel="stylesheet/scss" lang="scss">
+  img { width: 100%; }
+</style>

@@ -123,7 +123,7 @@
                     background: 'rgba(0, 0, 0, 0.1)',
                     fullscreen: true
                 })
-                applyJob({jobId: id, userId: this.$store.state.user.id}).then(res => {
+                applyJob({ids: id, userId: this.$store.state.user.id}).then(res => {
                     loading.close()
                     if (res.success) {
                         this.$message({
