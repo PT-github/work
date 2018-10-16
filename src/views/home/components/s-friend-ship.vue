@@ -3,7 +3,7 @@
         <div class="title"></div>
         <div class="link-box clearfix">
             <a  v-for="(item, index) in list" :href="item.link" class="fl" :key="'friend-ship' + index">
-                <img :src="item.imgUrl" :alt="item.name">
+                {{item.name}}
             </a>
         </div>
     </div>
@@ -49,14 +49,27 @@
             padding-top: 42px;
             padding-bottom: 20px;
             padding-left:20px;
-            min-height: 142px;
+            padding-right: 20px;
+            display: flex;
+            flex-wrap: wrap;
             a {
-                width: 120px;
-                height: 50px;
+                width: 232px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 13px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 10px;
+                &:nth-child(4n) {
+                    margin-right: 0;
+                }
+                &:hover {
+                    text-decoration: underline;
+                }
                 img {
                     width: 120px;
                     height: 50px;
-                    dispaly: block;
+                    display: block;
                 }
             }
         }
