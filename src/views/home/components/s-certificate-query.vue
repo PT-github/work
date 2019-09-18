@@ -137,10 +137,17 @@
                 type = this.$route.query.type,  // 查询类型
                 typeValue = this.$route.query.typeValue,    // 查询类型对应中文
                 value = this.$route.query.value // 查询类型对应值
+            this.formInline.name = name
+            this.formInline.type = type
+            this.formInline.value = value
+          if (name == '' || value == ''){
+                return
+          }
             this.queryCertificate({ name, type, typeValue, value })
         },
         methods: {
             onSubmit() {
+                this.hasData = false
                 this.queryCertificate(this.formInline)
             },
             // 通过名称name
@@ -187,6 +194,7 @@
         border: 1px solid #dadada;
         border-radius: 5px;
         background-color: #FFF;
+        background-image: url("/static/imgs/watermark.jpg");
         font-size: 13px;
         padding: 10px;
         .title {

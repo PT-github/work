@@ -1,7 +1,7 @@
 <template>
     <div class="lesson-query">
         <el-form size="mini" :inline="true" :model="formInline" class="demo-form-inline">
-            <el-select v-model="formInline.lesson" placeholder="请选择课程">
+            <el-select v-model="formInline.lesson" placeholder="请选择项目">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -41,7 +41,7 @@
             </div>
         </template>
         <template v-else>
-            <div style="text-align: center;margin: 50px 0;">未查询到证书数据，请查证后再试</div>
+            <div style="text-align: center;margin: 50px 0;">未查询到课程数据，请查证后再试</div>
         </template>
     </div>
 </template>

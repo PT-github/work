@@ -1,10 +1,13 @@
 <template>
     <div class="news-detail">
         <div class="title">{{title}}</div>
-        <div class="content" v-html="content"></div>
+        <div class="content ql-editor" id="newscontent" v-html="content"></div>
     </div>
 </template>
 <script>
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
     import { queryNewsDetail } from '@/api/service'
     export default {
         name: 'newsList',
@@ -45,14 +48,22 @@
         margin: 0 auto;
         background-color: #FFF;
         padding: 20px 10px;
+      /deep/
         .title {
-            padding-bottom: 20px;
+            padding-bottom: 5px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
-        }
+        };
+      .content {
+        margin-top: 5px;
+        color: #202020;
+        font-size: 16px;
+        line-height: 30px;
+        padding-bottom: 40px;
+      }
     }
 </style>
 <style rel="stylesheet/scss" lang="scss" >
- img{width: 100%}
+ img{max-width:100%;}
 </style>

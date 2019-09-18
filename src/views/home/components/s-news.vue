@@ -75,6 +75,9 @@
                 li {
                     cursor: pointer;
                     line-height: 26px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
                     background-image: url("../../../assets/news/icon.png");
                     background-repeat: no-repeat;
                     background-position: left center;
@@ -127,6 +130,9 @@
                     height: 34px;
                     line-height: 34px;
                     font-weight: bold;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                     &:hover {
                         text-decoration: underline;
                     }

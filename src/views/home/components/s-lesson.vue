@@ -30,7 +30,10 @@
                                     <template v-if="item.data && item.data.length > 0">
                                         <template v-for="(v, idx) in item.data">
                                             <div class="tr" :key="'lesson_content-data' + idx">
-                                                <div class="td blue" style="width: 115px;"><router-link tag="a" :to="{ path: '/lesson-detail', query: { id: v.id } }">{{ v.name }}</router-link></div>
+                                                <div class="td blue" style="width: 115px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;"><router-link tag="a" :to="{ path: '/lesson-detail', query: { id: v.id } }">{{ v.name }}</router-link></div>
                                                 <div class="td flex-auto">{{ v.openDate }}</div>
                                                 <div class="td sky-blue" style="width: 85px;">{{v.classHour}}</div>
                                                 <div class="td" style="width: 80px;">{{v.tranningFee}}</div>

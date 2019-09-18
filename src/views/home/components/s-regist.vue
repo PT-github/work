@@ -1,7 +1,7 @@
 <template>
     <div class="s-regist">
-        <div class="title no-bg no-border-top">
-            <p>证书查询</p>
+        <div class="title no-bg no-border-top" >
+            <p  @click="toCert">证书查询</p>
         </div>
         <div class="queryForm">
             <div class="form-control">
@@ -115,6 +115,11 @@
                     path: '/certifate-query', query: this.form
                 })
             },
+          toCert() {
+            this.$router.push({
+              path: '/certifate-query', query: this.form
+            })
+          },
             signUpOnline() {
                 const loading = this.$loading({
                     lock: true,

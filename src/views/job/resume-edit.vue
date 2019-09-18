@@ -60,7 +60,21 @@
                     </div>
                     <div class="job-control">
                         <div class="label">民族：</div>
-                        <div class="value"><el-input v-model="activeResume.nameFamily"></el-input></div>
+                        <div class="value">
+
+                          <!--<el-input v-model="activeResume.nameFamily"></el-input>-->
+                          <el-select v-model="activeResume.nameFamily" placeholder="请选择">
+                            <el-option
+                              v-for="item in options8"
+                              :key="item.id"
+                              :label="item.name"
+                              :value="item.id">
+                            </el-option>
+                          </el-select>
+                        </div>
+
+
+
                     </div>
                     <div class="borderBottom"></div>
                     <div class="job-control">
@@ -411,11 +425,30 @@
                 },
                 options: [{label: '男',value: 0},{label: '女',value: 1}],
                 options2: [{label: '未婚',value: 0},{label: '已婚',value: 1}],
-                options3: [{label: '党员',value: 0},{label: '共青团员',value: 1},{label: '其他',value: 2}],
-                options4: [{label: '博士',value: 0},{label: '研究生',value: 1},{label: '本科',value: 2},{label: '大专',value: 3},{label: '中专',value: 4},{label: '初中',value: 5},{label: '小学',value: 6}],
+                options3: [{label: '党员',value: 0},{label: '共青团员',value: 1},{label: '群众',value: 2},{label: '民主党派',value: 3},{label: '其他',value: 9}],
+                options4: [{label: '博士后',value: 0},{label: '博士研究生',value: 1},{label: '硕士研究生',value: 2},{label: '大学本科',value: 3},{label: '大专',value: 4},{label: '中专',value: 5},{label: '高中(职专、技校)',value: 6}],
                 options5: [{label: '7天内',value: 0},{label: '1个月内',value: 1},{label: '3个月内',value: 2}],
                 options6: [{label: '精通',value: 0},{label: '熟练',value: 1},{label: '一般',value: 2}],
                 options7: [],
+                options8: [{"id":"01","name":"汉族"},{"id":"02","name":"蒙古族"},{"id":"03","name":"回族"},
+                  {"id":"04","name":"藏族"},{"id":"05","name":"维吾尔族"},{"id":"06","name":"苗族"},
+                  {"id":"07","name":"彝族"},{"id":"08","name":"壮族"},{"id":"09","name":"布依族"},
+                  {"id":"10","name":"朝鲜族"},{"id":"11","name":"满族"},{"id":"12","name":"侗族"},
+                  {"id":"13","name":"瑶族"},{"id":"14","name":"白族"},{"id":"15","name":"土家族"},
+                  {"id":"16","name":"哈尼族"},{"id":"17","name":"哈萨克族"},{"id":"18","name":"傣族"},
+                  {"id":"19","name":"黎族"},{"id":"20","name":"傈僳族"},{"id":"21","name":"佤族"},
+                  {"id":"22","name":"畲族"},{"id":"23","name":"高山族"},{"id":"24","name":"拉祜族"},
+                  {"id":"25","name":"水族"},{"id":"26","name":"东乡族"},{"id":"27","name":"纳西族"},
+                  {"id":"28","name":"景颇族"},{"id":"29","name":"柯尔克孜族"},{"id":"30","name":"土族"},
+                  {"id":"31","name":"达斡尔族"},{"id":"32","name":"仫佬族"},{"id":"33","name":"羌族"},
+                  {"id":"34","name":"布朗族"},{"id":"35","name":"撒拉族"},{"id":"36","name":"毛难族"},
+                  {"id":"37","name":"仡佬族"},{"id":"38","name":"锡伯族"},{"id":"39","name":"阿昌族"},
+                  {"id":"40","name":"普米族"},{"id":"41","name":"塔吉克族"},{"id":"42","name":"怒族"},
+                  {"id":"43","name":"乌孜别克族"},{"id":"44","name":"俄罗斯族"},{"id":"45","name":"鄂温克族"},
+                  {"id":"46","name":"崩龙族"},{"id":"47","name":"保安族"},{"id":"48","name":"裕固族"},
+                  {"id":"49","name":"京族"},{"id":"50","name":"塔塔尔族"},{"id":"51","name":"独龙族"},
+                  {"id":"52","name":"鄂伦春族"},{"id":"53","name":"赫哲族"},{"id":"54","name":"门巴族"},
+                  {"id":"55","name":"珞巴族"},{"id":"56","name":"基诺族"}],
                 src: ''
             }
         },

@@ -65,6 +65,9 @@
                                         <input type="text" v-model="regMail" placeholder="邮箱">
                                     </div>
                                     <div class="login-form_control">
+                                      <input type="inviteCode" v-model="inviteCode" placeholder="邀请码(选填)">
+                                    </div>
+                                    <div class="login-form_control">
                                         <span @click="registerType = 0" class="sel" :class="{ active: registerType === 0 }">个人用户</span>
                                         <span @click="registerType = 1" class="sel" :class="{ active: registerType === 1 }">企业用户</span>
                                     </div>
@@ -193,6 +196,7 @@
                 regPwd: '',
                 regTel: '',
                 regMail: '',
+                inviteCode: '',
                 regCompanyName: '',
                 desc: '',
                 contactor: '',
@@ -311,6 +315,7 @@
                     tel: this.regTel,
                     email: this.regMail,
                     type: this.registerType,
+                    inviteCode: this.inviteCode,
                     companyName: this.regCompanyName
                 }).then(response => {
 //                    loading.close()

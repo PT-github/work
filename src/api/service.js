@@ -5,7 +5,7 @@ import request from '@/utils/request'
 // 查询其他企业职位列表
 export function joinTalentPool(data) {
     return request({
-        url: '/company/joinTalentPool',
+        url: '/company/addTalentPool',
         method: 'post',
         data
     })
@@ -334,14 +334,14 @@ export function queryLessons() {
 // 课程分类
 export function queryLessonCate() {
     return request({
-        url: '/home/queryLessonCate',
+        url: '/lesson/queryLessonCate',
         method: 'post'
     })
 }
 // 通过过滤条件查询课程列表
 export function filterLessons(data) {
     return request({
-        url: '/home/filterLessons',
+        url: '/lesson/queryLessonByCategory',
         method: 'post',
         data
     })
@@ -787,7 +787,7 @@ export function queryProjectDetail(data) {
 // =======================找工作结束=========================
 export function upload(data) {
     return request({
-        url: '/upload',
+        url: '/login/upload',
         method: 'post',
         data,
         headers: {

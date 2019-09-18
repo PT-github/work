@@ -79,7 +79,7 @@
             left: 0;
             right: 0;
             top: -10px;
-            background-image: url("../../../assets/links/title.png");
+            background-image: url(/static/imgs/title.png);
             background-repeat: repeat;
             background-position: center center;
         }

@@ -1,10 +1,13 @@
 <template>
     <div class="news-detail">
         <div class="title">{{title}}</div>
-        <div class="content" v-html="content"></div>
+        <div class="content ql-editor" v-html="content"></div>
     </div>
 </template>
 <script>
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
     import { queryLessonDetail } from '@/api/service'
     export default {
         name: 'lessonDetail',
@@ -44,7 +47,7 @@
         background-color: #FFF;
         padding: 20px 10px;
         .title {
-            padding-bottom: 20px;
+            padding-bottom: 5px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
